@@ -1,0 +1,35 @@
+To organize a project for creating an IRC server in C++ 98, you can follow these steps:
+
+1. Understand the project requirements: Read and understand the project specifications provided. Make sure you have a clear understanding of the functionality and constraints of the IRC server you need to build.
+
+2. Plan your project structure: Break down the project into logical components and modules. Identify the key functionalities that need to be implemented, such as handling client connections, message parsing, channel management, and user authentication.
+
+3. Set up your development environment: Install the necessary tools and libraries required for C++ development. Ensure that you have a C++ 98 compliant compiler and any additional dependencies required for network programming.
+
+4. Design your server architecture: Define the overall architecture of your IRC server. Decide how you will handle multiple client connections simultaneously without blocking. Consider using a non-blocking I/O model with a single poll (or equivalent) to handle all I/O operations, including read, write, and listen.
+
+5. Implement the core functionalities: Start by implementing the essential functionalities of the IRC server, such as accepting incoming connections, parsing and handling IRC commands, managing channels and users, and sending messages to clients.
+
+6. Test and debug: Regularly test your server implementation to ensure it functions correctly. Use tools like netcat (nc) to simulate client connections and send test commands to your server. Verify that your server correctly handles different scenarios, such as partial data received or low bandwidth situations.
+
+7. Implement IRC protocol features: Refer to the IRC official RFC (Request for Comments) to identify the minimal required features that need to be implemented. Focus on functionalities like authentication, setting a nickname, joining channels, sending and receiving private messages, and broadcasting messages to all clients in a channel.
+
+8. Handle operators and regular users: Implement the specific actions and commands for operators. Differentiate between operators and regular users based on their privileges and permissions.
+
+9. Ensure compatibility with IRC clients: Test your server's compatibility with an official IRC client. Make sure that the client can connect to your server without encountering any errors. The user experience should be similar to using the client with any official IRC server.
+
+10. Error handling and code cleanliness: Pay attention to error handling throughout your code. Verify and handle potential errors and edge cases to ensure the stability and reliability of your server. Keep your code clean, well-organized, and properly documented.
+
+11. Test thoroughly: Perform comprehensive testing of your IRC server to ensure it meets the project requirements. Test various scenarios, including multiple client connections, different IRC commands, and stress testing to ensure the server can handle the expected load.
+
+12. Optimize and refactor: Once your server is functioning correctly, consider optimizing and refactoring your code to improve performance, readability, and maintainability. Look for opportunities to eliminate code duplication, improve algorithms, and enhance overall efficiency.
+
+Remember to refer to the project specifications and any additional resources provided to ensure that your implementation aligns with the requirements. Additionally, seek guidance from instructors or peers if you encounter difficulties or have questions during the development process.
+
+Citations:
+[1] https://github.com/42YerevanProjects/ft_irc
+[2] https://github.com/barimehdi77/ft_irc
+[3] https://www.cs.cmu.edu/~prs/15-441-F10/project1/project1.pdf
+[4] https://github.com/topics/irc-server?l=c%2B%2B
+[5] https://ircgod.com
+[6] https://stackoverflow.com/questions/439987/how-can-i-implement-an-irc-server-with-owned-nicknames
