@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:04:22 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/22 00:28:03 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/22 16:47:23 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ int main(int argc, char **argv)
 {
 	if (argc != 3)
 		return howToUse();
-	
 	int port;
-	if (!portParser(argv[1], port))
-		return printError(BAD_PORT);
+	std::string portStr = argv[1];
+	if (!parsePort(portStr, port))
+		return printError(BAD_PORT, NORMAL);
 	Server server(port, argv[2]);
-	server.startServer();
+	server.runServer();
 	return 0;
 }

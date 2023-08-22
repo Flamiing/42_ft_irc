@@ -6,7 +6,7 @@
 #    By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/27 19:25:47 by alaaouam          #+#    #+#              #
-#    Updated: 2023/08/21 15:22:41 by alaaouam         ###   ########.fr        #
+#    Updated: 2023/08/22 16:42:43 by alaaouam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ COLOR_OFF = \033[0m
 
 NAME = ircserv
 
-SRC =	
+SRC =	main.cpp Server.cpp ServerRun.cpp ServerClientConnections.cpp Client.cpp parsePort.cpp printError.cpp
 			
 SRC_PATH = src/*/
 SRCS = $(addprefix $(SRC_PATH), $(SRC))
