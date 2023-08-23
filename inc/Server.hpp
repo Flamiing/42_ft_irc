@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/22 17:57:43 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/23 16:17:39 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@
 # include <vector>
 # include "Client.hpp"
 # include "errors.hpp"
+# include "generalUtils.hpp"
+# include "commands.hpp"
 
 # define LOCALHOST "127.0.0.1"
-# define SERVER_NAME "LOS-OSADOS"
+# define SERVER_NAME "LOS.OSADOS"
 # define MAX_CLIENTS 10
 
 class Server
@@ -47,9 +49,11 @@ class Server
 		
 		void _setupSever(void);
 		void _handleClientConnections(void);
-		void _handlePoll(void);
+		void _handleClients(void);
 		void _newClient(int& clientSocket);
 		void _handleClientRequest(size_t& client);
+		void _processMessage(const int& client, char* message);
+		void _disconnect(size_t& client);
 
 		int _port;
 		std::string _password;
@@ -57,6 +61,12 @@ class Server
 		struct sockaddr_in _address;
 		int _socket;
 		std::vector<struct pollfd> _pollFds;
+		//std::vector<Channel> _channels;
 };
+
+void processCommand(Client& client, std::string& buffer, std::vector<std::string>& message);
+void passCommand(Server& server, Client& client, std::string& buffer, std::vector<std::string>& message);
+void userCommand(Client& client, std::string& buffer, std::vector<std::string>& message);
+void nickCommand(Client& client, std::string& buffer, std::vector<std::string>& message);
 
 #endif

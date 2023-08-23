@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:10:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/22 17:58:41 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/23 16:17:49 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,29 @@ void Server::_newClient(int& clientSocket)
 	this->_pollFds.push_back(clientPoll);
 }
 
+void Server::_disconnect(size_t& client)
+{
+	std::cout << "Client at socket #" << this->_pollFds[client].fd << " disconnected." << std::endl;
+	this->_clients.erase(this->_pollFds[client].fd);
+	close(this->_pollFds[client].fd);
+	this->_pollFds.erase(this->_pollFds.begin() + client);
+	client--;
+}
+
 void Server::_handleClientRequest(size_t& client)
 {
 	char buffer[512] = {0};
 	ssize_t bytesRead = recv(this->_pollFds[client].fd, buffer, sizeof(buffer), 0);
 	if (bytesRead <= 0)
-	{
-		std::cout << "Client at socket #" << this->_pollFds[client].fd << " disconnected." << std::endl;
-		this->_clients.erase(this->_pollFds[client].fd);
-		close(this->_pollFds[client].fd);
-		this->_pollFds.erase(this->_pollFds.begin() + client);
-		client--;
-	}
+		_disconnect(client);
 	else
 	{
-		std::string message = buffer;
-		std::cout << "Client at socket #" << this->_pollFds[client].fd << ": " << message << std::endl; 
+		std::cout << "Client at socket #" << this->_pollFds[client].fd << ": " << buffer;
+		_processMessage(this->_pollFds[client].fd, buffer);
 	}
 }
 
-void Server::_handlePoll(void)
+void Server::_handleClients(void)
 {
 	int clientSocket;
     struct sockaddr_in clientAddr;
@@ -85,6 +88,6 @@ void Server::_handleClientConnections(void)
 			close(this->_socket);
 			exit(1);
 		}
-		_handlePoll();
+		_handleClients();
 	}
 }

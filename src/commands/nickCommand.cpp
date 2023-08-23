@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   generalUtils.hpp                                   :+:      :+:    :+:   */
+/*   nickCommand.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/21 22:37:45 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/22 19:18:21 by alaaouam         ###   ########.fr       */
+/*   Created: 2023/08/23 01:45:31 by alaaouam          #+#    #+#             */
+/*   Updated: 2023/08/23 16:17:39 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GENERALUTILS_CPP
-# define GENERALUTILS_CPP
+#include "../../inc/commands.hpp"
 
-# include <iostream>
-# include <sstream>
-# include <string>
-# include <vector>
-
-bool parsePort(std::string& portStr, int& port);
-std::vector<std::string> splitString(std::string& str, char delimiter);
-
-#endif
+void nickCommand(Client& client, std::string& buffer, std::vector<std::string>& message)
+{
+	if (message.size() > 2)
+	{
+		buffer = WRONG_NUM_ARGS;	
+		return ;
+	}
+	client.setNickname(message[1]);
+}

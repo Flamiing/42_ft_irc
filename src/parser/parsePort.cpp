@@ -6,11 +6,11 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 22:25:14 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/21 22:38:15 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/22 19:15:41 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#include "../../inc/generalUtils.hpp"
 #include "../../inc/errors.hpp"
 
 static bool allDigits(const std::string& str)
