@@ -6,26 +6,28 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:09:58 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/23 16:17:29 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/24 00:29:53 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Server.hpp"
 
-void Server::_processMessage(const int& client, char* data)
+void Server::_processMessage(const int& client, char* message)
 {
 	std::string buffer;
-	std::string dataStr = data;
-	if (!dataStr.empty() && dataStr[dataStr.size() - 1] == '\n')
-    	dataStr.erase(dataStr.size() - 1);
-	std::vector<std::string> dataVector = splitString(dataStr, ' ');
+	std::string messageStr = message;
+	if (messageStr[messageStr.size() - 1] == '\n')
+		messageStr.erase(messageStr.size() - 1);
+	if (messageStr[messageStr.size() - 1] == '\r')
+		messageStr.erase(messageStr.size() - 1);
+	if (messageStr[messageStr.size() - 1] == '\r')
+		std::cout << "YES" << std::endl;
+	std::vector<std::string> messageVector = splitString(messageStr, ' ');
 	
-	if (this->_clients[client].getPassAuth() == false && dataVector[0] != PASS)
-		buffer = NO_PASS;
-	else if (this->_clients[client].getPassAuth() == false && dataVector[0] == PASS)
-		passCommand(*this, this->_clients[client], buffer, dataVector);
-	else if (dataVector[0] != PASS)
-		processCommand(this->_clients[client], buffer, dataVector);
+	if (this->_clients[client].getPassAuth() == false && messageVector[0] != PASS)
+		buffer = RPL_NOTAUTHENTICATED;
+	else
+		processCommand(*this, this->_clients[client], buffer, messageVector);
 	send(this->_clients[client].getSocket(), buffer.c_str(), buffer.size(), 0);
 	buffer = "";
 }

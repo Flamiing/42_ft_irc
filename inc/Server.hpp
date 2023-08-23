@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/23 16:17:39 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/23 23:26:09 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ class Server
 		//std::vector<Channel> _channels;
 };
 
-void processCommand(Client& client, std::string& buffer, std::vector<std::string>& message);
+void processCommand(Server& server, Client& client, std::string& buffer, std::vector<std::string>& message);
 void passCommand(Server& server, Client& client, std::string& buffer, std::vector<std::string>& message);
 void userCommand(Client& client, std::string& buffer, std::vector<std::string>& message);
 void nickCommand(Client& client, std::string& buffer, std::vector<std::string>& message);

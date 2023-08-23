@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 00:59:24 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/22 21:33:18 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/23 23:44:25 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@ class Client
 		bool getAuth(void) const;
 		bool getPassAuth(void) const;
 		bool getUserAuth(void) const;
+		bool getNickAuth(void) const;
 
 		void setPassAuth(const bool auth);
 		void setUserAuth(const bool auth);
+		void setNickAuth(const bool auth);
 		void setUsername(const std::string username);
 		void setNickname(const std::string nickname);
 		void setFullName(const std::string fullName);
@@ -43,6 +45,7 @@ class Client
 		int _socket;
 		bool _passAuth;
 		bool _userAuth;
+		bool _nickAuth;
 		bool _auth;
 		bool _isOperator;
 };

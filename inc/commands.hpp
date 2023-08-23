@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:48:53 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/23 16:09:10 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/24 00:28:39 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,12 @@
 # define TOPIC "TOPIC"
 # define QUIT "QUIT"
 
-# define INVALID_CMD "Invalid command\n"
-# define WRONG_NUM_ARGS "wrong number of arguments.\n"
-# define WRONG_PASS "PASS: wrong password.\n"
-# define NO_PASS "Please use PASS <password> to be able to interact with the IRC Server\n"
+# define INVALID_CMD "Invalid command\r\n"
+# define WRONG_NUM_ARGS "wrong number of arguments.\r\n"
+# define WRONG_PASS "PASS: wrong password.\r\n"
+
+# define RPL_NOTAUTHENTICATED ":localhost 998 * :You need to authenticate first\r\n"
+# define ERR_ALREADYREGISTRED ":localhost 461 * :You may not reregister\r\n"
+# define ERR_NEEDMOREPARAMS(command) (":localhost 462 * " + command + " :Not enough parameters.\r\n")
 
 #endif

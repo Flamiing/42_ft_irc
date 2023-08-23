@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 20:10:01 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/23 16:17:39 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/23 23:56:41 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,8 @@
 #include "../../inc/Client.hpp"
 #include "../../inc/commands.hpp"
 
-void processCommand(Client& client, std::string& buffer, std::vector<std::string>& message)
+static void commandProcessor(Server& server, Client& client, std::string& buffer, std::vector<std::string>& message)
 {
-	if (message[0] == USER)
-		userCommand(client, buffer, message);
-	else if (message[0] == NICK)
-		nickCommand(client, buffer, message);
 //	else if (message[0] == PRIVMSG)
 //		privmsgCommand(client, buffer, message);
 //	else if (message[0] == NOTICE)
@@ -36,6 +32,22 @@ void processCommand(Client& client, std::string& buffer, std::vector<std::string
 //		topicCommand(client, buffer, message);
 //	else if (message[0] == QUIT)
 //		quitCommand(client, buffer, message);
-//	else
-//		std::strcpy(buffer, INVALID_CMD);
+	(void)server;
+	(void)client;
+	(void)message;
+	buffer = INVALID_CMD;
+}
+
+void processCommand(Server& server, Client& client, std::string& buffer, std::vector<std::string>& message)
+{
+	if (message[0] == PASS)
+		passCommand(server, client, buffer, message);
+	else if (client.getPassAuth() == true && message[0] == USER)
+		userCommand(client, buffer, message);
+	else if (client.getPassAuth() == true && message[0] == NICK)
+		nickCommand(client, buffer, message);
+	else if (client.getAuth() == true)
+		commandProcessor(server, client, buffer, message);
+	else
+		buffer = RPL_NOTAUTHENTICATED;
 }

@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 01:45:31 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/23 16:17:39 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/23 23:46:14 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,5 @@ void nickCommand(Client& client, std::string& buffer, std::vector<std::string>& 
 		return ;
 	}
 	client.setNickname(message[1]);
+	client.setNickAuth(true);
 }
