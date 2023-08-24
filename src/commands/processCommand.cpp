@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 20:10:01 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/24 15:15:15 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/24 21:25:11 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,7 @@ static void commandProcessor(Server& server, Client& client, std::string& buffer
 //	else if (message[0] == QUIT)
 //		quitCommand(client, buffer, message);
 	(void)server;
-	(void)client;
-	(void)message;
-	buffer = INVALID_CMD;
+	buffer = ERR_UNKNOWNCOMMAND(client.getNickname(), message[0]);
 }
 
 void processCommand(Server& server, Client& client, std::string& buffer, std::vector<std::string>& message)
@@ -45,7 +43,7 @@ void processCommand(Server& server, Client& client, std::string& buffer, std::ve
 	else if (client.getPassAuth() == true && message[0] == USER)
 		userCommand(client, buffer, message);
 	else if (client.getPassAuth() == true && message[0] == NICK)
-		nickCommand(client, buffer, message);
+		nickCommand(server, client, buffer, message);
 	else if (client.getAuth() == true)
 		commandProcessor(server, client, buffer, message);
 	else
