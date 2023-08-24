@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 01:45:31 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/24 21:35:42 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/24 21:40:51 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,5 @@ void nickCommand(Server& server, Client& client, std::string& buffer, std::vecto
 	client.setNickname(message[1]);
 	client.setNickAuth(true);
 	if (firstConnection && client.getAuth() == true)
-		buffer = WELCOME_MESSAGE(client.getNickname());
+		buffer = RPL_WELCOME(client.getNickname());
 }

@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 21:27:35 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/24 21:36:21 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/24 21:40:54 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,5 @@ void userCommand(Client& client, std::string& buffer, std::vector<std::string>& 
 	fullName += " " + message[5];
 	client.setFullName(fullName);
 	if (client.getAuth() == true)
-		buffer = WELCOME_MESSAGE(client.getNickname());
+		buffer = RPL_WELCOME(client.getNickname());
 }
