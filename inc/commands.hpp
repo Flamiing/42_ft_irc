@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:48:53 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/24 00:28:39 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/24 19:27:26 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,12 @@
 # define QUIT "QUIT"
 
 # define INVALID_CMD "Invalid command\r\n"
-# define WRONG_NUM_ARGS "wrong number of arguments.\r\n"
-# define WRONG_PASS "PASS: wrong password.\r\n"
 
-# define RPL_NOTAUTHENTICATED ":localhost 998 * :You need to authenticate first\r\n"
-# define ERR_ALREADYREGISTRED ":localhost 461 * :You may not reregister\r\n"
-# define ERR_NEEDMOREPARAMS(command) (":localhost 462 * " + command + " :Not enough parameters.\r\n")
+# define ERR_NONICKNAMEGIVEN(client) (":localhost 431 " + client + " :No nickname given\r\n")
+# define ERR_ERRONEUSNICKNAME(client, erroneousNickname) (":localhost 432 " + client + " " + erroneousNickname + " :Erroneous nickname\r\n")
+# define ERR_NOTREGISTERED(client) (":localhost 451 " + client + " :You have not registered\r\n")
+# define ERR_NEEDMOREPARAMS(client, command) (":localhost 461 " + client + " " + command + " :Not enough parameters\r\n")
+# define ERR_ALREADYREGISTRED(client) (":localhost 462 " + client + " :You may not reregister\r\n")
+# define RPL_NICKNAMECHANGED(nickname, username, newNickname) (":" + nickname + "!~" + username + "@localhost NICK :" + newNickname + "\r\n")
 
 #endif

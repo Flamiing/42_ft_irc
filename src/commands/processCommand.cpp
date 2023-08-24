@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 20:10:01 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/23 23:56:41 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/24 15:15:15 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,5 @@ void processCommand(Server& server, Client& client, std::string& buffer, std::ve
 	else if (client.getAuth() == true)
 		commandProcessor(server, client, buffer, message);
 	else
-		buffer = RPL_NOTAUTHENTICATED;
+		buffer = ERR_NOTREGISTERED(client.getNickname());
 }

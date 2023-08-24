@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 00:59:16 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/23 23:50:36 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/24 14:53:29 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ Client& Client::operator=(const Client& other)
 }
 
 int Client::getSocket(void) const { return this->_socket; }
+std::string Client::getUsername(void) const { return this->_username; }
+std::string Client::getNickname(void) const { return this->_nickname; }
 bool Client::getPassAuth(void) const { return this->_passAuth; }
 bool Client::getUserAuth(void) const { return this->_userAuth; }
 bool Client::getNickAuth(void) const { return this->_nickAuth; }
@@ -51,14 +53,14 @@ void Client::setPassAuth(const bool auth)
 void Client::setNickAuth(const bool auth)
 {
 	this->_nickAuth = auth;
-	if (this->getPassAuth() == true && this->getNickAuth() == true && auth == true)
+	if (this->getPassAuth() == true && this->getUserAuth() == true && auth == true)
 		this->_auth = auth;
 }
 
 void Client::setUserAuth(const bool auth)
 {
 	this->_userAuth = auth;
-	if (this->getPassAuth() == true && this->getUserAuth() == true && auth == true)
+	if (this->getPassAuth() == true && this->getNickAuth() == true && auth == true)
 		this->_auth = auth;
 }
 

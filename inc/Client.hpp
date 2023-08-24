@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 00:59:24 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/23 23:44:25 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/24 14:40:02 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ class Client
 		Client& operator=(const Client& other);
 
 		int getSocket(void) const;
+		std::string getNickname(void) const;
+		std::string getUsername(void) const;
 		bool getAuth(void) const;
 		bool getPassAuth(void) const;
 		bool getUserAuth(void) const;
