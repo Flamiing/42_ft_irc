@@ -6,14 +6,20 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:48:53 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/24 21:40:46 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/25 11:41:30 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COMMANDS_HPP
 # define COMMANDS_HPP
 
-# include "Client.hpp"
+# include <iostream>
+# include <vector>
+# include <string>
+
+class Server;
+class Client;
+class IRCMessage;
 
 # define PASS "PASS"
 # define NICK "NICK"
@@ -26,6 +32,7 @@
 # define JOIN "JOIN"
 # define TOPIC "TOPIC"
 # define QUIT "QUIT"
+# define PONG "PONG"
 
 # define RPL_WELCOME(client) (":localhost 001 " + client + " :Welcome to LOS OSADOS IRC Server, " + client + "!\r\n")
 # define ERR_UNKNOWNCOMMAND(client, command) (":localhost 421 " + client + " " + command + " :Unknown command\r\n")
@@ -36,5 +43,12 @@
 # define ERR_NEEDMOREPARAMS(client, command) (":localhost 461 " + client + " " + command + " :Not enough parameters\r\n")
 # define ERR_ALREADYREGISTRED(client) (":localhost 462 " + client + " :You may not reregister\r\n")
 # define RPL_NICKNAMECHANGED(nickname, username, newNickname) (":" + nickname + "!~" + username + "@localhost NICK :" + newNickname + "\r\n")
+# define RPL_QUIT(nickname, username, message) (":" + nickname + "!~" + username + "@localhost QUIT :Quit: " + message + "\r\n")
+
+void processCommand(Server& server, Client& client, std::string& buffer, IRCMessage& messageIRC);
+void passCommand(Server& server, Client& client, std::string& buffer, std::vector<std::string>& message);
+void nickCommand(Server& server, Client& client, std::string& buffer, std::vector<std::string>& message);
+void userCommand(Client& client, std::string& buffer, std::vector<std::string>& message);
+//void privmsgCommand(Client& client, std::string& buffer, std::vector<std::string>& message);
 
 #endif

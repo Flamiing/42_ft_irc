@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 20:10:01 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/24 21:25:11 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/25 12:01:43 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../../inc/Client.hpp"
 #include "../../inc/commands.hpp"
 
-static void commandProcessor(Server& server, Client& client, std::string& buffer, std::vector<std::string>& message)
+static void commandProcessor(Server& server, Client& client, std::string& buffer, IRCMessage& messageIRC)
 {
 //	else if (message[0] == PRIVMSG)
 //		privmsgCommand(client, buffer, message);
@@ -33,19 +33,26 @@ static void commandProcessor(Server& server, Client& client, std::string& buffer
 //	else if (message[0] == QUIT)
 //		quitCommand(client, buffer, message);
 	(void)server;
-	buffer = ERR_UNKNOWNCOMMAND(client.getNickname(), message[0]);
+	buffer = ERR_UNKNOWNCOMMAND(client.getNickname(), messageIRC.cmd);
 }
 
-void processCommand(Server& server, Client& client, std::string& buffer, std::vector<std::string>& message)
+void processCommand(Server& server, Client& client, std::string& buffer, IRCMessage& messageIRC)
 {
-	if (message[0] == PASS)
-		passCommand(server, client, buffer, message);
-	else if (client.getPassAuth() == true && message[0] == USER)
-		userCommand(client, buffer, message);
-	else if (client.getPassAuth() == true && message[0] == NICK)
-		nickCommand(server, client, buffer, message);
+	if (messageIRC.cmd == PASS)
+		passCommand(server, client, buffer, messageIRC.vector);
+	else if (client.getPassAuth() == true && messageIRC.cmd == USER)
+		userCommand(client, buffer, messageIRC.vector);
+	else if (client.getPassAuth() == true && messageIRC.cmd == NICK)
+		nickCommand(server, client, buffer, messageIRC.vector);
+	else if (messageIRC.cmd == PONG)
+		return ;
 	else if (client.getAuth() == true)
-		commandProcessor(server, client, buffer, message);
+		commandProcessor(server, client, buffer, messageIRC);
 	else
-		buffer = ERR_NOTREGISTERED(client.getNickname());
+	{
+		if (client.getAuth() == true)
+			buffer = ERR_NOTREGISTERED(client.getNickname());
+		else
+			buffer = ERR_NOTREGISTERED(client.getWrongNickname());
+	}
 }

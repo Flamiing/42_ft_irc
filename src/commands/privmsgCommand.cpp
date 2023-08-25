@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   splitString.cpp                                    :+:      :+:    :+:   */
+/*   privmsgCommand.cpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/22 19:17:10 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/25 11:26:26 by alaaouam         ###   ########.fr       */
+/*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
+/*   Updated: 2023/08/24 21:57:37 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/generalUtils.hpp"
+# include "../../inc/commands.hpp"
 
-std::vector<std::string> splitString(std::string& str, char delimiter)
+void privmsgCommand(Client& client, std::string& buffer, std::vector<std::string>& message)
 {
-	std::vector<std::string> splitted;
-	std::stringstream ss(str);
-	std::string token;
-
-	while (std::getline(ss, token, delimiter))
-		splitted.push_back(token);
-	return splitted;
+	
 }

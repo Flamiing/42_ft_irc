@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 01:45:31 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/24 21:40:51 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/25 12:03:17 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ static bool handleErrors(Server& server, Client& client, std::string& buffer, st
 	else if (invalidNickname(newNickname))
 	{
 		buffer = ERR_ERRONEUSNICKNAME(client.getNickname(), newNickname);
+		if (client.getAuth() == false)
+			client.setWrongNickname(newNickname);
 		return true;
 	}
 	return false;

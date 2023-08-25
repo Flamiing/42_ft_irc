@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 00:59:16 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/24 21:33:05 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/25 12:04:00 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ Client& Client::operator=(const Client& other)
 int Client::getSocket(void) const { return this->_socket; }
 std::string Client::getUsername(void) const { return this->_username; }
 std::string Client::getNickname(void) const { return this->_nickname; }
+std::string Client::getWrongNickname(void) const { return this->_wrongNickname; }
 bool Client::getPassAuth(void) const { return this->_passAuth; }
 bool Client::getUserAuth(void) const { return this->_userAuth; }
 bool Client::getNickAuth(void) const { return this->_nickAuth; }
@@ -73,6 +74,11 @@ void Client::setUsername(const std::string username)
 void Client::setNickname(const std::string nickname)
 {
 	this->_nickname = nickname;
+}
+
+void Client::setWrongNickname(const std::string nickname)
+{
+	this->_wrongNickname = nickname;
 }
 
 void Client::setFullName(const std::string fullName)

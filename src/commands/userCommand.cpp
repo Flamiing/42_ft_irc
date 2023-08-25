@@ -6,11 +6,12 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 21:27:35 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/24 21:40:54 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/24 21:54:35 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/commands.hpp"
+#include "../../inc/Client.hpp"
 
 static bool handdleErrors(Client& client, std::string& buffer, std::vector<std::string>& message)
 {

@@ -1,37 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Channel.hpp                                        :+:      :+:    :+:   */
+/*   IRCMessage.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/22 13:02:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/24 22:51:01 by alaaouam         ###   ########.fr       */
+/*   Created: 2023/08/25 11:12:33 by alaaouam          #+#    #+#             */
+/*   Updated: 2023/08/25 11:34:08 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHANNEL_HPP
-# define CHANNEL_HPP
+#ifndef IRCMESSAGE_HPP
+# define IRCMESSAGE_HPP
 
 # include <iostream>
+# include <sstream>
 # include <string>
-# include "../../inc/Client.hpp"
+# include <vector>
+# include "generalUtils.hpp"
 
-class Channel
+class IRCMessage
 {
 	public:
-		Channel(std::string& name);
-		~Channel(void);
+		IRCMessage(void);
+		IRCMessage(std::string& message);
+		IRCMessage(const IRCMessage& other);
+		~IRCMessage(void);
 
-		Channel& operator=(const Channel& other);
-	private:
-		Channel(void);
-		Channel(const Channel& other);
-		
-		std::string _name;
-		std::string _topic;
-		std::string _creationDate;
-		std::vector<Client> _onlineUsers;
+		IRCMessage& operator=(const IRCMessage& other);
+
+		std::string raw;
+		std::string cmd;
+		std::vector<std::string> vector;
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/24 19:52:20 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/25 11:35:32 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <map>
 # include <vector>
 # include "Client.hpp"
+# include "IRCMessage.hpp"
 # include "errors.hpp"
 # include "generalUtils.hpp"
 # include "commands.hpp"
@@ -64,10 +65,5 @@ class Server
 		std::vector<struct pollfd> _pollFds;
 		//std::vector<Channel> _channels;
 };
-
-void processCommand(Server& server, Client& client, std::string& buffer, std::vector<std::string>& message);
-void passCommand(Server& server, Client& client, std::string& buffer, std::vector<std::string>& message);
-void nickCommand(Server& server, Client& client, std::string& buffer, std::vector<std::string>& message);
-void userCommand(Client& client, std::string& buffer, std::vector<std::string>& message);
 
 #endif
