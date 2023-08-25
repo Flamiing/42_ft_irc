@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 00:59:24 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/25 12:03:41 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/25 19:42:27 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define CLIENT_HPP
 
 # include <iostream>
+
+class Channel;
 
 class Client
 {
@@ -53,6 +55,7 @@ class Client
 		bool _nickAuth;
 		bool _auth;
 		bool _isOperator;
+		//std::vector<Channel> _joinedChannels;
 };
 
 #endif

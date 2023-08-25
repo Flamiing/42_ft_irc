@@ -6,14 +6,14 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 21:27:35 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/24 21:54:35 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/25 18:19:31 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/commands.hpp"
 #include "../../inc/Client.hpp"
 
-static bool handdleErrors(Client& client, std::string& buffer, std::vector<std::string>& message)
+static bool handleErrors(Client& client, std::string& buffer, std::vector<std::string>& message)
 {
 	if (client.getAuth() == true)
 	{
@@ -30,7 +30,7 @@ static bool handdleErrors(Client& client, std::string& buffer, std::vector<std::
 
 void userCommand(Client& client, std::string& buffer, std::vector<std::string>& message)
 {
-	if (handdleErrors(client, buffer, message))
+	if (handleErrors(client, buffer, message))
 		return ;
 	client.setUserAuth(true);
 	client.setUsername(message[1]);

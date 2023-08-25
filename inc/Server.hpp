@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/25 11:35:32 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/25 18:03:25 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <map>
 # include <vector>
 # include "Client.hpp"
+# include "Channel.hpp"
 # include "IRCMessage.hpp"
 # include "errors.hpp"
 # include "generalUtils.hpp"
@@ -44,6 +45,9 @@ class Server
 		int getPort(void) const;
 		std::string getPassword(void) const;
 		std::map<int, Client> getClients(void) const;
+		std::vector<Channel> getChannels(void) const;
+		void addChannel(std::string newChannel);
+		void connectToChannel(std::string& channel, Client& client, std::string key);
 	private:
 		Server(void);
 		Server(const Server& other);
@@ -63,7 +67,7 @@ class Server
 		struct sockaddr_in _address;
 		int _socket;
 		std::vector<struct pollfd> _pollFds;
-		//std::vector<Channel> _channels;
+		std::vector<Channel> _channels;
 };
 
 #endif
