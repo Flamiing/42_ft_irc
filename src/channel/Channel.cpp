@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:32 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/25 17:38:39 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/28 16:30:07 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ Channel& Channel::operator=(const Channel& other)
 std::string Channel::getName() const { return this->_name; }
 std::string Channel::getTopic() const { return this->_topic; }
 std::string Channel::getKey() const { return this->_key; }
+//std::vector<Client> getBannedUsers(void) const { return this->_bannedUsers; }
 
 std::string Channel::getOnlineUsersList() const
 {
@@ -56,4 +57,17 @@ std::string Channel::getOnlineUsersList() const
 		it++;
 	}
 	return listOfUsers;
+}
+
+bool Channel::userIsBanned(std::string& nickname)
+{
+	std::vector<Client>::const_iterator it = this->_bannedUsers.begin();
+
+	while (it != this->_bannedUsers.end())
+	{
+		if ((*it).getNickname() == nickname)
+			return true;
+		it++;
+	}
+	return false;
 }

@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/25 19:42:43 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/28 16:27:06 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,32 @@ static void joinChannel(Server& server, std::vector<Channel> channels, Client& c
 {
 	if (channels.size() == 0 || channelNotFound(channels, message[1]))
 		server.addChannel(message[1]);
-	if (message.size() == 2)
+	else if (message.size() == 2)
 		server.connectToChannel(message[1], client, "");
-	else
-		server.connectToChannel(message[1], client, message[2]);
+	//else if ()
+	//else if (CHANNEL IS INVITE ONLY MODE)
+	//	server.connectToChannel(message[1], client, message[2]);
 }
 
-/* static bool handleErrors(std::string& buffer, std::vector<std::string>& message)
+static bool handleErrors(Server& server, Client& client, std::string& buffer, std::vector<std::string>& message)
 {
-	if 
-} */
+	if (message.size() < 2)
+	{
+		buffer = ERR_NEEDMOREPARAMS(client.getNickname(), message[0]);
+		return true;
+	}
+	(void)server;
+	//else if (server.isBanned(client.getNickname(), message[1]))
+	//	buffer = ERR_BANNEDFROMCHAN(client.getNickname(), message[1]);
+	//else if ()
+	//	buffer = ERR_INVITEONLYCHAN(client.getNickname(), message[1]);
+	return false;
+}
 
 void joinCommand(Server& server, Client& client, std::string& buffer, std::vector<std::string>& message)
 {
-	/* if (handleErrors(buffer, message))
-		return ; */
+	if (handleErrors(server, client, buffer, message))
+		return ;
 	message[1].erase(0, 1);
 	joinChannel(server, server.getChannels(), client, message);
 	(void)buffer;

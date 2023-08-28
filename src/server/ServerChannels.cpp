@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:13:49 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/25 18:03:32 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/28 16:29:58 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,3 +33,17 @@ void Server::connectToChannel(std::string& channel, Client& client, std::string 
 		it++;
 	}
 }
+
+/* bool Server::isBanned(std::string& nickname, std::string& channel)
+{
+	std::vector<Channel>::iterator it = this->_channels.begin();
+
+	while (it != this->_channels.end())
+	{
+		if ((*it).getName() == channel)
+			if ((*it).userIsBanned(nickname))
+				return true;
+		it++;
+	}
+	return false;
+} */
