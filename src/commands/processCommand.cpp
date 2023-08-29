@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 20:10:01 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/29 11:53:32 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/08/29 15:42:35 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,19 @@
 //static void helpCommand(Server& server, Client& client, std::string& buffer, IRCMessage& messageIRC)
 static void helpCommand(Client& client, std::string& buffer)
 {
-	buffer = HELP_PROMPT(client.getNickname());
+	buffer = RPL_HELP(client.getNickname());
+}
+
+static void quitCommand(Client& client, std::string& buffer, IRCMessage& messageIRC)
+{
+	std::string user_message;
+	std::string full_message;
+
+	full_message = messageIRC.raw;
+	//full_message = messageIRC.getRaw();
+
+	user_message = full_message.substr(full_message.find(" "));
+	buffer = RPL_QUIT(client.getNickname(), client.getUsername(), user_message);
 }
 
 static void commandProcessor(Server& server, Client& client, std::string& buffer, IRCMessage& messageIRC)
@@ -26,20 +38,21 @@ static void commandProcessor(Server& server, Client& client, std::string& buffer
 		joinCommand(server, client, buffer, messageIRC.vector);
 	else if (messageIRC.cmd == HELP)
 		helpCommand(client, buffer);
+	else if (messageIRC.cmd == QUIT)
+		quitCommand(client, buffer, messageIRC);
 	else
 		buffer = ERR_UNKNOWNCOMMAND(client.getNickname(), messageIRC.cmd);
 /* 	else if (messageIRC.cmd == PRIVMSG)
 		privmsgCommand(client, buffer, message);
-	else if (message[0] == NOTICE)
+	else if (messageIRC.cmd == NOTICE)
 		noticeCommand(client, buffer, message);
-	else if (message[0] == OPER)
+	else if (messageIRC.cmd == OPER)
 		operCommand(client, buffer, message);
-	else if (message[0] == KICK)
+	else if (messageIRC.cmd == KICK)
 		kickCommand(client, buffer, message);
-	else if (message[0] == TOPIC)
-		topicCommand(client, buffer, message);
-	else if (message[0] == QUIT)
-		quitCommand(client, buffer, message); */
+	else if (messageIRC.cmd == TOPIC)
+		topicCommand(client, buffer, message); */
+	
 }
 
 

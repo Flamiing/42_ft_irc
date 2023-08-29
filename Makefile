@@ -6,7 +6,7 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/27 19:25:47 by alaaouam          #+#    #+#              #
-#    Updated: 2023/08/29 12:07:59 by guilmira         ###   ########.fr        #
+#    Updated: 2023/08/29 15:22:38 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,7 +74,11 @@ san: $(OBJS)
 	@echo "$(GREEN)<+> $(NAME) compiled with fsanitize! <+>$(COLOR_OFF)"
 
 net:
-	nc localhost $(ARG1)
+	nc -c localhost $(ARG1)
+#echo "PASS pass"
+
+net1:
+	bash user.sh
 
 re: fclean all
 
