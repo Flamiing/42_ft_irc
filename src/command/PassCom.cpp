@@ -13,6 +13,12 @@
 #include "../../inc/Command/PassCom.hpp"
 
 /* CLASS DEFINITION. */
+PassCom::PassCom(std::string *buffer) 
+	: buffer(buffer)
+{
+	return ;
+}
+PassCom::~PassCom() { return ; }
 /* --------------------------------- GET | SET --------------------------------- */
 
 /* --------------------------------- METHODS --------------------------------- */
@@ -24,18 +30,18 @@ void PassCom::ilog(const std::string & name, const std::string & msg) const
 	<< msg << std::endl;
 }
 
-void passCommand(Server& server, Client& client, std::string& buffer, std::vector<std::string>& message)
+void PassCom::executeCom(Server* server, Client* client, std::string& buffer, std::vector<std::string>& message)
 {
-	if (client.getAuth() == true)
+	if (this->client->getAuth() == true)
 	{
-		buffer = ERR_ALREADYREGISTRED(client.getNickname());
+		buffer = ERR_ALREADYREGISTRED(this->client->getNickname());
 		return ;
 	}
 	else if (message.size() < 2)
 	{
-		buffer = ERR_NEEDMOREPARAMS(client.getNickname(), message[0]);
+		buffer = ERR_NEEDMOREPARAMS(this->client->getNickname(), message[0]);
 		return ;
 	}
-	else if (server.getPassword() == message[1])
-		client.setPassAuth(true);
+	else if (this->server->getPassword() == message[1])
+		this->client->setPassAuth(true);
 }

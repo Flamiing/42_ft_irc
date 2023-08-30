@@ -6,7 +6,7 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/27 19:25:47 by alaaouam          #+#    #+#              #
-#    Updated: 2023/08/30 12:34:00 by guilmira         ###   ########.fr        #
+#    Updated: 2023/08/30 16:18:14 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ NAME = ircserv
 SRC =	main.cpp Server.cpp ServerRun.cpp ServerClientConnections.cpp ServerProcessMessage.cpp \
 			   Client.cpp parsePort.cpp printError.cpp processCommand.cpp passCommand.cpp userCommand.cpp \
 			   splitString.cpp nickCommand.cpp IRCMessage.cpp ServerChannels.cpp ChannelConnection.cpp \
-			   Channel.cpp joinCommand.cpp 
+			   Channel.cpp joinCommand.cpp \
+			   Command.cpp
 			
 SRC_PATH = src/*/
 SRCS = $(addprefix $(SRC_PATH), $(SRC))

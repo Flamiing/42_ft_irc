@@ -24,10 +24,12 @@
 class PassCom : public Command
 {
 	public:
-		void passCommand(Server& server, Client& client, std::string& buffer, std::vector<std::string>& message);
+		PassCom(std::string *buffer);
+		~PassCom();
+
+		std::string *buffer;
 
 	private:
-		std::string _name;
 
 		void	ilog(const std::string & name, const std::string & msg) const;
 

@@ -30,18 +30,29 @@ Command::Command(std::string const & name)
 
 /* Stringstream is used to be able to manipulate the string in get line and 
 split into the first token. then split string does a split on the message */
-Command::Command(std::string& message, Server *server, Client *client)
-	: _name(" "), raw(message), server(server), client(client)
+/* Command::Command(std::string& message, Server *server, Client *client, std::string *buffer)
+	: _name(" "), raw(message), server(server), client(client), buffer(buffer)
 {
 	std::stringstream	ss(message);
 	std::string			token;
 
 	std::getline(ss, token, ' ');
 	this->cmd = token;
-	this->vector = splitString(message, ' ');
+	this->message = splitString(message, ' ');
 
 	setName(this->cmd);
+} */
+
+
+Command::Command(Server *server, Client *client, std::string *buffer, IRCMessage ircMessage)
+	: server(server), client(client), buffer(buffer),
+	raw(ircMessage.raw), cmd(ircMessage.cmd), message(ircMessage.vector),
+	_name(ircMessage.cmd)
+{
+	ilog(getName(), "Constructed");
+	return ;
 }
+
 
 /* --------------------------------- DESTRUCTOR --------------------------------- */
 Command::~Command()
@@ -69,9 +80,9 @@ Command & Command::operator=(Command const &rhs)
 		this->cmd = rhs.cmd;
 		
 		size_t pos = 0;
-		while (pos < rhs.vector.size())
+		while (pos < rhs.message.size())
 		{
-			this->vector.push_back(rhs.vector[pos]);
+			this->message.push_back(rhs.message[pos]);
 			pos++;
 		}
 	}
@@ -94,4 +105,23 @@ void Command::ilog(const std::string & name, const std::string & msg) const
 	
 	std::cout << "[Class]Command	- [Instance]" << name << "	|	"\
 	<< msg << std::endl;
+}
+
+
+void Command::executeCom()
+{
+
+	if (this->client->getAuth() == true)
+	{
+		*(this->buffer) = ERR_ALREADYREGISTRED(this->client->getNickname());
+		return ;
+	}
+	else if (this->message.size() < 2)
+	{
+		*(this->buffer) = ERR_NEEDMOREPARAMS(this->client->getNickname(), message[0]);
+		return ;
+	}
+	else if (this->server->getPassword() == message[1])
+		this->client->setPassAuth(true);
+
 }

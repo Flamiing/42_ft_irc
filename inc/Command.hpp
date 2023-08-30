@@ -23,12 +23,15 @@
 #include "Server.hpp"
 #include "Client.hpp"
 
+#include "commands.hpp"
+
 /* CLASS DECLARATION. */
 class Command
 {
 	public:
 		Command(std::string const & name);
-		Command(std::string& message, Server *server, Client *client);
+		Command(Server *server, Client *client\
+		, std::string *buffer, IRCMessage ircMessage);
 		virtual ~Command();
 		Command(Command const &src);
 		Command & operator=(Command const &rhs);
@@ -36,12 +39,18 @@ class Command
 		std::string const &	getName() const;
 		void				setName(std::string const &name);
 
-		std::string raw;
-		std::string cmd;
-		std::vector<std::string> vector;
+		
+
+		void executeCom();
 
 		Server *server;
 		Client *client;
+
+		std::string *buffer;
+
+		std::string raw;
+		std::string cmd;
+		std::vector<std::string> message;
 
 	private:
 		Command();

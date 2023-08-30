@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 20:10:01 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/30 14:43:41 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/08/30 16:31:16 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,14 @@ static void commandProcessor(Server& server, Client& client, std::string& buffer
 
 void processCommand(Server& server, Client& client, std::string& buffer, IRCMessage& messageIRC)
 {
+		printf("aa\n");
+
 	if (messageIRC.cmd == PASS)
+	{
+		Command com(&server, &client, &buffer, messageIRC);
+		printf("aqui va\n");
 		passCommand(server, client, buffer, messageIRC.vector);
+	}
 	else if (client.getPassAuth() == true && messageIRC.cmd == USER)
 		userCommand(client, buffer, messageIRC.vector);
 	else if (client.getPassAuth() == true && messageIRC.cmd == NICK)
