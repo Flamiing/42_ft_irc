@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 20:10:01 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/29 15:42:35 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/08/30 11:50:09 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void helpCommand(Client& client, std::string& buffer)
 	buffer = RPL_HELP(client.getNickname());
 }
 
-static void quitCommand(Client& client, std::string& buffer, IRCMessage& messageIRC)
+/* static void quitCommand(Server& server, Client& client, std::string& buffer, IRCMessage& messageIRC)
 {
 	std::string user_message;
 	std::string full_message;
@@ -28,9 +28,13 @@ static void quitCommand(Client& client, std::string& buffer, IRCMessage& message
 	full_message = messageIRC.raw;
 	//full_message = messageIRC.getRaw();
 
+	size_t clientFd;
+	clientFd = client.getSocket();
+
 	user_message = full_message.substr(full_message.find(" "));
 	buffer = RPL_QUIT(client.getNickname(), client.getUsername(), user_message);
-}
+	server._disconnect(&clientFd);
+} */
 
 static void commandProcessor(Server& server, Client& client, std::string& buffer, IRCMessage& messageIRC)
 {
@@ -39,7 +43,7 @@ static void commandProcessor(Server& server, Client& client, std::string& buffer
 	else if (messageIRC.cmd == HELP)
 		helpCommand(client, buffer);
 	else if (messageIRC.cmd == QUIT)
-		quitCommand(client, buffer, messageIRC);
+		quitCommand(server, client, buffer, messageIRC);
 	else
 		buffer = ERR_UNKNOWNCOMMAND(client.getNickname(), messageIRC.cmd);
 /* 	else if (messageIRC.cmd == PRIVMSG)
