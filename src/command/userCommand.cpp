@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   userCommand.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 21:27:35 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/25 18:19:31 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/30 19:49:20 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/commands.hpp"
 #include "../../inc/Client.hpp"
+#include "../../inc/Command.hpp"
 
 static bool handleErrors(Client& client, std::string& buffer, std::vector<std::string>& message)
 {
@@ -28,15 +29,16 @@ static bool handleErrors(Client& client, std::string& buffer, std::vector<std::s
 	return false;
 }
 
-void userCommand(Client& client, std::string& buffer, std::vector<std::string>& message)
+void userCommand(Command &command)
 {
-	if (handleErrors(client, buffer, message))
+	printf("user operando\n");
+	if (handleErrors(*command.client, command.buffer, command.message))
 		return ;
-	client.setUserAuth(true);
-	client.setUsername(message[1]);
-	std::string fullName = message[4].c_str() + 1;
-	fullName += " " + message[5];
-	client.setFullName(fullName);
-	if (client.getAuth() == true)
-		buffer = RPL_WELCOME(client.getNickname());
+	command.client->setUserAuth(true);
+	command.client->setUsername(command.message[1]);
+	std::string fullName = command.message[4].c_str() + 1;
+	fullName += " " + command.message[5];
+	command.client->setFullName(fullName);
+	if (command.client->getAuth() == true)
+		command.buffer = RPL_WELCOME(command.client->getNickname());
 }

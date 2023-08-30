@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:48:53 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/29 12:27:37 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/08/30 19:43:49 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 class Server;
 class Client;
 class Channel;
+class Command;
 class IRCMessage;
 
 # define PASS "PASS"
@@ -55,12 +56,17 @@ class IRCMessage;
 
 # define RPL_HELP(client) (":localhost 000 " + client + " :Use the following commands to traverse the chat: \r\n")
 
-void processCommand(Server& server, Client& client, std::string& buffer, IRCMessage& messageIRC);
-void passCommand(Server& server, Client& client, std::string& buffer, std::vector<std::string>& message);
+//_GUILLE - tras el cambio a Command 
+
+void processCommand(Server& server, Client& client, std::string& buffer, Command& command, IRCMessage& messageIRC);
+
 void nickCommand(Server& server, Client& client, std::string& buffer, std::vector<std::string>& message);
-void userCommand(Client& client, std::string& buffer, std::vector<std::string>& message);
 void joinCommand(Server& server, Client& client, std::string& buffer, std::vector<std::string>& message);
 void quitCommand(Client& client, std::string& buffer, std::vector<std::string>& message);
 //void privmsgCommand(Client& client, std::string& buffer, std::vector<std::string>& message);
+
+typedef void (*customFunctionType)(Command& command);
+void passCommand(Command& command);
+void userCommand(Command &command);
 
 #endif

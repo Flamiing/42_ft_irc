@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   nickCommand.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 01:45:31 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/29 02:39:04 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/30 17:12:13 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/commands.hpp"
 #include "../../inc/Server.hpp"
 #include <cctype>
-#include <map>
+#include <map> /* _GUILLE - este map dberia ir aqui solo? */
 
 static bool invalidNickname(std::string& nickname)
 {

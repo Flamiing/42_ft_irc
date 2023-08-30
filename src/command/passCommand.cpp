@@ -3,28 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   passCommand.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 20:35:46 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/25 12:28:05 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/30 19:41:25 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Server.hpp"
 #include "../../inc/Client.hpp"
 
-void passCommand(Server& server, Client& client, std::string& buffer, std::vector<std::string>& message)
+void passCommand(Command& command)
 {
-	if (client.getAuth() == true)
+	printf("pass operando\n");
+	if (command.client->getAuth() == true)
 	{
-		buffer = ERR_ALREADYREGISTRED(client.getNickname());
+		command.buffer = ERR_ALREADYREGISTRED(command.client->getNickname());
 		return ;
 	}
-	else if (message.size() < 2)
+	else if (command.message.size() < 2)
 	{
-		buffer = ERR_NEEDMOREPARAMS(client.getNickname(), message[0]);
+		command.buffer = ERR_NEEDMOREPARAMS(command.client->getNickname(), command.message[0]);
 		return ;
 	}
-	else if (server.getPassword() == message[1])
-		client.setPassAuth(true);
+	else if (command.server->getPassword() == command.message[1])
+		command.client->setPassAuth(true);
 }

@@ -29,24 +29,17 @@
 class Command
 {
 	public:
-		Command(std::string const & name);
-		Command(Server *server, Client *client\
-		, std::string *buffer, IRCMessage ircMessage);
-		virtual ~Command();
+		Command(Server *server, Client *client, std::string& buffer, std::string& message);
+		~Command();
 		Command(Command const &src);
 		Command & operator=(Command const &rhs);
 
 		std::string const &	getName() const;
 		void				setName(std::string const &name);
 
-		
-
-		void executeCom();
-
-		Server *server;
-		Client *client;
-
-		std::string *buffer;
+		Server		*server;
+		Client		*client; //_GUILLE son punteros por constructores por defecto de server privados.
+		std::string	buffer;
 
 		std::string raw;
 		std::string cmd;

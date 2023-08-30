@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 20:10:01 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/30 16:31:16 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/08/30 19:45:41 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,38 +46,40 @@ static void helpCommand(Client& client, std::string& buffer)
 static void commandProcessor(Server& server, Client& client, std::string& buffer, IRCMessage& messageIRC)
 {
 
+	/* 	std::map<std::string, Command *>::iterator it;
+	it = mapCom.find(messageIRC.cmd);
+	if (it == mapCom.end())
+		return ; //no es comando
+	else
+	{
+		mapCom[messageIRC.cmd]->executeCom();
+	} */
+
 	if (messageIRC.cmd == JOIN)
 		joinCommand(server, client, buffer, messageIRC.vector);
 	else if (messageIRC.cmd == HELP)
 		helpCommand(client, buffer);
 	else
 		buffer = ERR_UNKNOWNCOMMAND(client.getNickname(), messageIRC.cmd);
-/* 	else if (messageIRC.cmd == PRIVMSG)
-		privmsgCommand(client, buffer, message);
-	else if (messageIRC.cmd == NOTICE)
-		noticeCommand(client, buffer, message);
-	else if (messageIRC.cmd == OPER)
-		operCommand(client, buffer, message);
-	else if (messageIRC.cmd == KICK)
-		kickCommand(client, buffer, message);
-	else if (messageIRC.cmd == TOPIC)
-		topicCommand(client, buffer, message); */
 	
 }
 
 
-void processCommand(Server& server, Client& client, std::string& buffer, IRCMessage& messageIRC)
-{
-		printf("aa\n");
 
+
+void processCommand(Server& server, Client& client, std::string& buffer, Command& command, IRCMessage& messageIRC)
+{
+
+	std::map<std::string, customFunctionType> mapCom;
+
+	mapCom[PASS] = &passCommand;
+	mapCom[USER] = &userCommand;
+
+//los 3 primeros con if
 	if (messageIRC.cmd == PASS)
-	{
-		Command com(&server, &client, &buffer, messageIRC);
-		printf("aqui va\n");
-		passCommand(server, client, buffer, messageIRC.vector);
-	}
+		mapCom[PASS](command);
 	else if (client.getPassAuth() == true && messageIRC.cmd == USER)
-		userCommand(client, buffer, messageIRC.vector);
+		mapCom[USER](command);
 	else if (client.getPassAuth() == true && messageIRC.cmd == NICK)
 		nickCommand(server, client, buffer, messageIRC.vector);
 	else if (messageIRC.cmd == PONG)
