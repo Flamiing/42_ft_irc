@@ -6,21 +6,20 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:09:58 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/25 11:32:11 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/28 22:01:12 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Server.hpp"
 
-void Server::_processMessage(const int& client, char* message)
+void Server::_processMessage(const int& client, std::string message)
 {
 	std::string buffer;
-	std::string messageStr = message;
-	if (messageStr[messageStr.size() - 1] == '\n')
-		messageStr.erase(messageStr.size() - 1);
-	if (messageStr[messageStr.size() - 1] == '\r')
-		messageStr.erase(messageStr.size() - 1);
-	IRCMessage messageIRC(messageStr);
+	if (message[message.size() - 1] == '\n')
+		message.erase(message.size() - 1);
+	if (message[message.size() - 1] == '\r')
+		message.erase(message.size() - 1);
+	IRCMessage messageIRC(message);
 	
 	if (this->_clients[client].getPassAuth() == false && messageIRC.cmd != PASS)
 		buffer = ERR_NOTREGISTERED(this->_clients[client].getNickname());

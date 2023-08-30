@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/25 18:03:25 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/28 22:01:23 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ class Server
 		void _handleClients(void);
 		void _newClient(int& clientSocket);
 		void _handleClientRequest(size_t& client);
-		void _processMessage(const int& client, char* message);
+		void _processMessage(const int& client, std::string message);
 		void _disconnect(size_t& client);
 
 		int _port;
