@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 00:59:24 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/30 13:40:21 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/30 22:11:55 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ class Client
 		void setNickname(const std::string nickname);
 		void setWrongNickname(const std::string nickname);
 		void setFullName(const std::string fullName);
+		
+		std::string buffer;
 	private:
 		std::string _nickname;
 		std::string _wrongNickname;
