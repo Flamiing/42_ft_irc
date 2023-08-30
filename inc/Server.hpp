@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/28 22:01:23 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/30 15:30:11 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 # define SERVER_NAME "LOS.OSADOS"
 # define MAX_CLIENTS 10
 
+# include "/Command/PassCom.hpp"
+
 class Server
 {
 	public:
@@ -48,6 +50,12 @@ class Server
 		std::vector<Channel> getChannels(void) const;
 		void addChannel(std::string newChannel);
 		void connectToChannel(std::string& channel, Client& client, std::string key);
+
+		void	buildMapCommand(std::string& nameCom)
+		{
+			this->_commands[PASS] = PassCom(nameCom, NULL, NULL);
+		}
+
 	private:
 		Server(void);
 		Server(const Server& other);
@@ -68,6 +76,8 @@ class Server
 		int _socket;
 		std::vector<struct pollfd> _pollFds;
 		std::vector<Channel> _channels;
+
+		std::map<std::string, Command> _commands;
 };
 
 #endif

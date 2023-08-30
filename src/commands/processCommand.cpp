@@ -6,13 +6,15 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 20:10:01 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/30 11:50:09 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/08/30 14:43:41 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Server.hpp"
 #include "../../inc/Client.hpp"
 #include "../../inc/commands.hpp"
+
+#include "../../inc/Command.hpp"
 
 //static void helpCommand(Server& server, Client& client, std::string& buffer, IRCMessage& messageIRC)
 static void helpCommand(Client& client, std::string& buffer)
@@ -36,14 +38,18 @@ static void helpCommand(Client& client, std::string& buffer)
 	server._disconnect(&clientFd);
 } */
 
+/* else if (messageIRC.cmd == QUIT)
+		quitCommand(server, client, buffer, messageIRC); */
+
+
+
 static void commandProcessor(Server& server, Client& client, std::string& buffer, IRCMessage& messageIRC)
 {
+
 	if (messageIRC.cmd == JOIN)
 		joinCommand(server, client, buffer, messageIRC.vector);
 	else if (messageIRC.cmd == HELP)
 		helpCommand(client, buffer);
-	else if (messageIRC.cmd == QUIT)
-		quitCommand(server, client, buffer, messageIRC);
 	else
 		buffer = ERR_UNKNOWNCOMMAND(client.getNickname(), messageIRC.cmd);
 /* 	else if (messageIRC.cmd == PRIVMSG)
