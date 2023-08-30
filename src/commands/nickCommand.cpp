@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 01:45:31 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/25 12:03:17 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/29 02:39:04 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,23 +45,23 @@ static bool nicknameInUse(std::map<int, Client> clients, std::string& nickname)
 	return false;
 }
 
-static bool handleErrors(Server& server, Client& client, std::string& buffer, std::string& newNickname)
+static bool handleErrors(Server& server, Client& client, std::string& buffer, std::vector<std::string>& message)
 {
-	if (newNickname == ":" || newNickname.empty())
+	if (message.size() < 2 || message[1].empty() || message[1] == ":")
 	{
 		buffer = ERR_NONICKNAMEGIVEN(client.getNickname());
 		return true;
 	}
-	else if (nicknameInUse(server.getClients(), newNickname))
+	else if (nicknameInUse(server.getClients(), message[1]))
 	{
-		buffer = ERR_NICKNAMEINUSE(client.getNickname(), newNickname);
+		buffer = ERR_NICKNAMEINUSE(client.getNickname(), message[1]);
 		return true;
 	}
-	else if (invalidNickname(newNickname))
+	else if (invalidNickname(message[1]))
 	{
-		buffer = ERR_ERRONEUSNICKNAME(client.getNickname(), newNickname);
+		buffer = ERR_ERRONEUSNICKNAME(client.getNickname(), message[1]);
 		if (client.getAuth() == false)
-			client.setWrongNickname(newNickname);
+			client.setWrongNickname(message[1]);
 		return true;
 	}
 	return false;
@@ -71,7 +71,7 @@ void nickCommand(Server& server, Client& client, std::string& buffer, std::vecto
 {
 	bool firstConnection = false;
 	
-	if (handleErrors(server, client, buffer, message[1]))
+	if (handleErrors(server, client, buffer, message))
 		return ;
 	if (client.getNickAuth() == true)
 		buffer = RPL_NICKNAMECHANGED(client.getNickname(), client.getUsername(), message[1]);

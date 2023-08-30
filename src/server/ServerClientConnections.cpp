@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:10:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/23 16:17:49 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/28 22:00:42 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,19 @@ void Server::_disconnect(size_t& client)
 void Server::_handleClientRequest(size_t& client)
 {
 	char buffer[512] = {0};
+	static std::string stash = "";
 	ssize_t bytesRead = recv(this->_pollFds[client].fd, buffer, sizeof(buffer), 0);
 	if (bytesRead <= 0)
 		_disconnect(client);
 	else
 	{
-		std::cout << "Client at socket #" << this->_pollFds[client].fd << ": " << buffer;
-		_processMessage(this->_pollFds[client].fd, buffer);
+		std::string checkEOF(buffer);
+		stash += checkEOF;
+		if (checkEOF[checkEOF.size() - 1] != '\n')
+			return ;
+		std::cout << "Client at socket #" << this->_pollFds[client].fd << ": " << stash;
+		_processMessage(this->_pollFds[client].fd, stash);
+		stash = "";
 	}
 }
 
