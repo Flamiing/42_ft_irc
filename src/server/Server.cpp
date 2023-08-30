@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:11 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/25 17:57:02 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/30 18:08:55 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,3 +29,16 @@ int Server::getPort(void) const { return this->_port; }
 std::string Server::getPassword(void) const { return this->_password; }
 std::map<int, Client> Server::getClients(void) const { return this->_clients; }
 std::vector<Channel> Server::getChannels(void) const { return this->_channels; }
+
+int Server::getSocketByNickname(const std::string nickname) const
+{
+	std::map<int, Client>::const_iterator it = this->_clients.begin();
+
+	while (it != this->_clients.end())
+	{
+		if (it->second.getNickname() == nickname)
+			break ;
+		it++;
+	}
+	return it->second.getSocket();
+}

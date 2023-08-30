@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   generalUtils.hpp                                   :+:      :+:    :+:   */
+/*   trimSpaces.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/21 22:37:45 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/30 19:15:05 by alaaouam         ###   ########.fr       */
+/*   Created: 2023/08/30 19:04:34 by alaaouam          #+#    #+#             */
+/*   Updated: 2023/08/30 19:34:36 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GENERALUTILS_CPP
-# define GENERALUTILS_CPP
+#include "../../inc/generalUtils.hpp"
 
-# include <iostream>
-# include <sstream>
-# include <string>
-# include <vector>
-
-bool parsePort(std::string& portStr, int& port);
-std::vector<std::string> splitString(std::string& str, char delimiter);
-std::string getMessage(const std::string& raw, const std::vector<std::string>& remove);
-std::string trimSpaces(std::string& str);
-
-#endif
+std::string trimSpaces(std::string& str)
+{
+	size_t count = 0;
+	while (count < str.size())
+	{
+		if (str[0] != ' ')
+			return str;
+		else
+			str.erase(0, 1);
+		count++;
+	}
+	return str;
+}

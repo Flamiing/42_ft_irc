@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 11:18:27 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/25 11:38:38 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/30 19:05:23 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ IRCMessage& IRCMessage::operator=(const IRCMessage& other)
 	return *this;
 }
 
-IRCMessage::IRCMessage(std::string& message) : raw(message)
+IRCMessage::IRCMessage(std::string& message)
 {
 	std::stringstream ss(message);
 	std::string token;
@@ -43,4 +43,5 @@ IRCMessage::IRCMessage(std::string& message) : raw(message)
 	std::getline(ss, token, ' ');
 	this->cmd = token;
 	this->vector = splitString(message, ' ');
+	this->raw = trimSpaces(message);
 }
