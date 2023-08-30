@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:11 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/30 18:08:55 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/30 21:25:51 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,17 @@ int Server::getSocketByNickname(const std::string nickname) const
 		it++;
 	}
 	return it->second.getSocket();
+}
+
+std::string Server::getRawNickname(const std::string& modifiedNickname)
+{
+	std::map<int, Client>::const_iterator it = this->_clients.begin();
+
+	while (it != this->_clients.end())
+	{
+		if (toUpperCase(it->second.getNickname()) == toUpperCase(modifiedNickname))
+			return it->second.getNickname();
+		it++;
+	}
+	return it->second.getNickname();
 }

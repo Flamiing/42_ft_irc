@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 01:45:31 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/29 02:39:04 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/30 21:15:55 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static bool nicknameInUse(std::map<int, Client> clients, std::string& nickname)
 
 	while (it != clients.end())
 	{
-		if (it->second.getNickname() == nickname)
+		if (toUpperCase(it->second.getNickname()) == toUpperCase(nickname))
 			return true;
 		it++;
 	}
