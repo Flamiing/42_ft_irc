@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/25 21:50:40 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/30 13:44:04 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ class Channel
 		std::string getOnlineUsersList(void) const;
 		std::vector<Client> getBannedUsers(void) const;
 		void _replyToNewUser(Client& client);
-		void _informOnlineUsers(Client& client);
+		void _informOnlineUsers(const std::string& reply);
 		void joinChannel(Client& client, std::string& key);
 		bool userIsBanned(std::string& nickname);
 	private:

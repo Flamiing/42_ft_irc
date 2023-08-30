@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 21:27:35 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/25 18:19:31 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/30 14:05:26 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void userCommand(Client& client, std::string& buffer, std::vector<std::string>& 
 		return ;
 	client.setUserAuth(true);
 	client.setUsername(message[1]);
-	std::string fullName = message[4].c_str() + 1;
+	std::string fullName(message[4].c_str() + 1);
 	fullName += " " + message[5];
 	client.setFullName(fullName);
 	if (client.getAuth() == true)

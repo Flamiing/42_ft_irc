@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/28 16:27:06 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/30 13:57:51 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void joinChannel(Server& server, std::vector<Channel> channels, Client& c
 {
 	if (channels.size() == 0 || channelNotFound(channels, message[1]))
 		server.addChannel(message[1]);
-	else if (message.size() == 2)
+	if (message.size() == 2)
 		server.connectToChannel(message[1], client, "");
 	//else if ()
 	//else if (CHANNEL IS INVITE ONLY MODE)
@@ -45,12 +45,12 @@ static bool handleErrors(Server& server, Client& client, std::string& buffer, st
 		buffer = ERR_NEEDMOREPARAMS(client.getNickname(), message[0]);
 		return true;
 	}
-	(void)server;
 	//else if (server.isBanned(client.getNickname(), message[1]))
 	//	buffer = ERR_BANNEDFROMCHAN(client.getNickname(), message[1]);
 	//else if ()
 	//	buffer = ERR_INVITEONLYCHAN(client.getNickname(), message[1]);
 	return false;
+	(void)server;
 }
 
 void joinCommand(Server& server, Client& client, std::string& buffer, std::vector<std::string>& message)
@@ -59,5 +59,4 @@ void joinCommand(Server& server, Client& client, std::string& buffer, std::vecto
 		return ;
 	message[1].erase(0, 1);
 	joinChannel(server, server.getChannels(), client, message);
-	(void)buffer;
 }
