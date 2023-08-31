@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 14:03:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 14:13:11 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/08/31 15:17:37 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 void Server::initMapCommand(void)
 {
-	this->mapCommand[PASS] = &passCommand;
-	this->mapCommand[USER] = &userCommand;
-	this->mapCommand[NICK] = &nickCommand;
-	this->mapCommand[JOIN] = &joinCommand;
-	//mapCommand[QUIT] = &quitCommand;
+	mapCommand[PASS] = &passCommand;
+	mapCommand[USER] = &userCommand;
+	mapCommand[NICK] = &nickCommand;
+	mapCommand[JOIN] = &joinCommand;
+	mapCommand[QUIT] = &quitCommand;
+	mapCommand[NOTICE] = &noticeCommand;
 	//mapCommand[PRIVMSG] = &privmsgCommand;
 }
 
