@@ -1,0 +1,13 @@
+por que cuando defino USER, no me funciona si despuesd e los : no pongo un espacio 
+
+si pones PASS p  (una pass erronea) tiene un comportamiento diferente
+
+clase mesageIRC sin getters y setters. Cuando lo uso, no seguimos estandar, si no no sforzamos a trabajar bien acabara creando complicaciones
+
+necesito codear un poco para ver de donde saca cada cosa.
+
+no deberia funcionar sin -c en la terminal
+si interrumpo la conexion
+
+
+no puedo conectarme desde otro cpu con nc con ip local..

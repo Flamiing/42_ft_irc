@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/27 19:25:47 by alaaouam          #+#    #+#              #
-#    Updated: 2023/08/31 12:53:41 by alaaouam         ###   ########.fr        #
+#    Updated: 2023/08/31 14:53:38 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRC =	main.cpp Server.cpp ServerRun.cpp ServerClientConnections.cpp ServerProces
 			   Client.cpp parsePort.cpp printError.cpp processCommand.cpp passCommand.cpp userCommand.cpp \
 			   splitString.cpp nickCommand.cpp IRCMessage.cpp ServerChannels.cpp ChannelConnection.cpp \
 			   Channel.cpp joinCommand.cpp getMessage.cpp noticeCommand.cpp trimSpaces.cpp toUpperCase.cpp \
-			   quitCommand.cpp ChannelDisconnection.cpp ClientDisconnect.cpp
+			   quitCommand.cpp ChannelDisconnection.cpp ClientDisconnect.cpp Command.cpp
 			
 SRC_PATH = src/*/
 SRCS = $(addprefix $(SRC_PATH), $(SRC))
@@ -35,8 +35,13 @@ OBJS = $(addprefix $(OBJ_PATH), $(OBJ))
 INC = inc/
 
 CPP = c++
-CPPFLAGS =  -Wall -Wextra -Werror -std=c++98
+CPPFLAGS =  -Wall -Wextra -Werror -std=c++98 #-fsanitize=address
 RM = rm -rf
+
+#_GUILLE - ¿Que pasa si ejecutamos en un puerto en uso, 4242?
+ARG1 = 2042
+ARG2 = pass
+CSANITIZE	= -fsanitize=address
 
 #	RULES	#
 
@@ -47,7 +52,7 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.cpp
 	$(CPP) $(CPPFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
-	@$(CPP) $(CPPFLAGS) $(OBJS) -o $(NAME)
+	$(CPP) $(CPPFLAGS) $(OBJS) -o $(NAME)
 	@echo "$(GREEN)<+> $(NAME) has been created! <+>$(COLOR_OFF)"
 
 clean:
@@ -56,6 +61,24 @@ clean:
 fclean: clean
 	@$(RM) $(NAME)
 	@echo "$(GREEN)<-> $(NAME) cleaned succesfuly! <->$(COLOR_OFF)"
+
+
+
+exe: $(OBJS)
+	@$(CPP) $(CPPFLAGS) $(OBJS) -o $(NAME)
+	@echo "$(GREEN)<+> $(NAME) executing at port '$(ARG1)' and with password: '$(ARG2)' <+>$(COLOR_OFF)"
+	@./ircserv $(ARG1) $(ARG2)
+
+san: $(OBJS)
+	$(CPP) $(CPPFLAGSS) $(CSANITIZE) $(OBJS) -o $(NAME)
+	@echo "$(GREEN)<+> $(NAME) compiled with fsanitize! <+>$(COLOR_OFF)"
+
+net:
+	nc -c localhost $(ARG1)
+#echo "PASS pass"
+
+net1:
+	bash user.sh
 
 re: fclean all
 

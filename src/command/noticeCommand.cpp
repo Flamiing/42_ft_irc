@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   noticeCommand.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 17:18:58 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/30 21:25:34 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/31 15:00:50 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 #include "../../inc/Client.hpp"
 #include "../../inc/IRCMessage.hpp"
 
-static bool handleErrors(Client& client, std::string& buffer, IRCMessage& messageIRC)
+static bool handleErrors(Client& client, std::string& buffer, Command& command)
 {
-	if (messageIRC.vector.size() == 1)
+	if (command.message.size() == 1)
 	{
-		buffer = ERR_NORECIPIENT(client.getNickname(), messageIRC.cmd);
+		buffer = ERR_NORECIPIENT(client.getNickname(), command.cmd);
 		return true;
 	}
-	else if (messageIRC.vector.size() == 2)
+	else if (command.message.size() == 2)
 	{
 		buffer = ERR_NOTEXTTOSEND(client.getNickname());
 		return true;
@@ -30,15 +30,19 @@ static bool handleErrors(Client& client, std::string& buffer, IRCMessage& messag
 	return false;
 }
 
-void noticeCommand(Server& server, Client& client, std::string& buffer, IRCMessage& messageIRC)
+void noticeCommand(Command& command)
 {
-	if (handleErrors(client, buffer, messageIRC))
+	Server&						server = *command.server;
+	Client&						client = *command.client;
+	std::string&				buffer = *command.buffer;
+
+	if (handleErrors(client, buffer, command))
 		return ;
 	std::vector<std::string> remove;
-	remove.push_back(messageIRC.cmd);
-	remove.push_back(messageIRC.vector[1]);
-	std::string messageToSend = getMessage(messageIRC.raw, remove);
-	std::string rawNickname = server.getRawNickname(messageIRC.vector[1]);
+	remove.push_back(command.cmd);
+	remove.push_back(command.message[1]);
+	std::string messageToSend = getMessage(command.raw, remove);
+	std::string rawNickname = server.getRawNickname(command.message[1]);
 	std::string reply = MSG_NOTICE(client.getNickname(), client.getUsername(), rawNickname, messageToSend);
 	int recipientSocket = server.getSocketByNickname(rawNickname);
 	send(recipientSocket, reply.c_str(), reply.size(), 0);

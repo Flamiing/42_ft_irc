@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   userCommand.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 21:27:35 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/30 21:52:11 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/31 15:08:10 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/commands.hpp"
-#include "../../inc/Client.hpp"
+#include "../../inc/Server.hpp"
 
 static bool invalidUsername(std::string& username)
 {
@@ -49,14 +48,17 @@ static bool handleErrors(Client& client, std::string& buffer, std::vector<std::s
 	return false;
 }
 
-void userCommand(Client& client, std::string& buffer, std::vector<std::string>& message)
-{
-	if (handleErrors(client, buffer, message))
+void userCommand(Command &command)
+{	
+	Client&						client = *command.client;
+	std::string&				buffer = *command.buffer;
+
+	if (handleErrors(client, buffer, command.message))
 		return ;
 	client.setUserAuth(true);
-	client.setUsername(message[1]);
-	std::string fullName(message[4].c_str() + 1);
-	fullName += " " + message[5];
+	client.setUsername(command.message[1]);
+	std::string fullName = command.message[4].c_str() + 1;
+	fullName += " " + command.message[5];
 	client.setFullName(fullName);
 	if (client.getAuth() == true)
 		buffer = RPL_WELCOME(client.getNickname());

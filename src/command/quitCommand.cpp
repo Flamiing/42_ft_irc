@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quitCommand.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 19:44:22 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 13:31:08 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/31 15:08:24 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,28 @@
 #include "../../inc/Server.hpp"
 #include "../../inc/IRCMessage.hpp"
 
-std::string getQuitReply(Client& client, IRCMessage& messageIRC)
+std::string getQuitReply(Client& client, Command& command)
 {
 	std::string reply;
 	
-	if (messageIRC.vector.size() < 2)
+	if (command.message.size() < 2)
 		reply = RPL_QUITWITHNOMSG(client.getNickname(), client.getUsername());
 	else
 	{
 		std::vector<std::string> remove;
-		remove.push_back(messageIRC.cmd);
-		std::string messageToSend = getMessage(messageIRC.raw, remove);
+		remove.push_back(command.cmd);
+		std::string messageToSend = getMessage(command.raw, remove);
 		reply = RPL_QUIT(client.getNickname(), client.getUsername(), messageToSend);
 	}
 	return reply;
 }
 
-void quitCommand(Server& server, Client& client, IRCMessage& messageIRC)
+void quitCommand(Command& command)
 {
-	std::string reply = getQuitReply(client, messageIRC);
+	Server&						server = *command.server;
+	Client&						client = *command.client;
+
+	std::string reply = getQuitReply(client, command);
 	
 	client.disconnectChannels(reply);
 	server.disconnect(client.getPollFDPos());

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ServerProcessMessage.cpp                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:09:58 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/30 18:57:46 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:51:18 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,11 @@ void Server::_processMessage(const int& client, std::string message)
 		message.erase(message.size() - 1);
 	if (message[message.size() - 1] == '\r')
 		message.erase(message.size() - 1);
-	IRCMessage messageIRC(message);
-	
-	if (this->_clients[client].getPassAuth() == false && messageIRC.cmd != PASS)
+	Command		command(this, &this->_clients[client], &buffer, message);
+	if (this->_clients[client].getPassAuth() == false && command.cmd != PASS)
 		buffer = ERR_NOTREGISTERED(this->_clients[client].getNickname());
 	else
-		processCommand(*this, this->_clients[client], buffer, messageIRC);
+		processCommand(command);
 	send(this->_clients[client].getSocket(), buffer.c_str(), buffer.size(), 0);
 	buffer = "";
 }

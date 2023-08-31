@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   joinCommand.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/30 13:57:51 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:58:41 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../inc/commands.hpp"
-# include "../../inc/Channel.hpp"
-# include "../../inc/Server.hpp"
+#include "../../inc/Server.hpp"
 
 static bool channelNotFound(std::vector<Channel>& channels, std::string channelToFind)
 {
@@ -53,10 +51,14 @@ static bool handleErrors(Server& server, Client& client, std::string& buffer, st
 	(void)server;
 }
 
-void joinCommand(Server& server, Client& client, std::string& buffer, std::vector<std::string>& message)
+void joinCommand(Command& command)
 {
-	if (handleErrors(server, client, buffer, message))
+	Server&						server = *command.server;
+	Client&						client = *command.client;
+	std::string&				buffer = *command.buffer;
+
+	if (handleErrors(server, client, buffer, command.message))
 		return ;
-	message[1].erase(0, 1);
-	joinChannel(server, server.getChannels(), client, message);
-}
+	command.message[1].erase(0, 1);
+	joinChannel(server, server.getChannels(), client, command.message);
+} 

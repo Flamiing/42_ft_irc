@@ -3,25 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   commands.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:48:53 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 13:00:24 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:50:30 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COMMANDS_HPP
 # define COMMANDS_HPP
 
-# include <iostream>
-# include <vector>
-# include <string>
-# include <sys/socket.h>
-# include "generalUtils.hpp"
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <vector>
+#include <cctype>
+#include <map>
 
 class Server;
 class Client;
 class Channel;
+class Command;
 class IRCMessage;
 
 # define PASS "PASS"
@@ -60,13 +62,18 @@ class IRCMessage;
 # define RPL_QUIT(nickname, username, message) (":" + nickname + "!~" + username + "@localhost QUIT :Quit: " + message + "\r\n")
 # define MSG_NOTICE(nickname, username, recipient, message) (":" + nickname + "!~" + username + "@localhost NOTICE " + recipient + " :" + message + "\r\n")
 
-void processCommand(Server& server, Client& client, std::string& buffer, IRCMessage& messageIRC);
-void passCommand(Server& server, Client& client, std::string& buffer, std::vector<std::string>& message);
-void nickCommand(Server& server, Client& client, std::string& buffer, std::vector<std::string>& message);
-void userCommand(Client& client, std::string& buffer, std::vector<std::string>& message);
-void joinCommand(Server& server, Client& client, std::string& buffer, std::vector<std::string>& message);
-void quitCommand(Server& server, Client& client, IRCMessage& messageIRC);
-void noticeCommand(Server& server, Client& client, std::string& buffer, IRCMessage& messageIRC);
-//void privmsgCommand(Client& client, std::string& buffer, std::vector<std::string>& message);
+# define RPL_HELP(client) (":localhost 000 " + client + " :Use the following commands to traverse the chat: \r\n")
+
+
+typedef void (*customFunctionType)(Command& command);
+
+void processCommand(Command& command);
+void passCommand(Command& command);
+void userCommand(Command &command);
+void nickCommand(Command &command);
+void joinCommand(Command &command);
+void noticeCommand(Command &command);
+void quitCommand(Command &command);
+//void privmsgCommand(Command &command);
 
 #endif

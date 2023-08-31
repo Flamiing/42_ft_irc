@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 12:48:23 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:50:55 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,15 @@
 # include <unistd.h>
 # include <arpa/inet.h>
 # include <poll.h>
-# include <string>
-# include <map>
-# include <vector>
 # include "Client.hpp"
 # include "Channel.hpp"
+# include "Command.hpp"
 # include "IRCMessage.hpp"
 # include "errors.hpp"
 # include "generalUtils.hpp"
 # include "commands.hpp"
 
 # define LOCALHOST "127.0.0.1"
-# define SERVER_NAME "LOS.OSADOS"
 # define MAX_CLIENTS 10
 
 class Server
@@ -51,6 +48,10 @@ class Server
 		void addChannel(std::string newChannel);
 		void connectToChannel(std::string& channel, Client& client, std::string key);
 		void disconnect(size_t client);
+
+		void initMapCommand(void);
+		std::map<std::string, customFunctionType> mapCommand;
+
 	private:
 		Server(void);
 		Server(const Server& other);
@@ -70,6 +71,7 @@ class Server
 		int _socket;
 		std::vector<struct pollfd> _pollFds;
 		std::vector<Channel> _channels;
+
 };
 
 #endif

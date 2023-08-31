@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   nickCommand.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 01:45:31 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/30 21:15:55 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:58:56 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/commands.hpp"
 #include "../../inc/Server.hpp"
-#include <cctype>
-#include <map>
 
 static bool invalidNickname(std::string& nickname)
 {
@@ -67,7 +64,8 @@ static bool handleErrors(Server& server, Client& client, std::string& buffer, st
 	return false;
 }
 
-void nickCommand(Server& server, Client& client, std::string& buffer, std::vector<std::string>& message)
+/* _GUILLE revisar */
+/* void nickCommand(Server& server, Client& client, std::string& buffer, std::vector<std::string>& message)
 {
 	bool firstConnection = false;
 	
@@ -78,6 +76,26 @@ void nickCommand(Server& server, Client& client, std::string& buffer, std::vecto
 	else
 		firstConnection = true;
 	client.setNickname(message[1]);
+	client.setNickAuth(true);
+	if (firstConnection && client.getAuth() == true)
+		buffer = RPL_WELCOME(client.getNickname());
+} */
+
+
+void nickCommand(Command& command)
+{
+	bool firstConnection = false;
+	Server&						server = *command.server;
+	Client&						client = *command.client;
+	std::string&				buffer = *command.buffer;
+	
+	if (handleErrors(server, client, buffer, command.message))
+		return ;
+	if (client.getNickAuth() == true)
+		buffer = RPL_NICKNAMECHANGED(client.getNickname(), client.getUsername(), command.message[1]);
+	else
+		firstConnection = true;
+	client.setNickname(command.message[1]);
 	client.setNickAuth(true);
 	if (firstConnection && client.getAuth() == true)
 		buffer = RPL_WELCOME(client.getNickname());
