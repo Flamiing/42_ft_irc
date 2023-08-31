@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Client.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 00:59:24 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 14:47:26 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/08/31 23:19:07 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ class Client
 {
 	public:
 		Client(void);
-		Client(int socket, size_t pollFDPos);
+		Client(int socket);
 		Client(const Client& other);
 		~Client(void);
 		
@@ -37,7 +37,6 @@ class Client
 		bool getPassAuth(void) const;
 		bool getUserAuth(void) const;
 		bool getNickAuth(void) const;
-		size_t getPollFDPos(void) const;
 		void setPassAuth(const bool auth);
 		void setUserAuth(const bool auth);
 		void setNickAuth(const bool auth);
@@ -45,7 +44,6 @@ class Client
 		void setNickname(const std::string nickname);
 		void setWrongNickname(const std::string nickname);
 		void setFullName(const std::string fullName);
-		void disconnectChannels(const std::string& reply);
 		void addToJoinedChannels(Channel& channel);
 		
 		std::string buffer;
@@ -55,7 +53,6 @@ class Client
 		std::string _username;
 		std::string _fullName;
 		int _socket;
-		size_t _pollFDPos;
 		bool _passAuth;
 		bool _userAuth;
 		bool _nickAuth;

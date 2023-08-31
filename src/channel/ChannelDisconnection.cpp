@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:41:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 14:01:09 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/31 19:50:11 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void Channel::disconnectFromChannel(std::string& client, const std::string& repl
 
 	while (it != this->_onlineUsers.end())
 	{
-		if ((*it).getNickname() == client)
+		if (it->getNickname() == client)
 		{
 			this->_onlineUsers.erase(it);
 			break ;

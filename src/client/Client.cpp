@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 00:59:16 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 12:30:15 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/31 23:27:25 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 Client::Client(void) {}
 
-Client::Client(int socket, size_t pollFDPos) :
-		buffer(), _socket(socket), _pollFDPos(pollFDPos) , _passAuth(false),
+Client::Client(int socket) :
+		buffer(), _socket(socket) , _passAuth(false),
 		_userAuth(false), _nickAuth(false), _auth(false), _isOperator(false) {}
 
 Client::Client(const Client& other)
@@ -33,23 +33,12 @@ Client& Client::operator=(const Client& other)
 		this->_username = other._username;
 		this->_fullName = other._fullName;
 		this->_socket = other._socket;
-		this->_pollFDPos = other._pollFDPos;
 		this->_auth = other._auth;
 		this->_passAuth = other._passAuth;
 		this->_userAuth = other._userAuth;
 		this->_nickAuth = other._nickAuth;
 		this->_isOperator = other._isOperator;
 		this->_joinedChannels = other._joinedChannels;
-
-		/* std::vector<Channel>::const_iterator it = other._joinedChannels.begin();
-		std::vector<Channel> newJoinedChannels;
-
-		while (it != other._joinedChannels.end())
-		{
-			newJoinedChannels.push_back(*it);
-			it++;
-		}
-		this->_joinedChannels = newJoinedChannels; */
 	}
 	return *this;
 }
@@ -62,7 +51,6 @@ bool Client::getPassAuth(void) const { return this->_passAuth; }
 bool Client::getUserAuth(void) const { return this->_userAuth; }
 bool Client::getNickAuth(void) const { return this->_nickAuth; }
 bool Client::getAuth(void) const { return this->_auth; }
-size_t Client::getPollFDPos(void) const { return this->_pollFDPos; }
 
 void Client::setPassAuth(const bool auth)
 {

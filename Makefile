@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
+#    By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/27 19:25:47 by alaaouam          #+#    #+#              #
-#    Updated: 2023/08/31 14:53:38 by guilmira         ###   ########.fr        #
+#    Updated: 2023/08/31 20:07:16 by alaaouam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRC =	main.cpp Server.cpp ServerRun.cpp ServerClientConnections.cpp ServerProces
 			   Client.cpp parsePort.cpp printError.cpp processCommand.cpp passCommand.cpp userCommand.cpp \
 			   splitString.cpp nickCommand.cpp IRCMessage.cpp ServerChannels.cpp ChannelConnection.cpp \
 			   Channel.cpp joinCommand.cpp getMessage.cpp noticeCommand.cpp trimSpaces.cpp toUpperCase.cpp \
-			   quitCommand.cpp ChannelDisconnection.cpp ClientDisconnect.cpp Command.cpp
+			   quitCommand.cpp ChannelDisconnection.cpp Command.cpp ServerClientDisconnection.cpp
 			
 SRC_PATH = src/*/
 SRCS = $(addprefix $(SRC_PATH), $(SRC))

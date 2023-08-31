@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 14:50:55 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/08/31 23:41:09 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ class Server
 		void addChannel(std::string newChannel);
 		void connectToChannel(std::string& channel, Client& client, std::string key);
 		void disconnect(size_t client);
+		void disconnectClientFromChannels(std::string client, std::string& reply);
+		size_t getPollinPosition(Client& client);
 
 		void initMapCommand(void);
 		std::map<std::string, customFunctionType> mapCommand;
