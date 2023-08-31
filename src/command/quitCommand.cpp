@@ -6,14 +6,13 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 19:44:22 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 15:08:24 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/08/31 16:06:25 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/commands.hpp"
 #include "../../inc/Client.hpp"
 #include "../../inc/Server.hpp"
-#include "../../inc/IRCMessage.hpp"
 
 std::string getQuitReply(Client& client, Command& command)
 {
