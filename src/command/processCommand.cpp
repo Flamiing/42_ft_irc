@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 20:10:01 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 12:58:08 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:01:31 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void processCommand(Client& client, std::string& buffer, Command& command)
 		if (it != mapCommand.end())
 			mapCommand[command.cmd](command);
 		else
-
+			buffer = ERR_UNKNOWNCOMMAND(client.getNickname(), messageIRC.cmd);
 	}
 	else
 	{
