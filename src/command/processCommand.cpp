@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 20:10:01 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 12:53:09 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/08/31 12:58:08 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,13 @@ void processCommand(Client& client, std::string& buffer, Command& command)
 		mapCommand[NICK](command);
 	else if (!command.cmd.compare(PONG))
 		return ;
-	else if (client.getAuth() == true && it != mapCommand.end())
-		mapCommand[command.cmd](command);
+	else if (client.getAuth() == true)
+	{
+		if (it != mapCommand.end())
+			mapCommand[command.cmd](command);
+		else
+
+	}
 	else
 	{
 		if (client.getAuth() == true)
