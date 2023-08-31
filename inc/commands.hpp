@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:48:53 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/30 19:43:49 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/08/31 12:28:27 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +56,15 @@ class IRCMessage;
 
 # define RPL_HELP(client) (":localhost 000 " + client + " :Use the following commands to traverse the chat: \r\n")
 
-//_GUILLE - tras el cambio a Command 
-
 void processCommand(Server& server, Client& client, std::string& buffer, Command& command, IRCMessage& messageIRC);
 
-void nickCommand(Server& server, Client& client, std::string& buffer, std::vector<std::string>& message);
-void joinCommand(Server& server, Client& client, std::string& buffer, std::vector<std::string>& message);
-void quitCommand(Client& client, std::string& buffer, std::vector<std::string>& message);
-//void privmsgCommand(Client& client, std::string& buffer, std::vector<std::string>& message);
-
 typedef void (*customFunctionType)(Command& command);
+
 void passCommand(Command& command);
 void userCommand(Command &command);
+void nickCommand(Command &command);
+void joinCommand(Command &command);
+void quitCommand(Command &command);
+void privmsgCommand(Command &command);
 
 #endif

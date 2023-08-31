@@ -29,7 +29,7 @@
 class Command
 {
 	public:
-		Command(Server *server, Client *client, std::string& buffer, std::string& message);
+		Command(Server *server, Client *client, std::string *buffer, std::string& message);
 		~Command();
 		Command(Command const &src);
 		Command & operator=(Command const &rhs);
@@ -37,9 +37,9 @@ class Command
 		std::string const &	getName() const;
 		void				setName(std::string const &name);
 
-		Server		*server; //compilador no permitira referencia.
-		Client		*client; //_GUILLE son punteros por constructores por defecto de server privados.
-		std::string	buffer;
+		Server		*server;
+		Client		*client;
+		std::string	*buffer;
 
 		std::string raw;
 		std::string cmd;

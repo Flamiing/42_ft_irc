@@ -15,7 +15,7 @@
 /* CLASS DEFINITION. */
 /* --------------------------------- CONSTRUCTORS --------------------------------- */
 Command::Command()
-	: server(NULL), client(NULL), buffer(" "), raw(" "), _name("Default")
+	: server(NULL), client(NULL), buffer(NULL), raw(" "), _name("Default")
 {
 	ilog(getName(), "Constructed⚪");
 	return ;
@@ -23,7 +23,7 @@ Command::Command()
 
 /* Stringstream is used to be able to manipulate the string in get line and 
 split into the first token. then split string does a split on the message */
-Command::Command(Server *server, Client *client, std::string& buffer, std::string& message)
+Command::Command(Server *server, Client *client, std::string *buffer, std::string& message)
 	: server(server), client(client), buffer(buffer), raw(message)
 {
 	std::stringstream	ss(message);

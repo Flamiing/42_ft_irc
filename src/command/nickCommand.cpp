@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 01:45:31 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/30 17:12:13 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/08/31 12:21:02 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "../../inc/Server.hpp"
 #include <cctype>
 #include <map> /* _GUILLE - este map dberia ir aqui solo? */
+#include "../../inc/Command.hpp"
 
 static bool invalidNickname(std::string& nickname)
 {
@@ -81,4 +82,21 @@ void nickCommand(Server& server, Client& client, std::string& buffer, std::vecto
 	client.setNickAuth(true);
 	if (firstConnection && client.getAuth() == true)
 		buffer = RPL_WELCOME(client.getNickname());
+}
+
+
+void nickCommand(Command& command)
+{
+	bool firstConnection = false;
+	
+	if (handleErrors(*command.server, *command.client, *command.buffer, command.message))
+		return ;
+	if (command.client->getNickAuth() == true)
+		*command.buffer = RPL_NICKNAMECHANGED(command.client->getNickname(), command.client->getUsername(), command.message[1]);
+	else
+		firstConnection = true;
+	command.client->setNickname(command.message[1]);
+	command.client->setNickAuth(true);
+	if (firstConnection && command.client->getAuth() == true)
+		*command.buffer = RPL_WELCOME(command.client->getNickname());
 }
