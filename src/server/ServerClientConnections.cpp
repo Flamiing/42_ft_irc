@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:10:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/30 22:12:26 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/31 12:48:34 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void Server::_newClient(int& clientSocket)
 	clientPoll.fd = clientSocket;
 	clientPoll.events = POLLIN;
 	clientPoll.revents = 0;
-	this->_clients[clientSocket] = Client(clientSocket);
+	this->_clients[clientSocket] = Client(clientSocket, this->_pollFds.size());
 	std::cout << "New client connected at socket #" << clientSocket << std::endl;
 	this->_pollFds.push_back(clientPoll);
 }
 
-void Server::_disconnect(size_t& client)
+void Server::disconnect(size_t client)
 {
 	std::cout << "Client at socket #" << this->_pollFds[client].fd << " disconnected." << std::endl;
 	this->_clients[_pollFds[client].fd].buffer = "";
@@ -40,7 +40,7 @@ void Server::_handleClientRequest(size_t& client)
 	std::string& stash = this->_clients[_pollFds[client].fd].buffer;
 	ssize_t bytesRead = recv(this->_pollFds[client].fd, buffer, sizeof(buffer), 0);
 	if (bytesRead <= 0)
-		_disconnect(client);
+		disconnect(client);
 	else
 	{
 		std::string checkEOF(buffer);

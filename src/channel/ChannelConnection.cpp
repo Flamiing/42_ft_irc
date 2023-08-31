@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:18:42 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/30 13:44:12 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:49:53 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,14 @@ void Channel::_informOnlineUsers(const std::string& reply)
 {
 	std::vector<Client>::const_iterator it = this->_onlineUsers.begin();
 	
+	std::cout << "ONLINE USERS: ";
 	while (it != this->_onlineUsers.end())
 	{
+		std::cout << (*it).getNickname() << " ";
 		send(it->getSocket(), reply.c_str(), reply.size(), 0);
 		it++;
 	}
+	std::cout << std::endl;
 }
 
 void Channel::joinChannel(Client& client, std::string& key)
@@ -43,6 +46,7 @@ void Channel::joinChannel(Client& client, std::string& key)
 		this->_onlineUsers.push_back(client);
 		_informOnlineUsers(reply);
 		_replyToNewUser(client);
+		client.addToJoinedChannels(*this);
 	}
 	(void)key;
 	//if (!channelKey.empty() && channelKey == key)

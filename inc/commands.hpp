@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:48:53 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/30 21:53:56 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:00:24 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ class IRCMessage;
 # define ERR_BANNEDFROMCHAN(client, channel) (":localhost 474 " + client + " " + channel + " :Cannot join channel (+b)\r\n")
 # define RPL_NICKNAMECHANGED(nickname, username, newNickname) (":" + nickname + "!~" + username + "@localhost NICK :" + newNickname + "\r\n")
 # define RPL_USERJOINEDCHANNEL(nickname, username, channel) (":" + nickname + "!~" + username + "@localhost JOIN #" + channel + "\r\n")
+# define RPL_QUITWITHNOMSG(nickname, username) (":" + nickname + "!~" + username + "@localhost QUIT :Quit\r\n")
 # define RPL_QUIT(nickname, username, message) (":" + nickname + "!~" + username + "@localhost QUIT :Quit: " + message + "\r\n")
 # define MSG_NOTICE(nickname, username, recipient, message) (":" + nickname + "!~" + username + "@localhost NOTICE " + recipient + " :" + message + "\r\n")
 
@@ -64,7 +65,7 @@ void passCommand(Server& server, Client& client, std::string& buffer, std::vecto
 void nickCommand(Server& server, Client& client, std::string& buffer, std::vector<std::string>& message);
 void userCommand(Client& client, std::string& buffer, std::vector<std::string>& message);
 void joinCommand(Server& server, Client& client, std::string& buffer, std::vector<std::string>& message);
-void quitCommand(Client& client, std::string& buffer, std::vector<std::string>& message);
+void quitCommand(Server& server, Client& client, IRCMessage& messageIRC);
 void noticeCommand(Server& server, Client& client, std::string& buffer, IRCMessage& messageIRC);
 //void privmsgCommand(Client& client, std::string& buffer, std::vector<std::string>& message);
 

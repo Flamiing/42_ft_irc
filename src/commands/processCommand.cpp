@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 20:10:01 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/30 18:10:46 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/31 12:56:10 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,12 @@ static void commandProcessor(Server& server, Client& client, std::string& buffer
 		joinCommand(server, client, buffer, messageIRC.vector);
 	else if (messageIRC.cmd == NOTICE)
 		noticeCommand(server, client, buffer, messageIRC);
+	else if (messageIRC.cmd == QUIT)
+		quitCommand(server, client, messageIRC);
 	else
 		buffer = ERR_UNKNOWNCOMMAND(client.getNickname(), messageIRC.cmd);
+//	else if (message[0] == QUIT)
+//		quitCommand(server, client, message);
 //	else if (message[0] == PRIVMSG)
 //		privmsgCommand(client, buffer, message);
 //	else if (message[0] == HELP)
@@ -32,8 +36,6 @@ static void commandProcessor(Server& server, Client& client, std::string& buffer
 //		kickCommand(client, buffer, message);
 //	else if (message[0] == TOPIC)
 //		topicCommand(client, buffer, message);
-//	else if (message[0] == QUIT)
-//		quitCommand(client, buffer, message);
 }
 
 void processCommand(Server& server, Client& client, std::string& buffer, IRCMessage& messageIRC)
