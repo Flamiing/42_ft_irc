@@ -33,7 +33,7 @@ Command::Command(Server *server, Client *client, std::string& buffer, std::strin
 	this->cmd = token;
 	this->message = splitString(message, ' ');
 
-//---
+//_GUILLE
 	this->_name = token;
 	ilog(getName(), "Constructed⚪");
 }
@@ -59,8 +59,6 @@ Command & Command::operator=(Command const &rhs)
 	ilog(getName(), "[=] Assignation operator called");
 	if (this != &rhs)
 	{
-		this->setName(rhs.getName());
-
 		this->raw = rhs.raw;
 		this->cmd = rhs.cmd;
 		
@@ -70,6 +68,7 @@ Command & Command::operator=(Command const &rhs)
 			this->message.push_back(rhs.message[pos]);
 			pos++;
 		}
+		this->setName(rhs.getName());
 	}
 	return (*this);
 }

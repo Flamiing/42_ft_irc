@@ -37,7 +37,7 @@ class Command
 		std::string const &	getName() const;
 		void				setName(std::string const &name);
 
-		Server		*server;
+		Server		*server; //compilador no permitira referencia.
 		Client		*client; //_GUILLE son punteros por constructores por defecto de server privados.
 		std::string	buffer;
 

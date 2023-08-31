@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/30 16:19:13 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/08/31 09:58:00 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,6 @@ class Server
 		void addChannel(std::string newChannel);
 		void connectToChannel(std::string& channel, Client& client, std::string key);
 
-		/* void	buildMapCommand(std::string& nameCom)
-		{
-			this->_commands[PASS] = PassCom(nameCom, NULL, NULL);
-		} */
-
 	private:
 		Server(void);
 		Server(const Server& other);
@@ -76,8 +71,6 @@ class Server
 		int _socket;
 		std::vector<struct pollfd> _pollFds;
 		std::vector<Channel> _channels;
-
-		//std::map<std::string, Command> _commands;
 };
 
 #endif

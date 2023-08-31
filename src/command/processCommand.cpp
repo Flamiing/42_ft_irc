@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 20:10:01 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/30 19:45:41 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/08/31 10:12:00 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,25 +64,30 @@ static void commandProcessor(Server& server, Client& client, std::string& buffer
 	
 }
 
-
-
+//_GUILLE metodo de server
+void fillMap(std::map<std::string, customFunctionType>& mapCom)
+{
+	mapCom[PASS] = &passCommand;
+	mapCom[USER] = &userCommand;
+/* 	mapCom[NICK] = &nickCommand;
+	mapCom[JOIN] = &joinCommand;
+	mapCom[PRIVMSG] = &privmsgCommand;
+	mapCom[QUIT] = &quitCommand; */
+}
 
 void processCommand(Server& server, Client& client, std::string& buffer, Command& command, IRCMessage& messageIRC)
 {
 
 	std::map<std::string, customFunctionType> mapCom;
 
-	mapCom[PASS] = &passCommand;
-	mapCom[USER] = &userCommand;
-
-//los 3 primeros con if
+	fillMap(mapCom);
 	if (messageIRC.cmd == PASS)
 		mapCom[PASS](command);
-	else if (client.getPassAuth() == true && messageIRC.cmd == USER)
+	else if (client.getPassAuth() == true && command.cmd == USER)
 		mapCom[USER](command);
-	else if (client.getPassAuth() == true && messageIRC.cmd == NICK)
-		nickCommand(server, client, buffer, messageIRC.vector);
-	else if (messageIRC.cmd == PONG)
+	else if (client.getPassAuth() == true && command.cmd == NICK)
+		nickCommand(server, client, buffer, command.message);
+	else if (command.cmd == PONG)
 		return ;
 	else if (client.getAuth() == true)
 		commandProcessor(server, client, buffer, messageIRC);
