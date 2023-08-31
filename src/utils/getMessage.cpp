@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ChannelDisconnection.cpp                           :+:      :+:    :+:   */
+/*   getMessage.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/25 18:41:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 14:01:09 by alaaouam         ###   ########.fr       */
+/*   Created: 2023/08/30 17:30:53 by alaaouam          #+#    #+#             */
+/*   Updated: 2023/08/30 20:51:36 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/Channel.hpp"
+#include "../../inc/generalUtils.hpp"
 
-void Channel::disconnectFromChannel(std::string& client, const std::string& reply)
+std::string getMessage(const std::string& raw, const std::vector<std::string>& remove)
 {
-	std::vector<Client>::iterator it = this->_onlineUsers.begin();
-
-	while (it != this->_onlineUsers.end())
+	std::string newString(raw);
+	std::vector<std::string>::const_iterator it = remove.begin();
+	size_t pos = 0;
+	
+	while (it != remove.end())
 	{
-		if ((*it).getNickname() == client)
-		{
-			this->_onlineUsers.erase(it);
-			break ;
-		}
+		trimSpaces(newString);
+		pos = newString.find(*it, 0);
+		newString.erase(pos, (*it).length());
 		it++;
 	}
-	_informOnlineUsers(reply);
+	trimSpaces(newString);
+	return newString;
 }

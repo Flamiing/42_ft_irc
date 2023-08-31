@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ChannelDisconnection.cpp                           :+:      :+:    :+:   */
+/*   toUpperCase.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/25 18:41:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 14:01:09 by alaaouam         ###   ########.fr       */
+/*   Created: 2023/08/30 21:10:37 by alaaouam          #+#    #+#             */
+/*   Updated: 2023/08/30 21:20:01 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/Channel.hpp"
+#include "../../inc/generalUtils.hpp"
 
-void Channel::disconnectFromChannel(std::string& client, const std::string& reply)
+std::string toUpperCase(const std::string& str)
 {
-	std::vector<Client>::iterator it = this->_onlineUsers.begin();
-
-	while (it != this->_onlineUsers.end())
+	std::string result = str;
+	std::string::iterator it = result.begin();
+	
+	while (it != result.end())
 	{
-		if ((*it).getNickname() == client)
-		{
-			this->_onlineUsers.erase(it);
-			break ;
-		}
+		*it = std::toupper(*it);
 		it++;
 	}
-	_informOnlineUsers(reply);
+	return result;
 }

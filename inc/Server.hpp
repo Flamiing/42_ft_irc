@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/28 22:01:23 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/31 12:48:23 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,11 @@ class Server
 		std::string getPassword(void) const;
 		std::map<int, Client> getClients(void) const;
 		std::vector<Channel> getChannels(void) const;
+		int getSocketByNickname(const std::string nickname) const;
+		std::string getRawNickname(const std::string& modifiedNickname);
 		void addChannel(std::string newChannel);
 		void connectToChannel(std::string& channel, Client& client, std::string key);
+		void disconnect(size_t client);
 	private:
 		Server(void);
 		Server(const Server& other);
@@ -59,7 +62,6 @@ class Server
 		void _newClient(int& clientSocket);
 		void _handleClientRequest(size_t& client);
 		void _processMessage(const int& client, std::string message);
-		void _disconnect(size_t& client);
 
 		int _port;
 		std::string _password;

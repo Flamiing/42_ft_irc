@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ChannelJoinChannel.cpp                             :+:      :+:    :+:   */
+/*   ChannelConnection.cpp                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:18:42 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/25 17:38:07 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:49:53 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,39 @@
 
 void Channel::_replyToNewUser(Client& client)
 {
-	std::string buffer = RPL_TOPIC(client.getNickname(), this->getName(), this->getTopic());
-	buffer += RPL_NAMREPLY(client.getNickname(), "=", this->getName(), this->getOnlineUsersList());
-	buffer += RPL_ENDOFNAMES(client.getNickname(), this->getName());
+	std::string reply = RPL_TOPIC(client.getNickname(), this->getName(), this->getTopic());
+	reply += RPL_NAMREPLY(client.getNickname(), "=", this->getName(), this->getOnlineUsersList());
+	reply += RPL_ENDOFNAMES(client.getNickname(), this->getName());
 	
-	send(client.getSocket(), buffer.c_str(), buffer.size(), 0);
+	send(client.getSocket(), reply.c_str(), reply.size(), 0);
 }
 
-void Channel::_informOnlineUsers(Client& client)
+void Channel::_informOnlineUsers(const std::string& reply)
 {
 	std::vector<Client>::const_iterator it = this->_onlineUsers.begin();
-	std::string buffer = RPL_USERJOINEDCHANNEL(client.getNickname(),
-			client.getUsername(), this->getName());
 	
+	std::cout << "ONLINE USERS: ";
 	while (it != this->_onlineUsers.end())
 	{
-		send(it->getSocket(), buffer.c_str(), buffer.size(), 0);
+		std::cout << (*it).getNickname() << " ";
+		send(it->getSocket(), reply.c_str(), reply.size(), 0);
 		it++;
 	}
+	std::cout << std::endl;
 }
 
 void Channel::joinChannel(Client& client, std::string& key)
 {
 	std::string channelKey = this->getKey();
+	std::string reply = RPL_USERJOINEDCHANNEL(client.getNickname(),
+		client.getUsername(), this->getName());
 	
 	if (channelKey.empty())
 	{
 		this->_onlineUsers.push_back(client);
-		_informOnlineUsers(client);
+		_informOnlineUsers(reply);
 		_replyToNewUser(client);
+		client.addToJoinedChannels(*this);
 	}
 	(void)key;
 	//if (!channelKey.empty() && channelKey == key)

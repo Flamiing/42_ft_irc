@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ChannelDisconnection.cpp                           :+:      :+:    :+:   */
+/*   ClientDisconnect.cpp                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/25 18:41:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 14:01:09 by alaaouam         ###   ########.fr       */
+/*   Created: 2023/08/31 12:19:26 by alaaouam          #+#    #+#             */
+/*   Updated: 2023/08/31 13:36:02 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/Channel.hpp"
+#include "../../inc/Client.hpp"
 
-void Channel::disconnectFromChannel(std::string& client, const std::string& reply)
+void Client::disconnectChannels(const std::string& reply)
 {
-	std::vector<Client>::iterator it = this->_onlineUsers.begin();
+	std::vector<Channel>::iterator it = this->_joinedChannels.begin();
 
-	while (it != this->_onlineUsers.end())
+	while (it != this->_joinedChannels.end())
 	{
-		if ((*it).getNickname() == client)
-		{
-			this->_onlineUsers.erase(it);
-			break ;
-		}
+		(*it).disconnectFromChannel(this->_nickname, reply);
 		it++;
 	}
-	_informOnlineUsers(reply);
 }
