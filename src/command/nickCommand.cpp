@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 01:45:31 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 12:21:02 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/08/31 12:37:54 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,15 +88,18 @@ void nickCommand(Server& server, Client& client, std::string& buffer, std::vecto
 void nickCommand(Command& command)
 {
 	bool firstConnection = false;
+	Server&						server = *command.server;
+	Client&						client = *command.client;
+	std::string&				buffer = *command.buffer;
 	
-	if (handleErrors(*command.server, *command.client, *command.buffer, command.message))
+	if (handleErrors(server, client, buffer, command.message))
 		return ;
-	if (command.client->getNickAuth() == true)
-		*command.buffer = RPL_NICKNAMECHANGED(command.client->getNickname(), command.client->getUsername(), command.message[1]);
+	if (client.getNickAuth() == true)
+		buffer = RPL_NICKNAMECHANGED(client.getNickname(), client.getUsername(), command.message[1]);
 	else
 		firstConnection = true;
-	command.client->setNickname(command.message[1]);
-	command.client->setNickAuth(true);
-	if (firstConnection && command.client->getAuth() == true)
-		*command.buffer = RPL_WELCOME(command.client->getNickname());
+	client.setNickname(command.message[1]);
+	client.setNickAuth(true);
+	if (firstConnection && client.getAuth() == true)
+		buffer = RPL_WELCOME(client.getNickname());
 }

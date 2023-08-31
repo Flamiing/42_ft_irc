@@ -86,7 +86,7 @@ void Command::setName(std::string const &name)
 /* ilog = instance log */
 void Command::ilog(const std::string & name, const std::string & msg) const
 {
-	
+	return ;
 	std::cout << "[Class]Command	- [Instance]" << name << "	|	"\
 	<< msg << std::endl;
 }
