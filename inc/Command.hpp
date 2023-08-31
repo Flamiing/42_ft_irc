@@ -13,17 +13,16 @@
 #ifndef COMMAND_HPP
 #define	COMMAND_HPP
 
-#include <iostream>
-#include <string>
 
-# include <sstream>
-# include <vector>
-# include "generalUtils.hpp"
+
+#include "generalUtils.hpp"
 
 #include "Server.hpp"
 #include "Client.hpp"
 
 #include "commands.hpp"
+
+
 
 /* CLASS DECLARATION. */
 class Command
@@ -32,7 +31,6 @@ class Command
 		Command(Server *server, Client *client, std::string *buffer, std::string& message);
 		~Command();
 		Command(Command const &src);
-		Command & operator=(Command const &rhs);
 
 		std::string const &	getName() const;
 		void				setName(std::string const &name);
@@ -47,6 +45,7 @@ class Command
 
 	private:
 		Command();
+		Command & operator=(Command const &rhs);
 		std::string _name;
 
 		void	ilog(const std::string & name, const std::string & msg) const;

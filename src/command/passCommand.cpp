@@ -6,13 +6,11 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 20:35:46 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 12:35:09 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:35:11 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Server.hpp"
-#include "../../inc/Client.hpp"
-//_GUILLE homogeneizar includes
 
 void passCommand(Command& command)
 {

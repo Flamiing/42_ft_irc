@@ -52,24 +52,11 @@ Command::Command(Command const &src)
 	ilog(getName(), "Copy constructed");
 	return ;
 }
-//_GUILLE falt copiar referencias, deep copy? Si son punteros, tambien haria falta..
+
 /* Overload actually is previous to copy constructor, since cc uses the assign operator. */
 Command & Command::operator=(Command const &rhs)
 {
-	ilog(getName(), "[=] Assignation operator called");
-	if (this != &rhs)
-	{
-		this->raw = rhs.raw;
-		this->cmd = rhs.cmd;
-		
-		size_t pos = 0;
-		while (pos < rhs.message.size())
-		{
-			this->message.push_back(rhs.message[pos]);
-			pos++;
-		}
-		this->setName(rhs.getName());
-	}
+	(void) rhs;
 	return (*this);
 }
 /* --------------------------------- GET | SET --------------------------------- */

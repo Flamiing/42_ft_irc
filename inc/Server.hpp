@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 13:16:00 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:36:51 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,16 @@
 # include <unistd.h>
 # include <arpa/inet.h>
 # include <poll.h>
-# include <string>
-# include <map>
-# include <vector>
 # include "Client.hpp"
 # include "Channel.hpp"
+# include "Command.hpp"
 # include "IRCMessage.hpp"
 # include "errors.hpp"
 # include "generalUtils.hpp"
 # include "commands.hpp"
 
 # define LOCALHOST "127.0.0.1"
-# define SERVER_NAME "LOS.OSADOS"
 # define MAX_CLIENTS 10
-
-# include "./Command.hpp"
 
 class Server
 {
@@ -51,15 +46,7 @@ class Server
 		void addChannel(std::string newChannel);
 		void connectToChannel(std::string& channel, Client& client, std::string key);
 
-		void initMapCommand()
-		{
-			this->mapCommand[PASS] = &passCommand;
-			this->mapCommand[USER] = &userCommand;
-			this->mapCommand[NICK] = &nickCommand;
-			this->mapCommand[JOIN] = &joinCommand;
-			//mapCommand[QUIT] = &quitCommand;
-			//mapCommand[PRIVMSG] = &privmsgCommand;
-		}
+		void initMapCommand(void);
 		std::map<std::string, customFunctionType> mapCommand;
 
 	private:

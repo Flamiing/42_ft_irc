@@ -6,13 +6,11 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 21:27:35 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 12:35:15 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:35:30 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/commands.hpp"
-#include "../../inc/Client.hpp"
-#include "../../inc/Command.hpp"
+#include "../../inc/Server.hpp"
 
 static bool handleErrors(Client& client, std::string& buffer, std::vector<std::string>& message)
 {

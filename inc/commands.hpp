@@ -6,16 +6,19 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:48:53 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 13:11:03 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:27:53 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COMMANDS_HPP
 # define COMMANDS_HPP
 
-# include <iostream>
-# include <vector>
-# include <string>
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <vector>
+#include <cctype>
+#include <map>
 
 class Server;
 class Client;
@@ -56,10 +59,10 @@ class IRCMessage;
 
 # define RPL_HELP(client) (":localhost 000 " + client + " :Use the following commands to traverse the chat: \r\n")
 
-void processCommand(Server& server, Client& client, std::string& buffer, Command& command);
 
 typedef void (*customFunctionType)(Command& command);
 
+void processCommand(Command& command);
 void passCommand(Command& command);
 void userCommand(Command &command);
 void nickCommand(Command &command);

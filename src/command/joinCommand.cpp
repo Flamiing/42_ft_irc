@@ -6,13 +6,11 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 12:30:36 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:35:08 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../inc/commands.hpp"
-# include "../../inc/Channel.hpp"
-# include "../../inc/Server.hpp"
+#include "../../inc/Server.hpp"
 
 static bool channelNotFound(std::vector<Channel>& channels, std::string channelToFind)
 {

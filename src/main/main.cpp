@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:04:22 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 13:15:52 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:10:58 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int main(int argc, char **argv)
 	if (!parsePort(portStr, port))
 		return printError(BAD_PORT, NORMAL);
 	Server server(port, password);
-	server.initMapCommand(); //_GUILLE buscar el sitio optimo donde inicializar
 	server.runServer();
 	return 0;
 }

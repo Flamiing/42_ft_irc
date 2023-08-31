@@ -3,17 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ServerRun.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 14:03:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/22 17:53:06 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:13:11 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Server.hpp"
 
+void Server::initMapCommand(void)
+{
+	this->mapCommand[PASS] = &passCommand;
+	this->mapCommand[USER] = &userCommand;
+	this->mapCommand[NICK] = &nickCommand;
+	this->mapCommand[JOIN] = &joinCommand;
+	//mapCommand[QUIT] = &quitCommand;
+	//mapCommand[PRIVMSG] = &privmsgCommand;
+}
+
 void Server::_setupSever(void)
 {
+	initMapCommand();
 	this->_socket = INVALID_SOCKET;
 	this->_socket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 	if (this->_socket == INVALID_SOCKET)

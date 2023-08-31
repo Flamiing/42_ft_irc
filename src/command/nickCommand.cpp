@@ -6,15 +6,11 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 01:45:31 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 13:12:52 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:34:23 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/commands.hpp"
 #include "../../inc/Server.hpp"
-#include <cctype>
-#include <map> /* _GUILLE - este map dberia ir aqui solo? */
-#include "../../inc/Command.hpp"
 
 static bool invalidNickname(std::string& nickname)
 {

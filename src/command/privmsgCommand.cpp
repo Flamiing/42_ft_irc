@@ -6,12 +6,11 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 12:29:03 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:35:16 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../inc/commands.hpp"
-# include "../../inc/Command.hpp"
+#include "../../inc/Server.hpp"
 
 void privmsgCommand(Command& command)
 {
