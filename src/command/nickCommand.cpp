@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 01:45:31 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 14:58:56 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/08/31 15:28:52 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,24 +63,6 @@ static bool handleErrors(Server& server, Client& client, std::string& buffer, st
 	}
 	return false;
 }
-
-/* _GUILLE revisar */
-/* void nickCommand(Server& server, Client& client, std::string& buffer, std::vector<std::string>& message)
-{
-	bool firstConnection = false;
-	
-	if (handleErrors(server, client, buffer, message))
-		return ;
-	if (client.getNickAuth() == true)
-		buffer = RPL_NICKNAMECHANGED(client.getNickname(), client.getUsername(), message[1]);
-	else
-		firstConnection = true;
-	client.setNickname(message[1]);
-	client.setNickAuth(true);
-	if (firstConnection && client.getAuth() == true)
-		buffer = RPL_WELCOME(client.getNickname());
-} */
-
 
 void nickCommand(Command& command)
 {
