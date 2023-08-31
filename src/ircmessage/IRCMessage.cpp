@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   IRCMessage.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 11:18:27 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/25 11:38:38 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:41:07 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,3 +44,4 @@ IRCMessage::IRCMessage(std::string& message) : raw(message)
 	this->cmd = token;
 	this->vector = splitString(message, ' ');
 }
+

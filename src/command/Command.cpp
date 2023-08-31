@@ -24,7 +24,7 @@ Command::Command()
 /* Stringstream is used to be able to manipulate the string in get line and 
 split into the first token. then split string does a split on the message */
 Command::Command(Server *server, Client *client, std::string *buffer, std::string& message)
-	: server(server), client(client), buffer(buffer), raw(message)
+	: server(server), client(client), buffer(buffer)
 {
 	std::stringstream	ss(message);
 	std::string			token;
@@ -32,6 +32,8 @@ Command::Command(Server *server, Client *client, std::string *buffer, std::strin
 	std::getline(ss, token, ' ');
 	this->cmd = token;
 	this->message = splitString(message, ' ');
+	this->raw = trimSpaces(message);
+
 
 //_GUILLE para borrar cuando no debugee
 	this->_name = token;
