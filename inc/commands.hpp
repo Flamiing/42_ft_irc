@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:48:53 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 12:46:45 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:11:03 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ class IRCMessage;
 
 # define RPL_HELP(client) (":localhost 000 " + client + " :Use the following commands to traverse the chat: \r\n")
 
-void processCommand(Client& client, std::string& buffer, Command& command);
+void processCommand(Server& server, Client& client, std::string& buffer, Command& command);
 
 typedef void (*customFunctionType)(Command& command);
 

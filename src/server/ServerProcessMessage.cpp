@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:09:58 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 12:42:30 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:11:17 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void Server::_processMessage(const int& client, std::string message)
 	if (this->_clients[client].getPassAuth() == false && messageIRC.cmd != PASS)
 		buffer = ERR_NOTREGISTERED(this->_clients[client].getNickname());
 	else
-		processCommand(this->_clients[client], buffer, command);
+		processCommand(*this, this->_clients[client], buffer, command);
 	send(this->_clients[client].getSocket(), buffer.c_str(), buffer.size(), 0);
 	buffer = "";
 }

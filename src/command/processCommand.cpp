@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 20:10:01 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 13:01:31 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:13:53 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,12 @@
 
 #include "../../inc/Command.hpp"
 
-//_GUILLE metodo de server
-void fillMap(std::map<std::string, customFunctionType>& mapCommand)
-{
-	mapCommand[PASS] = &passCommand;
-	mapCommand[USER] = &userCommand;
-	mapCommand[NICK] = &nickCommand;
-	mapCommand[JOIN] = &joinCommand;
-	//mapCommand[QUIT] = &quitCommand;
-	//mapCommand[PRIVMSG] = &privmsgCommand;
-}
-
-void processCommand(Client& client, std::string& buffer, Command& command)
+void processCommand(Server& server, Client& client, std::string& buffer, Command& command)
 {
 
-	std::map<std::string, customFunctionType> 				mapCommand;
+	std::map<std::string, customFunctionType>& 				mapCommand = server.mapCommand;
 	std::map<std::string, customFunctionType>::iterator		it;
 	
-	fillMap(mapCommand);
 	it = mapCommand.find(buffer);
 	if (!command.cmd.compare(PASS))
 		mapCommand[PASS](command);
@@ -48,7 +36,7 @@ void processCommand(Client& client, std::string& buffer, Command& command)
 		if (it != mapCommand.end())
 			mapCommand[command.cmd](command);
 		else
-			buffer = ERR_UNKNOWNCOMMAND(client.getNickname(), messageIRC.cmd);
+			buffer = ERR_UNKNOWNCOMMAND(client.getNickname(), command.cmd);
 	}
 	else
 	{

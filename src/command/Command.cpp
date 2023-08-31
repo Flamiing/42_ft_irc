@@ -33,7 +33,7 @@ Command::Command(Server *server, Client *client, std::string *buffer, std::strin
 	this->cmd = token;
 	this->message = splitString(message, ' ');
 
-//_GUILLE
+//_GUILLE para borrar cuando no debugee
 	this->_name = token;
 	ilog(getName(), "Constructed⚪");
 }
@@ -52,7 +52,7 @@ Command::Command(Command const &src)
 	ilog(getName(), "Copy constructed");
 	return ;
 }
-//_GUILLE falt copiar referencias, deep copy?
+//_GUILLE falt copiar referencias, deep copy? Si son punteros, tambien haria falta..
 /* Overload actually is previous to copy constructor, since cc uses the assign operator. */
 Command & Command::operator=(Command const &rhs)
 {
