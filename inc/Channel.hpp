@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/01 11:03:02 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/01 15:44:30 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ class Channel
 		std::string		getMode() const
 		{
 			return (this->_mode);
+		}
+
+		void setTopic(std::string new_topic)
+		{
+			this->_topic = new_topic;
 		}
 
 	private:

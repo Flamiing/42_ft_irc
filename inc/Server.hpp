@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/01 10:50:24 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/01 15:37:31 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ class Server
 		void initMapCommand(void);
 		std::map<std::string, customFunctionType> mapCommand;
 
+/* _GUILLE puesto en publico por errores de compilacion */
+		std::vector<Channel> _channels;
 	private:
 		Server(void);
 		Server(const Server& other);
@@ -70,7 +72,6 @@ class Server
 		struct sockaddr_in _address;
 		int _socket;
 		std::vector<struct pollfd> _pollFds;
-		std::vector<Channel> _channels;
 
 };
 
