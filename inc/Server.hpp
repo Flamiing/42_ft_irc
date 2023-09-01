@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 16:05:43 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/01 10:50:24 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ class Server
 		int getPort(void) const;
 		std::string getPassword(void) const;
 		std::map<int, Client> getClients(void) const;
-		std::vector<Channel> getChannels(void) const;
+		//std::vector<Channel> getChannels(void) const;
+		std::vector<Channel> getChannels(void);
 		int getSocketByNickname(const std::string nickname) const;
 		std::string getRawNickname(const std::string& modifiedNickname);
 		void addChannel(std::string newChannel);

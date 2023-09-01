@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:48:53 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 14:50:30 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/01 12:42:22 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ class IRCMessage;
 # define PONG "PONG"
 
 # define RPL_WELCOME(client) (":localhost 001 " + client + " :Welcome to LOS OSADOS IRC Server, " + client + "!\r\n")
-# define RPL_TOPIC(client, channel, topic) (":localhost 332 " + client + " #" + channel + " :" + topic + "\r\n")
 # define RPL_NAMREPLY(client, symbol, channel, list) (":localhost 353 " + client + " " + symbol + " #" + channel + " :" + list + "\r\n")
 # define RPL_ENDOFNAMES(client, channel) (":localhost 366 " + client + " #" + channel + " :End of /NAMES list.\r\n")
 # define ERR_NORECIPIENT(client, command) (":localhost 411 " + client + " :No recipient given (" + command + ")\r\n")
@@ -75,5 +74,36 @@ void joinCommand(Command &command);
 void noticeCommand(Command &command);
 void quitCommand(Command &command);
 //void privmsgCommand(Command &command);
+
+void topicCommand(Command &command);
+# define RPL_TOPIC(client, channel, topic) (":localhost 332 " + client + " #" + channel + " :" + topic + "\r\n")
+# define RPL_NOTOPIC(client, channel) (":localhost 331 " + client + " #" + channel + " :No topic is set\r\n")
+
+/*    Numeric Replies:
+
+           ERR_NEEDMOREPARAMS              ERR_NOTONCHANNEL
+           RPL_NOTOPIC                     RPL_TOPIC
+           ERR_CHANOPRIVSNEEDED */
+
+
+
+# define ERR_CHANOPRIVSNEEDED(client, channel) (":localhost 482 " + client + " #" + channel + " :You're not channel operator\r\n")
+
+		/* 				  482     ERR_CHANOPRIVSNEEDED
+                        "<channel> :You're not channel operator"
+
+                - Any command requiring 'chanop' privileges (such as
+                  MODE messages) must return this error if the client
+                  making the attempt is not a chanop on the specified
+                  channel. */
+
+# define ERR_NOTONCHANNEL(client, channel) (":localhost 442 " + client + " #" + channel " :You're not on that channel\r\n")
+
+			/* 	  442     ERR_NOTONCHANNEL
+                        "<channel> :You're not on that channel" */
+
+
+
+
 
 #endif

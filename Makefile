@@ -6,7 +6,7 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/27 19:25:47 by alaaouam          #+#    #+#              #
-#    Updated: 2023/08/31 16:06:10 by guilmira         ###   ########.fr        #
+#    Updated: 2023/09/01 12:43:57 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRC =	main.cpp Server.cpp ServerRun.cpp ServerClientConnections.cpp ServerProces
 			   Client.cpp parsePort.cpp printError.cpp processCommand.cpp passCommand.cpp userCommand.cpp \
 			   splitString.cpp nickCommand.cpp ServerChannels.cpp ChannelConnection.cpp \
 			   Channel.cpp joinCommand.cpp getMessage.cpp noticeCommand.cpp trimSpaces.cpp toUpperCase.cpp \
-			   quitCommand.cpp ChannelDisconnection.cpp ClientDisconnect.cpp Command.cpp
+			   quitCommand.cpp ChannelDisconnection.cpp ClientDisconnect.cpp topicCommand.cpp Command.cpp
 			
 SRC_PATH = src/*/
 SRCS = $(addprefix $(SRC_PATH), $(SRC))

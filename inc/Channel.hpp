@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Channel.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 12:52:51 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/01 11:03:02 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ class Channel
 		void joinChannel(Client& client, std::string& key);
 		bool userIsBanned(std::string& nickname);
 		void disconnectFromChannel(std::string& client, const std::string& reply);
+
+		std::string		getMode() const
+		{
+			return (this->_mode);
+		}
+
 	private:
 		void _informOnlineUsers(const std::string& reply);
 		void _replyToNewUser(Client& client);
@@ -44,6 +50,9 @@ class Channel
 		std::string _name;
 		std::string _key;
 		std::string _topic;
+
+		std::string _mode;
+
 		std::vector<Client> _onlineUsers;
 		std::vector<Client> _bannedUsers;
 };

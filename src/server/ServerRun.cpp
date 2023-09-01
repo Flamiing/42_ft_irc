@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 14:03:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 15:17:37 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/01 12:44:11 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void Server::initMapCommand(void)
 	mapCommand[JOIN] = &joinCommand;
 	mapCommand[QUIT] = &quitCommand;
 	mapCommand[NOTICE] = &noticeCommand;
+	mapCommand[TOPIC] = &topicCommand;
 	//mapCommand[PRIVMSG] = &privmsgCommand;
 }
 
