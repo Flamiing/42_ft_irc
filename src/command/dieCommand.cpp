@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ClientDisconnect.cpp                               :+:      :+:    :+:   */
+/*   dieCommand.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/31 12:19:26 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 13:36:02 by alaaouam         ###   ########.fr       */
+/*   Created: 2023/09/01 03:14:59 by alaaouam          #+#    #+#             */
+/*   Updated: 2023/09/01 03:33:23 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/Client.hpp"
+#include "../../inc/Server.hpp"
 
-void Client::disconnectChannels(const std::string& reply)
+void dieCommand(Command& command)
 {
-	std::vector<Channel>::iterator it = this->_joinedChannels.begin();
+	Server&						server = *command.server;
+	Client&						client = *command.client;
+	std::string&				buffer = *command.buffer;
 
-	while (it != this->_joinedChannels.end())
+	if (!client.isOperator())
 	{
-		(*it).disconnectFromChannel(this->_nickname, reply);
-		it++;
+		buffer = ERR_NOPRIVILEGES(client.getNickname());
+		return ;
 	}
+	server.closeAllSockets();
+	exit(0);
 }

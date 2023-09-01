@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:11 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/30 21:25:51 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/01 05:32:56 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /* CONSTRUCTORS /// DESTRUCTOR /// OPERATOR */
 Server::Server(void) {}
 
-Server::Server(const int port, const std::string& password) :  _port(port), _password(password) {}
+Server::Server(const int port, const std::string& password) :  pollSize(0), _port(port), _password(password) {}
 
 Server::Server(const Server& other) { (void)other; }
 

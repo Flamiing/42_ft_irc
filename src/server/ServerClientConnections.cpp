@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:10:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 12:48:34 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/01 13:32:17 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,28 @@ void Server::_newClient(int& clientSocket)
 	clientPoll.fd = clientSocket;
 	clientPoll.events = POLLIN;
 	clientPoll.revents = 0;
-	this->_clients[clientSocket] = Client(clientSocket, this->_pollFds.size());
+	this->_clients[clientSocket] = Client(clientSocket);
 	std::cout << "New client connected at socket #" << clientSocket << std::endl;
 	this->_pollFds.push_back(clientPoll);
 }
 
-void Server::disconnect(size_t client)
+void Server::_processBuffer(size_t& client, std::string& buffer)
 {
-	std::cout << "Client at socket #" << this->_pollFds[client].fd << " disconnected." << std::endl;
-	this->_clients[_pollFds[client].fd].buffer = "";
-	this->_clients.erase(this->_pollFds[client].fd);
-	close(this->_pollFds[client].fd);
-	this->_pollFds.erase(this->_pollFds.begin() + client);
-	client--;
+	std::string bufferToProcess;
+	std::string::size_type pos = buffer.find("\n");
+	
+	while (pos != std::string::npos)
+	{
+		if (buffer[0] == 0)
+			buffer.erase(0, 1);
+		if (buffer[0] == '\n')
+			buffer.erase(0, 1);
+		bufferToProcess = buffer.substr(0, pos);
+		std::cout << "Client at socket #" << this->_pollFds[client].fd << ": " << bufferToProcess << std::endl;;
+		_processMessage(this->_pollFds[client].fd, bufferToProcess);
+		buffer.erase(0, pos + 1);
+		pos = buffer.find("\n");
+	}
 }
 
 void Server::_handleClientRequest(size_t& client)
@@ -40,17 +49,21 @@ void Server::_handleClientRequest(size_t& client)
 	std::string& stash = this->_clients[_pollFds[client].fd].buffer;
 	ssize_t bytesRead = recv(this->_pollFds[client].fd, buffer, sizeof(buffer), 0);
 	if (bytesRead <= 0)
+	{
+		stash = RPL_QUITWITHEOF(this->_clients[_pollFds[client].fd].getNickname(),
+				this->_clients[_pollFds[client].fd].getUsername());
+		this->disconnectClientFromChannels(this->_clients[_pollFds[client].fd].getNickname(), stash);
 		disconnect(client);
+	}
 	else
 	{
 		std::string checkEOF(buffer);
 		stash += checkEOF;
 		if (checkEOF[checkEOF.size() - 1] != '\n')
 			return ;
-		std::cout << "Client at socket #" << this->_pollFds[client].fd << ": " << stash;
-		_processMessage(this->_pollFds[client].fd, stash);
-		stash = "";
+		_processBuffer(client, stash);
 	}
+	stash = "";
 }
 
 void Server::_handleClients(void)
@@ -59,11 +72,11 @@ void Server::_handleClients(void)
     struct sockaddr_in clientAddr;
     socklen_t addrLen = sizeof(clientAddr);
 	
-	for (size_t pos = 0; pos < this->_pollFds.size(); pos++)
+	for (this->pollSize = 0; this->pollSize < this->_pollFds.size(); this->pollSize++)
 	{
-		if (this->_pollFds[pos].revents & POLLIN)
+		if (this->_pollFds[this->pollSize].revents & POLLIN)
 		{
-			if (this->_pollFds[pos].fd == this->_socket)
+			if (this->_pollFds[this->pollSize].fd == this->_socket)
 			{
 				clientSocket = accept(this->_socket, (struct sockaddr*)&clientAddr, &addrLen);
 				if (clientSocket == ERROR)
@@ -72,7 +85,7 @@ void Server::_handleClients(void)
 					_newClient(clientSocket);
 			}
 			else
-				_handleClientRequest(pos);
+				_handleClientRequest(this->pollSize);
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:13:49 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/28 16:29:58 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/08/31 20:00:04 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,18 @@ void Server::connectToChannel(std::string& channel, Client& client, std::string 
 			it->joinChannel(client, key);
 			return ;
 		}
+		it++;
+	}
+}
+
+void Server::disconnectClientFromChannels(std::string client, std::string& reply)
+{
+	std::vector<Channel>::iterator it = this->_channels.begin();
+
+	while (it != this->_channels.end())
+	{
+		if (it->clientInChannel(client))
+			it->disconnectFromChannel(client, reply);
 		it++;
 	}
 }

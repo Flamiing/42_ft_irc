@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 17:30:53 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/30 20:51:36 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/01 05:23:46 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ std::string getMessage(const std::string& raw, const std::vector<std::string>& r
 	{
 		trimSpaces(newString);
 		pos = newString.find(*it, 0);
-		newString.erase(pos, (*it).length());
+		if (pos != std::string::npos)
+			newString.erase(pos, (*it).length());
 		it++;
 	}
 	trimSpaces(newString);

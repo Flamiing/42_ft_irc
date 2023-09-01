@@ -6,24 +6,25 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 19:44:22 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 16:06:25 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/01 15:26:21 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/commands.hpp"
-#include "../../inc/Client.hpp"
 #include "../../inc/Server.hpp"
 
-std::string getQuitReply(Client& client, Command& command)
+static std::string getQuitReply(Client& client, Command& command)
 {
 	std::string reply;
 	
-	if (command.message.size() < 2)
+	if (command.message.size() > 1 && command.message[1][0] == ':')
+		command.message[1].erase(0, 1);
+	if (command.message.size() < 2 || command.message[1].empty())
 		reply = RPL_QUITWITHNOMSG(client.getNickname(), client.getUsername());
 	else
 	{
 		std::vector<std::string> remove;
 		remove.push_back(command.cmd);
+		remove.push_back(":");
 		std::string messageToSend = getMessage(command.raw, remove);
 		reply = RPL_QUIT(client.getNickname(), client.getUsername(), messageToSend);
 	}
@@ -37,6 +38,6 @@ void quitCommand(Command& command)
 
 	std::string reply = getQuitReply(client, command);
 	
-	client.disconnectChannels(reply);
-	server.disconnect(client.getPollFDPos());
+	server.disconnectClientFromChannels(client.getNickname(), reply);
+	server.disconnect(server.pollSize);
 }

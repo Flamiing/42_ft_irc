@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:48:53 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 14:50:30 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/01 03:32:12 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ class Server;
 class Client;
 class Channel;
 class Command;
-class IRCMessage;
 
 # define PASS "PASS"
 # define NICK "NICK"
@@ -38,11 +37,13 @@ class IRCMessage;
 # define TOPIC "TOPIC"
 # define QUIT "QUIT"
 # define PONG "PONG"
+# define DIE "DIE"
 
 # define RPL_WELCOME(client) (":localhost 001 " + client + " :Welcome to LOS OSADOS IRC Server, " + client + "!\r\n")
 # define RPL_TOPIC(client, channel, topic) (":localhost 332 " + client + " #" + channel + " :" + topic + "\r\n")
 # define RPL_NAMREPLY(client, symbol, channel, list) (":localhost 353 " + client + " " + symbol + " #" + channel + " :" + list + "\r\n")
 # define RPL_ENDOFNAMES(client, channel) (":localhost 366 " + client + " #" + channel + " :End of /NAMES list.\r\n")
+# define RPL_YOUREOPER(client) (":localhost 381 " + client + " :You are now an IRC operator\r\n")
 # define ERR_NORECIPIENT(client, command) (":localhost 411 " + client + " :No recipient given (" + command + ")\r\n")
 # define ERR_NOTEXTTOSEND(client) (":localhost 412 " + client + " :No text to send\r\n")
 # define ERR_UNKNOWNCOMMAND(client, command) (":localhost 421 " + client + " " + command + " :Unknown command\r\n")
@@ -56,12 +57,14 @@ class IRCMessage;
 # define ERR_INVALIDUSERNAME(client) (":localhost 468 " + client + ":Your username is invalid\r\n")
 # define ERR_INVITEONLYCHAN(client, channel) (":localhost 473 " + client + " " + channel + " :Cannot join channel (+i)\r\n")
 # define ERR_BANNEDFROMCHAN(client, channel) (":localhost 474 " + client + " " + channel + " :Cannot join channel (+b)\r\n")
+# define ERR_NOPRIVILEGES(client) (":localhost 481 " + client + " :Permission Denied- You're not an IRC operator\r\n")
+# define ERR_NOOPERHOST(client) (":localhost 491 " + client + " :No O-lines for your host\r\n")
 # define RPL_NICKNAMECHANGED(nickname, username, newNickname) (":" + nickname + "!~" + username + "@localhost NICK :" + newNickname + "\r\n")
 # define RPL_USERJOINEDCHANNEL(nickname, username, channel) (":" + nickname + "!~" + username + "@localhost JOIN #" + channel + "\r\n")
 # define RPL_QUITWITHNOMSG(nickname, username) (":" + nickname + "!~" + username + "@localhost QUIT :Quit\r\n")
+# define RPL_QUITWITHEOF(nickname, username) (":" + nickname + "!~" + username + "@localhost QUIT EOF from client\r\n")
 # define RPL_QUIT(nickname, username, message) (":" + nickname + "!~" + username + "@localhost QUIT :Quit: " + message + "\r\n")
 # define MSG_NOTICE(nickname, username, recipient, message) (":" + nickname + "!~" + username + "@localhost NOTICE " + recipient + " :" + message + "\r\n")
-
 # define RPL_HELP(client) (":localhost 000 " + client + " :Use the following commands to traverse the chat: \r\n")
 
 
@@ -74,6 +77,8 @@ void nickCommand(Command &command);
 void joinCommand(Command &command);
 void noticeCommand(Command &command);
 void quitCommand(Command &command);
+void operCommand(Command& command);
+void dieCommand(Command& command);
 //void privmsgCommand(Command &command);
 
 #endif

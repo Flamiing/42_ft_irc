@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   splitString.cpp                                    :+:      :+:    :+:   */
+/*   ServerClientDisconnection.cpp                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/22 19:17:10 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/01 04:03:22 by alaaouam         ###   ########.fr       */
+/*   Created: 2023/08/31 20:02:51 by alaaouam          #+#    #+#             */
+/*   Updated: 2023/09/01 05:31:37 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/generalUtils.hpp"
+#include "../../inc/Server.hpp"
 
-std::vector<std::string> splitString(std::string& str, char delimiter)
+void Server::disconnect(size_t& client)
 {
-	std::vector<std::string> splitted;
-	std::stringstream ss(str);
-	std::string token;
-
-	while (std::getline(ss, token, delimiter))
-	{
-		if (!token.empty())
-			splitted.push_back(token);
-	}
-	return splitted;
+	std::cout << "Client at socket #" << this->_pollFds[client].fd << " disconnected." << std::endl;
+	this->_clients[_pollFds[client].fd].buffer = "";
+	this->_clients.erase(this->_pollFds[client].fd);
+	close(this->_pollFds[client].fd);
+	this->_pollFds.erase(this->_pollFds.begin() + client);
+	client--;
 }

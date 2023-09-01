@@ -6,7 +6,7 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/27 19:25:47 by alaaouam          #+#    #+#              #
-#    Updated: 2023/08/31 16:06:10 by guilmira         ###   ########.fr        #
+#    Updated: 2023/09/01 15:26:44 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,9 +21,10 @@ NAME = ircserv
 
 SRC =	main.cpp Server.cpp ServerRun.cpp ServerClientConnections.cpp ServerProcessMessage.cpp \
 			   Client.cpp parsePort.cpp printError.cpp processCommand.cpp passCommand.cpp userCommand.cpp \
-			   splitString.cpp nickCommand.cpp ServerChannels.cpp ChannelConnection.cpp \
+			   splitString.cpp nickCommand.cpp operCommand.cpp ServerChannels.cpp ChannelConnection.cpp \
 			   Channel.cpp joinCommand.cpp getMessage.cpp noticeCommand.cpp trimSpaces.cpp toUpperCase.cpp \
-			   quitCommand.cpp ChannelDisconnection.cpp ClientDisconnect.cpp Command.cpp
+			   quitCommand.cpp ChannelDisconnection.cpp Command.cpp ServerClientDisconnection.cpp dieCommand.cpp \
+			   
 			
 SRC_PATH = src/*/
 SRCS = $(addprefix $(SRC_PATH), $(SRC))
@@ -35,7 +36,7 @@ OBJS = $(addprefix $(OBJ_PATH), $(OBJ))
 INC = inc/
 
 CPP = c++
-CPPFLAGS =  -Wall -Wextra -Werror -std=c++98 #-fsanitize=address
+CPPFLAGS =  -Wall -Wextra -Werror -std=c++98 #-g3 -fsanitize=address
 RM = rm -rf
 
 #_GUILLE - ¿Que pasa si ejecutamos en un puerto en uso, 4242?
