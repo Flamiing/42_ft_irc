@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/01 15:26:52 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/01 16:38:28 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ class Server
 		std::string getIP(void) const;
 		std::string getPassword(void) const;
 		std::map<int, Client> getClients(void) const;
-		std::vector<Channel> getChannels(void) const;
+		//std::vector<Channel> getChannels(void) const;
+		std::vector<Channel> getChannels(void);
 		int getSocketByNickname(const std::string nickname) const;
 		std::string getRawNickname(const std::string& modifiedNickname);
 		void addChannel(std::string newChannel);
@@ -58,6 +59,8 @@ class Server
 		std::map<std::string, customFunctionType> mapCommand;
 
 		size_t pollSize;
+/* _GUILLE puesto en publico por errores de compilacion */
+		std::vector<Channel> _channels;
 	private:
 		Server(void);
 		Server(const Server& other);
@@ -76,7 +79,6 @@ class Server
 		struct sockaddr_in _address;
 		int _socket;
 		std::vector<struct pollfd> _pollFds;
-		std::vector<Channel> _channels;
 };
 
 #endif
