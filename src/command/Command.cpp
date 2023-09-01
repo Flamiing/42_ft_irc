@@ -26,17 +26,13 @@ split into the first token. then split string does a split on the message */
 Command::Command(Server *server, Client *client, std::string *buffer, std::string& message)
 	: server(server), client(client), buffer(buffer)
 {
-	std::stringstream	ss(message);
-	std::string			token;
-
-	std::getline(ss, token, ' ');
-	this->cmd = token;
 	this->message = splitString(message, ' ');
+	this->cmd = this->message[0];
 	this->raw = trimSpaces(message);
 
 
 //_GUILLE para borrar cuando no debugee
-	this->_name = token;
+	this->_name = this->message[0];
 	ilog(getName(), "Constructed⚪");
 }
 

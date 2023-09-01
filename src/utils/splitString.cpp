@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:17:10 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/25 11:26:26 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/01 04:03:22 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ std::vector<std::string> splitString(std::string& str, char delimiter)
 	std::string token;
 
 	while (std::getline(ss, token, delimiter))
-		splitted.push_back(token);
+	{
+		if (!token.empty())
+			splitted.push_back(token);
+	}
 	return splitted;
 }
