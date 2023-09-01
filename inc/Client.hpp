@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 00:59:24 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 23:19:07 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/01 03:00:33 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ class Client
 		bool getPassAuth(void) const;
 		bool getUserAuth(void) const;
 		bool getNickAuth(void) const;
+		void setAsOperator(void);
 		void setPassAuth(const bool auth);
 		void setUserAuth(const bool auth);
 		void setNickAuth(const bool auth);

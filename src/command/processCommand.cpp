@@ -6,13 +6,13 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 20:10:01 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 18:19:46 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/01 03:03:23 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Server.hpp"
 
-void processGeneralCommands(Command& command, std::map<std::string, customFunctionType>& mapCommand)
+static void processGeneralCommands(Command& command, std::map<std::string, customFunctionType>& mapCommand)
 {
 	std::map<std::string, customFunctionType>::iterator		it;
 	
@@ -38,13 +38,13 @@ void processCommand(Command& command)
 
 	std::map<std::string, customFunctionType>& 				mapCommand = command.server->mapCommand;
 	
-	if (!command.cmd.compare(PASS))
+	if (command.cmd.compare(PASS) == 0)
 		mapCommand[PASS](command);
-	else if (command.client->getPassAuth() == true && !command.cmd.compare(USER))
+	else if (command.client->getPassAuth() == true && command.cmd.compare(USER) == 0)
 		mapCommand[USER](command);
-	else if (command.client->getPassAuth() == true && !command.cmd.compare(NICK))
+	else if (command.client->getPassAuth() == true && command.cmd.compare(NICK) == 0)
 		mapCommand[NICK](command);
-	else if (!command.cmd.compare(PONG))
+	else if (command.cmd.compare(PONG) == 0)
 		return ;
 	else
 		processGeneralCommands(command, mapCommand);

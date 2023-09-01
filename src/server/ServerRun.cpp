@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ServerRun.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 14:03:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 15:17:37 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/01 03:08:17 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void Server::initMapCommand(void)
 	mapCommand[JOIN] = &joinCommand;
 	mapCommand[QUIT] = &quitCommand;
 	mapCommand[NOTICE] = &noticeCommand;
+	mapCommand[OPER] = &operCommand;
 	//mapCommand[PRIVMSG] = &privmsgCommand;
 }
 

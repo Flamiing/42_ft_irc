@@ -6,13 +6,13 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 19:44:22 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/01 00:15:37 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/01 02:47:02 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Server.hpp"
 
-std::string getQuitReply(Client& client, Command& command)
+static std::string getQuitReply(Client& client, Command& command)
 {
 	std::string reply;
 	

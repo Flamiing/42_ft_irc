@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 23:41:09 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/01 03:06:03 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,14 @@
 # include "Client.hpp"
 # include "Channel.hpp"
 # include "Command.hpp"
-# include "IRCMessage.hpp"
 # include "errors.hpp"
 # include "generalUtils.hpp"
 # include "commands.hpp"
 
 # define LOCALHOST "127.0.0.1"
 # define MAX_CLIENTS 10
+# define OPERATOR_NAME "osado"
+# define OPERATOR_PASS "password"
 
 class Server
 {

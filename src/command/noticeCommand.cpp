@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   noticeCommand.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 17:18:58 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 15:00:50 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/01 02:35:36 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/commands.hpp"
 #include "../../inc/Server.hpp"
-#include "../../inc/Client.hpp"
-#include "../../inc/IRCMessage.hpp"
 
 static bool handleErrors(Client& client, std::string& buffer, Command& command)
 {
