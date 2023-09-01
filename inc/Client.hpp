@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 00:59:24 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/01 03:00:33 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/01 03:33:58 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ class Client
 		void setWrongNickname(const std::string nickname);
 		void setFullName(const std::string fullName);
 		void addToJoinedChannels(Channel& channel);
+		bool isOperator(void) const;
 		
 		std::string buffer;
 	private:

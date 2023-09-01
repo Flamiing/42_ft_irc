@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 14:03:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/01 03:08:17 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/01 03:33:41 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void Server::initMapCommand(void)
 	mapCommand[QUIT] = &quitCommand;
 	mapCommand[NOTICE] = &noticeCommand;
 	mapCommand[OPER] = &operCommand;
+	mapCommand[DIE] = &dieCommand;
 	//mapCommand[PRIVMSG] = &privmsgCommand;
 }
 
@@ -38,6 +39,23 @@ void Server::_setupSever(void)
 	this->_address.sin_family = AF_INET;
 	this->_address.sin_port = htons(this->getPort());
 	this->_address.sin_addr.s_addr = inet_addr(LOCALHOST);
+}
+
+void Server::closeAllSockets(void)
+{
+	size_t pos = 1;
+	int fdToClose;
+	
+	while (pos < this->_pollFds.size())
+	{
+		fdToClose = this->_pollFds[pos].fd;
+		this->_pollFds[pos].fd = -1;
+		close(this->_clients[fdToClose].getSocket());
+		pos++;
+	}
+	fdToClose = this->_pollFds[0].fd;
+	this->_pollFds[0].fd = -1;
+	close(this->_socket);
 }
 
 void Server::runServer(void)

@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/01 03:06:03 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/01 03:31:05 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ class Server
 		void disconnect(size_t client);
 		void disconnectClientFromChannels(std::string client, std::string& reply);
 		size_t getPollinPosition(Client& client);
+		void closeAllSockets(void);
 
 		void initMapCommand(void);
 		std::map<std::string, customFunctionType> mapCommand;
@@ -74,7 +75,6 @@ class Server
 		int _socket;
 		std::vector<struct pollfd> _pollFds;
 		std::vector<Channel> _channels;
-
 };
 
 #endif

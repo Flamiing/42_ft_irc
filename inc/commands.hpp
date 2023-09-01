@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:48:53 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/01 03:09:09 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/01 03:32:12 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ class Command;
 # define TOPIC "TOPIC"
 # define QUIT "QUIT"
 # define PONG "PONG"
+# define DIE "DIE"
 
 # define RPL_WELCOME(client) (":localhost 001 " + client + " :Welcome to LOS OSADOS IRC Server, " + client + "!\r\n")
 # define RPL_TOPIC(client, channel, topic) (":localhost 332 " + client + " #" + channel + " :" + topic + "\r\n")
@@ -56,6 +57,7 @@ class Command;
 # define ERR_INVALIDUSERNAME(client) (":localhost 468 " + client + ":Your username is invalid\r\n")
 # define ERR_INVITEONLYCHAN(client, channel) (":localhost 473 " + client + " " + channel + " :Cannot join channel (+i)\r\n")
 # define ERR_BANNEDFROMCHAN(client, channel) (":localhost 474 " + client + " " + channel + " :Cannot join channel (+b)\r\n")
+# define ERR_NOPRIVILEGES(client) (":localhost 481 " + client + " :Permission Denied- You're not an IRC operator\r\n")
 # define ERR_NOOPERHOST(client) (":localhost 491 " + client + " :No O-lines for your host\r\n")
 # define RPL_NICKNAMECHANGED(nickname, username, newNickname) (":" + nickname + "!~" + username + "@localhost NICK :" + newNickname + "\r\n")
 # define RPL_USERJOINEDCHANNEL(nickname, username, channel) (":" + nickname + "!~" + username + "@localhost JOIN #" + channel + "\r\n")
@@ -76,6 +78,7 @@ void joinCommand(Command &command);
 void noticeCommand(Command &command);
 void quitCommand(Command &command);
 void operCommand(Command& command);
+void dieCommand(Command& command);
 //void privmsgCommand(Command &command);
 
 #endif

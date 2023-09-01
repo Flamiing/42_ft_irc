@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 00:59:16 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/01 03:01:03 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/01 03:34:29 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ bool Client::getPassAuth(void) const { return this->_passAuth; }
 bool Client::getUserAuth(void) const { return this->_userAuth; }
 bool Client::getNickAuth(void) const { return this->_nickAuth; }
 bool Client::getAuth(void) const { return this->_auth; }
+bool Client::isOperator(void) const { return this->_isOperator; }
 
 void Client::setAsOperator(void)
 {
