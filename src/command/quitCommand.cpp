@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 19:44:22 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/01 02:47:02 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/01 05:31:11 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ void quitCommand(Command& command)
 	Client&						client = *command.client;
 
 	std::string reply = getQuitReply(client, command);
-	size_t pollinPosition = server.getPollinPosition(client);
 	
 	server.disconnectClientFromChannels(client.getNickname(), reply);
-	server.disconnect(pollinPosition);
+	server.disconnect(server.pollSize);
 }

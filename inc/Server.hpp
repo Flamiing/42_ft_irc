@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/01 03:31:05 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/01 05:33:20 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ class Server
 
 		void runServer(void);
 		int getPort(void) const;
+		std::string getIP(void) const;
 		std::string getPassword(void) const;
 		std::map<int, Client> getClients(void) const;
 		std::vector<Channel> getChannels(void) const;
@@ -48,14 +49,14 @@ class Server
 		std::string getRawNickname(const std::string& modifiedNickname);
 		void addChannel(std::string newChannel);
 		void connectToChannel(std::string& channel, Client& client, std::string key);
-		void disconnect(size_t client);
+		void disconnect(size_t& client);
 		void disconnectClientFromChannels(std::string client, std::string& reply);
-		size_t getPollinPosition(Client& client);
 		void closeAllSockets(void);
 
 		void initMapCommand(void);
 		std::map<std::string, customFunctionType> mapCommand;
 
+		size_t pollSize;
 	private:
 		Server(void);
 		Server(const Server& other);

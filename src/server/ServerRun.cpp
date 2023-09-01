@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 14:03:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/01 03:33:41 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/01 04:49:10 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void Server::_setupSever(void)
 	
 	this->_address.sin_family = AF_INET;
 	this->_address.sin_port = htons(this->getPort());
-	this->_address.sin_addr.s_addr = inet_addr(LOCALHOST);
+	this->_address.sin_addr.s_addr = htonl(INADDR_ANY);
 }
 
 void Server::closeAllSockets(void)

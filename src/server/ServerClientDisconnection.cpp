@@ -6,26 +6,13 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 20:02:51 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 23:27:15 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/01 05:31:37 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Server.hpp"
 
-size_t Server::getPollinPosition(Client& client)
-{
-	size_t pos = 0;
-
-	while(pos < this->_pollFds.size())
-	{
-		if (this->_pollFds[pos].fd == client.getSocket())
-			return pos;
-		pos++;
-	}
-	return 0;
-}
-
-void Server::disconnect(size_t client)
+void Server::disconnect(size_t& client)
 {
 	std::cout << "Client at socket #" << this->_pollFds[client].fd << " disconnected." << std::endl;
 	this->_clients[_pollFds[client].fd].buffer = "";

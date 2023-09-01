@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:10:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 23:46:26 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/01 05:36:14 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ void Server::_handleClients(void)
     struct sockaddr_in clientAddr;
     socklen_t addrLen = sizeof(clientAddr);
 	
-	for (size_t pos = 0; pos < this->_pollFds.size(); pos++)
+	for (this->pollSize = 0; this->pollSize < this->_pollFds.size(); this->pollSize++)
 	{
-		if (this->_pollFds[pos].revents & POLLIN)
+		if (this->_pollFds[this->pollSize].revents & POLLIN)
 		{
-			if (this->_pollFds[pos].fd == this->_socket)
+			if (this->_pollFds[this->pollSize].fd == this->_socket)
 			{
 				clientSocket = accept(this->_socket, (struct sockaddr*)&clientAddr, &addrLen);
 				if (clientSocket == ERROR)
@@ -67,7 +67,7 @@ void Server::_handleClients(void)
 					_newClient(clientSocket);
 			}
 			else
-				_handleClientRequest(pos);
+				_handleClientRequest(this->pollSize);
 		}
 	}
 }
