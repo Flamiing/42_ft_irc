@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:10:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/01 05:36:14 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/01 13:32:17 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,25 @@ void Server::_newClient(int& clientSocket)
 	this->_clients[clientSocket] = Client(clientSocket);
 	std::cout << "New client connected at socket #" << clientSocket << std::endl;
 	this->_pollFds.push_back(clientPoll);
+}
+
+void Server::_processBuffer(size_t& client, std::string& buffer)
+{
+	std::string bufferToProcess;
+	std::string::size_type pos = buffer.find("\n");
+	
+	while (pos != std::string::npos)
+	{
+		if (buffer[0] == 0)
+			buffer.erase(0, 1);
+		if (buffer[0] == '\n')
+			buffer.erase(0, 1);
+		bufferToProcess = buffer.substr(0, pos);
+		std::cout << "Client at socket #" << this->_pollFds[client].fd << ": " << bufferToProcess << std::endl;;
+		_processMessage(this->_pollFds[client].fd, bufferToProcess);
+		buffer.erase(0, pos + 1);
+		pos = buffer.find("\n");
+	}
 }
 
 void Server::_handleClientRequest(size_t& client)
@@ -42,8 +61,7 @@ void Server::_handleClientRequest(size_t& client)
 		stash += checkEOF;
 		if (checkEOF[checkEOF.size() - 1] != '\n')
 			return ;
-		std::cout << "Client at socket #" << this->_pollFds[client].fd << ": " << stash;
-		_processMessage(this->_pollFds[client].fd, stash);
+		_processBuffer(client, stash);
 	}
 	stash = "";
 }

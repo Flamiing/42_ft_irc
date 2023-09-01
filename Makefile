@@ -6,7 +6,7 @@
 #    By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/27 19:25:47 by alaaouam          #+#    #+#              #
-#    Updated: 2023/09/01 05:24:38 by alaaouam         ###   ########.fr        #
+#    Updated: 2023/09/01 12:20:32 by alaaouam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ OBJS = $(addprefix $(OBJ_PATH), $(OBJ))
 INC = inc/
 
 CPP = c++
-CPPFLAGS =  -Wall -Wextra -Werror -std=c++98 -g3 -fsanitize=address
+CPPFLAGS =  -Wall -Wextra -Werror -std=c++98 #-g3 -fsanitize=address
 RM = rm -rf
 
 #_GUILLE - ¿Que pasa si ejecutamos en un puerto en uso, 4242?

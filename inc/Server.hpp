@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/01 05:33:20 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/01 12:13:16 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ class Server
 		void disconnect(size_t& client);
 		void disconnectClientFromChannels(std::string client, std::string& reply);
 		void closeAllSockets(void);
+		void _processBuffer(size_t& client, std::string& buffer);
 
 		void initMapCommand(void);
 		std::map<std::string, customFunctionType> mapCommand;
