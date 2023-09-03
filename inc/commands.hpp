@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:48:53 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/03 15:56:04 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/04 00:35:38 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ class Command;
 # define TOPIC "TOPIC"
 # define QUIT "QUIT"
 # define PONG "PONG"
+# define PART "PART"
 # define DIE "DIE"
 
 # define RPL_WELCOME(client) (":localhost 001 " + client + " :Welcome to LOS OSADOS IRC Server, " + client + "!\r\n")
@@ -72,6 +73,7 @@ class Command;
 # define RPL_KICKWITHMSG(nickname, username, channel, kicked, message) (":" + nickname + "!~" + username + "@localhost KICK " + channel + " " + kicked + " " + message + "\r\n")
 # define MSG_NOTICE(nickname, username, recipient, message) (":" + nickname + "!~" + username + "@localhost NOTICE " + recipient + " :" + message + "\r\n")
 # define RPL_HELP(client) (":localhost 000 " + client + " :Use the following commands to traverse the chat: \r\n")
+# define RPL_PART(nickname, username, channel) (":" + nickname + "!~" + username + "@localhost PART " + channel + "\r\n")
 
 
 typedef void (*customFunctionType)(Command& command);
@@ -86,6 +88,7 @@ void quitCommand(Command &command);
 void operCommand(Command& command);
 void dieCommand(Command& command);
 void kickCommand(Command& command);
+void partCommand(Command& command);
 //void privmsgCommand(Command &command);
 
 #endif

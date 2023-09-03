@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 14:17:16 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/03 17:53:18 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/03 23:19:11 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,20 +65,6 @@ static std::string getKickReply(Client& client, Command& command)
 		}
 	}
 	return reply;
-}
-
-static bool notInChannel(Client& client, std::string& channelName)
-{
-	std::vector<Channel> channels = client.getJoinedChannels();
-	std::vector<Channel>::const_iterator it = channels.begin();
-
-	while (it != channels.end())
-	{
-		if ((*it).getName() == channelName)
-			return false;
-		it++;
-	}
-	return true;
 }
 
 static bool handleErrors(Server& server, Client& client, std::string& buffer, Command& command)

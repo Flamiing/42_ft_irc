@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/03 17:53:29 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/04 01:05:35 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,12 @@
 # define OPERATOR_NAME "osado"
 # define OPERATOR_PASS "password"
 
+# define SERVER_LISTENING(port) ("[SERVER] Listening on port " + port + "...\n")
+# define CLIENT_CONNECTION(socket) ("[SERVER] Client connected at socket #" + socket + "\n")
+# define CLIENT_DISCONNECTED(socket) ("[SERVER] Client at socket #" + socket + " disconnected.\n")
+# define CHANNEL_DELETED(channel) ("[SERVER] " + channel + " has been deleted.\n")
+# define CLIENT_MESSAGE_RECIVED(socket, message) ("[SERVER] Client at socket #" + socket + ": " + message + "\n")
+
 class Server
 {
 	public:
@@ -53,6 +59,7 @@ class Server
 		void disconnect(size_t& client);
 		void disconnectClientFromChannels(std::string client, std::string& reply);
 		void kickFromChannel(std::string& clientName, std::string& channelName, std::string& reply);
+		void partFromChannel(Client& client, std::string& channelName);
 		void closeAllSockets(void);
 
 		void initMapCommand(void);
@@ -71,7 +78,7 @@ class Server
 		void _handleClientRequest(size_t& client);
 		void _processMessage(const int& client, std::string message);
 		void _processBuffer(size_t& client, std::string& buffer);
-		void _removeChannelFromClient(std::string& clientName, std::string& channelName);
+		void _removeChannelFromClient(std::string clientName, std::string& channelName);
 
 		int _port;
 		std::string _password;

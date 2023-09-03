@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   channelNotFound.cpp                                :+:      :+:    :+:   */
+/*   numberToString.cpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/01 14:49:16 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/03 16:03:03 by alaaouam         ###   ########.fr       */
+/*   Created: 2023/09/04 01:08:25 by alaaouam          #+#    #+#             */
+/*   Updated: 2023/09/04 01:09:48 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Server.hpp"
 
-bool channelNotFound(std::vector<Channel> channels, std::string channelToFind)
+std::string numberToString(const size_t number)
 {
-	std::vector<Channel>::const_iterator it = channels.begin();
-	
-	while (it != channels.end())
-	{
-		if ((*it).getName() == channelToFind)
-			return false;
-		it++;
-	}
-	return true;
+	std::stringstream ss;
+	ss << number;
+	std::string string(ss.str());
+
+	return string;
 }
