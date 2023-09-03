@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 22:55:48 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 01:35:27 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/04 01:40:05 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static bool hasWhiteSpace(const std::string& str)
 	return false;
 }
 
-static std::string removeFromSpaceBehind(const std::string& str)
+static std::string removeFromSpace(const std::string& str)
 {
 	std::string newString;
 	size_t pos = 0;
