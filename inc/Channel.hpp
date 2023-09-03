@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/01 17:13:11 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/03 17:23:09 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ class Channel
 		Channel& operator=(const Channel& other);
 
 		std::string getName(void) const;
+		size_t getUserCount(void) const;
 		std::string getTopic(void) const;
 		std::string getKey(void) const;
 		std::string getOnlineUsersList(void) const;
@@ -44,6 +45,7 @@ class Channel
 		void _replyToNewUser(Client& client);
 		
 		std::string _name;
+		size_t _userCount;
 		std::string _key;
 		std::string _topic;
 		std::vector<Client> _onlineUsers;

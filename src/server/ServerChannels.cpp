@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:13:49 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/03 16:14:06 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/03 17:36:25 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,14 @@ void Server::disconnectClientFromChannels(std::string client, std::string& reply
 	while (it != this->_channels.end())
 	{
 		if (it->clientInChannel(client))
+		{
 			it->disconnectFromChannel(client, reply);
+			if (it->getUserCount() == 0)
+			{
+				this->_channels.erase(it);
+				it--;
+			}
+		}
 		it++;
 	}
 }
@@ -55,6 +62,8 @@ void Server::disconnectFromChannel(std::string& clientName, std::string& channel
 		if (it->getName() == channelName && it->clientInChannel(clientName))
 		{
 			it->removeFromChannel(clientName, reply);
+			if (it->getUserCount() == 0)
+				this->_channels.erase(it);
 			break ;	
 		}
 		it++;
