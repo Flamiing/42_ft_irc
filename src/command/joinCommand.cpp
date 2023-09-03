@@ -6,24 +6,11 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 23:28:35 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/03 15:54:11 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Server.hpp"
-
-static bool channelNotFound(std::vector<Channel>& channels, std::string channelToFind)
-{
-	std::vector<Channel>::const_iterator it = channels.begin();
-	
-	while (it != channels.end())
-	{
-		if ((*it).getName() == channelToFind)
-			return false;
-		it++;
-	}
-	return true;
-}
 
 static void joinChannel(Server& server, std::vector<Channel> channels, Client& client, std::vector<std::string>& message)
 {
@@ -59,6 +46,6 @@ void joinCommand(Command& command)
 
 	if (handleErrors(server, client, buffer, command.message))
 		return ;
-	command.message[1].erase(0, 1);
+	//command.message[1].erase(0, 1);
 	joinChannel(server, server.getChannels(), client, command.message);
 } 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/01 15:26:52 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/03 16:22:35 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <unistd.h>
 # include <arpa/inet.h>
 # include <poll.h>
+# include <exception>
 # include "Client.hpp"
 # include "Channel.hpp"
 # include "Command.hpp"
@@ -51,8 +52,8 @@ class Server
 		void connectToChannel(std::string& channel, Client& client, std::string key);
 		void disconnect(size_t& client);
 		void disconnectClientFromChannels(std::string client, std::string& reply);
+		void disconnectFromChannel(std::string& clientName, std::string& channelName, std::string& reply);
 		void closeAllSockets(void);
-		void _processBuffer(size_t& client, std::string& buffer);
 
 		void initMapCommand(void);
 		std::map<std::string, customFunctionType> mapCommand;
@@ -69,6 +70,8 @@ class Server
 		void _newClient(int& clientSocket);
 		void _handleClientRequest(size_t& client);
 		void _processMessage(const int& client, std::string message);
+		void _processBuffer(size_t& client, std::string& buffer);
+		void _removeChannelFromClient(std::string& clientName, std::string& channelName);
 
 		int _port;
 		std::string _password;

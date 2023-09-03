@@ -6,13 +6,13 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:41:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/31 19:50:11 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/01 17:13:08 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Channel.hpp"
 
-void Channel::disconnectFromChannel(std::string& client, const std::string& reply)
+void Channel::disconnectFromChannel(std::string client, const std::string& reply)
 {
 	std::vector<Client>::iterator it = this->_onlineUsers.begin();
 
@@ -26,4 +26,20 @@ void Channel::disconnectFromChannel(std::string& client, const std::string& repl
 		it++;
 	}
 	_informOnlineUsers(reply);
+}
+
+void Channel::removeFromChannel(std::string client, const std::string& reply)
+{
+	std::vector<Client>::iterator it = this->_onlineUsers.begin();
+
+	_informOnlineUsers(reply);
+	while (it != this->_onlineUsers.end())
+	{
+		if (it->getNickname() == client)
+		{
+			this->_onlineUsers.erase(it);
+			break ;
+		}
+		it++;
+	}
 }
