@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:04:22 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/03 15:48:27 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/03 17:47:29 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int main(int argc, char **argv)
 	catch (const std::exception& e)
 	{
 		std::cerr << "Exception caught: " << e.what() << std::endl;
+		return 1;
 	}
 	return 0;
 }
