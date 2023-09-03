@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 17:49:30 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/03 17:50:08 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/03 17:52:59 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void Server::disconnectClientFromChannels(std::string client, std::string& reply
 	}
 }
 
-void Server::disconnectFromChannel(std::string& clientName, std::string& channelName, std::string& reply)
+void Server::kickFromChannel(std::string& clientName, std::string& channelName, std::string& reply)
 {
 	std::vector<Channel>::iterator it = this->_channels.begin();
 

@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 14:17:16 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/03 16:16:14 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/03 17:53:18 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,5 @@ void kickCommand(Command& command)
 	if (handleErrors(server, client, buffer, command))
 		return ;
 	std::string reply = getKickReply(client, command);
-	server.disconnectFromChannel(command.message[2], command.message[1], reply);
+	server.kickFromChannel(command.message[2], command.message[1], reply);
 }

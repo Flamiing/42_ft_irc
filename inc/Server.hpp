@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/03 16:22:35 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/03 17:53:29 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ class Server
 		void connectToChannel(std::string& channel, Client& client, std::string key);
 		void disconnect(size_t& client);
 		void disconnectClientFromChannels(std::string client, std::string& reply);
-		void disconnectFromChannel(std::string& clientName, std::string& channelName, std::string& reply);
+		void kickFromChannel(std::string& clientName, std::string& channelName, std::string& reply);
 		void closeAllSockets(void);
 
 		void initMapCommand(void);
