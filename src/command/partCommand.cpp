@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 22:55:48 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 00:40:22 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/04 01:35:27 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,24 @@ static bool hasWhiteSpace(const std::string& str)
 	return false;
 }
 
-std::vector<std::string> getChannels(std::string& raw)
+static std::string removeFromSpaceBehind(const std::string& str)
+{
+	std::string newString;
+	size_t pos = 0;
+
+	while (pos < str.size())
+	{
+		if (isspace(str[pos]))
+			break ;
+		newString.push_back(str[pos]);
+		pos++;
+	}
+	if (pos == 0)
+		return str;
+	return newString;
+}
+
+static std::vector<std::string> getChannels(std::string& raw)
 {
 	std::vector<std::string> remove;
 	remove.push_back(PART);
@@ -41,6 +58,8 @@ std::vector<std::string> getChannels(std::string& raw)
 		if (hasWhiteSpace(*it))
 		{
 			whiteSpaceFound = true;
+			*it = removeFromSpaceBehind(*it);
+			it++;
 			break ;
 		}
 		it++;
