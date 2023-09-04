@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Channel.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:32 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 17:09:08 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/05 00:23:24 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 Channel::Channel(void) {}
 
-Channel::Channel(std::string& name) : _name(name), _userCount(0), _key(""), _topic("") {}
+Channel::Channel(std::string& name) : _name(name), _key(""), _topic("") {}
 
 Channel::Channel(const Channel& other)
 {
@@ -39,8 +39,9 @@ Channel& Channel::operator=(const Channel& other)
 	return *this;
 }
 
+
 std::string Channel::getName() const { return this->_name; }
-size_t Channel::getUserCount() const { return this->_userCount; }
+size_t Channel::getUserCount() const { return this->_onlineUsers.size(); }
 std::string Channel::getTopic() const { return this->_topic; }
 std::string Channel::getKey() const { return this->_key; }
 //std::vector<Client> getBannedUsers(void) const { return this->_bannedUsers; }
@@ -92,7 +93,6 @@ void Channel::messageOnlineUsers(const std::string sender, const std::string& re
 	
 	while (it != this->_onlineUsers.end())
 	{
-		std::cout << it->getNickname() << std::endl;
 		if (toUpperCase(it->getNickname()) != toUpperCase(sender))
 			send(it->getSocket(), reply.c_str(), reply.size(), 0);
 		it++;

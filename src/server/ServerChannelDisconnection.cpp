@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 17:49:30 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 18:21:20 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/05 00:10:16 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void Server::partFromChannel(Client& client, std::string& channelName)
 				this->channels.erase(it);
 				std::cout << CHANNEL_DELETED(channelName);
 			}
-			break ;	
+			break ;
 		}
 		it++;
 	}

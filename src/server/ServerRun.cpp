@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ServerRun.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 14:03:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 17:05:54 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/04 22:21:11 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void Server::initMapCommand(void)
 	mapCommand[KICK] = &kickCommand;
 	mapCommand[PART] = &partCommand;
 	mapCommand[PRIVMSG] = &privmsgCommand;
+	mapCommand[LIST] = &listCommand;
 }
 
 void Server::_setupSever(void)
