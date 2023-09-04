@@ -6,11 +6,28 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 17:30:53 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 12:11:41 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/04 17:10:05 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Server.hpp"
+
+std::string getMessageToSend(Command& command, size_t messagePos)
+{
+	std::vector<std::string> remove;
+	std::string messageToSend;
+	remove.push_back(command.cmd);
+	if (command.cmd != QUIT)
+		remove.push_back(command.message[1]);
+	
+	if (command.message[messagePos][0] != ':')
+		return command.message[command.message.size() - 1];
+	else
+		messageToSend = getMessage(command.raw, remove);
+	if (messageToSend[0] == ':')
+		messageToSend.erase(0, 1);
+	return messageToSend;
+}
 
 std::string getMessage(const std::string& raw, const std::vector<std::string>& remove)
 {

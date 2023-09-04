@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 23:11:42 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 10:56:34 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/04 17:10:20 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ bool channelNotFound(std::vector<Channel> channels, std::string channelToFind)
 	
 	while (it != channels.end())
 	{
-		if ((*it).getName() == channelToFind)
+		if (toUpperCase((*it).getName()) == toUpperCase(channelToFind))
 			return false;
 		it++;
 	}

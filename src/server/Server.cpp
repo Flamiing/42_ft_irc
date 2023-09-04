@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:11 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/01 16:38:36 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/04 17:05:46 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,18 @@ std::string Server::getRawNickname(const std::string& modifiedNickname)
 			return it->second.getNickname();
 		it++;
 	}
-	return it->second.getNickname();
+	return modifiedNickname;
+}
+
+bool Server::userInServer(const std::string& nickname)
+{
+	std::map<int, Client>::const_iterator it = this->_clients.begin();
+
+	while (it != this->_clients.end())
+	{
+		if (toUpperCase(it->second.getNickname()) == toUpperCase(nickname))
+			return true;
+		it++;
+	}
+	return false;
 }

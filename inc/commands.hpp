@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:48:53 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 12:11:50 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/04 17:08:48 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,15 @@ class Command;
 # define RPL_QUIT(nickname, username, message) (":" + nickname + "!~" + username + "@localhost QUIT :Quit: " + message + "\r\n")
 # define RPL_KICKWITHNOMSG(nickname, username, channel, kicked) (":" + nickname + "!~" + username + "@localhost KICK " + channel + " " + kicked + " :" + kicked + "\r\n")
 # define RPL_KICKWITHMSG(nickname, username, channel, kicked, message) (":" + nickname + "!~" + username + "@localhost KICK " + channel + " " + kicked + " " + message + "\r\n")
-# define MSG_NOTICE(nickname, username, recipient, message) (":" + nickname + "!~" + username + "@localhost NOTICE " + recipient + " :" + message + "\r\n")
+# define RPL_NOTICE(nickname, username, recipient, message) (":" + nickname + "!~" + username + "@localhost NOTICE " + recipient + " :" + message + "\r\n")
+# define RPL_PRIVMSG(nickname, username, recipient, message) (":" + nickname + "!~" + username + "@localhost PRIVMSG " + recipient + " :" + message + "\r\n")
 # define RPL_HELP(client) (":localhost 000 " + client + " :Use the following commands to traverse the chat: \r\n")
 # define RPL_PART(nickname, username, channel) (":" + nickname + "!~" + username + "@localhost PART " + channel + "\r\n")
 
 
 typedef void (*customFunctionType)(Command& command);
 
+void privmsgCommand(Command& command);
 void processCommand(Command& command);
 void passCommand(Command& command);
 void userCommand(Command &command);
