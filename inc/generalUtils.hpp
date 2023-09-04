@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 22:37:45 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 01:09:43 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/04 13:07:31 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 class Channel;
 class Client;
+class Command;
 
 bool parsePort(std::string& portStr, int& port);
 std::vector<std::string> splitString(std::string& str, char delimiter);
@@ -30,5 +31,6 @@ bool channelNotFound(std::vector<Channel> channels, std::string channelToFind);
 bool notInChannel(Client& client, std::string& channelName);
 bool findChannels(Client& client, std::vector<Channel> channels, std::vector<std::string>& channelsToFind);
 std::string numberToString(const size_t number);
+std::string getMessageToSend(Command& command, size_t messagePos);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 14:03:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 01:11:41 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/04 15:02:12 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void Server::initMapCommand(void)
 	mapCommand[DIE] = &dieCommand;
 	mapCommand[KICK] = &kickCommand;
 	mapCommand[PART] = &partCommand;
-	//mapCommand[PRIVMSG] = &privmsgCommand;
+	mapCommand[PRIVMSG] = &privmsgCommand;
 }
 
 void Server::_setupSever(void)

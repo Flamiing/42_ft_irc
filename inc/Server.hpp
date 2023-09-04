@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 01:05:35 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/04 14:59:07 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 
 # define LOCALHOST "127.0.0.1"
 # define MAX_CLIENTS 10
-# define OPERATOR_NAME "osado"
+# define OPERATOR_NAME "operator"
 # define OPERATOR_PASS "password"
 
 # define SERVER_LISTENING(port) ("[SERVER] Listening on port " + port + "...\n")
@@ -61,6 +61,7 @@ class Server
 		void kickFromChannel(std::string& clientName, std::string& channelName, std::string& reply);
 		void partFromChannel(Client& client, std::string& channelName);
 		void closeAllSockets(void);
+		bool userInServer(const std::string& nickname);
 
 		void initMapCommand(void);
 		std::map<std::string, customFunctionType> mapCommand;
