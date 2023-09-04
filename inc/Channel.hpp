@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/01 16:37:38 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/04 10:47:48 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,13 @@ class Channel
 		Channel& operator=(const Channel& other);
 
 		std::string getName(void) const;
+		size_t getUserCount(void) const;
 		std::string getTopic(void) const;
 		std::string getKey(void) const;
 		std::string getOnlineUsersList(void) const;
 		std::vector<Client> getBannedUsers(void) const;
 		void joinChannel(Client& client, std::string& key);
 		bool userIsBanned(std::string& nickname);
-		bool clientInChannel(std::string& nickname);
-		void disconnectFromChannel(std::string& client, const std::string& reply);
 
 		std::string		getMode() const
 		{
@@ -49,11 +48,15 @@ class Channel
 			this->_topic = new_topic;
 		}
 
+		bool clientInChannel(std::string nickname);
+		void disconnectFromChannel(std::string client, const std::string& reply);
+		void removeFromChannel(std::string client, const std::string& reply);
 	private:
 		void _informOnlineUsers(const std::string& reply);
 		void _replyToNewUser(Client& client);
 		
 		std::string _name;
+		size_t _userCount;
 		std::string _key;
 		std::string _topic;
 

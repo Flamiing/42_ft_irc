@@ -6,11 +6,11 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:17:10 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/01 04:03:22 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/04 02:17:38 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/generalUtils.hpp"
+#include "../../inc/Server.hpp"
 
 std::vector<std::string> splitString(std::string& str, char delimiter)
 {

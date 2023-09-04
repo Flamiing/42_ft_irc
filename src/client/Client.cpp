@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 00:59:16 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/01 03:34:29 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/01 15:28:34 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ bool Client::getUserAuth(void) const { return this->_userAuth; }
 bool Client::getNickAuth(void) const { return this->_nickAuth; }
 bool Client::getAuth(void) const { return this->_auth; }
 bool Client::isOperator(void) const { return this->_isOperator; }
+std::vector<Channel> Client::getJoinedChannels(void) const { return this->_joinedChannels; }
 
 void Client::setAsOperator(void)
 {
@@ -101,4 +102,19 @@ void Client::setFullName(const std::string fullName)
 void Client::addToJoinedChannels(Channel& channel)
 {
 	this->_joinedChannels.push_back(channel);
+}
+
+void Client::removeChannel(std::string& channel)
+{
+	std::vector<Channel>::iterator it = this->_joinedChannels.begin();
+
+	while (it != this->_joinedChannels.end())
+	{
+		if ((*it).getName() == channel)
+		{
+			this->_joinedChannels.erase(it);
+			break ;
+		}
+		it++;
+	}
 }

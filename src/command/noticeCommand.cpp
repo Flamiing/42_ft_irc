@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   noticeCommand.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 17:18:58 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/01 15:26:16 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/04 02:15:53 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Server.hpp"
-#include "../../inc/Client.hpp"
 
 static bool handleErrors(Client& client, std::string& buffer, Command& command)
 {

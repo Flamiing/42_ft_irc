@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 14:03:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/01 16:39:11 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/04 10:52:10 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void Server::initMapCommand(void)
 	mapCommand[OPER] = &operCommand;
 	mapCommand[DIE] = &dieCommand;
 	mapCommand[TOPIC] = &topicCommand;
+	mapCommand[KICK] = &kickCommand;
+	mapCommand[PART] = &partCommand;
 	//mapCommand[PRIVMSG] = &privmsgCommand;
 }
 
@@ -80,7 +82,7 @@ void Server::runServer(void)
 		printError(ERROR_LISTEN, W_ERRNO);
 		exit(1);
 	}
-	std::cout << "IRC Server listening on port " << this->getPort() << "..." << std::endl;
+	std::cout << SERVER_LISTENING(numberToString(this->getPort()));
 	_handleClientConnections();
 	close(this->_socket);
 }

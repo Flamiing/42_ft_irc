@@ -6,7 +6,7 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/27 19:25:47 by alaaouam          #+#    #+#              #
-#    Updated: 2023/09/01 16:39:52 by guilmira         ###   ########.fr        #
+#    Updated: 2023/09/04 10:46:48 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,10 +21,11 @@ NAME = ircserv
 
 SRC =	main.cpp Server.cpp ServerRun.cpp ServerClientConnections.cpp ServerProcessMessage.cpp \
 			   Client.cpp parsePort.cpp printError.cpp processCommand.cpp passCommand.cpp userCommand.cpp \
-			   splitString.cpp nickCommand.cpp operCommand.cpp ServerChannels.cpp ChannelConnection.cpp \
+			   splitString.cpp nickCommand.cpp operCommand.cpp ServerChannelConnection.cpp ChannelConnection.cpp \
 			   Channel.cpp joinCommand.cpp getMessage.cpp noticeCommand.cpp trimSpaces.cpp toUpperCase.cpp \
 			   quitCommand.cpp ChannelDisconnection.cpp Command.cpp ServerClientDisconnection.cpp dieCommand.cpp \
-			   topicCommand.cpp
+			   channelUtils.cpp kickCommand.cpp ServerChannelDisconnection.cpp partCommand.cpp numberToString.cpp topicCommand.cpp\
+			   
 			
 SRC_PATH = src/*/
 SRCS = $(addprefix $(SRC_PATH), $(SRC))

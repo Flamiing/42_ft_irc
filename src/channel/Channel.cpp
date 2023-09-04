@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:32 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/01 16:40:06 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/04 10:46:53 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 Channel::Channel(void) {}
 
-Channel::Channel(std::string& name) : _name(name), _key(""), _topic("") {}
+Channel::Channel(std::string& name) : _name(name), _userCount(0), _key(""), _topic("") {}
 
 Channel::Channel(const Channel& other)
 {
@@ -40,6 +40,7 @@ Channel& Channel::operator=(const Channel& other)
 }
 
 std::string Channel::getName() const { return this->_name; }
+size_t Channel::getUserCount() const { return this->_userCount; }
 std::string Channel::getTopic() const { return this->_topic; }
 std::string Channel::getKey() const { return this->_key; }
 //std::vector<Client> getBannedUsers(void) const { return this->_bannedUsers; }
@@ -72,7 +73,7 @@ bool Channel::userIsBanned(std::string& nickname)
 	return false;
 }
 
-bool Channel::clientInChannel(std::string& nickname)
+bool Channel::clientInChannel(std::string nickname)
 {
 	std::vector<Client>::const_iterator it = this->_onlineUsers.begin();
 

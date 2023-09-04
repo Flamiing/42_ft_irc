@@ -15,9 +15,8 @@
 /* CLASS DEFINITION. */
 /* --------------------------------- CONSTRUCTORS --------------------------------- */
 Command::Command()
-	: server(NULL), client(NULL), buffer(NULL), raw(" "), _name("Default")
+	: server(NULL), client(NULL), buffer(NULL), raw(" ")
 {
-	ilog(getName(), "Constructed⚪");
 	return ;
 }
 
@@ -29,49 +28,25 @@ Command::Command(Server *server, Client *client, std::string *buffer, std::strin
 	this->message = splitString(message, ' ');
 	this->cmd = this->message[0];
 	this->raw = trimSpaces(message);
-
-
-//_GUILLE para borrar cuando no debugee
-	this->_name = this->message[0];
-	ilog(getName(), "Constructed⚪");
 }
 
 /* --------------------------------- DESTRUCTOR --------------------------------- */
 Command::~Command()
 {
-	ilog(getName(), "-Destroyed⭕");
 	return ;
 }
-/* White and red dots means default constructed or destructed */
 /* ------------------COPY CONSTRUCTOR AND ASSIGN OVERLOAD OPERATOR------------------ */
 Command::Command(Command const &src)
 {
 	*this = src;
-	ilog(getName(), "Copy constructed");
 	return ;
 }
 
-/* Overload actually is previous to copy constructor, since cc uses the assign operator. */
 Command & Command::operator=(Command const &rhs)
 {
 	(void) rhs;
 	return (*this);
 }
 /* --------------------------------- GET | SET --------------------------------- */
-std::string const & Command::getName() const
-{
-	return (this->_name);
-}
 
-void Command::setName(std::string const &name)
-{ 
-	this->_name = name;
-}
 /* --------------------------------- METHODS --------------------------------- */
-/* ilog = instance log */
-void Command::ilog(const std::string & name, const std::string & msg) const
-{
-	return ;
-	std::cout << "[Class]Command	- [Instance]" << name << "	|	"\
-	<< msg << std::endl;
-}

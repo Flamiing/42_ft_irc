@@ -1,7 +1,0 @@
-
-si pones PASS p  (una pass erronea) tiene un comportamiento diferente
-
-no deberia funcionar sin -c en la terminal
-si interrumpo la conexion
-
-falta pasar leaks y sanitize

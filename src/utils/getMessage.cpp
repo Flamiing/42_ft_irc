@@ -6,11 +6,11 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 17:30:53 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/01 05:23:46 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/04 02:17:28 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/generalUtils.hpp"
+#include "../../inc/Server.hpp"
 
 std::string getMessage(const std::string& raw, const std::vector<std::string>& remove)
 {

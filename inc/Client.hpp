@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 00:59:24 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/01 03:33:58 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/01 15:26:14 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ class Client
 		bool getPassAuth(void) const;
 		bool getUserAuth(void) const;
 		bool getNickAuth(void) const;
+		std::vector<Channel> getJoinedChannels(void) const;
 		void setAsOperator(void);
 		void setPassAuth(const bool auth);
 		void setUserAuth(const bool auth);
@@ -47,6 +48,7 @@ class Client
 		void setFullName(const std::string fullName);
 		void addToJoinedChannels(Channel& channel);
 		bool isOperator(void) const;
+		void removeChannel(std::string& channel);
 		
 		std::string buffer;
 	private:
