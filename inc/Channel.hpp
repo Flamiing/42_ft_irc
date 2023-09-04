@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 11:14:53 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/04 16:43:34 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ class Channel
 		void _replyToNewUser(Client& client);
 		
 		std::string _name;
-		size_t _userCount;
+		size_t		_userCount;
 		std::string _key;
 		std::string _topic;
 

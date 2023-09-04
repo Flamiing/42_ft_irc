@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 12:22:34 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/04 16:56:00 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ class Server
 		std::map<std::string, customFunctionType> mapCommand;
 
 		size_t pollSize;
-/* _GUILLE puesto en publico por errores de compilacion */
+		
 		std::vector<Channel> _channels;
 
 	private:
@@ -86,8 +86,6 @@ class Server
 		void _processMessage(const int& client, std::string message);
 		void _processBuffer(size_t& client, std::string& buffer);
 		void _removeChannelFromClient(std::string clientName, std::string& channelName);
-
-		
 
 		int _port;
 		std::string _password;

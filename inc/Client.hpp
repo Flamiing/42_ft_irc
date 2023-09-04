@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Client.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 00:59:24 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/01 15:26:14 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/04 16:43:39 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,21 @@ class Client
 		void addToJoinedChannels(Channel& channel);
 		bool isOperator(void) const;
 		void removeChannel(std::string& channel);
+
+		bool checkChannel(Channel &channel)
+		{
+			std::vector<Channel>::iterator it;
+			
+			std::string str;
+
+			for (this->_joinedChannels.begin(); it != _joinedChannels.end(); it++)
+			{
+				str = _joinedChannels.getName
+				if (_joinedChannels)
+			}
+			
+			return true;
+		}
 		
 		std::string buffer;
 	private:

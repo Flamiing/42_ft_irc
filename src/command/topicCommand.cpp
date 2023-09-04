@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:35:00 by guilmira          #+#    #+#             */
-/*   Updated: 2023/09/04 12:11:16 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/04 16:59:53 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void static changeTopic(Client& client, std::vector<std::string> message, Channe
 	}
 	else
 		buffer = ERR_CHANOPRIVSNEEDED(client.getNickname(), channel.getName());
-		
 }
 
 static void viewTopic(Client& client, Channel& channel, std::string& buffer)
@@ -65,6 +64,10 @@ void topicCommand(Command& command)
 		return ;
 	for (int i = 0; i < static_cast<int>(channel.size()); i++)
 	{
+		static checkChannel()
+buffer = ERR_NOTONCHANNEL(client.getNickname(), command.message[0]);
+
+
 		if (channel[i].getName().compare(command.message[1]))
 		{
 			if (command.message.size() == 2)

@@ -25,7 +25,6 @@ split into the first token. then split string does a split on the message */
 Command::Command(Server *server, Client *client, std::string *buffer, std::string& message)
 	: server(server), client(client), buffer(buffer)
 {	
-	 /* _GUILLE ¿CUmple protocolo? */
 	if (!message.empty())
 	{
 		this->message = splitString(message, ' ');
@@ -33,7 +32,7 @@ Command::Command(Server *server, Client *client, std::string *buffer, std::strin
 		this->raw = trimSpaces(message);
 	}
 	else
-		message = "EMPTY COMMAND";
+		message = "EMPTY COMMAND"; /* _GUILLE ¿CUmple protocolo? */
 	
 }
 
