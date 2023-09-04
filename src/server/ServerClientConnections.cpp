@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:10:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 01:12:03 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/05 00:54:31 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void Server::_newClient(int& clientSocket)
 	clientPoll.revents = 0;
 	this->_clients[clientSocket] = Client(clientSocket);
 	
-	std::cout << CLIENT_CONNECTION(numberToString(clientSocket));
+	std::cout << SERVER << BOLD_GREEN << CLIENT_CONNECTION(numberToString(clientSocket)) << RESET;
 	this->_pollFds.push_back(clientPoll);
 }
 
@@ -37,7 +37,7 @@ void Server::_processBuffer(size_t& client, std::string& buffer)
 		if (buffer[0] == '\n')
 			buffer.erase(0, 1);
 		bufferToProcess = buffer.substr(0, pos);
-		std::cout << CLIENT_MESSAGE_RECIVED(numberToString(this->_pollFds[client].fd), bufferToProcess);
+		std::cout << SERVER << BOLD_CYAN << CLIENT_MESSAGE_RECIVED(numberToString(this->_pollFds[client].fd), bufferToProcess) << RESET;
 		_processMessage(this->_pollFds[client].fd, bufferToProcess);
 		buffer.erase(0, pos + 1);
 		pos = buffer.find("\n");

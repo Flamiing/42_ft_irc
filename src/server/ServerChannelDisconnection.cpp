@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 17:49:30 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/05 00:10:16 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/05 00:54:14 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void Server::disconnectClientFromChannels(std::string client, std::string& reply
 			it->disconnectFromChannel(client, reply);
 			if (it->getUserCount() == 0)
 			{
-				std::cout << CHANNEL_DELETED((*it).getName());
+				std::cout << SERVER << BOLD_YELLOW << CHANNEL_DELETED((*it).getName()) << RESET;
 				this->channels.erase(it);
 				it--;
 			}
@@ -45,7 +45,7 @@ void Server::partFromChannel(Client& client, std::string& channelName)
 			if (it->getUserCount() == 0)
 			{
 				this->channels.erase(it);
-				std::cout << CHANNEL_DELETED(channelName);
+				std::cout << SERVER << BOLD_YELLOW << CHANNEL_DELETED(channelName) << RESET;
 			}
 			break ;
 		}
@@ -67,7 +67,7 @@ void Server::kickFromChannel(std::string& clientName, std::string& channelName, 
 			if (it->getUserCount() == 0)
 			{
 				this->channels.erase(it);
-				std::cout << CHANNEL_DELETED(channelName);
+				std::cout << SERVER << BOLD_YELLOW << CHANNEL_DELETED(channelName) << RESET;
 			}
 			break ;	
 		}

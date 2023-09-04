@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:04:22 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 02:16:37 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/05 00:46:59 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int howToUse(void)
 {
-	std::cerr << "Usage: ./ircserv <port> <password>" << std::endl;
+	std::cerr << BOLD_RED << "Usage: ./ircserv <port> <password>" << RESET << std::endl;
 	return 1;
 }
 
@@ -34,7 +34,7 @@ int main(int argc, char **argv)
 	}
 	catch (const std::exception& e)
 	{
-		std::cerr << "Exception caught: " << e.what() << std::endl;
+		std::cerr << BOLD_RED << "Exception caught: " << e.what() << RESET << std::endl;
 		return 1;
 	}
 	return 0;

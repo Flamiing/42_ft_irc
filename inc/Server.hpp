@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 18:21:53 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/05 00:59:31 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,19 @@
 # include "errors.hpp"
 # include "generalUtils.hpp"
 # include "commands.hpp"
+# include "colors.hpp"
 
 # define LOCALHOST "127.0.0.1"
 # define MAX_CLIENTS 10
 # define OPERATOR_NAME "operator"
 # define OPERATOR_PASS "password"
+# define SERVER "\033[1;37m[SERVER]\033[0m"
 
-# define SERVER_LISTENING(port) ("[SERVER] Listening on port " + port + "...\n")
-# define CLIENT_CONNECTION(socket) ("[SERVER] Client connected at socket #" + socket + "\n")
-# define CLIENT_DISCONNECTED(socket) ("[SERVER] Client at socket #" + socket + " disconnected.\n")
-# define CHANNEL_DELETED(channel) ("[SERVER] " + channel + " has been deleted.\n")
-# define CLIENT_MESSAGE_RECIVED(socket, message) ("[SERVER] Client at socket #" + socket + ": " + message + "\n")
+# define SERVER_LISTENING(port) (" Listening on port " + port + "...\n")
+# define CLIENT_CONNECTION(socket) (" Client connected at socket #" + socket + "\n")
+# define CLIENT_DISCONNECTED(socket) (" Client at socket #" + socket + " disconnected.\n")
+# define CHANNEL_DELETED(channel) (" " + channel + " has been deleted.\r\n")
+# define CLIENT_MESSAGE_RECIVED(socket, message) (" Client at socket #" + socket + ": " + message + "\n")
 
 class Server
 {
