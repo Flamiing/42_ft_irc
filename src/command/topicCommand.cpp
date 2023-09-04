@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   topicCommand.cpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:35:00 by guilmira          #+#    #+#             */
-/*   Updated: 2023/09/04 12:11:16 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/04 18:21:20 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void topicCommand(Command& command)
 	Server&						server = *command.server;
 	Client&						client = *command.client;
 	std::string&				buffer = *command.buffer;
-	std::vector<Channel>&		channel = server._channels;
+	std::vector<Channel>&		channel = server.channels;
 
 	if (parserTopic(command))
 		return ;

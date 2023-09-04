@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 17:49:30 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 16:17:03 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/04 18:21:20 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void Server::disconnectClientFromChannels(std::string client, std::string& reply)
 {
-	std::vector<Channel>::iterator it = this->_channels.begin();
+	std::vector<Channel>::iterator it = this->channels.begin();
 
-	while (it != this->_channels.end())
+	while (it != this->channels.end())
 	{
 		if (it->clientInChannel(client))
 		{
@@ -24,7 +24,7 @@ void Server::disconnectClientFromChannels(std::string client, std::string& reply
 			if (it->getUserCount() == 0)
 			{
 				std::cout << CHANNEL_DELETED((*it).getName());
-				this->_channels.erase(it);
+				this->channels.erase(it);
 				it--;
 			}
 		}
@@ -34,17 +34,17 @@ void Server::disconnectClientFromChannels(std::string client, std::string& reply
 
 void Server::partFromChannel(Client& client, std::string& channelName)
 {
-	std::vector<Channel>::iterator it = this->_channels.begin();
+	std::vector<Channel>::iterator it = this->channels.begin();
 	std::string reply = RPL_PART(client.getNickname(), client.getUsername(), channelName);
 
-	while (it != this->_channels.end())
+	while (it != this->channels.end())
 	{
 		if (it->getName() == channelName && it->clientInChannel(client.getNickname()))
 		{
 			it->removeFromChannel(client.getNickname(), reply);
 			if (it->getUserCount() == 0)
 			{
-				this->_channels.erase(it);
+				this->channels.erase(it);
 				std::cout << CHANNEL_DELETED(channelName);
 			}
 			break ;	
@@ -56,9 +56,9 @@ void Server::partFromChannel(Client& client, std::string& channelName)
 
 void Server::kickFromChannel(std::string& clientName, std::string& channelName, std::string& reply)
 {
-	std::vector<Channel>::iterator it = this->_channels.begin();
+	std::vector<Channel>::iterator it = this->channels.begin();
 
-	while (it != this->_channels.end())
+	while (it != this->channels.end())
 	{
 		if (toUpperCase(it->getName()) == toUpperCase(channelName)
 			&& it->clientInChannel(clientName))
@@ -66,7 +66,7 @@ void Server::kickFromChannel(std::string& clientName, std::string& channelName, 
 			it->removeFromChannel(clientName, reply);
 			if (it->getUserCount() == 0)
 			{
-				this->_channels.erase(it);
+				this->channels.erase(it);
 				std::cout << CHANNEL_DELETED(channelName);
 			}
 			break ;	

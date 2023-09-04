@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 16:25:36 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/04 18:22:44 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void sendMessageToUser(Server& server, Client& client, const std::string&
 
 static void sendMessageToChannel(Server& server, Client& client, std::string& channel, const std::string& messageToSend)
 {
-	std::vector<Channel> channels = server.getChannels();
+	std::vector<Channel> channels = server.channels;
 	std::vector<Channel>::iterator it = channels.begin();
 	bool messageSended = false;
 	std::string reply;
@@ -66,7 +66,7 @@ static void sendMessageToChannel(Server& server, Client& client, std::string& ch
 	}
 	if (!messageSended)
 	{
-		if (channelNotFound(server.getChannels(), channel))
+		if (channelNotFound(server.channels, channel))
 			reply = ERR_NOSUCHCHANNEL(client.getNickname(), channel);
 		else
 			reply = ERR_NOTONCHANNEL(client.getNickname(), channel);

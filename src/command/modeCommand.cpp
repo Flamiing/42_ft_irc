@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   modeCommand.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 12:27:39 by guilmira          #+#    #+#             */
-/*   Updated: 2023/09/04 12:31:46 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/04 18:21:20 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void modeCommand(Command& command)
 	Server&						server = *command.server;
 	Client&						client = *command.client;
 	std::string&				buffer = *command.buffer;
-	std::vector<Channel>&		channel = server._channels;
+	std::vector<Channel>&		channel = server.channels;
 
 	if (parserMode(command))
 		return ;

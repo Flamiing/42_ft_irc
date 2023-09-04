@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 22:55:48 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 02:15:37 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/04 18:22:34 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void partCommand(Command& command)
 		buffer = ERR_NEEDMOREPARAMS(client.getNickname(), command.cmd);
 		return ;
 	}
-	else if (!findChannels(client, server.getChannels(), channels))
+	else if (!findChannels(client, server.channels, channels))
 		return ;
 	partFromChannels(server, client, channels);
 }
