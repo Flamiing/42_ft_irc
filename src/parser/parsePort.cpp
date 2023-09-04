@@ -6,12 +6,11 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 22:25:14 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/22 19:15:41 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/04 02:16:52 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/generalUtils.hpp"
-#include "../../inc/errors.hpp"
+#include "../../inc/Server.hpp"
 
 static bool allDigits(const std::string& str)
 {

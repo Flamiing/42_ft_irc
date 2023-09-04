@@ -6,12 +6,11 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:31:08 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/22 14:25:43 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/04 02:16:20 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include "../../inc/errors.hpp"
+#include "../../inc/Server.hpp"
 
 int printError(const std::string error, int mode)
 {

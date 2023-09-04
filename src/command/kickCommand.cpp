@@ -6,15 +6,11 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 14:17:16 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/03 23:19:11 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/04 02:15:04 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Server.hpp"
-
-//KICK SIN MENSAJE PARA TODOS LOS USERS-> :worbam!~worbam@151.red-83-33-35.dynamicip.rima-tde.net KICK #prueba flamiing :flamiing
-//KICK CON MENSAJE PARA TODOS LOS USERS -> :worbam!~worbam@151.red-83-33-35.dynamicip.rima-tde.net KICK #prueba flamiing :mensaje
-//Te puedes autokickear y nadie tiene OP mas
 
 static bool userNotInChannel(Server& server, std::string& nickname, std::string& channelName)
 {

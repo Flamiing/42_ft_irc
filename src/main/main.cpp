@@ -6,14 +6,11 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:04:22 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/03 17:47:29 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/04 02:16:37 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
 #include "../../inc/Server.hpp"
-#include "../../inc/errors.hpp"
-#include "../../inc/generalUtils.hpp"
 
 int howToUse(void)
 {
