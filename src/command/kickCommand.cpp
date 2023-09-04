@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 14:17:16 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 16:19:30 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/04 18:22:25 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool userNotInChannel(Server& server, std::string nickname, std::string& channelName)
 {
-	std::vector<Channel> channels = server.getChannels();
+	std::vector<Channel> channels = server.channels;
 	std::vector<Channel>::iterator it = channels.begin();
 	std::string::size_type found;
 
@@ -70,7 +70,7 @@ static bool handleErrors(Server& server, Client& client, std::string& buffer, Co
 		buffer = ERR_NEEDMOREPARAMS(client.getNickname(), command.cmd);
 		return true;
 	}
-	else if (channelNotFound(server.getChannels(), command.message[1]))
+	else if (channelNotFound(server.channels, command.message[1]))
 	{
 		buffer = ERR_NOSUCHCHANNEL(client.getNickname(), command.message[1]);
 		return true;

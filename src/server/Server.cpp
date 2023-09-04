@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:11 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 17:05:46 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/04 18:22:04 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,6 @@ Server& Server::operator=(const Server& other) { (void)other; return *this; }
 int Server::getPort(void) const { return this->_port; }
 std::string Server::getPassword(void) const { return this->_password; }
 std::map<int, Client> Server::getClients(void) const { return this->_clients; }
-//std::vector<Channel> Server::getChannels(void) const { return this->_channels; }
-
-std::vector<Channel> Server::getChannels(void)
-{
-	return (this->_channels);
-}
 
 int Server::getSocketByNickname(const std::string nickname) const
 {
