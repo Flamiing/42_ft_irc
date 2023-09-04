@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 10:47:01 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/04 11:16:14 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ class Server
 		size_t pollSize;
 /* _GUILLE puesto en publico por errores de compilacion */
 		std::vector<Channel> _channels;
+
 	private:
 		Server(void);
 		Server(const Server& other);

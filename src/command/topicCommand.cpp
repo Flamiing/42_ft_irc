@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:35:00 by guilmira          #+#    #+#             */
-/*   Updated: 2023/09/01 16:36:44 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/04 11:35:06 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void static changeTopic(Client& client, std::vector<std::string> message, Channe
 	{
 		channel.setTopic(message[2]);
 		return ;
-		/* _GUILLE poner mensaje de que se ha hecho? */
+		/* _GUILLE poner mensaje de que se ha modificado antes de? */
 	}
 	else
 		buffer = ERR_CHANOPRIVSNEEDED(client.getNickname(), channel.getName());
@@ -40,12 +40,22 @@ static void viewTopic(Client& client, Channel& channel, std::string& buffer)
 		buffer = RPL_NOTOPIC(client.getNickname(), channel.getName());
 }	
 
-static bool isCommandcorrect(std::vector<std::string> message, int lenght)
+static bool parserTopic(Command& command)
 {
-	if (static_cast<int>(message.size()) > lenght)
-		return (false);
-	else
-		return (true);
+	Client&						client = *command.client;
+	std::string&				buffer = *command.buffer;
+
+	if (static_cast<int>(command.message.size()) < 2)
+	{
+		buffer = ERR_NEEDMOREPARAMS(client.getNickname(), command.message[0]);
+		return false;
+	}
+	if (static_cast<int>(command.message.size()) > 3)
+	{
+		buffer = displayMsg("666", "too many parameters", client.getNickname());
+		return false;
+	}
+	return true;
 }
 
 /* _GUILLE cerciorarse de que no hay channels con el mismo nombre */
@@ -56,12 +66,8 @@ void topicCommand(Command& command)
 	std::string&				buffer = *command.buffer;
 	std::vector<Channel>&		channel = server._channels;
 
-	if (!isCommandcorrect(command.message, 4))
-	{
-		printf("display error\n");
-		displayMsg("666", "too many parameters", client.getNickname());
+	if (parserTopic(command))
 		return ;
-	}
 	for (int i = 0; i < static_cast<int>(channel.size()); i++)
 	{
 		if (channel[i].getName().compare(command.message[1]))

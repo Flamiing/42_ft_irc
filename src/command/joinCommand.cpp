@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   joinCommand.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/03 15:54:11 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/04 11:16:37 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@ static bool handleErrors(Server& server, Client& client, std::string& buffer, st
 	//	buffer = ERR_INVITEONLYCHAN(client.getNickname(), message[1]);
 	return false;
 	(void)server;
+}
+
+void joinChannel(Command)
+{
+	
 }
 
 void joinCommand(Command& command)
