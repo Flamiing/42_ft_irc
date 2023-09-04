@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:41:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 15:11:16 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/04 16:16:48 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void Channel::removeFromChannel(std::string client, const std::string& reply)
 	_informOnlineUsers(reply);
 	while (it != this->_onlineUsers.end())
 	{
-		if (it->getNickname() == client)
+		if (toUpperCase(it->getNickname()) == toUpperCase(client))
 		{
 			this->_onlineUsers.erase(it);
 			this->_userCount--;

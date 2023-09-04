@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 15:14:18 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/04 16:25:36 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static bool handleErrors(Client& client, std::string& buffer, Command& command)
 		buffer = ERR_NORECIPIENT(client.getNickname(), command.cmd);
 		return true;
 	}
-	else if (command.message.size() == 2)
+	else if (command.message.size() == 2 || (command.message.size() == 3
+				&& command.message[2].size() == 1 && command.message[2] == ":"))
 	{
 		buffer = ERR_NOTEXTTOSEND(client.getNickname());
 		return true;
@@ -44,16 +45,17 @@ static void sendMessageToUser(Server& server, Client& client, const std::string&
 	send(recipientSocket, reply.c_str(), reply.size(), 0);
 }
 
-static void sendMessageToChannel(Server& server, Client& client, const std::string& channel, const std::string& messageToSend)
+static void sendMessageToChannel(Server& server, Client& client, std::string& channel, const std::string& messageToSend)
 {
-	std::vector<Channel> channels = client.getJoinedChannels();
+	std::vector<Channel> channels = server.getChannels();
 	std::vector<Channel>::iterator it = channels.begin();
 	bool messageSended = false;
 	std::string reply;
 	
 	while (it != channels.end())
 	{
-		if (toUpperCase((*it).getName()) == toUpperCase(channel))
+		if (!userNotInChannel(server, client.getNickname(), channel)
+			&& toUpperCase((*it).getName()) == toUpperCase(channel))
 		{
 			reply = RPL_PRIVMSG(client.getNickname(), client.getUsername(), (*it).getName(), messageToSend);
 			(*it).messageOnlineUsers(client.getNickname(), reply);

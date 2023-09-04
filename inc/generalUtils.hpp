@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 22:37:45 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 13:07:31 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/04 16:06:33 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <string>
 # include <vector>
 
+class Server;
 class Channel;
 class Client;
 class Command;
@@ -32,5 +33,6 @@ bool notInChannel(Client& client, std::string& channelName);
 bool findChannels(Client& client, std::vector<Channel> channels, std::vector<std::string>& channelsToFind);
 std::string numberToString(const size_t number);
 std::string getMessageToSend(Command& command, size_t messagePos);
+bool userNotInChannel(Server& server, std::string nickname, std::string& channelName);
 
 #endif

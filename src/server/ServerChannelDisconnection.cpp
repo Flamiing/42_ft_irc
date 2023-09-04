@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 17:49:30 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 00:47:26 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/04 16:17:03 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ void Server::kickFromChannel(std::string& clientName, std::string& channelName, 
 
 	while (it != this->_channels.end())
 	{
-		if (it->getName() == channelName && it->clientInChannel(clientName))
+		if (toUpperCase(it->getName()) == toUpperCase(channelName)
+			&& it->clientInChannel(clientName))
 		{
 			it->removeFromChannel(clientName, reply);
 			if (it->getUserCount() == 0)

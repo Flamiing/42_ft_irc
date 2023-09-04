@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:32 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 15:28:50 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/04 16:13:22 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ bool Channel::clientInChannel(std::string nickname)
 
 	while (it != this->_onlineUsers.end())
 	{
-		if ((*it).getNickname() == nickname)
+		if (toUpperCase((*it).getNickname()) == toUpperCase(nickname))
 			return true;
 		it++;
 	}
