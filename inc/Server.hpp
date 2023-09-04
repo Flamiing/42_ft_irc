@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 11:16:14 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/04 12:22:34 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,9 @@ class Server
 		void disconnectClientFromChannels(std::string client, std::string& reply);
 		void kickFromChannel(std::string& clientName, std::string& channelName, std::string& reply);
 		void partFromChannel(Client& client, std::string& channelName);
+
+		bool	isBanned(Client& client, std::string& channel);
+
 		void closeAllSockets(void);
 
 		void initMapCommand(void);
@@ -83,6 +86,8 @@ class Server
 		void _processMessage(const int& client, std::string message);
 		void _processBuffer(size_t& client, std::string& buffer);
 		void _removeChannelFromClient(std::string clientName, std::string& channelName);
+
+		
 
 		int _port;
 		std::string _password;

@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   joinCommand.cpp                                    :+:      :+:    :+:   */
+/*   modeCommand.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 12:19:51 by guilmira         ###   ########.fr       */
+/*   Created: 2023/09/04 12:27:39 by guilmira          #+#    #+#             */
+/*   Updated: 2023/09/04 12:31:46 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Server.hpp"
 
-static void joinChannel(Server& server, std::vector<Channel> channels, Client& client, std::vector<std::string>& message)
-{
-	if (channels.size() == 0 || channelNotFound(channels, message[1]))
-		server.addChannel(message[1]);
-	if (message.size() == 2)
-		server.connectToChannel(message[1], client, "");
-	//else if (CHANNEL IS INVITE ONLY MODE)
-	//	server.connectToChannel(message[1], client, message[2]);
-}
-
-static bool parserJoin(Command& command)
+static bool parserMode(Command& command)
 {
 	Client&						client = *command.client;
 	std::string&				buffer = *command.buffer;
@@ -40,16 +30,13 @@ static bool parserJoin(Command& command)
 	return false;
 }
 
-void joinCommand(Command& command)
+void modeCommand(Command& command)
 {
 	Server&						server = *command.server;
 	Client&						client = *command.client;
-	std::string&				buffer = *command.buffer;	
+	std::string&				buffer = *command.buffer;
+	std::vector<Channel>&		channel = server._channels;
 
-	if (parserJoin(command))
+	if (parserMode(command))
 		return ;
-	if (server.isBanned(client, command.message[1]))
-		buffer = ERR_BANNEDFROMCHAN(client.getNickname(), command.message[1]);
-	//	buffer = ERR_INVITEONLYCHAN(client.getNickname(), message[1]); lista ccon usuarios invitados. comprobar y meter.
-	joinChannel(server, server.getChannels(), client, command.message);
-} 
+}

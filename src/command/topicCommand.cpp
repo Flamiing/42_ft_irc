@@ -6,16 +6,11 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:35:00 by guilmira          #+#    #+#             */
-/*   Updated: 2023/09/04 11:35:06 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/04 12:11:16 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Server.hpp"
-
-std::string displayMsg(std::string number, std::string str, std::string clientNick)
-{
-	return (std::string(":localhost " + number + " " + clientNick + str + "\r\n") );
-}
 
 void static changeTopic(Client& client, std::vector<std::string> message, Channel& channel, std::string& buffer)
 {
@@ -48,14 +43,14 @@ static bool parserTopic(Command& command)
 	if (static_cast<int>(command.message.size()) < 2)
 	{
 		buffer = ERR_NEEDMOREPARAMS(client.getNickname(), command.message[0]);
-		return false;
+		return true;
 	}
 	if (static_cast<int>(command.message.size()) > 3)
 	{
 		buffer = displayMsg("666", "too many parameters", client.getNickname());
-		return false;
+		return true;
 	}
-	return true;
+	return false;
 }
 
 /* _GUILLE cerciorarse de que no hay channels con el mismo nombre */

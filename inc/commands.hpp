@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:48:53 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 11:34:37 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/04 12:11:50 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,8 @@ void topicCommand(Command &command);
 # define ERR_NOTONCHANNEL(client, channel) (":localhost 442 " + client + " #" + channel + " :You're not on that channel\r\n")
 /* # define ERR_NOTONCHANNEL(client, channel) (":localhost 442 " + client + " #" + channel " :You're not on that channel\r\n") */
 /* _GUILLE el de abajo no funciona? ponemos con hastag el channel si o no */
+
+
+std::string displayMsg(std::string number, std::string str, std::string clientNick);
 
 #endif

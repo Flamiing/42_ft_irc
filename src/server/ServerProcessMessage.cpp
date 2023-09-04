@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ServerProcessMessage.cpp                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:09:58 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/01 13:32:37 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/04 12:47:26 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ void Server::_processMessage(const int& client, std::string message)
 		message.erase(message.size() - 1);
 	Command		command(this, &this->_clients[client], &buffer, message);
 	if (this->_clients[client].getPassAuth() == false && command.cmd != PASS)
+	{
+		std::cout << command.cmd;
 		buffer = ERR_NOTREGISTERED(this->_clients[client].getNickname());
+	}
 	else
 		processCommand(command);
 	std::map<int, Client>::iterator found = this->_clients.find(keyToFind);
