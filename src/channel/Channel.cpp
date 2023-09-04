@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:32 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 10:46:53 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/04 17:35:53 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,16 @@ std::string Channel::getName() const { return this->_name; }
 size_t Channel::getUserCount() const { return this->_userCount; }
 std::string Channel::getTopic() const { return this->_topic; }
 std::string Channel::getKey() const { return this->_key; }
+std::string		Channel::getMode() const
+{
+	return (this->_mode);
+}
+
+void Channel::setTopic(std::string new_topic)
+{
+	this->_topic = new_topic;
+}
+
 //std::vector<Client> getBannedUsers(void) const { return this->_bannedUsers; }
 
 std::string Channel::getOnlineUsersList() const
