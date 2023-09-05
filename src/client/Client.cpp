@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 00:59:16 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/01 15:28:34 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/04 16:14:29 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void Client::removeChannel(std::string& channel)
 
 	while (it != this->_joinedChannels.end())
 	{
-		if ((*it).getName() == channel)
+		if (toUpperCase((*it).getName()) == toUpperCase(channel))
 		{
 			this->_joinedChannels.erase(it);
 			break ;

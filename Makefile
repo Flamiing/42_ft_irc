@@ -6,7 +6,7 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/27 19:25:47 by alaaouam          #+#    #+#              #
-#    Updated: 2023/09/04 17:37:54 by guilmira         ###   ########.fr        #
+#    Updated: 2023/09/05 13:58:40 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,9 +23,10 @@ SRC =	main.cpp Server.cpp ServerRun.cpp ServerClientConnections.cpp ServerProces
 			   Client.cpp parsePort.cpp printError.cpp processCommand.cpp passCommand.cpp userCommand.cpp \
 			   splitString.cpp nickCommand.cpp operCommand.cpp ServerChannelConnection.cpp ChannelConnection.cpp \
 			   Channel.cpp joinCommand.cpp getMessage.cpp noticeCommand.cpp trimSpaces.cpp toUpperCase.cpp \
-			   quitCommand.cpp ChannelDisconnection.cpp Command.cpp ServerClientDisconnection.cpp dieCommand.cpp \
-			   channelUtils.cpp kickCommand.cpp ServerChannelDisconnection.cpp partCommand.cpp numberToString.cpp topicCommand.cpp\
-			   ServerChannels.cpp ChannelMethods.cpp
+			   quitCommand.cpp ChannelDisconnection.cpp Command.cpp ServerClientDisconnection.cpp dieCommand.cpp topicCommand.cpp\
+			   ChannelMethods.cpp \
+			   channelUtils.cpp kickCommand.cpp ServerChannelDisconnection.cpp partCommand.cpp numberToString.cpp \
+			   privmsgCommand.cpp ServerChannels.cpp\
 			
 SRC_PATH = src/*/
 SRCS = $(addprefix $(SRC_PATH), $(SRC))

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:32 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 17:35:53 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/05 13:55:42 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,22 @@ bool Channel::clientInChannel(std::string nickname)
 
 	while (it != this->_onlineUsers.end())
 	{
-		if ((*it).getNickname() == nickname)
+		if (toUpperCase((*it).getNickname()) == toUpperCase(nickname))
 			return true;
 		it++;
 	}
 	return false;
+}
+
+void Channel::messageOnlineUsers(const std::string sender, const std::string& reply)
+{
+	std::vector<Client>::const_iterator it = this->_onlineUsers.begin();
+	
+	while (it != this->_onlineUsers.end())
+	{
+		std::cout << it->getNickname() << std::endl;
+		if (toUpperCase(it->getNickname()) != toUpperCase(sender))
+			send(it->getSocket(), reply.c_str(), reply.size(), 0);
+		it++;
+	}
 }

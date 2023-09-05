@@ -6,23 +6,23 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 14:17:16 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 02:15:04 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/04 18:22:25 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Server.hpp"
 
-static bool userNotInChannel(Server& server, std::string& nickname, std::string& channelName)
+bool userNotInChannel(Server& server, std::string nickname, std::string& channelName)
 {
-	std::vector<Channel> channels = server.getChannels();
+	std::vector<Channel> channels = server.channels;
 	std::vector<Channel>::iterator it = channels.begin();
 	std::string::size_type found;
 
 	while (it != channels.end())
 	{
-		if ((*it).getName() == channelName)
+		if (toUpperCase((*it).getName()) == toUpperCase(channelName))
 		{
-			found = ((*it).getOnlineUsersList()).find(nickname);
+			found = (toUpperCase((*it).getOnlineUsersList())).find(toUpperCase(nickname));
 			if (found != std::string::npos)
 				return false;
 		}
@@ -32,21 +32,21 @@ static bool userNotInChannel(Server& server, std::string& nickname, std::string&
 	return true;
 }
 
-static std::string getKickReply(Client& client, Command& command)
+static std::string getKickReply(Server& server, Client& client, Command& command)
 {
 	std::string reply;
 	
 	if (command.message.size() == 3
 		|| (command.message.size() == 4 && command.message[3] == ":"))
 		reply = RPL_KICKWITHNOMSG(client.getNickname(), client.getUsername(),
-				command.message[1], command.message[2]);
+				command.message[1], server.getRawNickname(command.message[2]));
 	else
 	{
 		if (command.message[3][0] != ':')
 		{
 			command.message[3] = ":" + command.message[command.message.size() - 1];
 			reply = RPL_KICKWITHMSG(client.getNickname(), client.getUsername(),
-				command.message[1], command.message[2], command.message[3]);
+				command.message[1], server.getRawNickname(command.message[2]), command.message[3]);
 		}
 		else
 		{
@@ -57,7 +57,7 @@ static std::string getKickReply(Client& client, Command& command)
 			remove.push_back(command.message[2]);
 			std::string messageToSend = getMessage(command.raw, remove);
 			reply = RPL_KICKWITHMSG(client.getNickname(), client.getUsername(),
-				command.message[1], command.message[2], messageToSend);
+				command.message[1], server.getRawNickname(command.message[2]), messageToSend);
 		}
 	}
 	return reply;
@@ -70,7 +70,7 @@ static bool handleErrors(Server& server, Client& client, std::string& buffer, Co
 		buffer = ERR_NEEDMOREPARAMS(client.getNickname(), command.cmd);
 		return true;
 	}
-	else if (channelNotFound(server.getChannels(), command.message[1]))
+	else if (channelNotFound(server.channels, command.message[1]))
 	{
 		buffer = ERR_NOSUCHCHANNEL(client.getNickname(), command.message[1]);
 		return true;
@@ -98,6 +98,6 @@ void kickCommand(Command& command)
 	
 	if (handleErrors(server, client, buffer, command))
 		return ;
-	std::string reply = getKickReply(client, command);
+	std::string reply = getKickReply(server, client, command);
 	server.kickFromChannel(command.message[2], command.message[1], reply);
 }

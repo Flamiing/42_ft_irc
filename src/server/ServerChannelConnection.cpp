@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 17:49:11 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/03 17:50:12 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/04 18:21:20 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ void Server::addChannel(std::string channelName)
 {
 	Channel newChannel(channelName);
 	
-	this->_channels.push_back(newChannel);
+	this->channels.push_back(newChannel);
 }
 
 void Server::connectToChannel(std::string& channel, Client& client, std::string key)
 {
-	std::vector<Channel>::iterator it = this->_channels.begin();
+	std::vector<Channel>::iterator it = this->channels.begin();
 
-	while (it != this->_channels.end())
+	while (it != this->channels.end())
 	{
 		if (it->getName() == channel)
 		{

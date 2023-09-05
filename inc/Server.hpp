@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/05 11:52:57 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/05 13:57:11 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 
 # define LOCALHOST "127.0.0.1"
 # define MAX_CLIENTS 10
-# define OPERATOR_NAME "osado"
+# define OPERATOR_NAME "operator"
 # define OPERATOR_PASS "password"
 
 # define SERVER_LISTENING(port) ("[SERVER] Listening on port " + port + "...\n")
@@ -51,8 +51,6 @@ class Server
 		std::string getIP(void) const;
 		std::string getPassword(void) const;
 		std::map<int, Client> getClients(void) const;
-		//std::vector<Channel> getChannels(void) const;
-		std::vector<Channel> getChannels(void);
 		int getSocketByNickname(const std::string nickname) const;
 		std::string getRawNickname(const std::string& modifiedNickname);
 		void addChannel(std::string newChannel);
@@ -65,13 +63,14 @@ class Server
 		bool	isBanned(Client& client, std::string& channel);
 
 		void closeAllSockets(void);
+		bool userInServer(const std::string& nickname);
 
 		void initMapCommand(void);
 		std::map<std::string, customFunctionType> mapCommand;
 
 		size_t pollSize;
 		
-		std::vector<Channel> _channels;
+		std::vector<Channel> channels;
 
 	private:
 		Server(void);

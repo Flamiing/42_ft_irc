@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/05 13:47:18 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/05 13:55:30 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,5 @@ void joinCommand(Command& command)
 	if (server.isBanned(client, command.message[1]))
 		buffer = ERR_BANNEDFROMCHAN(client.getNickname(), command.message[1]);
 	//	buffer = ERR_INVITEONLYCHAN(client.getNickname(), message[1]); lista ccon usuarios invitados. comprobar y meter.
-	joinChannel(server, server.getChannels(), client, command.message);
+	joinChannel(server, server.channels, client, command.message);
 } 

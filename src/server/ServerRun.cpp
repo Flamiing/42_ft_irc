@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 14:03:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 10:52:10 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/04 17:05:54 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void Server::initMapCommand(void)
 	mapCommand[TOPIC] = &topicCommand;
 	mapCommand[KICK] = &kickCommand;
 	mapCommand[PART] = &partCommand;
-	//mapCommand[PRIVMSG] = &privmsgCommand;
+	mapCommand[PRIVMSG] = &privmsgCommand;
 }
 
 void Server::_setupSever(void)
