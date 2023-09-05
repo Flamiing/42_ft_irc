@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:35:00 by guilmira          #+#    #+#             */
-/*   Updated: 2023/09/04 17:53:18 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/04 19:20:05 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ void topicCommand(Command& command)
 	for (int i = 0; i < static_cast<int>(channel.size()); i++)
 	{
 		std::cout << "⭕OUTPUT⭕" << std::endl;
-		std::cout << "" << std::endl;
-		if (channel[i].getName().compare(command.message[1]))
+		std::cout << channel[i].getName() << std::endl;
+		if (!channel[i].getName().compare(command.message[1]))
 		{
 			if (client.checkChannel(channel[i]))
 			{
