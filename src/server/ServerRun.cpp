@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 14:03:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/05 00:53:26 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/05 03:26:51 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void Server::initMapCommand(void)
 	mapCommand[PART] = &partCommand;
 	mapCommand[PRIVMSG] = &privmsgCommand;
 	mapCommand[LIST] = &listCommand;
+	mapCommand[AWAY] = &awayCommand;
 }
 
 void Server::_setupSever(void)

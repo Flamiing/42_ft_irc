@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 18:22:44 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/05 03:39:49 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,12 @@ static void sendMessageToUser(Server& server, Client& client, const std::string&
 	reply = RPL_PRIVMSG(client.getNickname(), client.getUsername(), rawNickname, messageToSend);
 	int recipientSocket = server.getSocketByNickname(rawNickname);
 	send(recipientSocket, reply.c_str(), reply.size(), 0);
+	Client awayClient = server.getClientByNickname(user);
+	if (awayClient.isAway)
+	{
+		reply = RPL_AWAY(client.getNickname(), awayClient.getNickname(), awayClient.awayMessage);
+		send(client.getSocket(), reply.c_str(), reply.size(), 0);
+	}
 }
 
 static void sendMessageToChannel(Server& server, Client& client, std::string& channel, const std::string& messageToSend)

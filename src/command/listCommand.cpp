@@ -6,16 +6,11 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 21:53:27 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/05 00:25:13 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/05 03:05:29 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Server.hpp"
-
-// LIST #prueba
-// :LosAngeles.CA.US.Undernet.Org 321 worbam Channel :Users  Name
-// :LosAngeles.CA.US.Undernet.Org 322 worbam #prueba 2 :hola
-// :LosAngeles.CA.US.Undernet.Org 323 worbam :End of /LIST
 
 void listAllChannels(std::vector<Channel>& channels, Client& client)
 {

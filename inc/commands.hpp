@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:48:53 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 22:21:24 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/05 03:42:16 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,14 @@ class Command;
 # define PONG "PONG"
 # define PART "PART"
 # define LIST "LIST"
+# define AWAY "AWAY"
 # define DIE "DIE"
 
 # define RPL_HELP(client) (":localhost 000 " + client + " :Use the following commands to traverse the chat: \r\n")
 # define RPL_WELCOME(client) (":localhost 001 " + client + " :Welcome to LOS OSADOS IRC Server, " + client + "!\r\n")
+# define RPL_AWAY(client, awayClient, message) (":localhost 301 " + client + " " + awayClient + " :" + message + "\r\n")
+# define RPL_UNAWAY(client) (":localhost 305 " + client + " :You are no longer marked as being away\r\n")
+# define RPL_NOWAWAY(client) (":localhost 306 " + client + " :You have been marked as being away\r\n")
 # define RPL_LISTSTART(client) (":localhost 321 " + client + " Channel :Users  Name\r\n")
 # define RPL_LIST(client, channel, userCount, topic) (":localhost 322 " + client + " " + channel + " " + userCount + " :" + topic + "\r\n")
 # define RPL_LISTEND(client) (":localhost 323 " + client + " :End of /LIST\r\n")
@@ -99,6 +103,7 @@ void kickCommand(Command& command);
 void partCommand(Command& command);
 void topicCommand(Command &command);
 void listCommand(Command &command);
+void awayCommand(Command& command);
 /* _GUILLE el de abajo no funciona? ponemos con hastag el channel si o no */
 
 

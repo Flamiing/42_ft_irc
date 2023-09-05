@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:11 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 18:22:04 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/05 03:21:41 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,24 @@ int Server::getSocketByNickname(const std::string nickname) const
 
 	while (it != this->_clients.end())
 	{
-		if (it->second.getNickname() == nickname)
+		if (toUpperCase(it->second.getNickname()) == toUpperCase(nickname))
 			break ;
 		it++;
 	}
 	return it->second.getSocket();
+}
+
+Client Server::getClientByNickname(const std::string nickname) const
+{
+	std::map<int, Client>::const_iterator it = this->_clients.begin();
+
+	while (it != this->_clients.end())
+	{
+		if (toUpperCase(it->second.getNickname()) == toUpperCase(nickname))
+			break ;
+		it++;
+	}
+	return it->second;
 }
 
 std::string Server::getRawNickname(const std::string& modifiedNickname)

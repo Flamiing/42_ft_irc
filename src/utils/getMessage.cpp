@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   getMessage.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 17:30:53 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 17:10:05 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/05 03:41:25 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ std::string getMessageToSend(Command& command, size_t messagePos)
 	std::vector<std::string> remove;
 	std::string messageToSend;
 	remove.push_back(command.cmd);
-	if (command.cmd != QUIT)
+	if (command.cmd != QUIT && command.cmd != AWAY)
 		remove.push_back(command.message[1]);
 	
 	if (command.message[messagePos][0] != ':')
