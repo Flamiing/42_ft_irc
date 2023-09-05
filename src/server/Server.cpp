@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:11 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/05 03:21:41 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/05 15:56:58 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,19 @@ Client Server::getClientByNickname(const std::string nickname) const
 		it++;
 	}
 	return it->second;
+}
+
+Channel Server::getChannelByName(const std::string channelName) const
+{
+	std::vector<Channel>::const_iterator it = this->channels.begin();
+
+	while (it != this->channels.end())
+	{
+		if (toUpperCase(it->getName()) == toUpperCase(channelName))
+			break ;
+		it++;
+	}
+	return *it;
 }
 
 std::string Server::getRawNickname(const std::string& modifiedNickname)

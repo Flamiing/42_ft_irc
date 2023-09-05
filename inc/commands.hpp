@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:48:53 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/05 03:49:07 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/05 20:26:40 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ class Command;
 # define PART "PART"
 # define LIST "LIST"
 # define AWAY "AWAY"
+# define MODE "MODE"
 # define DIE "DIE"
 
 # define RPL_HELP(client) (":localhost 000 " + client + " :Use the following commands to traverse the chat: \r\n")
@@ -50,6 +51,8 @@ class Command;
 # define RPL_LISTSTART(client) (":localhost 321 " + client + " Channel :Users  Name\r\n")
 # define RPL_LIST(client, channel, userCount, topic) (":localhost 322 " + client + " " + channel + " " + userCount + " :" + topic + "\r\n")
 # define RPL_LISTEND(client) (":localhost 323 " + client + " :End of /LIST\r\n")
+# define RPL_CHANNELMODEIS(client, channel, modes) (":localhost 324 " + client + " " + channel + " " + modes + "\r\n")
+# define RPL_CREATIONTIME(client, channel, creationTime) (":localhost 329 " + client + " " + channel + " " + creationTime + "\r\n")
 # define RPL_NOTOPIC(client, channel) (":localhost 331 " + client + " " + channel + " :No topic is set\r\n")
 # define RPL_TOPIC(client, channel, topic) (":localhost 332 " + client + " " + channel + " :" + topic + "\r\n")
 # define RPL_NAMREPLY(client, symbol, channel, list) (":localhost 353 " + client + " " + symbol + " " + channel + " :" + list + "\r\n")
@@ -104,6 +107,7 @@ void partCommand(Command& command);
 void topicCommand(Command &command);
 void listCommand(Command &command);
 void awayCommand(Command& command);
+void modeCommand(Command& command);
 /* _GUILLE el de abajo no funciona? ponemos con hastag el channel si o no */
 
 

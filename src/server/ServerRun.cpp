@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 14:03:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/05 03:26:51 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/05 20:26:23 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,14 @@ void Server::initMapCommand(void)
 	mapCommand[QUIT] = &quitCommand;
 	mapCommand[NOTICE] = &noticeCommand;
 	mapCommand[OPER] = &operCommand;
-	mapCommand[DIE] = &dieCommand;
-	mapCommand[TOPIC] = &topicCommand;
 	mapCommand[KICK] = &kickCommand;
+	mapCommand[DIE] = &dieCommand;
 	mapCommand[PART] = &partCommand;
 	mapCommand[PRIVMSG] = &privmsgCommand;
 	mapCommand[LIST] = &listCommand;
 	mapCommand[AWAY] = &awayCommand;
+	mapCommand[MODE] = &modeCommand;
+	//mapCommand[TOPIC] = &topicCommand;
 }
 
 void Server::_setupSever(void)
