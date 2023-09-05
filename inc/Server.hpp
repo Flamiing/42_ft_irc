@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/05 03:20:33 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/05 04:05:15 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ class Server
 		void _handleClients(void);
 		void _newClient(int& clientSocket);
 		void _handleClientRequest(size_t& client);
-		void _processMessage(const int& client, std::string message);
+		bool _processMessage(const int& client, std::string message);
 		void _processBuffer(size_t& client, std::string& buffer);
 		void _removeChannelFromClient(std::string clientName, std::string& channelName);
 
