@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 12:19:51 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/05 13:47:18 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void joinChannel(Server& server, std::vector<Channel> channels, Client& c
 		server.addChannel(message[1]);
 	if (message.size() == 2)
 		server.connectToChannel(message[1], client, "");
+	
 	//else if (CHANNEL IS INVITE ONLY MODE)
 	//	server.connectToChannel(message[1], client, message[2]);
 }
@@ -30,11 +31,6 @@ static bool parserJoin(Command& command)
 	if (static_cast<int>(command.message.size()) < 2)
 	{
 		buffer = ERR_NEEDMOREPARAMS(client.getNickname(), command.message[0]);
-		return true;
-	}
-	if (static_cast<int>(command.message.size()) > 3)
-	{
-		buffer = displayMsg("666", "too many parameters", client.getNickname());
 		return true;
 	}
 	return false;

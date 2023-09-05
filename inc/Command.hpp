@@ -17,6 +17,16 @@
 #include "Client.hpp"
 #include "commands.hpp"
 
+/* _GUILLE get channel name _NAME command */
+
+/* 	std::vector<Client>::const_iterator it = this->_onlineUsers.begin();
+	
+	while (it != this->_onlineUsers.end())
+	{
+		send(it->getSocket(), reply.c_str(), reply.size(), 0);
+		it++;
+	} */
+
 /* CLASS DECLARATION. */
 class Command
 {
