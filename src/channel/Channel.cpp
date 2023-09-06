@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Channel.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:32 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/05 21:16:35 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/06 11:01:22 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 Channel::Channel(void) {}
 
-Channel::Channel(std::string& name) : _name(name), _key(""), _topic("")
+Channel::Channel(std::string& name, std::string& key)
+	: _name(name), _userCount(0), _key(key), _topic("")
 {
 	this->creationTime = getCurrentTime();
 	this->modes[MODE_CHANNEL_OPERATOR] = false;

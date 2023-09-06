@@ -17,6 +17,8 @@
 #include "Client.hpp"
 #include "commands.hpp"
 
+/* _GUILLE _NAME command */
+
 /* CLASS DECLARATION. */
 class Command
 {

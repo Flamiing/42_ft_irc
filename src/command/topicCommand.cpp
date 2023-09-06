@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   topicCommand.cpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:35:00 by guilmira          #+#    #+#             */
-/*   Updated: 2023/09/04 18:21:20 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/05 13:55:48 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void static changeTopic(Client& client, std::vector<std::string> message, Channe
 	}
 	else
 		buffer = ERR_CHANOPRIVSNEEDED(client.getNickname(), channel.getName());
-		
 }
 
 static void viewTopic(Client& client, Channel& channel, std::string& buffer)
@@ -65,8 +64,15 @@ void topicCommand(Command& command)
 		return ;
 	for (int i = 0; i < static_cast<int>(channel.size()); i++)
 	{
-		if (channel[i].getName().compare(command.message[1]))
+		std::cout << "⭕OUTPUT⭕" << std::endl;
+		std::cout << channel[i].getName() << std::endl;
+		if (!channel[i].getName().compare(command.message[1]))
 		{
+			if (client.checkChannel(channel[i]))
+			{
+				buffer = ERR_NOTONCHANNEL(client.getNickname(), command.message[0]);
+				return ;
+			}
 			if (command.message.size() == 2)
 				viewTopic(client, channel[i], buffer);
 			else

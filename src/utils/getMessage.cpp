@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   getMessage.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 17:30:53 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/05 03:41:25 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/06 11:01:29 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,5 @@ std::string getMessage(const std::string& raw, const std::vector<std::string>& r
 /* _GUILLE - para mensajes generales */
 std::string displayMsg(std::string number, std::string str, std::string clientNick)
 {
-	return (std::string(":localhost " + number + " " + clientNick + str + "\r\n") );
+	return (std::string(":localhost " + number + " " + clientNick + " " + str + "\r\n") );
 }

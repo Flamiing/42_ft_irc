@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/05 22:43:48 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/06 10:53:14 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ class Server
 		Client getClientByNickname(const std::string nickname) const;
 		Channel getChannelByName(const std::string nickname) const;
 		std::string getRawNickname(const std::string& modifiedNickname);
-		void addChannel(std::string newChannel);
-		void connectToChannel(std::string& channel, Client& client, std::string key);
+		void addChannel(std::string channelName, std::string keyName);
+		void connectToChannel(std::string& channel, Client& client, std::string& key, std::string& buffer);
 		void disconnect(size_t& client);
 		void disconnectClientFromChannels(std::string client, std::string& reply);
 		void kickFromChannel(std::string& clientName, std::string& channelName, std::string& reply);
@@ -74,7 +74,7 @@ class Server
 		std::map<std::string, customFunctionType> mapCommand;
 
 		size_t pollSize;
-/* _GUILLE puesto en publico por errores de compilacion */
+		
 		std::vector<Channel> channels;
 
 	private:
@@ -90,8 +90,6 @@ class Server
 		bool _processMessage(const int& client, std::string message);
 		void _processBuffer(size_t& client, std::string& buffer);
 		void _removeChannelFromClient(std::string clientName, std::string& channelName);
-
-		
 
 		int _port;
 		std::string _password;

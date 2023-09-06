@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ServerChannels.cpp                                 :+:      :+:    :+:   */
+/*   ChannelMethods.cpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/25 15:13:49 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/05 13:55:51 by guilmira         ###   ########.fr       */
+/*   Created: 2023/09/04 17:33:47 by guilmira          #+#    #+#             */
+/*   Updated: 2023/09/04 17:41:11 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/Server.hpp"
+#include "../../inc/Channel.hpp"
 
-bool Server::isBanned(Client& client, std::string& channel)
+bool Client::checkChannel(Channel& channel)
 {
-	std::vector<Channel>::iterator it = this->channels.begin();
-	std::string nickname(client.getNickname());
-
-	while (it != this->channels.end())
+	std::vector<Channel>::iterator it;
+	
+	std::string str;
+	for (this->_joinedChannels.begin(); it != _joinedChannels.end(); it++)
 	{
-		if (it->getName() == channel)
-			if (it->userIsBanned(nickname))
-				return true;
-		it++;
+		str = it->getName();
+		if (str.compare(channel.getName()))
+			return true;
 	}
 	return false;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Channel.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/05 20:17:55 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/06 10:55:52 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ class Channel
 {
 	public:
 		Channel(void);
-		Channel(std::string& name);
+		Channel(std::string& name, std::string& key);
 		Channel(const Channel& other);
 		~Channel(void);
 
@@ -48,13 +48,13 @@ class Channel
 		size_t getLimit(void) const;
 		std::string getOnlineUsersList(void) const;
 		std::vector<Client> getBannedUsers(void) const;
-		void joinChannel(Client& client, std::string& key);
+		void joinChannel(Client& client, std::string& key, std::string& buffer);
 		bool userIsBanned(std::string& nickname);
 
-		void setTopic(std::string new_topic)
-		{
-			this->_topic = new_topic;
-		}
+		std::string		getMode() const;
+		
+
+		void setTopic(std::string new_topic);
 
 		bool clientInChannel(std::string nickname);
 		void disconnectFromChannel(std::string client, const std::string& reply);
@@ -68,6 +68,7 @@ class Channel
 		void _replyToNewUser(Client& client);
 		
 		std::string _name;
+		size_t		_userCount;
 		std::string _key;
 		std::string _topic;
 		size_t _limit;

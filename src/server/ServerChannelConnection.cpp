@@ -3,23 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ServerChannelConnection.cpp                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 17:49:11 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/05 00:05:20 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/06 10:59:15 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Server.hpp"
 
-void Server::addChannel(std::string channelName)
+void Server::addChannel(std::string channelName, std::string keyName)
 {
-	Channel newChannel(channelName);
-	
-	this->channels.push_back(newChannel);
+	this->channels.push_back(Channel(channelName, keyName));
 }
 
-void Server::connectToChannel(std::string& channel, Client& client, std::string key)
+void Server::connectToChannel(std::string& channel, Client& client, std::string& key, std::string& buffer)
 {
 	std::vector<Channel>::iterator it = this->channels.begin();
 
@@ -27,9 +25,12 @@ void Server::connectToChannel(std::string& channel, Client& client, std::string 
 	{
 		if (toUpperCase(it->getName()) == toUpperCase(channel))
 		{
-			it->joinChannel(client, key);
+			it->joinChannel(client, key, buffer);
 			return ;
 		}
 		it++;
 	}
+
+	
+
 }
