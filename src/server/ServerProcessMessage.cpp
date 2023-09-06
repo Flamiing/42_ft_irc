@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ServerProcessMessage.cpp                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:09:58 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 17:05:50 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/05 04:05:05 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Server.hpp"
 
-void Server::_processMessage(const int& client, std::string message)
+bool Server::_processMessage(const int& client, std::string message)
 {
 	std::string buffer;
 	int keyToFind = client;
@@ -32,4 +32,7 @@ void Server::_processMessage(const int& client, std::string message)
 	if (found != this->_clients.end())
 		send(this->_clients[client].getSocket(), buffer.c_str(), buffer.size(), 0);
 	buffer = "";
+	if (command.cmd == QUIT)
+		return false;
+	return true;
 }

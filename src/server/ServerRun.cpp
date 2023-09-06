@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ServerRun.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 14:03:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 17:05:54 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/05 20:26:23 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,14 @@ void Server::initMapCommand(void)
 	mapCommand[QUIT] = &quitCommand;
 	mapCommand[NOTICE] = &noticeCommand;
 	mapCommand[OPER] = &operCommand;
-	mapCommand[DIE] = &dieCommand;
-	mapCommand[TOPIC] = &topicCommand;
 	mapCommand[KICK] = &kickCommand;
+	mapCommand[DIE] = &dieCommand;
 	mapCommand[PART] = &partCommand;
 	mapCommand[PRIVMSG] = &privmsgCommand;
+	mapCommand[LIST] = &listCommand;
+	mapCommand[AWAY] = &awayCommand;
+	mapCommand[MODE] = &modeCommand;
+	//mapCommand[TOPIC] = &topicCommand;
 }
 
 void Server::_setupSever(void)
@@ -82,7 +85,7 @@ void Server::runServer(void)
 		printError(ERROR_LISTEN, W_ERRNO);
 		exit(1);
 	}
-	std::cout << SERVER_LISTENING(numberToString(this->getPort()));
+	std::cout << SERVER << BOLD_GREEN << SERVER_LISTENING(numberToString(this->getPort())) << RESET;
 	_handleClientConnections();
 	close(this->_socket);
 }

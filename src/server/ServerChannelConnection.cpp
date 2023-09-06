@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 17:49:11 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 18:21:20 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/05 00:05:20 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void Server::connectToChannel(std::string& channel, Client& client, std::string 
 
 	while (it != this->channels.end())
 	{
-		if (it->getName() == channel)
+		if (toUpperCase(it->getName()) == toUpperCase(channel))
 		{
 			it->joinChannel(client, key);
 			return ;

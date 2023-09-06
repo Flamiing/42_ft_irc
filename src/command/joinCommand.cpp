@@ -6,13 +6,13 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 18:22:12 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/04 23:52:06 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Server.hpp"
 
-static void joinChannel(Server& server, std::vector<Channel> channels, Client& client, std::vector<std::string>& message)
+static void joinChannel(Server& server, std::vector<Channel>& channels, Client& client, std::vector<std::string>& message)
 {
 	if (channels.size() == 0 || channelNotFound(channels, message[1]))
 		server.addChannel(message[1]);

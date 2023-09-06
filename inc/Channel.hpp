@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Channel.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 17:06:50 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/05 20:17:55 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,18 @@
 # include <sys/socket.h>
 # include "Client.hpp"
 # include "commands.hpp"
+
+# define MODE_CHANNEL_OPERATOR 'o'
+# define MODE_CHANNEL_PRIVATE 'p'
+# define MODE_CHANNEL_SECRET 's'
+# define MODE_CHANNEL_INVITE_ONLY 'i'
+# define MODE_CHANNEL_TOPIC_OPER_ONLY 't'
+# define MODE_CHANNEL_NO_MSG_FROM_OUTSIDE 'n'
+# define MODE_CHANNEL_MODERATED 'm'
+# define MODE_CHANNEL_USER_LIMIT 'l'
+# define MODE_CHANNEL_BANNED 'b'
+# define MODE_CHANNEL_SPEAK_ABILITY 'v'
+# define MODE_CHANNEL_KEY 'k'
 
 class Channel
 {
@@ -33,15 +45,11 @@ class Channel
 		size_t getUserCount(void) const;
 		std::string getTopic(void) const;
 		std::string getKey(void) const;
+		size_t getLimit(void) const;
 		std::string getOnlineUsersList(void) const;
 		std::vector<Client> getBannedUsers(void) const;
 		void joinChannel(Client& client, std::string& key);
 		bool userIsBanned(std::string& nickname);
-
-		std::string		getMode() const
-		{
-			return (this->_mode);
-		}
 
 		void setTopic(std::string new_topic)
 		{
@@ -52,16 +60,18 @@ class Channel
 		void disconnectFromChannel(std::string client, const std::string& reply);
 		void removeFromChannel(std::string client, const std::string& reply);
 		void messageOnlineUsers(const std::string sender, const std::string& reply);
+		
+		std::map<char, bool> modes;
+		std::string creationTime;
 	private:
 		void _informOnlineUsers(const std::string& reply);
 		void _replyToNewUser(Client& client);
 		
 		std::string _name;
-		size_t _userCount;
 		std::string _key;
 		std::string _topic;
+		size_t _limit;
 
-		std::string _mode;
 
 		std::vector<Client> _onlineUsers;
 		std::vector<Client> _bannedUsers;

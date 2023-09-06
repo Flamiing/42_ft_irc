@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 18:21:53 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/05 22:43:48 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <sys/types.h>
 # include <netinet/in.h>
 # include <cstdlib>
+# include <ctime>
 # include <unistd.h>
 # include <arpa/inet.h>
 # include <poll.h>
@@ -28,17 +29,19 @@
 # include "errors.hpp"
 # include "generalUtils.hpp"
 # include "commands.hpp"
+# include "colors.hpp"
 
 # define LOCALHOST "127.0.0.1"
 # define MAX_CLIENTS 10
 # define OPERATOR_NAME "operator"
 # define OPERATOR_PASS "password"
 
-# define SERVER_LISTENING(port) ("[SERVER] Listening on port " + port + "...\n")
-# define CLIENT_CONNECTION(socket) ("[SERVER] Client connected at socket #" + socket + "\n")
-# define CLIENT_DISCONNECTED(socket) ("[SERVER] Client at socket #" + socket + " disconnected.\n")
-# define CHANNEL_DELETED(channel) ("[SERVER] " + channel + " has been deleted.\n")
-# define CLIENT_MESSAGE_RECIVED(socket, message) ("[SERVER] Client at socket #" + socket + ": " + message + "\n")
+# define SERVER "\033[1;37m[SERVER]\033[0m"
+# define SERVER_LISTENING(port) (" Listening on port " + port + "...\n")
+# define CLIENT_CONNECTION(socket) (" Client connected at socket #" + socket + "\n")
+# define CLIENT_DISCONNECTED(socket) (" Client at socket #" + socket + " disconnected.\n")
+# define CHANNEL_DELETED(channel) (" " + channel + " has been deleted.\r\n")
+# define CLIENT_MESSAGE_RECIVED(socket, message) (" Client at socket #" + socket + ": " + message + "\n")
 
 class Server
 {
@@ -52,6 +55,8 @@ class Server
 		std::string getPassword(void) const;
 		std::map<int, Client> getClients(void) const;
 		int getSocketByNickname(const std::string nickname) const;
+		Client getClientByNickname(const std::string nickname) const;
+		Channel getChannelByName(const std::string nickname) const;
 		std::string getRawNickname(const std::string& modifiedNickname);
 		void addChannel(std::string newChannel);
 		void connectToChannel(std::string& channel, Client& client, std::string key);
@@ -82,7 +87,7 @@ class Server
 		void _handleClients(void);
 		void _newClient(int& clientSocket);
 		void _handleClientRequest(size_t& client);
-		void _processMessage(const int& client, std::string message);
+		bool _processMessage(const int& client, std::string message);
 		void _processBuffer(size_t& client, std::string& buffer);
 		void _removeChannelFromClient(std::string clientName, std::string& channelName);
 

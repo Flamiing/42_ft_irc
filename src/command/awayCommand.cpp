@@ -1,23 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ServerClientDisconnection.cpp                      :+:      :+:    :+:   */
+/*   awayCommand.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/31 20:02:51 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/05 00:54:44 by alaaouam         ###   ########.fr       */
+/*   Created: 2023/09/05 02:52:41 by alaaouam          #+#    #+#             */
+/*   Updated: 2023/09/05 03:39:43 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Server.hpp"
 
-void Server::disconnect(size_t& client)
+void awayCommand(Command& command)
 {
-	std::cout << SERVER << BOLD_YELLOW << CLIENT_DISCONNECTED(numberToString(this->_pollFds[client].fd)) << RESET;
-	this->_clients[_pollFds[client].fd].buffer = "";
-	this->_clients.erase(this->_pollFds[client].fd);
-	close(this->_pollFds[client].fd);
-	this->_pollFds.erase(this->_pollFds.begin() + client);
-	client--;
+	Client&						client = *command.client;
+	std::string&				buffer = *command.buffer;
+	
+	if (command.message.size() == 1)
+	{
+		buffer = RPL_UNAWAY(client.getNickname());
+		client.awayMessage = "";
+		client.isAway = false;
+	}
+	else
+	{
+		if (!client.isAway)
+		{
+			client.awayMessage = getMessageToSend(command, 1);
+			client.isAway = true;
+		}
+		buffer = RPL_NOWAWAY(client.getNickname());
+	}
 }

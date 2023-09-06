@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:18:42 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 15:10:55 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/05 00:23:34 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,5 @@ void Channel::joinChannel(Client& client, std::string& key)
 		client.addToJoinedChannels(*this);
 	}
 	(void)key;
-	this->_userCount++;
 	//if (!channelKey.empty() && channelKey == key)
 }

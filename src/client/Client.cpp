@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 00:59:16 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 16:14:29 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/05 03:39:24 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 Client::Client(void) {}
 
 Client::Client(int socket) :
-		buffer(), _socket(socket) , _passAuth(false),
+		buffer(""), awayMessage(""), isAway(false), _socket(socket) , _passAuth(false),
 		_userAuth(false), _nickAuth(false), _auth(false), _isOperator(false) {}
 
 Client::Client(const Client& other)
@@ -29,7 +29,11 @@ Client& Client::operator=(const Client& other)
 { 
 	if (this != &other)
 	{
+		this->buffer = other.buffer;
+		this->awayMessage = other.awayMessage;
+		this->isAway = other.isAway;
 		this->_nickname = other._nickname;
+		this->_wrongNickname = other._wrongNickname;
 		this->_username = other._username;
 		this->_fullName = other._fullName;
 		this->_socket = other._socket;
