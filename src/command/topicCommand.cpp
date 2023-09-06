@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:35:00 by guilmira          #+#    #+#             */
-/*   Updated: 2023/09/06 11:12:15 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/06 11:16:40 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 void static changeTopic(Client& client, std::vector<std::string> message, Channel& channel, std::string& buffer)
 {
-	std::string const mode	= channel.getMode();
+	/* std::string const mode	= channel.getMode(); */
 
-	if (!mode.compare("+t"))
+	/* if (!mode.compare("+t")) */
+	if (1)
 	{
 		(void)message;
 		/* channel.setTopic(message[2]); */
