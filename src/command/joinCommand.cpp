@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/06 11:10:49 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/06 11:29:21 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,11 @@ void joinCommand(Command& command)
 			joinChannel(command, channelNames[i], keyNames[i], buffer);
 	}
 
-	std::cout << "HERE" << std::endl;
+	/* std::cout << "HERE" << std::endl;
 	for (size_t i = 0; i < command.server->channels.size(); i++)
 	{
 		std::cout << "name:" << command.server->channels[i].getName() << std::endl;
 		std::cout << "key:" << command.server->channels[i].getKey() << std::endl;
-	}
+	} */
 	//	buffer = ERR_INVITEONLYCHAN(client.getNickname(), message[1]); lista ccon usuarios invitados. comprobar y meter.
 } 
