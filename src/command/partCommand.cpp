@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 22:55:48 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/06 10:57:49 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/06 11:04:44 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void partCommand(Command& command)
 	Server&						server = *command.server;
 	Client&						client = *command.client;
 	std::string&				buffer = *command.buffer;
-	std::vector<std::string> channels = getChannels(command.raw, PART);
+	std::vector<std::string> channels = getChannelNames(command.raw, PART);
 
 	if (command.message.size() < 2)
 	{

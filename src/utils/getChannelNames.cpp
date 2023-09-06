@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   getChannelNames.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 22:40:36 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 22:46:33 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/06 11:03:59 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ static std::string removeFromSpace(const std::string& str)
 	return newString;
 }
 
-std::vector<std::string> getChannelNames(std::string& raw)
+std::vector<std::string> getChannelNames(std::string& raw, std::string commandName)
 {
 	std::vector<std::string> remove;
-	remove.push_back(PART);
+	remove.push_back(commandName);
 	std::string commaSeparated = getMessage(raw, remove);
 	commaSeparated = trimSpaces(commaSeparated);
 	std::vector<std::string> channels = splitString(commaSeparated, ',');

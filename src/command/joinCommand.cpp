@@ -6,12 +6,11 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/06 10:58:25 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/06 11:10:49 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Server.hpp"
-std::vector<std::string> getChannels(std::string& raw, std::string commandName);
 
 
 static void joinChannel(Command& command, std::string& channelName, std::string& keyName, std::string& buffer)
@@ -45,7 +44,7 @@ static bool parserJoin(Command& command)
 
 void	lexerJoin(std::vector<std::string>& channelNames, std::vector<std::string>& keyNames, std::string raw)
 {
-	channelNames = getChannels(raw, JOIN);
+	channelNames = getChannelNames(raw, JOIN);
 	std::string lastElement = channelNames.back();
 	std::string sub;
 	size_t	lastPos = channelNames.size();
@@ -54,7 +53,7 @@ void	lexerJoin(std::vector<std::string>& channelNames, std::vector<std::string>&
     if (pos != std::string::npos && raw.size() > pos + 1)
 	{
         sub = raw.substr(pos + 1);
-		keyNames = getChannels(sub, lastElement);
+		keyNames = getChannelNames(sub, lastElement);
     }
 	if (lastPos > keyNames.size())
 		for (size_t i = 0; i < lastPos-keyNames.size(); i++)

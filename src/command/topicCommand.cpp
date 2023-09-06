@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:35:00 by guilmira          #+#    #+#             */
-/*   Updated: 2023/09/05 13:55:48 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/06 11:12:15 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void static changeTopic(Client& client, std::vector<std::string> message, Channe
 
 	if (!mode.compare("+t"))
 	{
-		channel.setTopic(message[2]);
+		(void)message;
+		/* channel.setTopic(message[2]); */
 		return ;
 		/* _GUILLE poner mensaje de que se ha modificado antes de? */
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   listCommand.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 21:53:27 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/05 03:05:29 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/06 11:06:07 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void listCommand(Command& command)
 		listAllChannels(server.channels, client);
 	else
 	{
-		channelsToFind = getChannelNames(command.message[1]);
+		channelsToFind = getChannelNames(command.message[1], LIST);
 		listSpecifiedChannels(server.channels, channelsToFind, client);
 	}
 }
