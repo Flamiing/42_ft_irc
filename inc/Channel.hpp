@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/05 13:55:39 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/06 10:22:01 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ class Channel
 {
 	public:
 		Channel(void);
-		Channel(std::string& name);
+		Channel(std::string& name, std::string& key);
 		Channel(const Channel& other);
 		~Channel(void);
 
@@ -35,7 +35,7 @@ class Channel
 		std::string getKey(void) const;
 		std::string getOnlineUsersList(void) const;
 		std::vector<Client> getBannedUsers(void) const;
-		void joinChannel(Client& client, std::string& key);
+		void joinChannel(Client& client, std::string& key, std::string& buffer);
 		bool userIsBanned(std::string& nickname);
 
 		std::string		getMode() const;

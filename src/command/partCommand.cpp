@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   partCommand.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 22:55:48 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 18:22:34 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/06 07:29:01 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,11 @@ static std::string removeFromSpace(const std::string& str)
 	return newString;
 }
 
-static std::vector<std::string> getChannels(std::string& raw)
+/* _GUILLE cambio parametro de la funcion para reutilizarla */
+std::vector<std::string> getChannels(std::string& raw, std::string commandName)
 {
 	std::vector<std::string> remove;
-	remove.push_back(PART);
+	remove.push_back(commandName);
 	std::string commaSeparated = getMessage(raw, remove);
 	commaSeparated = trimSpaces(commaSeparated);
 	std::vector<std::string> channels = splitString(commaSeparated, ',');
@@ -85,7 +86,7 @@ void partCommand(Command& command)
 	Server&						server = *command.server;
 	Client&						client = *command.client;
 	std::string&				buffer = *command.buffer;
-	std::vector<std::string> channels = getChannels(command.raw);
+	std::vector<std::string> channels = getChannels(command.raw, PART);
 
 	if (command.message.size() < 2)
 	{

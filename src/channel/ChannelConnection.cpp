@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ChannelConnection.cpp                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:18:42 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 15:10:55 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/06 10:45:24 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,26 @@ void Channel::_informOnlineUsers(const std::string& reply)
 	}
 }
 
-void Channel::joinChannel(Client& client, std::string& key)
+void Channel::joinChannel(Client& client, std::string& keyName, std::string& buffer)
 {
-	std::string channelKey = this->getKey();
 	std::string reply = RPL_USERJOINEDCHANNEL(client.getNickname(),
 		client.getUsername(), this->getName());
 	
-	if (channelKey.empty())
+	if (this->getKey().empty())
 	{
 		this->_onlineUsers.push_back(client);
 		_informOnlineUsers(reply);
 		_replyToNewUser(client);
 		client.addToJoinedChannels(*this);
 	}
-	(void)key;
+	else if (!keyName.compare(this->getKey()))
+	{
+		this->_onlineUsers.push_back(client);
+		_informOnlineUsers(reply);
+		_replyToNewUser(client);
+		client.addToJoinedChannels(*this);
+	}
+	else
+		buffer = ERR_BADCHANNELKEY(client.getNickname(), this->getName());
 	this->_userCount++;
-	//if (!channelKey.empty() && channelKey == key)
 }

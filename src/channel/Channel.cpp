@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:32 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/05 13:55:42 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/06 10:09:20 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 
 Channel::Channel(void) {}
 
-Channel::Channel(std::string& name) : _name(name), _userCount(0), _key(""), _topic("") {}
+Channel::Channel(std::string& name, std::string& key)
+	: _name(name), _userCount(0), _key(key), _topic("")
+{
+	return ;
+}
 
 Channel::Channel(const Channel& other)
 {
@@ -29,6 +33,7 @@ Channel& Channel::operator=(const Channel& other)
 	{
 		this->_name = other._name;
 		this->_topic = other._topic;
+		this->_key = other._key;
 		size_t pos = 0;
 		while (pos < other._onlineUsers.size())
 		{

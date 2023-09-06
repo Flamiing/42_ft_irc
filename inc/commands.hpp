@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:48:53 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/05 13:55:34 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/06 10:23:55 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,14 +89,13 @@ void operCommand(Command& command);
 void dieCommand(Command& command);
 void kickCommand(Command& command);
 void partCommand(Command& command);
-/* void privmsgCommand(Command &command); */
+
 void topicCommand(Command &command);
 # define RPL_TOPIC(client, channel, topic) (":localhost 332 " + client + " " + channel + " :" + topic + "\r\n")
 # define RPL_NOTOPIC(client, channel) (":localhost 331 " + client + " " + channel + " :No topic is set\r\n")
 # define ERR_CHANOPRIVSNEEDED(client, channel) (":localhost 482 " + client + " " + channel + " :You're not channel operator\r\n")
 # define ERR_NOTONCHANNEL(client, channel) (":localhost 442 " + client + " " + channel + " :You're not on that channel\r\n")
-/* # define ERR_NOTONCHANNEL(client, channel) (":localhost 442 " + client + " #" + channel " :You're not on that channel\r\n") */
-/* _GUILLE el de abajo no funciona? ponemos con hastag el channel si o no */
+# define ERR_BADCHANNELKEY(client, channel) (":localhost 475 " + client + " " + channel + " :Cannot join channel (+k)\r\n")
 
 
 std::string displayMsg(std::string number, std::string str, std::string clientNick);
