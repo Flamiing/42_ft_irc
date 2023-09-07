@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/07 12:44:20 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/07 12:52:53 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static void joinChannel(Command& command, std::string& channelName, std::string&
 
 }
 
-/* _GUILLE faltaria parseo de asegurar que cada canal tiene su key */
 static bool parserJoin(Command& command)
 {
 	Client&						client = *command.client;
@@ -58,28 +57,6 @@ std::vector<std::string>::iterator it = channelNames.begin();
 		it1++;
 	}
 }
-
-void	completeKeyNames(size_t lastPos, size_t vectorSize, std::vector<std::string>& keyNames)
-{
-
-	size_t iMax = lastPos - vectorSize;
-	for (size_t i = 0; i < iMax; i++)
-	{
-		keyNames.push_back("");
-		std::cout << i << std::endl;
-	}
-
-}
-
-/*
-
-a, b,c
-a, #b,c
-a,#b,c
-
-a,x   b, c,  
-
- */
 
 /* 	
 	Rule 0 - Erase the command
@@ -121,14 +98,8 @@ void	getVectors(std::vector<std::string>& channelNames, std::vector<std::string>
 		if (std::isspace(processed[count]))
 			break;
 	channels = processed.substr(0, count);
-	std::cout << "⭕OUTPUT⭕" << std::endl;
-	std::cout << channels << std::endl;
-
-	keys = processed.substr(count);
-
+	keys = processed.substr(count + 1);
 	channelNames = splitString(channels, ',');
-	std::cout << "⭕OUTPUT⭕" << std::endl;
-	std::cout << channelNames[0] << std::endl;
 	keyNames = splitString(keys, ',');
 }
 
@@ -138,20 +109,14 @@ void	lexerJoin(std::vector<std::string>& channelNames, std::vector<std::string>&
 	std::string processed;
 
 	processed = processRaw(raw);
-	std::cout << "⭕OUTPUT⭕" << " " << processed << std::endl;
 	getVectors(channelNames, keyNames, processed);
-	
-
+	size_t size = channelNames.size();
+	size_t sizeKey = keyNames.size();
+	for (size_t i = 0; i < size - sizeKey; i++)
+		keyNames.push_back("");
 	pstr(channelNames,keyNames);
-	
 }
 
-
-/* _hacer lexer, no gestionar si hay espaccios de por medio entre las comas
-a,b ,c  
-tambien tiene que tener # o & */
-
-/* _GUILLE ¿esta poniendo un hastag por defecto el cliente en mi nombre de canal? ¿O somos nosotros? */
 void joinCommand(Command& command)
 {
 	std::string&				buffer = *command.buffer;	
