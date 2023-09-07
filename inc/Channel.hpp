@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/06 11:15:59 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/07 17:43:16 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ class Channel
 		std::string _key;
 		std::string _topic;
 		size_t _limit;
-
 
 		std::vector<Client> _onlineUsers;
 		std::vector<Client> _bannedUsers;

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/07 17:41:32 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/07 18:06:09 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ bool isInvitieOnly(Server& server, std::string& channelName)
 	{
 		if (toUpperCase(it->getName()) == toUpperCase(channelName))
 		{
-			  it->modes[MODE_CHANNEL_KEY] = true;
-			  return (true);
+			if (it->modes[MODE_CHANNEL_KEY] == true)
+			  	return (true);
 		}
 		it++;
 	}
@@ -37,7 +37,6 @@ static void joinChannel(Command& command, std::string& channelName, std::string&
 
 	if (channels.size() == 0 || channelNotFound(channels, channelName))
 		server.addChannel(channelName, keyName);
-	
 	if (isInvitieOnly(server, channelName))
 		buffer = ERR_INVITEONLYCHAN(client.getNickname(), channelName);
 	else
@@ -115,7 +114,7 @@ void	getVectors(std::vector<std::string>& channelNames, std::vector<std::string>
 			break;
 	channels = processed.substr(0, count);
 	channelNames = splitString(channels, ',');
-	if (count != channels.size())
+	if (count != processed.size())
 	{
 		keys = processed.substr(count + 1);
 		keyNames = splitString(keys, ',');
@@ -133,10 +132,9 @@ void	lexerJoin(std::vector<std::string>& channelNames, std::vector<std::string>&
 	getVectors(channelNames, keyNames, processed);
 	size_t size = channelNames.size();
 	size_t sizeKey = keyNames.size();
-
 	for (size_t i = 0; i < size - sizeKey; i++)
 		keyNames.push_back("");
-	pstr(channelNames,keyNames);
+	pstr(channelNames,keyNames); /* _GUILLE PRINTER */
 }
 
 void joinCommand(Command& command)
