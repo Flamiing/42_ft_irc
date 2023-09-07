@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/07 17:19:21 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/07 17:41:32 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ bool isInvitieOnly(Server& server, std::string& channelName)
 {
 	std::vector<Channel>&	channels = server.channels;
 	std::vector<Channel>::iterator it = channels.begin();
+
 	while (it != channels.end())
 	{
 		if (toUpperCase(it->getName()) == toUpperCase(channelName))
@@ -113,9 +114,14 @@ void	getVectors(std::vector<std::string>& channelNames, std::vector<std::string>
 		if (std::isspace(processed[count]))
 			break;
 	channels = processed.substr(0, count);
-	keys = processed.substr(count + 1);
 	channelNames = splitString(channels, ',');
-	keyNames = splitString(keys, ',');
+	if (count != channels.size())
+	{
+		keys = processed.substr(count + 1);
+		keyNames = splitString(keys, ',');
+	}
+	else
+		keys = "";
 }
 
 
@@ -127,6 +133,7 @@ void	lexerJoin(std::vector<std::string>& channelNames, std::vector<std::string>&
 	getVectors(channelNames, keyNames, processed);
 	size_t size = channelNames.size();
 	size_t sizeKey = keyNames.size();
+
 	for (size_t i = 0; i < size - sizeKey; i++)
 		keyNames.push_back("");
 	pstr(channelNames,keyNames);
@@ -143,6 +150,7 @@ void joinCommand(Command& command)
 	lexerJoin(channelNames, keyNames, command.raw);
 	for (size_t i = 0; i != channelNames.size(); i++)
 	{
+
 		if (command.server->isBanned(*command.client, channelNames[i]))
 			buffer = ERR_BANNEDFROMCHAN(command.client->getNickname(), channelNames[i]);
 		else
