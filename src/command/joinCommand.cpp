@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/07 18:13:42 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/07 18:23:29 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ std::string processRaw(std::string raw)
 	raw.erase(0, raw.find(JOIN) + 4);	
 	size_t	pos = raw.find_first_not_of(" ");
 	raw.erase(0, pos);
+	if (raw[0] != '#')
+		raw = "#" + raw; /* _GUILLE PROBAR VACIO */
 	for (size_t i = count; i < raw.size(); i++)
 	{
 		if (raw[i] == ',')
