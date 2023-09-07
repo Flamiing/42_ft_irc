@@ -6,12 +6,27 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/07 12:52:53 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/07 17:19:21 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Server.hpp"
 
+bool isInvitieOnly(Server& server, std::string& channelName)
+{
+	std::vector<Channel>&	channels = server.channels;
+	std::vector<Channel>::iterator it = channels.begin();
+	while (it != channels.end())
+	{
+		if (toUpperCase(it->getName()) == toUpperCase(channelName))
+		{
+			  it->modes[MODE_CHANNEL_KEY] = true;
+			  return (true);
+		}
+		it++;
+	}
+	return false;
+}
 
 static void joinChannel(Command& command, std::string& channelName, std::string& keyName, std::string& buffer)
 {
@@ -21,11 +36,11 @@ static void joinChannel(Command& command, std::string& channelName, std::string&
 
 	if (channels.size() == 0 || channelNotFound(channels, channelName))
 		server.addChannel(channelName, keyName);
-	server.connectToChannel(channelName, client, keyName, buffer);
-
-	//else if (CHANNEL IS INVITE ONLY MODE)
-	//	server.connectToChannel(message[1], client, message[2]);
-
+	
+	if (isInvitieOnly(server, channelName))
+		buffer = ERR_INVITEONLYCHAN(client.getNickname(), channelName);
+	else
+		server.connectToChannel(channelName, client, keyName, buffer);
 }
 
 static bool parserJoin(Command& command)
@@ -133,12 +148,4 @@ void joinCommand(Command& command)
 		else
 			joinChannel(command, channelNames[i], keyNames[i], buffer);
 	}
-
-	/* std::cout << "HERE" << std::endl;
-	for (size_t i = 0; i < command.server->channels.size(); i++)
-	{
-		std::cout << "name:" << command.server->channels[i].getName() << std::endl;
-		std::cout << "key:" << command.server->channels[i].getKey() << std::endl;
-	} */
-	//	buffer = ERR_INVITEONLYCHAN(client.getNickname(), message[1]); lista ccon usuarios invitados. comprobar y meter.
 }

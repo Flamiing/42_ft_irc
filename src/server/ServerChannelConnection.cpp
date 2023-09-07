@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 17:49:11 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/06 10:59:15 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/07 17:13:18 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 void Server::addChannel(std::string channelName, std::string keyName)
 {
-	this->channels.push_back(Channel(channelName, keyName));
+	Channel newChannel(channelName, keyName);
+	if (!keyName.empty())
+		newChannel.modes[MODE_CHANNEL_KEY] = true;
+	this->channels.push_back(newChannel);
 }
 
 void Server::connectToChannel(std::string& channel, Client& client, std::string& key, std::string& buffer)
