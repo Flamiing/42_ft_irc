@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/07 18:23:29 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/07 18:57:03 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,8 @@ bool isInvitieOnly(Server& server, std::string& channelName)
 	while (it != channels.end())
 	{
 		if (toUpperCase(it->getName()) == toUpperCase(channelName))
-		{
-			if (it->modes[MODE_CHANNEL_KEY] == true)
+			if (it->modes[MODE_CHANNEL_INVITE_ONLY] == true)
 			  	return (true);
-		}
 		it++;
 	}
 	return false;
@@ -38,9 +36,14 @@ static void joinChannel(Command& command, std::string& channelName, std::string&
 	if (channels.size() == 0 || channelNotFound(channels, channelName))
 		server.addChannel(channelName, keyName);
 	if (isInvitieOnly(server, channelName))
-		buffer = ERR_INVITEONLYCHAN(client.getNickname(), channelName);
-	else
-		server.connectToChannel(channelName, client, keyName, buffer);
+	{
+		if (1) /* _GUILLE checkar si usuario NO esta invitado */
+		{
+			buffer = ERR_INVITEONLYCHAN(client.getNickname(), channelName);
+			return ;
+		} 
+	}
+	server.connectToChannel(channelName, client, keyName, buffer);
 }
 
 static bool parserJoin(Command& command)
@@ -87,7 +90,7 @@ std::string processRaw(std::string raw)
 	size_t	pos = raw.find_first_not_of(" ");
 	raw.erase(0, pos);
 	if (raw[0] != '#')
-		raw = "#" + raw; /* _GUILLE PROBAR VACIO */
+		raw = "#" + raw;
 	for (size_t i = count; i < raw.size(); i++)
 	{
 		if (raw[i] == ',')

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:18:42 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/06 10:56:44 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/07 18:59:03 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,7 @@ void Channel::joinChannel(Client& client, std::string& keyName, std::string& buf
 	std::string reply = RPL_USERJOINEDCHANNEL(client.getNickname(),
 		client.getUsername(), this->getName());
 	
-	if (this->getKey().empty())
-	{
-		this->_onlineUsers.push_back(client);
-		_informOnlineUsers(reply);
-		_replyToNewUser(client);
-		client.addToJoinedChannels(*this);
-	}
-	else if (!keyName.compare(this->getKey()))
+	if (this->modes[MODE_CHANNEL_KEY] == false || !keyName.compare(this->getKey()))
 	{
 		this->_onlineUsers.push_back(client);
 		_informOnlineUsers(reply);
