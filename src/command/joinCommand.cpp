@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/06 11:29:21 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/07 12:44:20 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,23 +42,114 @@ static bool parserJoin(Command& command)
 	return false;
 }
 
+void pstr(std::vector<std::string>& channelNames, std::vector<std::string>& keyNames)
+{
+std::vector<std::string>::iterator it = channelNames.begin();
+	std::vector<std::string>::iterator it1 = keyNames.begin();
+
+	while (it != channelNames.end())
+	{
+		std::cout << "name: " << *it << std::endl;
+		it++;	
+	}
+	while (it1 != keyNames.end())
+	{
+		std::cout << "key: " << *it1 << std::endl;
+		it1++;
+	}
+}
+
+void	completeKeyNames(size_t lastPos, size_t vectorSize, std::vector<std::string>& keyNames)
+{
+
+	size_t iMax = lastPos - vectorSize;
+	for (size_t i = 0; i < iMax; i++)
+	{
+		keyNames.push_back("");
+		std::cout << i << std::endl;
+	}
+
+}
+
+/*
+
+a, b,c
+a, #b,c
+a,#b,c
+
+a,x   b, c,  
+
+ */
+
+/* 	
+	Rule 0 - Erase the command
+	Rule 1 - Cant end in comma.
+	Rule 2 - After a comma, there cant be a space. if there is, is not evaluated into the prompt.
+	Rule 3 - no channels without # or & */
+std::string processRaw(std::string raw)
+{
+	bool flag = false;
+	size_t count = 0;
+
+	raw.erase(0, raw.find(JOIN) + 4);	
+	size_t	pos = raw.find_first_not_of(" ");
+	raw.erase(0, pos);
+	for (size_t i = count; i < raw.size(); i++)
+	{
+		if (raw[i] == ',')
+			if (i + 1 == raw.size())
+				return raw.substr(0, i);
+		if (raw[i] == ',')
+				if (std::isspace(raw[i + 1]))
+					return raw.substr(0, i);
+		if (raw[i] == ' ')
+			flag = true;
+		if (!flag && raw[i] == ',')
+				if (raw[i + 1] != '#' && raw[i + 1] != '&')
+					return raw.substr(0, i);
+	}
+	return raw;
+}
+
+void	getVectors(std::vector<std::string>& channelNames, std::vector<std::string>& keyNames, std::string processed)
+{
+	std::string channels;
+	std::string keys;
+	size_t count;
+
+	for (count = 0; count < processed.size(); count++)
+		if (std::isspace(processed[count]))
+			break;
+	channels = processed.substr(0, count);
+	std::cout << "⭕OUTPUT⭕" << std::endl;
+	std::cout << channels << std::endl;
+
+	keys = processed.substr(count);
+
+	channelNames = splitString(channels, ',');
+	std::cout << "⭕OUTPUT⭕" << std::endl;
+	std::cout << channelNames[0] << std::endl;
+	keyNames = splitString(keys, ',');
+}
+
+
 void	lexerJoin(std::vector<std::string>& channelNames, std::vector<std::string>& keyNames, std::string raw)
 {
-	channelNames = getChannelNames(raw, JOIN);
-	std::string lastElement = channelNames.back();
-	std::string sub;
-	size_t	lastPos = channelNames.size();
+	std::string processed;
 
-	size_t pos = raw.find_last_of(lastElement);
-    if (pos != std::string::npos && raw.size() > pos + 1)
-	{
-        sub = raw.substr(pos + 1);
-		keyNames = getChannelNames(sub, lastElement);
-    }
-	if (lastPos > keyNames.size())
-		for (size_t i = 0; i < lastPos-keyNames.size(); i++)
-			keyNames.push_back("");
+	processed = processRaw(raw);
+	std::cout << "⭕OUTPUT⭕" << " " << processed << std::endl;
+	getVectors(channelNames, keyNames, processed);
+	
+
+	pstr(channelNames,keyNames);
+	
 }
+
+
+/* _hacer lexer, no gestionar si hay espaccios de por medio entre las comas
+a,b ,c  
+tambien tiene que tener # o & */
 
 /* _GUILLE ¿esta poniendo un hastag por defecto el cliente en mi nombre de canal? ¿O somos nosotros? */
 void joinCommand(Command& command)
@@ -85,4 +176,4 @@ void joinCommand(Command& command)
 		std::cout << "key:" << command.server->channels[i].getKey() << std::endl;
 	} */
 	//	buffer = ERR_INVITEONLYCHAN(client.getNickname(), message[1]); lista ccon usuarios invitados. comprobar y meter.
-} 
+}
