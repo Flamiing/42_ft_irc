@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 12:27:39 by guilmira          #+#    #+#             */
-/*   Updated: 2023/09/08 02:16:41 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/08 02:30:32 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,5 @@ void modeCommand(Command& command)
 	if (command.message.size() == 2)
 		replyChannelModes(channel, client);
 	else if (command.message.size() > 2)
-	{
 		modifyChannelModes(channel, client, command.message);
-	}
 }
