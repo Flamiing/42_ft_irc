@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/08 01:40:12 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/08 02:59:57 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ class Channel
 		
 		void setMode(Client& client, char mode, std::string& param, bool action);
 		void setO(Client& client, std::string& param, bool action);
+		void setK(Client& client, std::string& param, bool action);
 
 		void setTopic(std::string new_topic)
 		{

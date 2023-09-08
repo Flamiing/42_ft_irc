@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 12:27:39 by guilmira          #+#    #+#             */
-/*   Updated: 2023/09/08 02:30:32 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/08 02:33:07 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ static void modifyChannelModes(Channel& channel, Client& client, std::vector<std
 	while (it != message.end())
 	{
 		skips = handleModesWithParams(channel, client, *it, message, pos);
-		break;
+		break ; // JUST FOR TESTING REMOVE ME
 		pos++;
 		it += skips;
 	}

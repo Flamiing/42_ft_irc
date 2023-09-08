@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 03:22:11 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/08 01:58:50 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/08 03:24:51 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,8 @@ void Channel::setMode(Client& client, char mode, std::string& param, bool action
 	}
 	if (((this->modes[mode] == true && action == true)
 		|| (this->modes[mode] == false && action == false))
-		&& mode != 'o' && mode != 'b' && mode != 'l')
+		&& mode != 'o' && mode != 'b' && mode != 'l' && mode == 'k')
 		return ;
-	this->modes[mode] = action;
 	if (mode == 'o' || mode == 'k' || mode == 'l' || mode == 'b')
 		(this->*modesWithParams[mode])(client, param, action);
 	else
