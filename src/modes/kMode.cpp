@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 02:36:31 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/08 03:22:43 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/08 12:56:05 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static bool keyAlreadySet(Client& client, std::string channelName,
 	return false;
 }
 
-void Channel::setK(Client& client, std::string& param, bool action)
+void Channel::setK(Client& client, std::string param, bool action)
 {
 	std::string reply;
 	

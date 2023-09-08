@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 22:37:45 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/05 20:14:45 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/08 12:42:39 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ std::string getMessageToSend(Command& command, size_t messagePos);
 bool userNotInChannel(Server& server, std::string nickname, std::string& channelName);
 std::vector<std::string> getChannelNames(std::string& raw);
 std::string getCurrentTime(void);
+bool allDigits(const std::string& str);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 01:00:27 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/08 03:32:14 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/08 12:56:02 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void Channel::_removeOperator(std::string& operatorToRemove)
 	}
 }
 
-void Channel::setO(Client& client, std::string& param, bool action)
+void Channel::setO(Client& client, std::string param, bool action)
 {
 	std::string reply;
 	std::vector<Client>::iterator it = this->_onlineUsers.begin();

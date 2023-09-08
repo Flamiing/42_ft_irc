@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 03:22:11 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/08 03:24:51 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/08 12:55:31 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ bool Channel::_checkOperator(std::string nickname)
 	return isOper;
 }
 
-void Channel::setMode(Client& client, char mode, std::string& param, bool action)
+void Channel::setMode(Client& client, char mode, std::string param, bool action)
 {
 	if (!_checkOperator(client.getNickname()) && !client.isOperator())
 	{

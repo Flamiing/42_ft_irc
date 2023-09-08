@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:32 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/08 03:24:25 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/08 12:52:03 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ Channel::Channel(std::string& name) : _name(name), _key(""), _topic("")
 
 	this->modesWithParams[MODE_CHANNEL_OPERATOR] = &Channel::setO;
 	this->modesWithParams[MODE_CHANNEL_KEY] = &Channel::setK;
+	this->modesWithParams[MODE_CHANNEL_USER_LIMIT] = &Channel::setL;
 }
 
 Channel::Channel(const Channel& other) { *this = other; }
