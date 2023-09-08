@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:48:53 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/05 20:26:40 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/08 00:57:57 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,10 @@ class Command;
 # define MODE "MODE"
 # define DIE "DIE"
 
+# define SYMBOL_NONE ' '
+# define SYMBOL_PLUS '+'
+# define SYMBOL_MINUS '-'
+
 # define RPL_HELP(client) (":localhost 000 " + client + " :Use the following commands to traverse the chat: \r\n")
 # define RPL_WELCOME(client) (":localhost 001 " + client + " :Welcome to LOS OSADOS IRC Server, " + client + "!\r\n")
 # define RPL_AWAY(client, awayClient, message) (":localhost 301 " + client + " " + awayClient + " :" + message + "\r\n")
@@ -73,6 +77,7 @@ class Command;
 # define ERR_ALREADYREGISTRED(client) (":localhost 462 " + client + " :You may not reregister\r\n")
 # define ERR_PASSWDMISMATCH(client) (":localhost 464 " + client + " :Password incorrect\r\n")
 # define ERR_INVALIDUSERNAME(client) (":localhost 468 " + client + ":Your username is invalid\r\n")
+# define ERR_UNKNOWNMODE(client, mode) (":localhost 472 " + client + " " + mode + " :is unknown mode char to me\r\n")
 # define ERR_INVITEONLYCHAN(client, channel) (":localhost 473 " + client + " " + channel + " :Cannot join channel (+i)\r\n")
 # define ERR_BANNEDFROMCHAN(client, channel) (":localhost 474 " + client + " " + channel + " :Cannot join channel (+b)\r\n")
 # define ERR_NOPRIVILEGES(client) (":localhost 481 " + client + " :Permission Denied- You're not an IRC operator\r\n")
@@ -88,6 +93,7 @@ class Command;
 # define RPL_NOTICE(nickname, username, recipient, message) (":" + nickname + "!~" + username + "@localhost NOTICE " + recipient + " :" + message + "\r\n")
 # define RPL_PRIVMSG(nickname, username, recipient, message) (":" + nickname + "!~" + username + "@localhost PRIVMSG " + recipient + " :" + message + "\r\n")
 # define RPL_PART(nickname, username, channel) (":" + nickname + "!~" + username + "@localhost PART " + channel + "\r\n")
+# define RPL_MODE(nickname, username, channel, mode, param) (":" + nickname + "!~" + username + "@localhost MODE " + channel + " " + mode + " " + param + "\r\n")
 
 
 typedef void (*customFunctionType)(Command& command);

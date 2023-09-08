@@ -6,7 +6,7 @@
 #    By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/27 19:25:47 by alaaouam          #+#    #+#              #
-#    Updated: 2023/09/05 20:37:38 by alaaouam         ###   ########.fr        #
+#    Updated: 2023/09/08 01:46:55 by alaaouam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRC =	main.cpp Server.cpp ServerRun.cpp ServerClientConnections.cpp ServerProces
 			   quitCommand.cpp ChannelDisconnection.cpp Command.cpp ServerClientDisconnection.cpp dieCommand.cpp \
 			   channelUtils.cpp kickCommand.cpp ServerChannelDisconnection.cpp partCommand.cpp numberToString.cpp \
 			   privmsgCommand.cpp ServerChannels.cpp listCommand.cpp getChannelNames.cpp awayCommand.cpp \
-			   getCurrentTime.cpp modeCommand.cpp
+			   getCurrentTime.cpp modeCommand.cpp oMode.cpp ChannelModes.cpp
 			
 SRC_PATH = src/*/
 SRCS = $(addprefix $(SRC_PATH), $(SRC))

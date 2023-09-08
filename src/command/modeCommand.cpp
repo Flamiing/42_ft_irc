@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 12:27:39 by guilmira          #+#    #+#             */
-/*   Updated: 2023/09/05 21:14:07 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/08 02:16:41 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@
 	return false;
 } */
 
-// :Pipera.RO.EU.Undernet.Org 324 worbam #test2 +pmtnlk 10 * //// El asterisco es cuando hay key y el 10 es cuando hay limit
-
 static bool handleErrors(Server& server, Client& client, std::string& buffer, Command& command)
 {
 	if (command.message.size() == 1)
@@ -54,8 +52,7 @@ static bool hasToBeReplied(char mode)
 	{
 		MODE_CHANNEL_OPERATOR,
 		MODE_CHANNEL_BANNED,
-		MODE_CHANNEL_SPEAK_ABILITY,
-		MODE_CHANNEL_KEY
+		MODE_CHANNEL_SPEAK_ABILITY
 	};
 
 	while (pos < 4)
@@ -85,8 +82,6 @@ static void replyChannelModes(Channel& channel, Client& client)
 			hasLimit = true;
 		it++;
 	}
-	if (hasKey)
-		modesToReturn += 'k';
 	if (hasLimit)
 		modesToReturn += " " + numberToString(channel.getLimit());
 	if (hasKey)
@@ -94,6 +89,47 @@ static void replyChannelModes(Channel& channel, Client& client)
 	reply = RPL_CHANNELMODEIS(client.getNickname(), channel.getName(), modesToReturn);
 	reply += RPL_CREATIONTIME(client.getNickname(), channel.getName(), channel.creationTime);
 	send(client.getSocket(), reply.c_str(), reply.size(), 0);
+}
+
+// Si hay p no puede haber s
+// Va iterando por todos los mensajes, si hay 'o', 'l', 'k' o 'b' el siguiente mensaje es el parametro de estas opciones 
+
+static size_t handleModesWithParams(Channel& channel, Client& client, std::string& modes, std::vector<std::string>& message, size_t currentMsg)
+{
+	size_t pos = 0;
+	size_t argPos = 1;
+	bool action = MODE_CHANNEL_ADD;
+
+	while (pos < modes.size())
+	{
+		if (modes[pos] == SYMBOL_MINUS)
+			action = MODE_CHANNEL_REMOVE;
+		else if (modes[pos] == SYMBOL_PLUS)
+			action = MODE_CHANNEL_ADD;
+		if (modes[pos] == 'o' || modes[pos] == 'k'
+			|| modes[pos] == 'l' || modes[pos] == 'b')
+		{
+			channel.setMode(client, modes[pos], message[currentMsg + argPos], action);
+			argPos++;
+		}
+		pos++;
+	}
+	return argPos;
+}
+
+static void modifyChannelModes(Channel& channel, Client& client, std::vector<std::string>& message)
+{
+	std::vector<std::string>::iterator it = message.begin() + 2;
+	size_t pos = 2;
+	size_t skips;
+	
+	while (it != message.end())
+	{
+		skips = handleModesWithParams(channel, client, *it, message, pos);
+		break;
+		pos++;
+		it += skips;
+	}
 }
 
 void modeCommand(Command& command)
@@ -104,7 +140,11 @@ void modeCommand(Command& command)
 
 	if (handleErrors(server, client, buffer, command))
 		return ;
-	Channel channel = server.getChannelByName(command.message[1]);
+	Channel& channel = server.getChannelByName(command.message[1]);
 	if (command.message.size() == 2)
 		replyChannelModes(channel, client);
+	else if (command.message.size() > 2)
+	{
+		modifyChannelModes(channel, client, command.message);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/05 20:17:55 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/08 01:40:12 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,13 @@
 # define MODE_CHANNEL_BANNED 'b'
 # define MODE_CHANNEL_SPEAK_ABILITY 'v'
 # define MODE_CHANNEL_KEY 'k'
+# define MODE_CHANNEL_ADD true
+# define MODE_CHANNEL_REMOVE false
+
+class Channel;
+
+typedef void (Channel::*modeWithParamsFunctions)(Client& client, std::string& param, bool action);
+typedef void (Channel::*modeFunctions)(Client& client, bool action);
 
 class Channel
 {
@@ -46,10 +53,13 @@ class Channel
 		std::string getTopic(void) const;
 		std::string getKey(void) const;
 		size_t getLimit(void) const;
-		std::string getOnlineUsersList(void) const;
+		std::string getOnlineUsersList(void) ;
 		std::vector<Client> getBannedUsers(void) const;
 		void joinChannel(Client& client, std::string& key);
 		bool userIsBanned(std::string& nickname);
+		
+		void setMode(Client& client, char mode, std::string& param, bool action);
+		void setO(Client& client, std::string& param, bool action);
 
 		void setTopic(std::string new_topic)
 		{
@@ -63,16 +73,20 @@ class Channel
 		
 		std::map<char, bool> modes;
 		std::string creationTime;
+		std::map<char, modeWithParamsFunctions> modesWithParams;
+		std::map<char, modeFunctions> modesWithoutParams;
 	private:
 		void _informOnlineUsers(const std::string& reply);
 		void _replyToNewUser(Client& client);
+		bool _checkOperator(std::string client);
+		void _removeOperator(std::string& operatorToRemove);
 		
 		std::string _name;
 		std::string _key;
 		std::string _topic;
 		size_t _limit;
 
-
+		std::vector<std::string> _operators;
 		std::vector<Client> _onlineUsers;
 		std::vector<Client> _bannedUsers;
 };

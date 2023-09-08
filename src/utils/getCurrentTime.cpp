@@ -6,12 +6,11 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 20:10:17 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/05 23:33:45 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/06 12:15:34 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Server.hpp"
-#include <sys/time.h>
 
 /* void getTime(std::tm& timeStruct, char *timeString)
 {
@@ -67,6 +66,5 @@ std::string getCurrentTime(void)
     std::stringstream ss;
     ss << microseconds;
     std::string currentTime = ss.str();
-	std::cout << "TIME: " << currentTime << std::endl;
 	return currentTime;
 }

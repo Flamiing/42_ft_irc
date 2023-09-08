@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 14:17:16 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 18:22:25 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/06 03:55:04 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ bool userNotInChannel(Server& server, std::string nickname, std::string& channel
 		}
 		it++;
 	}
-	
 	return true;
 }
 
