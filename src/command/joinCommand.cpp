@@ -6,13 +6,13 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/08 15:52:35 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/08 18:48:20 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Server.hpp"
 
-bool isInvitieOnly(Server& server, std::string& channelName)
+static bool isInvitieOnly(Server& server, std::string& channelName)
 {
 	std::vector<Channel>&	channels = server.channels;
 	std::vector<Channel>::iterator it = channels.begin();
@@ -64,7 +64,7 @@ static bool parserJoin(Command& command)
 	Rule 1 - Cant end in comma.
 	Rule 2 - After a comma, there cant be a space. if there is, is not evaluated into the prompt.
 	Rule 3 - no channels without # or & */
-std::string processRaw(std::string raw)
+static std::string processRaw(std::string raw)
 {
 	bool flag = false;
 	size_t count = 0;
@@ -111,7 +111,7 @@ void	getVectors(std::vector<std::string>& channelNames, std::vector<std::string>
 		keys = "";
 }
 
-void	lexerJoin(std::vector<std::string>& channelNames, std::vector<std::string>& keyNames, std::string raw)
+static void	lexerJoin(std::vector<std::string>& channelNames, std::vector<std::string>& keyNames, std::string raw)
 {
 	std::string processed;
 
@@ -123,6 +123,7 @@ void	lexerJoin(std::vector<std::string>& channelNames, std::vector<std::string>&
 		keyNames.push_back("");
 }
 
+/* _GUILLE falta merer limite */
 void joinCommand(Command& command)
 {
 	std::string&				buffer = *command.buffer;	

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 14:03:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/08 13:17:11 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/08 18:06:18 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void Server::initMapCommand(void)
 	mapCommand[USER] = &userCommand;
 	mapCommand[NICK] = &nickCommand;
 	mapCommand[JOIN] = &joinCommand;
+	mapCommand[TOPIC] = &topicCommand;
 	mapCommand[QUIT] = &quitCommand;
 	mapCommand[NOTICE] = &noticeCommand;
 	mapCommand[OPER] = &operCommand;
@@ -28,7 +29,7 @@ void Server::initMapCommand(void)
 	mapCommand[LIST] = &listCommand;
 	mapCommand[AWAY] = &awayCommand;
 	mapCommand[MODE] = &modeCommand;
-	mapCommand[TOPIC] = &topicCommand;
+	mapCommand[NAMES] = &namesCommand;
 }
 
 void Server::_setupSever(void)

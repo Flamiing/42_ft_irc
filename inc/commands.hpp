@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:48:53 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/08 16:31:10 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/08 18:06:23 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ class Command;
 # define AWAY "AWAY"
 # define MODE "MODE"
 # define DIE "DIE"
+# define NAMES "NAMES"
 
 # define RPL_HELP(client) (":localhost 000 " + client + " :Use the following commands to traverse the chat: \r\n")
 # define RPL_WELCOME(client) (":localhost 001 " + client + " :Welcome to LOS OSADOS IRC Server, " + client + "!\r\n")
@@ -88,6 +89,10 @@ class Command;
 # define RPL_NOTICE(nickname, username, recipient, message) (":" + nickname + "!~" + username + "@localhost NOTICE " + recipient + " :" + message + "\r\n")
 # define RPL_PRIVMSG(nickname, username, recipient, message) (":" + nickname + "!~" + username + "@localhost PRIVMSG " + recipient + " :" + message + "\r\n")
 # define RPL_PART(nickname, username, channel) (":" + nickname + "!~" + username + "@localhost PART " + channel + "\r\n")
+# define RPL_TOPIC(client, channel, topic) (":localhost 332 " + client + " " + channel + " :" + topic + "\r\n")
+# define RPL_NOTOPIC(client, channel) (":localhost 331 " + client + " " + channel + " :No topic is set\r\n")
+# define ERR_CHANOPRIVSNEEDED(client, channel) (":localhost 482 " + client + " " + channel + " :You're not channel operator\r\n")
+# define ERR_BADCHANNELKEY(client, channel) (":localhost 475 " + client + " " + channel + " :Cannot join channel (+k)\r\n")
 
 
 typedef void (*customFunctionType)(Command& command);
@@ -98,6 +103,7 @@ void passCommand(Command& command);
 void userCommand(Command &command);
 void nickCommand(Command &command);
 void joinCommand(Command &command);
+void topicCommand(Command &command);
 void noticeCommand(Command &command);
 void quitCommand(Command &command);
 void operCommand(Command& command);
@@ -108,12 +114,9 @@ void topicCommand(Command &command);
 void listCommand(Command &command);
 void awayCommand(Command& command);
 void modeCommand(Command& command);
+void namesCommand(Command& command);
 
-void topicCommand(Command &command);
-# define RPL_TOPIC(client, channel, topic) (":localhost 332 " + client + " " + channel + " :" + topic + "\r\n")
-# define RPL_NOTOPIC(client, channel) (":localhost 331 " + client + " " + channel + " :No topic is set\r\n")
-# define ERR_CHANOPRIVSNEEDED(client, channel) (":localhost 482 " + client + " " + channel + " :You're not channel operator\r\n")
-# define ERR_BADCHANNELKEY(client, channel) (":localhost 475 " + client + " " + channel + " :Cannot join channel (+k)\r\n")
+
 
 
 std::string displayMsg(std::string number, std::string str, std::string clientNick);
