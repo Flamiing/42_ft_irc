@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 12:27:39 by guilmira          #+#    #+#             */
-/*   Updated: 2023/09/08 15:40:58 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/08 16:00:18 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static bool hasToBeReplied(char mode)
 		MODE_CHANNEL_SPEAK_ABILITY
 	};
 
-	while (pos < 4)
+	while (pos < 3)
 	{
 		if (mode == modesList[pos])
 			return false;

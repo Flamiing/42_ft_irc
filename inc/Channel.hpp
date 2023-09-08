@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/08 15:53:29 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/08 16:12:52 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ class Channel
 		bool banUser(std::string& nickname);
 		void unbanUser(std::string& nickname);
 		bool userCanTalk(std::string nickname);
-		void removeTalkingPermissions(std::string& nickname);
+		void removeTalkingPermissions(std::string nickname);
 		
 		void setMode(Client& client, char mode, std::string param, bool action);
 		void setO(Client& client, std::string param, bool action);
@@ -87,7 +87,7 @@ class Channel
 		void _informOnlineUsers(const std::string& reply);
 		void _replyToNewUser(Client& client);
 		bool _checkOperator(std::string client);
-		void _removeOperator(std::string& operatorToRemove);
+		void _removeOperator(std::string operatorToRemove);
 		
 		std::string _name;
 		std::string _key;

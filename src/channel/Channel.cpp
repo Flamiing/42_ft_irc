@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:32 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/08 15:53:45 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/08 16:11:50 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ Channel::Channel(std::string& name) : _name(name), _key(""), _topic("")
 	this->modes[MODE_CHANNEL_INVITE_ONLY] = false;
 	this->modes[MODE_CHANNEL_TOPIC_OPER_ONLY] = false;
 	this->modes[MODE_CHANNEL_NO_MSG_FROM_OUTSIDE] = false;
-	this->modes[MODE_CHANNEL_MODERATED] = false;
+	this->modes[MODE_CHANNEL_MODERATED] = true;
 	this->modes[MODE_CHANNEL_USER_LIMIT] = false;
 	this->modes[MODE_CHANNEL_BANNED] = false;
 	this->modes[MODE_CHANNEL_SPEAK_ABILITY] = false;
@@ -113,6 +113,8 @@ std::string Channel::getOnlineUsersList()
 	{
 		if (_checkOperator(it->getNickname()))
 			listOfUsers += "@" + it->getNickname();
+		else if (this->userCanTalk(it->getNickname()))
+			listOfUsers += "+" + it->getNickname();
 		else
 			listOfUsers += it->getNickname();
 		if ((it + 1) != this->_onlineUsers.end())

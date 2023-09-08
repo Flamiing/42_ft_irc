@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 15:44:37 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/08 15:54:17 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/08 16:26:40 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ bool Channel::userCanTalk(std::string nickname)
 {
 	std::vector<std::string>::iterator it = this->_canTalk.begin();
 	
+	if (_checkOperator(nickname))
+		return true;
 	while (it != this->_canTalk.end())
 	{
 		if (toUpperCase(*it) == toUpperCase(nickname))
@@ -25,7 +27,7 @@ bool Channel::userCanTalk(std::string nickname)
 	return false;
 }
 
-void Channel::removeTalkingPermissions(std::string& nickname)
+void Channel::removeTalkingPermissions(std::string nickname)
 {
 	std::vector<std::string>::iterator it = this->_canTalk.begin();
 	

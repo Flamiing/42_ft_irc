@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 01:00:27 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/08 12:56:02 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/08 16:12:16 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void replyIfNotFound(Client& client, std::string& nickname)
 	send(client.getSocket(), reply.c_str(), reply.size(), 0);
 }
 
-void Channel::_removeOperator(std::string& operatorToRemove)
+void Channel::_removeOperator(std::string operatorToRemove)
 {
 	std::vector<std::string>::iterator it = this->_operators.begin();
 

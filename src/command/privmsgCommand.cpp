@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/08 15:57:13 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/08 16:23:12 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ static void sendMessageToChannel(Server& server, Client& client, std::string& ch
 {
 	std::vector<Channel> channels = server.channels;
 	std::vector<Channel>::iterator it = channels.begin();
-	bool messageSended = false;
 	std::string reply;
 	
 	while (it != channels.end())
@@ -68,22 +67,21 @@ static void sendMessageToChannel(Server& server, Client& client, std::string& ch
 			{
 				reply = RPL_PRIVMSG(client.getNickname(), client.getUsername(), (*it).getName(), messageToSend);
 				(*it).messageOnlineUsers(client.getNickname(), reply);
-				messageSended = true;
 			}
 			else
+			{
 				reply = ERR_CANNOTSENDTOCHAN(client.getNickname(), (*it).getName());
-			break ;
+				send(client.getSocket(), reply.c_str(), reply.size(), 0);
+			}
+			return ;
 		}
 		it++;
 	}
-	if (!messageSended)
-	{
-		if (channelNotFound(server.channels, channel))
-			reply = ERR_NOSUCHCHANNEL(client.getNickname(), channel);
-		else
-			reply = ERR_NOTONCHANNEL(client.getNickname(), channel);
-		send(client.getSocket(), reply.c_str(), reply.size(), 0);
-	}
+	if (channelNotFound(server.channels, channel))
+		reply = ERR_NOSUCHCHANNEL(client.getNickname(), channel);
+	else
+		reply = ERR_NOTONCHANNEL(client.getNickname(), channel);
+	send(client.getSocket(), reply.c_str(), reply.size(), 0);
 }
 
 static void sendMessageToReceivers(Server& server, Client& client, std::vector<std::string>& receivers, std::string& messageToSend)
