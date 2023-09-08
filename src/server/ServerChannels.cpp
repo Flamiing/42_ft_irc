@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:13:49 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 18:21:20 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/08 13:31:14 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ bool Server::isBanned(Client& client, std::string& channel)
 
 	while (it != this->channels.end())
 	{
-		if ((*it).getName() == channel)
+		if (toUpperCase((*it).getName()) == toUpperCase(channel))
 			if ((*it).userIsBanned(nickname))
 				return true;
 		it++;

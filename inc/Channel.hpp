@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/08 12:55:53 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/08 13:54:09 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,14 @@ class Channel
 		std::vector<Client> getBannedUsers(void) const;
 		void joinChannel(Client& client, std::string& key);
 		bool userIsBanned(std::string& nickname);
+		bool banUser(std::string& nickname);
+		void unbanUser(std::string& nickname);
 		
 		void setMode(Client& client, char mode, std::string param, bool action);
 		void setO(Client& client, std::string param, bool action);
 		void setK(Client& client, std::string param, bool action);
 		void setL(Client& client, std::string param, bool action);
+		void setB(Client& client, std::string param, bool action);
 
 		void setTopic(std::string new_topic)
 		{

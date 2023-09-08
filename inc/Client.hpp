@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 00:59:24 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/08 01:21:03 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/08 13:44:41 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ class Client
 	public:
 		Client(void);
 		Client(int socket);
+		Client(std::string& nickname);
 		Client(const Client& other);
 		~Client(void);
 		
