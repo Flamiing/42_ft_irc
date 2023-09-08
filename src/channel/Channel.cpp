@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:32 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/06 11:01:22 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/08 15:57:58 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ bool Channel::userIsBanned(std::string& nickname)
 
 	while (it != this->_bannedUsers.end())
 	{
-		if ((*it).getNickname() == nickname)
+		if (isEqualStr(it->getNickname(), nickname))
 			return true;
 		it++;
 	}

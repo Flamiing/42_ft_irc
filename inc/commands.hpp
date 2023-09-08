@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:48:53 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/06 11:01:08 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/08 16:03:08 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,6 @@ void topicCommand(Command &command);
 void listCommand(Command &command);
 void awayCommand(Command& command);
 void modeCommand(Command& command);
-/* _GUILLE el de abajo no funciona? ponemos con hastag el channel si o no */
 
 void topicCommand(Command &command);
 # define RPL_TOPIC(client, channel, topic) (":localhost 332 " + client + " " + channel + " :" + topic + "\r\n")
@@ -119,5 +118,6 @@ void topicCommand(Command &command);
 
 
 std::string displayMsg(std::string number, std::string str, std::string clientNick);
+bool isEqualStr(std::string str1, std::string str2);
 
 #endif

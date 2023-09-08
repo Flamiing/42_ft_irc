@@ -6,11 +6,14 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:35:00 by guilmira          #+#    #+#             */
-/*   Updated: 2023/09/08 14:03:13 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/08 15:55:33 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Server.hpp"
+
+
+//# define RPL_TOPIC(client, channel) (":localhost 332 " + client + " " + channel + " :" + topic + "\r\n")
 
 void static changeTopic(Client& client, std::vector<std::string> message, Channel& channel, std::string& buffer)
 {
@@ -46,11 +49,6 @@ static bool parserTopic(Command& command)
 		buffer = ERR_NEEDMOREPARAMS(client.getNickname(), command.message[0]);
 		return true;
 	}
-	if (static_cast<int>(command.message.size()) > 3)
-	{
-		buffer = displayMsg("666", "too many parameters", client.getNickname()); /* _GUILLE VER QUE HACE LIME */
-		return true;
-	}
 	return false;
 }
 
@@ -66,7 +64,7 @@ void topicCommand(Command& command)
 		return ;
 	for (int i = 0; i < static_cast<int>(channel.size()); i++)
 	{
-		if (!channel[i].getName().compare(command.message[1]))
+		if (isEqualStr(channel[i].getName(), command.message[1]))
 		{
 			if (!client.isConnectedToChannel(channel[i]))
 			{

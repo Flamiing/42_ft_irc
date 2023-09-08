@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 17:49:11 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/08 14:00:01 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/08 15:54:14 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void Server::addChannel(std::string channelName, std::string keyName)
 	if (!keyName.empty())
 		newChannel.modes[MODE_CHANNEL_KEY] = true;
 	this->channels.push_back(newChannel);
-	std::cout << "SIZE" << channels.size() << std::endl;
 }
 
 void Server::connectToChannel(std::string& channel, Client& client, std::string& key, std::string& buffer)
@@ -27,7 +26,7 @@ void Server::connectToChannel(std::string& channel, Client& client, std::string&
 
 	while (it != this->channels.end())
 	{
-		if (toUpperCase(it->getName()) == toUpperCase(channel))
+		if (isEqualStr(it->getName(), channel))
 		{
 			it->joinChannel(client, key, buffer);
 			return ;

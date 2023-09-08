@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   toUpperCase.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 21:10:37 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 02:17:41 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/08 15:48:06 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,14 @@ std::string toUpperCase(const std::string& str)
 		it++;
 	}
 	return result;
+}
+
+bool isEqualStr(std::string str1, std::string str2)
+{
+	std::string string = toUpperCase(str1);
+
+	if (!string.compare(toUpperCase(str2)))
+		return true;
+	else
+		return false;
 }

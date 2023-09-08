@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/08 13:47:11 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/08 15:52:35 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void joinChannel(Command& command, std::string& channelName, std::string&
 		server.addChannel(channelName, keyName);
 	if (isInvitieOnly(server, channelName))
 	{
-		if (1) /* _GUILLE checkar si usuario NO esta invitado */
+		if (1) /* _GUILLE invitaciones, string de usuarios invitados en el canal? o esta ya gestionado */
 		{
 			buffer = ERR_INVITEONLYCHAN(client.getNickname(), channelName);
 			return ;
@@ -57,23 +57,6 @@ static bool parserJoin(Command& command)
 		return true;
 	}
 	return false;
-}
-
-void pstr(std::vector<std::string>& channelNames, std::vector<std::string>& keyNames)
-{
-std::vector<std::string>::iterator it = channelNames.begin();
-	std::vector<std::string>::iterator it1 = keyNames.begin();
-
-	while (it != channelNames.end())
-	{
-		std::cout << "name: " << *it << std::endl;
-		it++;	
-	}
-	while (it1 != keyNames.end())
-	{
-		std::cout << "key: " << *it1 << std::endl;
-		it1++;
-	}
 }
 
 /* 	
@@ -138,7 +121,6 @@ void	lexerJoin(std::vector<std::string>& channelNames, std::vector<std::string>&
 	size_t sizeKey = keyNames.size();
 	for (size_t i = 0; i < size - sizeKey; i++)
 		keyNames.push_back("");
-	pstr(channelNames,keyNames); /* _GUILLE PRINTER */
 }
 
 void joinCommand(Command& command)
@@ -152,10 +134,37 @@ void joinCommand(Command& command)
 	lexerJoin(channelNames, keyNames, command.raw);
 	for (size_t i = 0; i != channelNames.size(); i++)
 	{
-
 		if (command.server->isBanned(*command.client, channelNames[i]))
 			buffer = ERR_BANNEDFROMCHAN(command.client->getNickname(), channelNames[i]);
 		else
 			joinChannel(command, channelNames[i], keyNames[i], buffer);
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+/* _GUILLE PRINTER PARA BORRAR */
+/* void pstr(std::vector<std::string>& channelNames, std::vector<std::string>& keyNames)
+{
+std::vector<std::string>::iterator it = channelNames.begin();
+	std::vector<std::string>::iterator it1 = keyNames.begin();
+
+	while (it != channelNames.end())
+	{
+		std::cout << "name: " << *it << std::endl;
+		it++;	
+	}
+	while (it1 != keyNames.end())
+	{
+		std::cout << "key: " << *it1 << std::endl;
+		it1++;
+	}
+} */
