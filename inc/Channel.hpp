@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/07 17:43:16 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/08 13:32:50 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,15 @@ class Channel
 		void removeFromChannel(std::string client, const std::string& reply);
 		void messageOnlineUsers(const std::string sender, const std::string& reply);
 		
+	/* 	bool isUserInChanel(Client& client)
+		{
+			for (std::vector<Client>::iterator it = this->_onlineUsers.begin(); it != _onlineUsers.end(); it++)
+	 		{
+				if (*it.get)
+			}
+			
+		}
+ */
 		std::map<char, bool> modes;
 		std::string creationTime;
 	private:

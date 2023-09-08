@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 00:59:24 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/06 10:53:09 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/08 13:49:55 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ class Client
 		bool isOperator(void) const;
 		void removeChannel(std::string& channel);
 
-		bool checkChannel(Channel& channel);
+		bool isConnectedToChannel(Channel& channel);
 		
 		
 		std::string buffer;

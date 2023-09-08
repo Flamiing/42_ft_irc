@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:35:00 by guilmira          #+#    #+#             */
-/*   Updated: 2023/09/06 11:16:40 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/08 14:03:13 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static bool parserTopic(Command& command)
 	}
 	if (static_cast<int>(command.message.size()) > 3)
 	{
-		buffer = displayMsg("666", "too many parameters", client.getNickname());
+		buffer = displayMsg("666", "too many parameters", client.getNickname()); /* _GUILLE VER QUE HACE LIME */
 		return true;
 	}
 	return false;
@@ -66,11 +66,9 @@ void topicCommand(Command& command)
 		return ;
 	for (int i = 0; i < static_cast<int>(channel.size()); i++)
 	{
-		std::cout << "⭕OUTPUT⭕" << std::endl;
-		std::cout << channel[i].getName() << std::endl;
 		if (!channel[i].getName().compare(command.message[1]))
 		{
-			if (client.checkChannel(channel[i]))
+			if (!client.isConnectedToChannel(channel[i]))
 			{
 				buffer = ERR_NOTONCHANNEL(client.getNickname(), command.message[0]);
 				return ;
@@ -79,11 +77,9 @@ void topicCommand(Command& command)
 				viewTopic(client, channel[i], buffer);
 			else
 				changeTopic(client, command.message, channel[i], buffer);
-		}
-		else	
-		{
-			buffer = displayMsg("666", " Introduce a valid channel", client.getNickname());
 			return ;
 		}
 	}
+	buffer = displayMsg("666", " Introduce a valid channel", client.getNickname());
+	return ;
 }
