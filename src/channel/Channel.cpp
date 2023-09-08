@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:32 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/08 13:54:25 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/08 15:53:45 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ Channel::Channel(std::string& name) : _name(name), _key(""), _topic("")
 	this->modesWithParams[MODE_CHANNEL_KEY] = &Channel::setK;
 	this->modesWithParams[MODE_CHANNEL_USER_LIMIT] = &Channel::setL;
 	this->modesWithParams[MODE_CHANNEL_BANNED] = &Channel::setB;
+	this->modesWithParams[MODE_CHANNEL_SPEAK_ABILITY] = &Channel::setV;
 }
 
 Channel::Channel(const Channel& other) { *this = other; }
@@ -53,6 +54,12 @@ Channel& Channel::operator=(const Channel& other)
 		while (pos < other._operators.size())
 		{
 			this->_operators.push_back(other._operators[pos]);
+			pos++;
+		}
+		pos = 0;
+		while (pos < other._canTalk.size())
+		{
+			this->_canTalk.push_back(other._canTalk[pos]);
 			pos++;
 		}
 		pos = 0;

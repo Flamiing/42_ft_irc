@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/08 13:30:31 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/08 15:57:13 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ static void sendMessageToChannel(Server& server, Client& client, std::string& ch
 		if (!userNotInChannel(server, client.getNickname(), channel)
 			&& toUpperCase((*it).getName()) == toUpperCase(channel))
 		{
-			if (!server.isBanned(client, channel))
+			if (!server.isBanned(client, channel) && (!(*it).modes['m']
+				|| ((*it).modes['m'] && (*it).userCanTalk(client.getNickname()))))
 			{
 				reply = RPL_PRIVMSG(client.getNickname(), client.getUsername(), (*it).getName(), messageToSend);
 				(*it).messageOnlineUsers(client.getNickname(), reply);

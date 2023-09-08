@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 12:27:39 by guilmira          #+#    #+#             */
-/*   Updated: 2023/09/08 12:57:08 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/08 15:40:58 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ static size_t handleModesWithParams(Channel& channel, Client& client, std::strin
 			action = MODE_CHANNEL_REMOVE;
 		else if (modes[pos] == SYMBOL_PLUS)
 			action = MODE_CHANNEL_ADD;
-		if (modes[pos] == 'o' || modes[pos] == 'k'
+		if (modes[pos] == 'o' || modes[pos] == 'k' || modes[pos] == 'v'
 			|| modes[pos] == 'l' || modes[pos] == 'b')
 		{
 			if ((currentMsg + argPos) < message.size())

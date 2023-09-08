@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/08 13:54:09 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/08 15:53:29 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,15 @@ class Channel
 		bool userIsBanned(std::string& nickname);
 		bool banUser(std::string& nickname);
 		void unbanUser(std::string& nickname);
+		bool userCanTalk(std::string nickname);
+		void removeTalkingPermissions(std::string& nickname);
 		
 		void setMode(Client& client, char mode, std::string param, bool action);
 		void setO(Client& client, std::string param, bool action);
 		void setK(Client& client, std::string param, bool action);
 		void setL(Client& client, std::string param, bool action);
 		void setB(Client& client, std::string param, bool action);
+		void setV(Client& client, std::string param, bool action);
 
 		void setTopic(std::string new_topic)
 		{
@@ -92,6 +95,7 @@ class Channel
 		size_t _limit;
 
 		std::vector<std::string> _operators;
+		std::vector<std::string> _canTalk;
 		std::vector<Client> _onlineUsers;
 		std::vector<Client> _bannedUsers;
 };
