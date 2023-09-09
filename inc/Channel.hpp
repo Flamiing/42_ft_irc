@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/09 02:27:54 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/09 02:36:32 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ class Channel
 		void setM(Client& client, bool action);
 		void setI(Client& client, bool action);
 		void setT(Client& client, bool action);
+		void setN(Client& client, bool action);
 
 		void setTopic(std::string new_topic)
 		{

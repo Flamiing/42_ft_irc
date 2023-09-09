@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:32 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/09 02:24:07 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/09 02:37:51 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ Channel::Channel(std::string& name) : _name(name), _key(""), _topic("")
 	this->modesWithoutParams[MODE_CHANNEL_MODERATED] = &Channel::setM;
 	this->modesWithoutParams[MODE_CHANNEL_INVITE_ONLY] = &Channel::setI;
 	this->modesWithoutParams[MODE_CHANNEL_TOPIC_OPER_ONLY] = &Channel::setT;
+	this->modesWithoutParams[MODE_CHANNEL_NO_MSG_FROM_OUTSIDE] = &Channel::setN;
 }
 
 Channel::Channel(const Channel& other) { *this = other; }
