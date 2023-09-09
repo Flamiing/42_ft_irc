@@ -42,7 +42,6 @@ static void printNames(Client& client, Channel& channel)
 	send(client.getSocket(), reply.c_str(), reply.size(), 0);
 }
 
-
 static void sendName(Command& command, std::string& channelName)
 {
 	Server&						server = *command.server;
@@ -58,8 +57,6 @@ void namesCommand(Command& command)
 {
 	std::vector<std::string>	channelNames;
 	std::string					processed;
-
-	/* _GUILLE D N M */
 
 	processed = processRaw(command.raw);
 	channelNames = splitString(processed, ',');
