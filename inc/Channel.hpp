@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/08 16:28:45 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/09 16:55:29 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,6 @@ class Channel
 		std::vector<Client> getBannedUsers(void) const;
 		void joinChannel(Client& client, std::string& key, std::string& buffer);
 		bool userIsBanned(std::string& nickname);
-
-		/* std::string		getMode() const; */
-		
-
-		/* void setTopic(std::string new_topic); */
-
 		bool clientInChannel(std::string nickname);
 		void disconnectFromChannel(std::string client, const std::string& reply);
 		void removeFromChannel(std::string client, const std::string& reply);
