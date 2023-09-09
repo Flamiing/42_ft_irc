@@ -6,14 +6,11 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:35:00 by guilmira          #+#    #+#             */
-/*   Updated: 2023/09/08 17:40:53 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/09 14:16:14 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Server.hpp"
-
-
-//# define RPL_TOPIC(client, channel) (":localhost 332 " + client + " " + channel + " :" + topic + "\r\n")
 
 void static changeTopic(Client& client, std::vector<std::string> message, Channel& channel, std::string& buffer)
 {
@@ -71,6 +68,6 @@ void topicCommand(Command& command)
 			return ;
 		}
 	}
-	buffer = displayMsg("666", " Introduce a valid channel", client.getNickname());
+	buffer = ERR_NOSUCHCHANNEL(client.getNickname(), command.message[1]);
 	return ;
 }

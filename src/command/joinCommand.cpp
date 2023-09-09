@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/08 18:48:20 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/09 14:41:06 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,12 @@ static std::string processRaw(std::string raw)
 	for (size_t i = count; i < raw.size(); i++)
 	{
 		if (raw[i] == ',')
+		{
 			if (i + 1 == raw.size())
 				return raw.substr(0, i);
-		if (raw[i] == ',')
-				if (std::isspace(raw[i + 1]))
-					return raw.substr(0, i);
-		if (raw[i] == ' ')
+			if (std::isspace(raw[i + 1]))
+				return raw.substr(0, i);
+		}
 			flag = true;
 		if (!flag && raw[i] == ',')
 				if (raw[i + 1] != '#' && raw[i + 1] != '&')

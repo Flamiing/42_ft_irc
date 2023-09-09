@@ -16,84 +16,60 @@ static std::string processRaw(std::string raw)
 {
 	size_t count = 0;
 
-	raw.erase(0, raw.find(NAMES) + 5);	
+	raw.erase(0, raw.find(NAMES) + 5);
+	std::cout << raw << std::endl;
 	size_t	pos = raw.find_first_not_of(" ");
 	raw.erase(0, pos);
 	for (size_t i = count; i < raw.size(); i++)
 	{
 		if (raw[i] == ',')
+		{
 			if (i + 1 == raw.size())
 				return raw.substr(0, i);
-		if (raw[i] == ',')
-				if (std::isspace(raw[i + 1]))
-					return raw.substr(0, i);
-		if (raw[i] == ',')
-				if (raw[i + 1] != '#' && raw[i + 1] != '&')
-					return raw.substr(0, i);
+			if (std::isspace(raw[i + 1]))
+				return raw.substr(0, i);
+			if (raw[i + 1] != '#' && raw[i + 1] != '&')
+				return raw.substr(0, i);
+		}
 	}
 	return raw;
 }
 
-static void	lexerNames(std::vector<std::string>& channelNames, std::string raw)
+static void printNames(Client& client, Channel& channel)
 {
-	std::string processed;
-
-	processed = processRaw(raw);
-	channelNames = splitString(processed, ',');
+	std::string reply = RPL_NAMREPLY(client.getNickname(), "=", channel.getName(), channel.getOnlineUsersList());
+	reply += RPL_ENDOFNAMES(client.getNickname(), channel.getName());
+	send(client.getSocket(), reply.c_str(), reply.size(), 0);
 }
 
 
-# define RD(client) (":" + client + ":" "\r\n")
-
-
-static void printNames(Client& client, std::string& result)
-{
-	std::string str = RD(result);
-	
-	(void) client;
-	//send(client.getSocket(), str.c_str(), str.size(), 0);
-}
-
-
-static void showName(Command& command, std::string& channelName, std::string& buffer)
+static void sendName(Command& command, std::string& channelName)
 {
 	Server&						server = *command.server;
 	std::vector<Channel>&		channel = server.channels;
 	Client&						client = *command.client;
 
-(void) buffer;
-	std::string result;
-
 	for (size_t i = 0; i != channel.size(); i++)
-	{
 		if (isEqualStr(channel[i].getName(), channelName))
-		{
-			result = channel[i].getOnlineUsersList();
-			printNames(client, result);
-
-	
-		}
-	}
-
+			printNames(client, channel[i]);
 }
 
 void namesCommand(Command& command)
 {
-	std::string&				buffer = *command.buffer;
-
 	std::vector<std::string>	channelNames;
+	std::string					processed;
 
-	lexerNames(channelNames, command.raw);
+	/* _GUILLE D N M */
 
-	std::vector<std::string>::iterator it = channelNames.begin();
+	processed = processRaw(command.raw);
+	channelNames = splitString(processed, ',');
+	/* std::vector<std::string>::iterator it = channelNames.begin();
 	while (it != channelNames.end())
 	{
 		std::cout << "namee: " << *it << std::endl;
 		it++;	
-	}
+	} */
 	for (size_t i = 0; i != channelNames.size(); i++)
-	{
-		showName(command, channelNames[i], buffer);
-	}
+		sendName(command, channelNames[i]);
 	return ;
 }

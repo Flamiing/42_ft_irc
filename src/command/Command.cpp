@@ -32,7 +32,7 @@ Command::Command(Server *server, Client *client, std::string *buffer, std::strin
 		this->raw = trimSpaces(message);
 	}
 	else
-		message = "EMPTY COMMAND"; /* _GUILLE ¿CUmple protocolo? */
+		message = "EMPTY COMMAND";
 	
 }
 
