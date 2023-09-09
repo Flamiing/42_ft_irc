@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 03:22:11 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/08 15:40:40 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/09 02:15:21 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,36 @@ bool Channel::_checkOperator(std::string nickname)
 	return isOper;
 }
 
+static bool validMode(char c)
+{
+	size_t pos = 0;
+	char validModes[] =
+	{
+		MODE_CHANNEL_PRIVATE, MODE_CHANNEL_SECRET,
+		MODE_CHANNEL_INVITE_ONLY, MODE_CHANNEL_TOPIC_OPER_ONLY,
+		MODE_CHANNEL_NO_MSG_FROM_OUTSIDE, MODE_CHANNEL_MODERATED
+	};
+	
+	while (pos < 6)
+	{
+		if (c == validModes[pos])
+			break ;
+		pos++;
+	}
+	if (pos < 6)
+		return true;
+	return false;
+}
+
 void Channel::setMode(Client& client, char mode, std::string param, bool action)
 {
+	std::string reply;
+
+	if (mode == '-' || mode == '+')
+		return ;
 	if (!_checkOperator(client.getNickname()) && !client.isOperator())
 	{
-		std::string reply = ERR_CHANOPRIVSNEEDED(client.getNickname(), this->getName());
+		reply = ERR_CHANOPRIVSNEEDED(client.getNickname(), this->getName());
 		send(client.getSocket(), reply.c_str(), reply.size(), 0);
 		return ;
 	}
@@ -44,6 +69,11 @@ void Channel::setMode(Client& client, char mode, std::string param, bool action)
 		return ;
 	if (mode == 'o' || mode == 'k' || mode == 'l' || mode == 'b' || mode == 'v')
 		(this->*modesWithParams[mode])(client, param, action);
-	else
+	else if (validMode(mode))
 		(this->*modesWithoutParams[mode])(client, action);
+	else
+	{
+		reply = ERR_UNKNOWNMODE(client.getNickname(), mode);
+		send(client.getSocket(), reply.c_str(), reply.size(), 0);
+	}
 }

@@ -6,29 +6,11 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 12:27:39 by guilmira          #+#    #+#             */
-/*   Updated: 2023/09/08 16:00:18 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/08 17:37:58 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Server.hpp"
-
-/* static bool parserMode(Command& command)
-{
-	Client&						client = *command.client;
-	std::string&				buffer = *command.buffer;
-
-	if (static_cast<int>(command.message.size()) < 2)
-	{
-		buffer = ERR_NEEDMOREPARAMS(client.getNickname(), command.message[0]);
-		return true;
-	}
-	if (static_cast<int>(command.message.size()) > 3)
-	{
-		buffer = displayMsg("666", "too many parameters", client.getNickname());
-		return true;
-	}
-	return false;
-} */
 
 static bool handleErrors(Server& server, Client& client, std::string& buffer, Command& command)
 {
@@ -92,13 +74,13 @@ static void replyChannelModes(Channel& channel, Client& client)
 }
 
 // Si hay p no puede haber s
-// Va iterando por todos los mensajes, si hay 'o', 'l', 'k' o 'b' el siguiente mensaje es el parametro de estas opciones 
 
 static size_t handleModesWithParams(Channel& channel, Client& client, std::string& modes, std::vector<std::string>& message, size_t currentMsg)
 {
 	size_t pos = 0;
 	size_t argPos = 1;
 	bool action = MODE_CHANNEL_ADD;
+	std::string noParameter = "";
 
 	while (pos < modes.size())
 	{
@@ -112,13 +94,32 @@ static size_t handleModesWithParams(Channel& channel, Client& client, std::strin
 			if ((currentMsg + argPos) < message.size())
 				channel.setMode(client, modes[pos], message[currentMsg + argPos], action);
 			else
-				channel.setMode(client, modes[pos], "", action);
+				channel.setMode(client, modes[pos], noParameter, action);
 			if (action != MODE_CHANNEL_REMOVE && modes[pos] != 'l')
 				argPos++;
 		}
 		pos++;
 	}
 	return argPos;
+}
+
+void handleNormalModes(Channel& channel, Client& client, std::string& modes)
+{
+	size_t pos = 0;
+	bool action = MODE_CHANNEL_ADD;
+	std::string noParameter = "";
+
+	while (pos < modes.size())
+	{
+		if (modes[pos] == SYMBOL_MINUS)
+			action = MODE_CHANNEL_REMOVE;
+		else if (modes[pos] == SYMBOL_PLUS)
+			action = MODE_CHANNEL_ADD;
+		if (modes[pos] != 'o' && modes[pos] != 'k' && modes[pos] != 'v'
+			&& modes[pos] != 'l' && modes[pos] != 'b')
+			channel.setMode(client, modes[pos], noParameter, action);
+		pos++;
+	}
 }
 
 static void modifyChannelModes(Channel& channel, Client& client, std::vector<std::string>& message)
@@ -130,8 +131,8 @@ static void modifyChannelModes(Channel& channel, Client& client, std::vector<std
 	while (it != message.end())
 	{
 		skips = handleModesWithParams(channel, client, *it, message, pos);
-		break ; // JUST FOR TESTING REMOVE ME
-		pos++;
+		handleNormalModes(channel, client, *it);
+		pos += skips;
 		it += skips;
 	}
 }
