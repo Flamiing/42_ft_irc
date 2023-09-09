@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/05 03:39:49 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/09 03:15:58 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static bool handleErrors(Client& client, std::string& buffer, Command& command)
 		buffer = ERR_NOTEXTTOSEND(client.getNickname());
 		return true;
 	}
-	// TODO: Hay que gestionar ERR_CANNOTSENDTOCHAN, pero necesitamos que los modos esten hechos
 	return false;
 }
 
@@ -55,29 +54,34 @@ static void sendMessageToChannel(Server& server, Client& client, std::string& ch
 {
 	std::vector<Channel> channels = server.channels;
 	std::vector<Channel>::iterator it = channels.begin();
-	bool messageSended = false;
 	std::string reply;
 	
 	while (it != channels.end())
 	{
-		if (!userNotInChannel(server, client.getNickname(), channel)
-			&& toUpperCase((*it).getName()) == toUpperCase(channel))
+		if (toUpperCase((*it).getName()) == toUpperCase(channel)
+			&& (!userNotInChannel(server, client.getNickname(), channel)
+			|| (*it).modes['n'] != true))
 		{
-			reply = RPL_PRIVMSG(client.getNickname(), client.getUsername(), (*it).getName(), messageToSend);
-			(*it).messageOnlineUsers(client.getNickname(), reply);
-			messageSended = true;
-			break ;
+			if (!server.isBanned(client, channel) && (!(*it).modes['m']
+				|| ((*it).modes['m'] && (*it).userCanTalk(client.getNickname()))))
+			{
+				reply = RPL_PRIVMSG(client.getNickname(), client.getUsername(), (*it).getName(), messageToSend);
+				(*it).messageOnlineUsers(client.getNickname(), reply);
+			}
+			else
+			{
+				reply = ERR_CANNOTSENDTOCHAN(client.getNickname(), (*it).getName());
+				send(client.getSocket(), reply.c_str(), reply.size(), 0);
+			}
+			return ;
 		}
 		it++;
 	}
-	if (!messageSended)
-	{
-		if (channelNotFound(server.channels, channel))
-			reply = ERR_NOSUCHCHANNEL(client.getNickname(), channel);
-		else
-			reply = ERR_NOTONCHANNEL(client.getNickname(), channel);
-		send(client.getSocket(), reply.c_str(), reply.size(), 0);
-	}
+	if (channelNotFound(server.channels, channel))
+		reply = ERR_NOSUCHCHANNEL(client.getNickname(), channel);
+	else
+		reply = ERR_NOTONCHANNEL(client.getNickname(), channel);
+	send(client.getSocket(), reply.c_str(), reply.size(), 0);
 }
 
 static void sendMessageToReceivers(Server& server, Client& client, std::vector<std::string>& receivers, std::string& messageToSend)

@@ -6,31 +6,11 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 12:27:39 by guilmira          #+#    #+#             */
-/*   Updated: 2023/09/05 21:14:07 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/08 17:37:58 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Server.hpp"
-
-/* static bool parserMode(Command& command)
-{
-	Client&						client = *command.client;
-	std::string&				buffer = *command.buffer;
-
-	if (static_cast<int>(command.message.size()) < 2)
-	{
-		buffer = ERR_NEEDMOREPARAMS(client.getNickname(), command.message[0]);
-		return true;
-	}
-	if (static_cast<int>(command.message.size()) > 3)
-	{
-		buffer = displayMsg("666", "too many parameters", client.getNickname());
-		return true;
-	}
-	return false;
-} */
-
-// :Pipera.RO.EU.Undernet.Org 324 worbam #test2 +pmtnlk 10 * //// El asterisco es cuando hay key y el 10 es cuando hay limit
 
 static bool handleErrors(Server& server, Client& client, std::string& buffer, Command& command)
 {
@@ -54,11 +34,10 @@ static bool hasToBeReplied(char mode)
 	{
 		MODE_CHANNEL_OPERATOR,
 		MODE_CHANNEL_BANNED,
-		MODE_CHANNEL_SPEAK_ABILITY,
-		MODE_CHANNEL_KEY
+		MODE_CHANNEL_SPEAK_ABILITY
 	};
 
-	while (pos < 4)
+	while (pos < 3)
 	{
 		if (mode == modesList[pos])
 			return false;
@@ -85,8 +64,6 @@ static void replyChannelModes(Channel& channel, Client& client)
 			hasLimit = true;
 		it++;
 	}
-	if (hasKey)
-		modesToReturn += 'k';
 	if (hasLimit)
 		modesToReturn += " " + numberToString(channel.getLimit());
 	if (hasKey)
@@ -94,6 +71,70 @@ static void replyChannelModes(Channel& channel, Client& client)
 	reply = RPL_CHANNELMODEIS(client.getNickname(), channel.getName(), modesToReturn);
 	reply += RPL_CREATIONTIME(client.getNickname(), channel.getName(), channel.creationTime);
 	send(client.getSocket(), reply.c_str(), reply.size(), 0);
+}
+
+// Si hay p no puede haber s
+
+static size_t handleModesWithParams(Channel& channel, Client& client, std::string& modes, std::vector<std::string>& message, size_t currentMsg)
+{
+	size_t pos = 0;
+	size_t argPos = 1;
+	bool action = MODE_CHANNEL_ADD;
+	std::string noParameter = "";
+
+	while (pos < modes.size())
+	{
+		if (modes[pos] == SYMBOL_MINUS)
+			action = MODE_CHANNEL_REMOVE;
+		else if (modes[pos] == SYMBOL_PLUS)
+			action = MODE_CHANNEL_ADD;
+		if (modes[pos] == 'o' || modes[pos] == 'k' || modes[pos] == 'v'
+			|| modes[pos] == 'l' || modes[pos] == 'b')
+		{
+			if ((currentMsg + argPos) < message.size())
+				channel.setMode(client, modes[pos], message[currentMsg + argPos], action);
+			else
+				channel.setMode(client, modes[pos], noParameter, action);
+			if (action != MODE_CHANNEL_REMOVE && modes[pos] != 'l')
+				argPos++;
+		}
+		pos++;
+	}
+	return argPos;
+}
+
+void handleNormalModes(Channel& channel, Client& client, std::string& modes)
+{
+	size_t pos = 0;
+	bool action = MODE_CHANNEL_ADD;
+	std::string noParameter = "";
+
+	while (pos < modes.size())
+	{
+		if (modes[pos] == SYMBOL_MINUS)
+			action = MODE_CHANNEL_REMOVE;
+		else if (modes[pos] == SYMBOL_PLUS)
+			action = MODE_CHANNEL_ADD;
+		if (modes[pos] != 'o' && modes[pos] != 'k' && modes[pos] != 'v'
+			&& modes[pos] != 'l' && modes[pos] != 'b')
+			channel.setMode(client, modes[pos], noParameter, action);
+		pos++;
+	}
+}
+
+static void modifyChannelModes(Channel& channel, Client& client, std::vector<std::string>& message)
+{
+	std::vector<std::string>::iterator it = message.begin() + 2;
+	size_t pos = 2;
+	size_t skips;
+	
+	while (it != message.end())
+	{
+		skips = handleModesWithParams(channel, client, *it, message, pos);
+		handleNormalModes(channel, client, *it);
+		pos += skips;
+		it += skips;
+	}
 }
 
 void modeCommand(Command& command)
@@ -104,7 +145,9 @@ void modeCommand(Command& command)
 
 	if (handleErrors(server, client, buffer, command))
 		return ;
-	Channel channel = server.getChannelByName(command.message[1]);
+	Channel& channel = server.getChannelByName(command.message[1]);
 	if (command.message.size() == 2)
 		replyChannelModes(channel, client);
+	else if (command.message.size() > 2)
+		modifyChannelModes(channel, client, command.message);
 }

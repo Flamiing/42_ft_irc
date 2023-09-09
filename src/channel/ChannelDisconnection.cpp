@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:41:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/05 00:23:28 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/08 16:17:59 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void Channel::disconnectFromChannel(std::string client, const std::string& reply
 	{
 		if (it->getNickname() == client)
 		{
+			this->removeTalkingPermissions(it->getNickname());
+			_removeOperator(it->getNickname());
 			this->_onlineUsers.erase(it);
 			break ;
 		}
@@ -37,6 +39,8 @@ void Channel::removeFromChannel(std::string client, const std::string& reply)
 	{
 		if (toUpperCase(it->getNickname()) == toUpperCase(client))
 		{
+			this->removeTalkingPermissions(it->getNickname());
+			_removeOperator(it->getNickname());
 			this->_onlineUsers.erase(it);
 			break ;
 		}

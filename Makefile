@@ -6,7 +6,7 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/27 19:25:47 by alaaouam          #+#    #+#              #
-#    Updated: 2023/09/09 15:24:50 by guilmira         ###   ########.fr        #
+#    Updated: 2023/09/09 18:37:25 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,11 +24,11 @@ SRC =	main.cpp Server.cpp ServerRun.cpp ServerClientConnections.cpp ServerProces
 			   splitString.cpp nickCommand.cpp operCommand.cpp ServerChannelConnection.cpp ChannelConnection.cpp \
 			   Channel.cpp joinCommand.cpp getMessage.cpp noticeCommand.cpp trimSpaces.cpp toUpperCase.cpp \
 			   quitCommand.cpp ChannelDisconnection.cpp Command.cpp ServerClientDisconnection.cpp dieCommand.cpp topicCommand.cpp\
-			   ChannelMethods.cpp \
+			   ChannelMethods.cpp namesCommand.cpp inviteCommand.cpp \
 			   channelUtils.cpp kickCommand.cpp ServerChannelDisconnection.cpp partCommand.cpp numberToString.cpp \
 			   privmsgCommand.cpp ServerChannels.cpp listCommand.cpp getChannelNames.cpp awayCommand.cpp \
-			   getCurrentTime.cpp modeCommand.cpp \
-			   namesCommand.cpp inviteCommand.cpp
+			   getCurrentTime.cpp modeCommand.cpp oMode.cpp ChannelModes.cpp kMode.cpp lMode.cpp ChannelBan.cpp \
+			   bMode.cpp vMode.cpp mMode.cpp iMode.cpp tMode.cpp nMode.cpp pMode.cpp sMode.cpp
 			
 SRC_PATH = src/*/
 SRCS = $(addprefix $(SRC_PATH), $(SRC))
@@ -43,7 +43,6 @@ CPP = c++
 CPPFLAGS =  -Wall -Wextra -Werror -std=c++98 -g3 -fsanitize=address
 RM = rm -rf
 
-#_GUILLE - ¿Que pasa si ejecutamos en un puerto en uso, 4242?
 ARG1 = 2042
 ARG2 = pass
 CSANITIZE	= -fsanitize=address
@@ -66,8 +65,6 @@ clean:
 fclean: clean
 	@$(RM) $(NAME)
 	@echo "$(GREEN)<-> $(NAME) cleaned succesfuly! <->$(COLOR_OFF)"
-
-
 
 exe: $(OBJS)
 	@$(CPP) $(CPPFLAGS) $(OBJS) -o $(NAME)

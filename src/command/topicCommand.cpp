@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:35:00 by guilmira          #+#    #+#             */
-/*   Updated: 2023/09/09 14:16:14 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/09 18:48:52 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 void static changeTopic(Client& client, std::vector<std::string> message, Channel& channel, std::string& buffer)
 {
-/*  if (channel._checkOperator(client)) */
-	if (channel.isClientOperator(client)) /* _GUILLE */
+ 	if (channel.checkOperator(client.getNickname()))
 		channel.setTopic(message[2]);
 	else
 		buffer = ERR_CHANOPRIVSNEEDED(client.getNickname(), channel.getName());
