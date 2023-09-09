@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 17:30:53 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/06 11:01:29 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/09 18:01:00 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,4 @@ std::string getMessage(const std::string& raw, const std::vector<std::string>& r
 	}
 	trimSpaces(newString);
 	return newString;
-}
-
-
-/* _GUILLE - para mensajes generales */
-std::string displayMsg(std::string number, std::string str, std::string clientNick)
-{
-	return (std::string(":localhost " + number + " " + clientNick + " " + str + "\r\n") );
 }

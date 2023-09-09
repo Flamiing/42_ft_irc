@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/06 10:53:14 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/09 18:24:44 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <sys/types.h>
 # include <netinet/in.h>
 # include <cstdlib>
-# include <ctime>
+# include <sys/time.h>
 # include <unistd.h>
 # include <arpa/inet.h>
 # include <poll.h>
@@ -56,7 +56,7 @@ class Server
 		std::map<int, Client> getClients(void) const;
 		int getSocketByNickname(const std::string nickname) const;
 		Client getClientByNickname(const std::string nickname) const;
-		Channel getChannelByName(const std::string nickname) const;
+		Channel& getChannelByName(const std::string channelName);
 		std::string getRawNickname(const std::string& modifiedNickname);
 		void addChannel(std::string channelName, std::string keyName);
 		void connectToChannel(std::string& channel, Client& client, std::string& key, std::string& buffer);

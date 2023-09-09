@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/09 16:55:29 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/09 17:44:11 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,13 @@
 # define MODE_CHANNEL_BANNED 'b'
 # define MODE_CHANNEL_SPEAK_ABILITY 'v'
 # define MODE_CHANNEL_KEY 'k'
+# define MODE_CHANNEL_ADD true
+# define MODE_CHANNEL_REMOVE false
+
+class Channel;
+
+typedef void (Channel::*modeWithParamsFunctions)(Client& client, std::string param, bool action);
+typedef void (Channel::*modeFunctions)(Client& client, bool action);
 
 class Channel
 {
@@ -47,25 +54,44 @@ class Channel
 		void		setTopic(std::string topic);
 		std::string getKey(void) const;
 		size_t getLimit(void) const;
-		std::string getOnlineUsersList(void) const;
+		std::string getOnlineUsersList(void);
 		std::vector<Client> getBannedUsers(void) const;
 		void joinChannel(Client& client, std::string& key, std::string& buffer);
 		bool userIsBanned(std::string& nickname);
+		bool banUser(std::string& nickname);
+		void unbanUser(std::string& nickname);
+		bool userCanTalk(std::string nickname);
+		void removeTalkingPermissions(std::string nickname);
+		
+		void setMode(Client& client, char mode, std::string param, bool action);
+		void setO(Client& client, std::string param, bool action);
+		void setK(Client& client, std::string param, bool action);
+		void setL(Client& client, std::string param, bool action);
+		void setB(Client& client, std::string param, bool action);
+		void setV(Client& client, std::string param, bool action);
+		void setM(Client& client, bool action);
+		void setI(Client& client, bool action);
+		void setT(Client& client, bool action);
+		void setN(Client& client, bool action);
+		void setP(Client& client, bool action);
+		void setS(Client& client, bool action);
+
 		bool clientInChannel(std::string nickname);
 		void disconnectFromChannel(std::string client, const std::string& reply);
 		void removeFromChannel(std::string client, const std::string& reply);
 		void messageOnlineUsers(const std::string sender, const std::string& reply);
+		bool checkOperator(std::string client);
 		
-
-		bool isClientOperator(Client& client);
-
 		bool isUserInChannel();
 
 		std::map<char, bool> modes;
 		std::string creationTime;
+		std::map<char, modeWithParamsFunctions> modesWithParams;
+		std::map<char, modeFunctions> modesWithoutParams;
 	private:
 		void _informOnlineUsers(const std::string& reply);
 		void _replyToNewUser(Client& client);
+		void _removeOperator(std::string operatorToRemove);
 		
 		std::string _name;
 		size_t		_userCount;
@@ -73,6 +99,8 @@ class Channel
 		std::string _topic;
 		size_t _limit;
 
+		std::vector<std::string> _operators;
+		std::vector<std::string> _canTalk;
 		std::vector<Client> _onlineUsers;
 		std::vector<Client> _bannedUsers;
 };

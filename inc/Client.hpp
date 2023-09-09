@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 00:59:24 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/08 16:10:01 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/09 17:15:20 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ class Client
 	public:
 		Client(void);
 		Client(int socket);
+		Client(std::string& nickname);
 		Client(const Client& other);
 		~Client(void);
 		

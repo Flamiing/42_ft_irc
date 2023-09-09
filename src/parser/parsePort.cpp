@@ -6,14 +6,16 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 22:25:14 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 02:16:52 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/08 12:50:23 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Server.hpp"
 
-static bool allDigits(const std::string& str)
+bool allDigits(const std::string& str)
 {
+	if (str.empty())
+		return false;
 	size_t pos = 0;
 	while (pos < str.length())
 	{

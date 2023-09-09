@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:09:58 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/09 14:56:00 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/09 18:00:48 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ bool Server::_processMessage(const int& client, std::string message)
 {
 	std::string buffer;
 	int keyToFind = client;
-	if (message[message.size() - 1] == '\n') /* _GUILLE bastaria con una linea aqui para bloquear que nc funcione sin el -c */
+	if (message[message.size() - 1] == '\n')
 		message.erase(message.size() - 1);
 	if (message[message.size() - 1] == '\r')
 		message.erase(message.size() - 1);

@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 14:17:16 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 18:22:25 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/09 03:29:18 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ bool userNotInChannel(Server& server, std::string nickname, std::string& channel
 		}
 		it++;
 	}
-	
 	return true;
 }
 
@@ -63,6 +62,15 @@ static std::string getKickReply(Server& server, Client& client, Command& command
 	return reply;
 }
 
+static bool userNotOperator(Server& server, std::string nickname, std::string& channelName)
+{
+	Channel& channel = server.getChannelByName(channelName);
+
+	if (channel.checkOperator(nickname))
+		return false;
+	return true;
+}
+
 static bool handleErrors(Server& server, Client& client, std::string& buffer, Command& command)
 {
 	if (command.message.size() < 3 || (command.message.size() == 3 && command.message[2] == ":"))
@@ -85,8 +93,11 @@ static bool handleErrors(Server& server, Client& client, std::string& buffer, Co
 		buffer = ERR_NOSUCHNICK(client.getNickname(), command.message[2]);
 		return true;
 	}
-	// TODO: Gestionar ERR_CHANOPRIVSNEEDED cuando el usuario
-	// que ejecuta el comando no sea operador del canal
+	else if (!client.isOperator() && userNotOperator(server, client.getNickname(), command.message[1]))
+	{
+		buffer = ERR_CHANOPRIVSNEEDED(client.getNickname(), command.message[1]);
+		return true;
+	}
 	return false;
 }
 

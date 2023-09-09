@@ -34,7 +34,7 @@ static std::string processRaw(std::string raw)
 	}
 	return raw;
 }
-
+/* _GUILLE channelModes  si es privetMSG CON MACROS */
 static void printNames(Client& client, Channel& channel)
 {
 	std::string reply = RPL_NAMREPLY(client.getNickname(), "=", channel.getName(), channel.getOnlineUsersList());

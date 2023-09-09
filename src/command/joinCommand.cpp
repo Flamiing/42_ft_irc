@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/09 14:41:06 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/09 18:19:06 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static bool isInvitieOnly(Server& server, std::string& channelName)
 	return false;
 }
 
+/* _GUILLE al hacer join meter modo operador (usuario al crear el canal es op)
+ */
 static void joinChannel(Command& command, std::string& channelName, std::string& keyName, std::string& buffer)
 {
 	Server&						server = *command.server;
@@ -141,16 +143,6 @@ void joinCommand(Command& command)
 			joinChannel(command, channelNames[i], keyNames[i], buffer);
 	}
 }
-
-
-
-
-
-
-
-
-
-
 
 /* _GUILLE PRINTER PARA BORRAR */
 /* void pstr(std::vector<std::string>& channelNames, std::vector<std::string>& keyNames)

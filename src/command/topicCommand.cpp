@@ -6,16 +6,22 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:35:00 by guilmira          #+#    #+#             */
-/*   Updated: 2023/09/09 14:16:14 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/09 18:03:36 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Server.hpp"
 
+/* _GUILLE */
+/* else if (!client.isOperator() && userNotOperator(server, client.getNickname(), command.message[1]))
+	{
+		buffer = ERR_CHANOPRIVSNEEDED(client.getNickname(), command.message[1]);
+		return true;
+	} */
+
 void static changeTopic(Client& client, std::vector<std::string> message, Channel& channel, std::string& buffer)
 {
-/*  if (channel._checkOperator(client)) */
-	if (channel.isClientOperator(client)) /* _GUILLE */
+ 	if (channel.checkOperator(client.getNickname()))
 		channel.setTopic(message[2]);
 	else
 		buffer = ERR_CHANOPRIVSNEEDED(client.getNickname(), channel.getName());
@@ -56,6 +62,7 @@ void topicCommand(Command& command)
 	{
 		if (isEqualStr(channel[i].getName(), command.message[1]))
 		{
+			/* _GUILLE solo operador si modo t. si no todos */
 			if (!client.isConnectedToChannel(channel[i]))
 			{
 				buffer = ERR_NOTONCHANNEL(client.getNickname(), command.message[0]);

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:32 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/08 16:18:42 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/09 17:35:06 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ Channel::Channel(std::string& name, std::string& key)
 	: _name(name), _userCount(0), _key(key), _topic("")
 {
 	this->creationTime = getCurrentTime();
+	
 	this->modes[MODE_CHANNEL_OPERATOR] = false;
 	this->modes[MODE_CHANNEL_PRIVATE] = false;
 	this->modes[MODE_CHANNEL_SECRET] = false;
@@ -29,12 +30,22 @@ Channel::Channel(std::string& name, std::string& key)
 	this->modes[MODE_CHANNEL_BANNED] = false;
 	this->modes[MODE_CHANNEL_SPEAK_ABILITY] = false;
 	this->modes[MODE_CHANNEL_KEY] = false;
+
+	this->modesWithParams[MODE_CHANNEL_OPERATOR] = &Channel::setO;
+	this->modesWithParams[MODE_CHANNEL_KEY] = &Channel::setK;
+	this->modesWithParams[MODE_CHANNEL_USER_LIMIT] = &Channel::setL;
+	this->modesWithParams[MODE_CHANNEL_BANNED] = &Channel::setB;
+	this->modesWithParams[MODE_CHANNEL_SPEAK_ABILITY] = &Channel::setV;
+	
+	this->modesWithoutParams[MODE_CHANNEL_MODERATED] = &Channel::setM;
+	this->modesWithoutParams[MODE_CHANNEL_INVITE_ONLY] = &Channel::setI;
+	this->modesWithoutParams[MODE_CHANNEL_TOPIC_OPER_ONLY] = &Channel::setT;
+	this->modesWithoutParams[MODE_CHANNEL_NO_MSG_FROM_OUTSIDE] = &Channel::setN;
+	this->modesWithoutParams[MODE_CHANNEL_PRIVATE] = &Channel::setP;
+	this->modesWithoutParams[MODE_CHANNEL_SECRET] = &Channel::setS;
 }
 
-Channel::Channel(const Channel& other)
-{
-	*this = other;
-}
+Channel::Channel(const Channel& other) { *this = other; }
 
 Channel::~Channel(void) {}
 
@@ -48,6 +59,18 @@ Channel& Channel::operator=(const Channel& other)
 		this->_limit = other._limit;
 		this->creationTime = other.creationTime;
 		size_t pos = 0;
+		while (pos < other._operators.size())
+		{
+			this->_operators.push_back(other._operators[pos]);
+			pos++;
+		}
+		pos = 0;
+		while (pos < other._canTalk.size())
+		{
+			this->_canTalk.push_back(other._canTalk[pos]);
+			pos++;
+		}
+		pos = 0;
 		while (pos < other._onlineUsers.size())
 		{
 			this->_onlineUsers.push_back(other._onlineUsers[pos]);
@@ -59,11 +82,23 @@ Channel& Channel::operator=(const Channel& other)
 			this->_bannedUsers.push_back(other._bannedUsers[pos]);
 			pos++;
 		}
-		std::map<char, bool>::const_iterator it = other.modes.begin();
-		while (it != other.modes.end())
+		std::map<char, bool>::const_iterator itModes = other.modes.begin();
+		while (itModes != other.modes.end())
 		{
-			this->modes[it->first] = it->second;
-			it++;
+			this->modes[itModes->first] = itModes->second;
+			itModes++;
+		}
+		std::map<char, modeWithParamsFunctions>::const_iterator itModesParams = other.modesWithParams.begin();
+		while (itModesParams != other.modesWithParams.end())
+		{
+			this->modesWithParams[itModesParams->first] = itModesParams->second;
+			itModesParams++;
+		}
+		std::map<char, modeFunctions>::const_iterator itModesWithout = other.modesWithoutParams.begin();
+		while (itModesWithout != other.modesWithoutParams.end())
+		{
+			this->modesWithoutParams[itModesWithout->first] = itModesWithout->second;
+			itModesWithout++;
 		}
 	}
 	return *this;
@@ -82,14 +117,19 @@ void		Channel::setTopic(std::string topic)
 	this->_topic = topic;
 }
 
-std::string Channel::getOnlineUsersList() const
+std::string Channel::getOnlineUsersList()
 {
 	std::vector<Client>::const_iterator it = this->_onlineUsers.begin();
 	std::string listOfUsers;
 
 	while (it != this->_onlineUsers.end())
 	{
-		listOfUsers += it->getNickname();
+		if (checkOperator(it->getNickname()))
+			listOfUsers += "@" + it->getNickname();
+		else if (this->userCanTalk(it->getNickname()))
+			listOfUsers += "+" + it->getNickname();
+		else
+			listOfUsers += it->getNickname();
 		if ((it + 1) != this->_onlineUsers.end())
 			listOfUsers += " ";
 		it++;
@@ -97,18 +137,7 @@ std::string Channel::getOnlineUsersList() const
 	return listOfUsers;
 }
 
-bool Channel::userIsBanned(std::string& nickname)
-{
-	std::vector<Client>::const_iterator it = this->_bannedUsers.begin();
 
-	while (it != this->_bannedUsers.end())
-	{
-		if (isEqualStr(it->getNickname(), nickname))
-			return true;
-		it++;
-	}
-	return false;
-}
 
 bool Channel::clientInChannel(std::string nickname)
 {
