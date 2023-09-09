@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/09 02:45:13 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/09 03:15:58 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static bool handleErrors(Client& client, std::string& buffer, Command& command)
 		buffer = ERR_NOTEXTTOSEND(client.getNickname());
 		return true;
 	}
-	// TODO: Hay que gestionar ERR_CANNOTSENDTOCHAN, pero necesitamos que los modos esten hechos
 	return false;
 }
 

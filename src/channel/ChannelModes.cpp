@@ -6,13 +6,13 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 03:22:11 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/09 02:15:21 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/09 03:24:15 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Server.hpp"
 
-bool Channel::_checkOperator(std::string nickname)
+bool Channel::checkOperator(std::string nickname)
 {
 	std::vector<std::string>::iterator it = this->_operators.begin();
 	std::string reply;
@@ -57,7 +57,7 @@ void Channel::setMode(Client& client, char mode, std::string param, bool action)
 
 	if (mode == '-' || mode == '+')
 		return ;
-	if (!_checkOperator(client.getNickname()) && !client.isOperator())
+	if (!checkOperator(client.getNickname()) && !client.isOperator())
 	{
 		reply = ERR_CHANOPRIVSNEEDED(client.getNickname(), this->getName());
 		send(client.getSocket(), reply.c_str(), reply.size(), 0);

@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/08 02:17:44 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/09 03:17:36 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ class Server
 		std::map<int, Client> getClients(void) const;
 		int getSocketByNickname(const std::string nickname) const;
 		Client getClientByNickname(const std::string nickname) const;
-		Channel& getChannelByName(const std::string nickname);
+		Channel& getChannelByName(const std::string channelName);
 		std::string getRawNickname(const std::string& modifiedNickname);
 		void addChannel(std::string newChannel);
 		void connectToChannel(std::string& channel, Client& client, std::string key);

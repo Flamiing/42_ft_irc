@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 01:00:27 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/08 16:12:16 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/09 03:24:20 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ void Channel::setO(Client& client, std::string param, bool action)
 		if (toUpperCase(it->getNickname()) == toUpperCase(param))
 		{
 			this->modes[MODE_CHANNEL_OPERATOR] = true;
-			if (action == MODE_CHANNEL_ADD && !_checkOperator(param))
+			if (action == MODE_CHANNEL_ADD && !checkOperator(param))
 			{
 				this->_operators.push_back(param);
 				reply = RPL_MODE(client.getNickname(), client.getUsername(), this->getName(), "+o", param);
 				_informOnlineUsers(reply);
 			}
-			else if (action == MODE_CHANNEL_REMOVE && _checkOperator(param))
+			else if (action == MODE_CHANNEL_REMOVE && checkOperator(param))
 			{
 				_removeOperator(param);
 				reply = RPL_MODE(client.getNickname(), client.getUsername(), this->getName(), "-o", param);

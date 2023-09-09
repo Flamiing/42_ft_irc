@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:32 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/09 03:10:22 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/09 03:24:05 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ std::string Channel::getOnlineUsersList()
 
 	while (it != this->_onlineUsers.end())
 	{
-		if (_checkOperator(it->getNickname()))
+		if (checkOperator(it->getNickname()))
 			listOfUsers += "@" + it->getNickname();
 		else if (this->userCanTalk(it->getNickname()))
 			listOfUsers += "+" + it->getNickname();

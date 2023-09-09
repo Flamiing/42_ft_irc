@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 15:44:37 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/08 16:26:40 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/09 03:24:23 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ bool Channel::userCanTalk(std::string nickname)
 {
 	std::vector<std::string>::iterator it = this->_canTalk.begin();
 	
-	if (_checkOperator(nickname))
+	if (checkOperator(nickname))
 		return true;
 	while (it != this->_canTalk.end())
 	{

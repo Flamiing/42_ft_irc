@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/09 03:10:24 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/09 03:23:53 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ class Channel
 		void disconnectFromChannel(std::string client, const std::string& reply);
 		void removeFromChannel(std::string client, const std::string& reply);
 		void messageOnlineUsers(const std::string sender, const std::string& reply);
+		bool checkOperator(std::string client);
 		
 		std::map<char, bool> modes;
 		std::string creationTime;
@@ -92,7 +93,6 @@ class Channel
 	private:
 		void _informOnlineUsers(const std::string& reply);
 		void _replyToNewUser(Client& client);
-		bool _checkOperator(std::string client);
 		void _removeOperator(std::string operatorToRemove);
 		
 		std::string _name;
