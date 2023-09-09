@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 21:53:27 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/05 03:05:29 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/09 03:04:27 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,19 @@
 
 void listAllChannels(std::vector<Channel>& channels, Client& client)
 {
-	std::vector<Channel>::const_iterator channel = channels.begin();
+	std::vector<Channel>::iterator channel = channels.begin();
 	std::string reply;
 	
 	reply = RPL_LISTSTART(client.getNickname());
 	send(client.getSocket(), reply.c_str(), reply.size(), 0);
 	while (channel != channels.end())
 	{
-		reply = RPL_LIST(client.getNickname(), channel->getName(),
-			numberToString(channel->getUserCount()), channel->getTopic());
-		send(client.getSocket(), reply.c_str(), reply.size(), 0);
+		if ((*channel).modes['p'] != true && (*channel).modes['s'] != true)
+		{
+			reply = RPL_LIST(client.getNickname(), channel->getName(),
+				numberToString(channel->getUserCount()), channel->getTopic());
+			send(client.getSocket(), reply.c_str(), reply.size(), 0);
+		}
 		channel++;
 	}
 	reply = RPL_LISTEND(client.getNickname());
@@ -43,7 +46,8 @@ void listSpecifiedChannels(std::vector<Channel>& channels, std::vector<std::stri
 		channel = channels.begin();
 		while (channel != channels.end())
 		{
-			if (toUpperCase(channel->getName()) == toUpperCase(*toFind))
+			if (toUpperCase(channel->getName()) == toUpperCase(*toFind)
+				&& channel->modes['p'] != true && channel->modes['s'] != true)
 			{
 				reply = RPL_LIST(client.getNickname(), channel->getName(),
 					numberToString(channel->getUserCount()), channel->getTopic());
