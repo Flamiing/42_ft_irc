@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:32 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/11 08:21:43 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/11 10:48:20 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +19,8 @@ Channel::Channel(std::string& name, std::string& key)
 {
 	this->creationTime = getCurrentTime();
 	
-	this->modes[MODE_CHANNEL_OPERATOR] = false;
-	this->modes[MODE_CHANNEL_PRIVATE] = false;
-	this->modes[MODE_CHANNEL_SECRET] = false;
-	this->modes[MODE_CHANNEL_INVITE_ONLY] = false;
-	this->modes[MODE_CHANNEL_TOPIC_OPER_ONLY] = false;
-	this->modes[MODE_CHANNEL_NO_MSG_FROM_OUTSIDE] = false;
-	this->modes[MODE_CHANNEL_MODERATED] = false;
-	this->modes[MODE_CHANNEL_USER_LIMIT] = false;
-	this->modes[MODE_CHANNEL_BANNED] = false;
-	this->modes[MODE_CHANNEL_SPEAK_ABILITY] = false;
-	this->modes[MODE_CHANNEL_KEY] = false;
-
-	this->modesWithParams[MODE_CHANNEL_OPERATOR] = &Channel::setO;
-	this->modesWithParams[MODE_CHANNEL_KEY] = &Channel::setK;
-	this->modesWithParams[MODE_CHANNEL_USER_LIMIT] = &Channel::setL;
-	this->modesWithParams[MODE_CHANNEL_BANNED] = &Channel::setB;
-	this->modesWithParams[MODE_CHANNEL_SPEAK_ABILITY] = &Channel::setV;
-	
-	this->modesWithoutParams[MODE_CHANNEL_MODERATED] = &Channel::setM;
-	this->modesWithoutParams[MODE_CHANNEL_INVITE_ONLY] = &Channel::setI;
-	this->modesWithoutParams[MODE_CHANNEL_TOPIC_OPER_ONLY] = &Channel::setT;
-	this->modesWithoutParams[MODE_CHANNEL_NO_MSG_FROM_OUTSIDE] = &Channel::setN;
-	this->modesWithoutParams[MODE_CHANNEL_PRIVATE] = &Channel::setP;
-	this->modesWithoutParams[MODE_CHANNEL_SECRET] = &Channel::setS;
+	_initChannelModes();
+	_initModeFunctions();
 }
 
 Channel::Channel(const Channel& other) { *this = other; }
