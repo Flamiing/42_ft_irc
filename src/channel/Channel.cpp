@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:32 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/11 10:55:52 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/11 10:58:26 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,61 +79,4 @@ Channel& Channel::operator=(const Channel& other)
 		}
 	}
 	return *this;
-}
-
-
-std::string Channel::getName() const { return this->_name; }
-size_t Channel::getUserCount() const { return this->_onlineUsers.size(); }
-std::string Channel::getTopic() const { return this->_topic; }
-std::string Channel::getKey() const { return this->_key; }
-size_t Channel::getLimit() const { return this->_limit; }
-void		Channel::setTopic(std::string topic)
-{
-	this->_topic = topic;
-}
-//std::vector<Client> getBannedUsers(void) const { return this->_bannedUsers; }
-
-std::string Channel::getOnlineUsersList()
-{
-	std::vector<Client>::const_iterator it = this->_onlineUsers.begin();
-	std::string listOfUsers;
-
-	while (it != this->_onlineUsers.end())
-	{
-		if (checkOperator(it->getNickname()))
-			listOfUsers += "@" + it->getNickname();
-		else if (this->userCanTalk(it->getNickname()))
-			listOfUsers += "+" + it->getNickname();
-		else
-			listOfUsers += it->getNickname();
-		if ((it + 1) != this->_onlineUsers.end())
-			listOfUsers += " ";
-		it++;
-	}
-	return listOfUsers;
-}
-
-bool Channel::clientInChannel(std::string nickname)
-{
-	std::vector<Client>::const_iterator it = this->_onlineUsers.begin();
-
-	while (it != this->_onlineUsers.end())
-	{
-		if (toUpperCase((*it).getNickname()) == toUpperCase(nickname))
-			return true;
-		it++;
-	}
-	return false;
-}
-
-void Channel::messageOnlineUsers(const std::string sender, const std::string& reply)
-{
-	std::vector<Client>::const_iterator it = this->_onlineUsers.begin();
-	
-	while (it != this->_onlineUsers.end())
-	{
-		if (toUpperCase(it->getNickname()) != toUpperCase(sender))
-			send(it->getSocket(), reply.c_str(), reply.size(), MSG_NOSIGNAL);
-		it++;
-	}
 }
