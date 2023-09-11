@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Server.cpp                                         :+:      :+:    :+:   */
+/*   ChannelSetters.cpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/21 14:57:11 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/11 12:35:56 by alaaouam         ###   ########.fr       */
+/*   Created: 2023/09/11 10:56:32 by alaaouam          #+#    #+#             */
+/*   Updated: 2023/09/11 10:57:43 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../inc/Server.hpp"
+# include "../../inc/Channel.hpp"
 
-Server::Server(void) {}
+void		Channel::setTopic(std::string topic)
+{
+	this->_topic = topic;
+}
 
-Server::Server(const int port, const std::string& password) :  pollSize(0), _port(port), _password(password) {}
-
-Server::Server(const Server& other) { (void)other; }
-
-Server::~Server(void) {}
-
-Server& Server::operator=(const Server& other) { (void)other; return *this; }

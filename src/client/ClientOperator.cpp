@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Server.cpp                                         :+:      :+:    :+:   */
+/*   ClientOperator.cpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/21 14:57:11 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/11 12:35:56 by alaaouam         ###   ########.fr       */
+/*   Created: 2023/09/11 11:05:57 by alaaouam          #+#    #+#             */
+/*   Updated: 2023/09/11 11:06:17 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../inc/Server.hpp"
+#include "../../inc/Client.hpp"
 
-Server::Server(void) {}
+bool Client::isOperator(void) const { return this->_isOperator; }
 
-Server::Server(const int port, const std::string& password) :  pollSize(0), _port(port), _password(password) {}
-
-Server::Server(const Server& other) { (void)other; }
-
-Server::~Server(void) {}
-
-Server& Server::operator=(const Server& other) { (void)other; return *this; }
+void Client::setAsOperator(void)
+{
+	this->_isOperator = true;
+}

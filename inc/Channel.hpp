@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/11 14:48:30 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/11 16:04:55 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ class Channel
 		std::map<char, modeWithParamsFunctions> modesWithParams;
 		std::map<char, modeFunctions> modesWithoutParams;
 	private:
+		void _initChannelModes(void);
+		void _initModeFunctions(void);
 		void _informOnlineUsers(const std::string& reply);
 		void _replyToNewUser(Client& client);
 		void _removeOperator(std::string operatorToRemove);

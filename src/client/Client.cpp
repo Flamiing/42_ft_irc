@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Client.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 00:59:16 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/09 18:45:48 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/11 11:41:41 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,89 +49,4 @@ Client& Client::operator=(const Client& other)
 		this->_joinedChannels = other._joinedChannels;
 	}
 	return *this;
-}
-
-int Client::getSocket(void) const { return this->_socket; }
-std::string Client::getUsername(void) const { return this->_username; }
-std::string Client::getNickname(void) const { return this->_nickname; }
-std::string Client::getWrongNickname(void) const { return this->_wrongNickname; }
-bool Client::getPassAuth(void) const { return this->_passAuth; }
-bool Client::getUserAuth(void) const { return this->_userAuth; }
-bool Client::getNickAuth(void) const { return this->_nickAuth; }
-bool Client::getAuth(void) const { return this->_auth; }
-bool Client::isOperator(void) const { return this->_isOperator; }
-std::vector<Channel> Client::getJoinedChannels(void) const { return this->_joinedChannels; }
-
-void Client::setAsOperator(void)
-{
-	this->_isOperator = true;
-}
-
-void Client::setPassAuth(const bool auth)
-{
-	this->_passAuth = auth;
-}
-
-void Client::setNickAuth(const bool auth)
-{
-	this->_nickAuth = auth;
-	if (this->getPassAuth() == true && this->getUserAuth() == true && auth == true)
-		this->_auth = auth;
-}
-
-void Client::setUserAuth(const bool auth)
-{
-	this->_userAuth = auth;
-	if (this->getPassAuth() == true && this->getNickAuth() == true && auth == true)
-		this->_auth = auth;
-}
-
-
-void Client::setUsername(const std::string username)
-{
-	this->_username = username;
-}
-
-void Client::setNickname(const std::string nickname)
-{
-	this->_nickname = nickname;
-}
-
-void Client::setWrongNickname(const std::string nickname)
-{
-	this->_wrongNickname = nickname;
-}
-
-void Client::setFullName(const std::string fullName)
-{
-	this->_fullName = fullName;
-}
-
-void Client::addToJoinedChannels(Channel& channel)
-{
-	this->_joinedChannels.push_back(channel);
-}
-
-void Client::removeChannel(std::string& channel)
-{
-	std::vector<Channel>::iterator it = this->_joinedChannels.begin();
-
-	while (it != this->_joinedChannels.end())
-	{
-		if (toUpperCase((*it).getName()) == toUpperCase(channel))
-		{
-			this->_joinedChannels.erase(it);
-			break ;
-		}
-		it++;
-	}
-}
-
-/* On user side */
-bool Client::isConnectedToChannel(Channel& channel)
-{
-	for (std::vector<Channel>::iterator it = this->_joinedChannels.begin(); it != _joinedChannels.end(); it++)
-		if (isEqualStr(it->getName(), channel.getName()))
-			return true;
-	return false;
 }

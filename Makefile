@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
+#    By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/27 19:25:47 by alaaouam          #+#    #+#              #
-#    Updated: 2023/09/09 18:37:25 by guilmira         ###   ########.fr        #
+#    Updated: 2023/09/11 12:34:05 by alaaouam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,11 +24,12 @@ SRC =	main.cpp Server.cpp ServerRun.cpp ServerClientConnections.cpp ServerProces
 			   splitString.cpp nickCommand.cpp operCommand.cpp ServerChannelConnection.cpp ChannelConnection.cpp \
 			   Channel.cpp joinCommand.cpp getMessage.cpp noticeCommand.cpp trimSpaces.cpp toUpperCase.cpp \
 			   quitCommand.cpp ChannelDisconnection.cpp Command.cpp ServerClientDisconnection.cpp dieCommand.cpp topicCommand.cpp\
-			   ChannelMethods.cpp namesCommand.cpp inviteCommand.cpp \
+			   ChannelMethods.cpp namesCommand.cpp inviteCommand.cpp ChannelGeneral.cpp ChannelGetters.cpp ChannelSetters.cpp\
 			   channelUtils.cpp kickCommand.cpp ServerChannelDisconnection.cpp partCommand.cpp numberToString.cpp \
 			   privmsgCommand.cpp ServerChannels.cpp listCommand.cpp getChannelNames.cpp awayCommand.cpp \
 			   getCurrentTime.cpp modeCommand.cpp oMode.cpp ChannelModes.cpp kMode.cpp lMode.cpp ChannelBan.cpp \
-			   bMode.cpp vMode.cpp mMode.cpp iMode.cpp tMode.cpp nMode.cpp pMode.cpp sMode.cpp
+			   bMode.cpp vMode.cpp mMode.cpp iMode.cpp tMode.cpp nMode.cpp pMode.cpp sMode.cpp ClientChannels.cpp \
+			   ClientGetters.cpp ClientOperator.cpp ClientSetter.cpp ServerGeneral.cpp ServerGetters.cpp
 			
 SRC_PATH = src/*/
 SRCS = $(addprefix $(SRC_PATH), $(SRC))

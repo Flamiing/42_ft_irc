@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/11 15:59:43 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/11 16:04:59 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@
 # define SERVER "\033[1;37m[SERVER]\033[0m"
 # define SERVER_LISTENING(port) (" Listening on port " + port + "...\n")
 # define CLIENT_CONNECTION(socket) (" Client connected at socket #" + socket + "\n")
-# define CLIENT_DISCONNECTED(socket) (" Client at socket #" + socket + " disconnected.\n")
-# define CHANNEL_DELETED(channel) (" " + channel + " has been deleted.\r\n")
+# define CLIENT_DISCONNECTED(socket) (" Client at socket #" + socket + " disconnected\n")
+# define CHANNEL_DELETED(channel) (" " + channel + " has been deleted\r\n")
 # define CLIENT_MESSAGE_RECIVED(socket, message) (" Client at socket #" + socket + ": " + message + "\n")
 
 class Server

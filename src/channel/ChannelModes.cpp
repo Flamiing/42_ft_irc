@@ -6,11 +6,42 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 03:22:11 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/11 16:03:03 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/11 16:05:03 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Server.hpp"
+
+void Channel::_initChannelModes(void)
+{
+	this->modes[MODE_CHANNEL_OPERATOR] = false;
+	this->modes[MODE_CHANNEL_PRIVATE] = false;
+	this->modes[MODE_CHANNEL_SECRET] = false;
+	this->modes[MODE_CHANNEL_INVITE_ONLY] = false;
+	this->modes[MODE_CHANNEL_TOPIC_OPER_ONLY] = false;
+	this->modes[MODE_CHANNEL_NO_MSG_FROM_OUTSIDE] = false;
+	this->modes[MODE_CHANNEL_MODERATED] = false;
+	this->modes[MODE_CHANNEL_USER_LIMIT] = false;
+	this->modes[MODE_CHANNEL_BANNED] = false;
+	this->modes[MODE_CHANNEL_SPEAK_ABILITY] = false;
+	this->modes[MODE_CHANNEL_KEY] = false;
+}
+
+void Channel::_initModeFunctions(void)
+{
+	this->modesWithParams[MODE_CHANNEL_OPERATOR] = &Channel::setO;
+	this->modesWithParams[MODE_CHANNEL_KEY] = &Channel::setK;
+	this->modesWithParams[MODE_CHANNEL_USER_LIMIT] = &Channel::setL;
+	this->modesWithParams[MODE_CHANNEL_BANNED] = &Channel::setB;
+	this->modesWithParams[MODE_CHANNEL_SPEAK_ABILITY] = &Channel::setV;
+	
+	this->modesWithoutParams[MODE_CHANNEL_MODERATED] = &Channel::setM;
+	this->modesWithoutParams[MODE_CHANNEL_INVITE_ONLY] = &Channel::setI;
+	this->modesWithoutParams[MODE_CHANNEL_TOPIC_OPER_ONLY] = &Channel::setT;
+	this->modesWithoutParams[MODE_CHANNEL_NO_MSG_FROM_OUTSIDE] = &Channel::setN;
+	this->modesWithoutParams[MODE_CHANNEL_PRIVATE] = &Channel::setP;
+	this->modesWithoutParams[MODE_CHANNEL_SECRET] = &Channel::setS;
+}
 
 bool Channel::checkOperator(std::string nickname)
 {
