@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Server.cpp                                         :+:      :+:    :+:   */
+/*   ServerGeneral.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/21 14:57:11 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/11 12:35:56 by alaaouam         ###   ########.fr       */
+/*   Created: 2023/09/11 12:33:25 by alaaouam          #+#    #+#             */
+/*   Updated: 2023/09/11 12:33:50 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../inc/Server.hpp"
 
-Server::Server(void) {}
+bool Server::userInServer(const std::string& nickname)
+{
+	std::map<int, Client>::const_iterator it = this->_clients.begin();
 
-Server::Server(const int port, const std::string& password) :  pollSize(0), _port(port), _password(password) {}
-
-Server::Server(const Server& other) { (void)other; }
-
-Server::~Server(void) {}
-
-Server& Server::operator=(const Server& other) { (void)other; return *this; }
+	while (it != this->_clients.end())
+	{
+		if (toUpperCase(it->second.getNickname()) == toUpperCase(nickname))
+			return true;
+		it++;
+	}
+	return false;
+}
