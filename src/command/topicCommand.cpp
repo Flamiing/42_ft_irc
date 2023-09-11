@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:35:00 by guilmira          #+#    #+#             */
-/*   Updated: 2023/09/11 15:14:49 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/11 19:06:06 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void viewTopic(Client& client, Channel& channel, std::string& buffer)
 		buffer = RPL_NOTOPIC(client.getNickname(), channel.getName());
 }	
 
+/* _GUILLE */
 static bool parserTopic(Command& command)
 {
 	Client&						client = *command.client;
