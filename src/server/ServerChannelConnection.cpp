@@ -6,19 +6,21 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 17:49:11 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/08 15:54:14 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/11 14:55:03 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Server.hpp"
 
-void Server::addChannel(std::string channelName, std::string keyName)
+void Server::addChannel(std::string channelName, std::string keyName, std::string operatorName)
 {
 	Channel newChannel(channelName, keyName);
 	if (!keyName.empty())
 		newChannel.modes[MODE_CHANNEL_KEY] = true;
+	newChannel.addOperator(operatorName);
 	this->channels.push_back(newChannel);
 }
+
 
 void Server::connectToChannel(std::string& channel, Client& client, std::string& key, std::string& buffer)
 {
@@ -33,7 +35,4 @@ void Server::connectToChannel(std::string& channel, Client& client, std::string&
 		}
 		it++;
 	}
-
-	
-
 }

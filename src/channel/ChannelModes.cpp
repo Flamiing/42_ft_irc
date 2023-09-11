@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ChannelModes.cpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 03:22:11 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/09 03:24:15 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/11 14:58:24 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ bool Channel::checkOperator(std::string nickname)
 
 	while (it != this->_operators.end())
 	{
+		std::cout << "⭕OUTPUT⭕" << std::endl;
+		std::cout << *it << std::endl;
 		if (toUpperCase(*it) == toUpperCase(nickname))
 		{
 			isOper = true;

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:48:53 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/09 18:39:24 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/11 14:29:48 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ class Command;
 # define RPL_PART(nickname, username, channel) (":" + nickname + "!~" + username + "@localhost PART " + channel + "\r\n")
 # define RPL_MODE(nickname, username, channel, mode, param) (":" + nickname + "!~" + username + "@localhost MODE " + channel + " " + mode + " " + param + "\r\n")
 # define ERR_BADCHANNELKEY(client, channel) (":localhost 475 " + client + " " + channel + " :Cannot join channel (+k)\r\n")
+# define ERR_CHANNELISFULL(client, channel) (":localhost 471 " + client + " " + channel + " :Cannot join channel (+l)\r\n")
 
 
 typedef void (*customFunctionType)(Command& command);

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/09 18:37:58 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/11 14:48:30 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,36 +56,38 @@ class Channel
 		size_t getLimit(void) const;
 		std::string getOnlineUsersList(void) ;
 		std::vector<Client> getBannedUsers(void) const;
-		void joinChannel(Client& client, std::string& key, std::string& buffer);
-		bool userIsBanned(std::string& nickname);
-		bool banUser(std::string& nickname);
-		void unbanUser(std::string& nickname);
-		bool userCanTalk(std::string nickname);
-		void removeTalkingPermissions(std::string nickname);
+		void	joinChannel(Client& client, std::string& key, std::string& buffer);
+		bool	userIsBanned(std::string& nickname);
+		bool	banUser(std::string& nickname);
+		void	unbanUser(std::string& nickname);
+		bool	userCanTalk(std::string nickname);
+		void	removeTalkingPermissions(std::string nickname);
 		
-		void setMode(Client& client, char mode, std::string param, bool action);
-		void setO(Client& client, std::string param, bool action);
-		void setK(Client& client, std::string param, bool action);
-		void setL(Client& client, std::string param, bool action);
-		void setB(Client& client, std::string param, bool action);
-		void setV(Client& client, std::string param, bool action);
-		void setM(Client& client, bool action);
-		void setI(Client& client, bool action);
-		void setT(Client& client, bool action);
-		void setN(Client& client, bool action);
-		void setP(Client& client, bool action);
-		void setS(Client& client, bool action);
+		void	setMode(Client& client, char mode, std::string param, bool action);
+		void	setO(Client& client, std::string param, bool action);
+		void	setK(Client& client, std::string param, bool action);
+		void	setL(Client& client, std::string param, bool action);
+		void	setB(Client& client, std::string param, bool action);
+		void	setV(Client& client, std::string param, bool action);
+		void	setM(Client& client, bool action);
+		void	setI(Client& client, bool action);
+		void	setT(Client& client, bool action);
+		void	setN(Client& client, bool action);
+		void	setP(Client& client, bool action);
+		void	setS(Client& client, bool action);
 		
-		bool clientInChannel(std::string nickname);
-		void disconnectFromChannel(std::string client, const std::string& reply);
-		void removeFromChannel(std::string client, const std::string& reply);
-		void messageOnlineUsers(const std::string sender, const std::string& reply);
-		bool checkOperator(std::string client);
-		
+		bool	clientInChannel(std::string nickname);
+		void	disconnectFromChannel(std::string client, const std::string& reply);
+		void	removeFromChannel(std::string client, const std::string& reply);
+		void	messageOnlineUsers(const std::string sender, const std::string& reply);
+		bool	checkOperator(std::string client);
+		bool	isClientOperator(Client& client);
+		bool	isUserInChannel();
 
-		bool isClientOperator(Client& client);
-
-		bool isUserInChannel();
+		void	addOperator(std::string operatorName)
+		{
+			this->_operators.push_back(operatorName);
+		}
 
 		std::map<char, bool> modes;
 		std::string creationTime;
@@ -96,16 +98,16 @@ class Channel
 		void _replyToNewUser(Client& client);
 		void _removeOperator(std::string operatorToRemove);
 		
-		std::string _name;
-		size_t		_userCount;
-		std::string _key;
-		std::string _topic;
-		size_t _limit;
+		std::string						_name;
+		size_t							_userCount;
+		std::string						_key;
+		std::string						_topic;
+		size_t							_limit;
 
-		std::vector<std::string> _operators;
-		std::vector<std::string> _canTalk;
-		std::vector<Client> _onlineUsers;
-		std::vector<Client> _bannedUsers;
+		std::vector<std::string>		_operators;
+		std::vector<std::string>		_canTalk;
+		std::vector<Client>				_onlineUsers;
+		std::vector<Client>				_bannedUsers;
 };
 
 #endif

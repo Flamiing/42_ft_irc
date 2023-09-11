@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/09 14:41:06 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/11 15:52:56 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ static void joinChannel(Command& command, std::string& channelName, std::string&
 	std::vector<Channel>&		channels = server.channels;
 
 	if (channels.size() == 0 || channelNotFound(channels, channelName))
-		server.addChannel(channelName, keyName);
-	if (isInvitieOnly(server, channelName))
+		server.addChannel(channelName, keyName, client.getNickname());
+	if (isInvitieOnly(server, channelName)) /* _GUILLE MODE SOLO BOOLEANO */
 	{
 		if (1) /* _GUILLE invitaciones, string de usuarios invitados en el canal? o esta ya gestionado */
 		{
@@ -123,7 +123,6 @@ static void	lexerJoin(std::vector<std::string>& channelNames, std::vector<std::s
 		keyNames.push_back("");
 }
 
-/* _GUILLE falta merer limite */
 void joinCommand(Command& command)
 {
 	std::string&				buffer = *command.buffer;	
@@ -143,29 +142,7 @@ void joinCommand(Command& command)
 }
 
 
-
-
-
-
-
-
-
-
-
-/* _GUILLE PRINTER PARA BORRAR */
-/* void pstr(std::vector<std::string>& channelNames, std::vector<std::string>& keyNames)
-{
-std::vector<std::string>::iterator it = channelNames.begin();
-	std::vector<std::string>::iterator it1 = keyNames.begin();
-
-	while (it != channelNames.end())
-	{
-		std::cout << "name: " << *it << std::endl;
-		it++;	
-	}
-	while (it1 != keyNames.end())
-	{
-		std::cout << "key: " << *it1 << std::endl;
-		it1++;
-	}
-} */
+/* _GUILLE
+NOSUCHCHANNEL canal sin hastagb soo en netcat
+TOOMANYCHANNELS 
+*/

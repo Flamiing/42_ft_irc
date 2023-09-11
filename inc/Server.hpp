@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/09 18:34:55 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/11 14:51:03 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ class Server
 		Client getClientByNickname(const std::string nickname) const;
 		Channel& getChannelByName(const std::string channelName);
 		std::string getRawNickname(const std::string& modifiedNickname);
-		void addChannel(std::string channelName, std::string keyName);
+		void addChannel(std::string channelName, std::string keyName, std::string operatorName);
 		void connectToChannel(std::string& channel, Client& client, std::string& key, std::string& buffer);
 		void disconnect(size_t& client);
 		void disconnectClientFromChannels(std::string client, std::string& reply);

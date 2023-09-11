@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:35:00 by guilmira          #+#    #+#             */
-/*   Updated: 2023/09/09 18:48:52 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/11 15:14:49 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static bool parserTopic(Command& command)
 	return false;
 }
 
+/* _GUILLE quitar el meter el hastag. */
 /* _GUILLE cerciorarse de que no hay channels con el mismo nombre */
 void topicCommand(Command& command)
 {
