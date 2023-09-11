@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:09:58 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/11 15:53:42 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/11 15:59:51 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ bool Server::_processMessage(const int& client, std::string message)
 		processCommand(command);
 	std::map<int, Client>::iterator found = this->_clients.find(keyToFind);
 	if (found != this->_clients.end())
-		send(this->_clients[client].getSocket(), buffer.c_str(), buffer.size(), 0);
+		send(this->_clients[client].getSocket(), buffer.c_str(), buffer.size(), MSG_NOSIGNAL);
 	buffer = "";
 	if (command.cmd == QUIT)
 		return false;

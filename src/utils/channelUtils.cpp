@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 23:11:42 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 22:40:46 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/11 08:23:35 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ bool findChannels(Client& client, std::vector<Channel> channels, std::vector<std
 		if (channelNotFound(channels, *toFind))
 		{
 			reply = ERR_NOSUCHCHANNEL(client.getNickname(), *toFind);
-			send(client.getSocket(), reply.c_str(), reply.size(),0);
+			send(client.getSocket(), reply.c_str(), reply.size(), MSG_NOSIGNAL);
 			invalidChannels++;
 		}
 		else if (notInChannel(client, *toFind))
 		{
 			reply = ERR_NOTONCHANNEL(client.getNickname(), *toFind);
-			send(client.getSocket(), reply.c_str(), reply.size(),0);
+			send(client.getSocket(), reply.c_str(), reply.size(), MSG_NOSIGNAL);
 			invalidChannels++;
 		}
 		reply = "";

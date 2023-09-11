@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 12:27:39 by guilmira          #+#    #+#             */
-/*   Updated: 2023/09/08 17:37:58 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/11 08:22:38 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void replyChannelModes(Channel& channel, Client& client)
 		modesToReturn += " *";
 	reply = RPL_CHANNELMODEIS(client.getNickname(), channel.getName(), modesToReturn);
 	reply += RPL_CREATIONTIME(client.getNickname(), channel.getName(), channel.creationTime);
-	send(client.getSocket(), reply.c_str(), reply.size(), 0);
+	send(client.getSocket(), reply.c_str(), reply.size(), MSG_NOSIGNAL);
 }
 
 // Si hay p no puede haber s

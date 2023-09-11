@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/11 14:51:03 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/11 15:59:43 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@
 # include "generalUtils.hpp"
 # include "commands.hpp"
 # include "colors.hpp"
+
+# ifndef MSG_NOSIGNAL
+#  define MSG_NOSIGNAL 0
+# endif
 
 # define LOCALHOST "127.0.0.1"
 # define MAX_CLIENTS 10
