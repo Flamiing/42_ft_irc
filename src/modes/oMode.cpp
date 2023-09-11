@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 01:00:27 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/09 03:24:20 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/11 08:23:22 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void replyIfNotFound(Client& client, std::string& nickname)
 {
 	std::string reply = ERR_NOSUCHNICK(client.getNickname(), nickname);
-	send(client.getSocket(), reply.c_str(), reply.size(), 0);
+	send(client.getSocket(), reply.c_str(), reply.size(), MSG_NOSIGNAL);
 }
 
 void Channel::_removeOperator(std::string operatorToRemove)

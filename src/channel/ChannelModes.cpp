@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 03:22:11 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/09 03:24:15 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/11 08:22:09 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void Channel::setMode(Client& client, char mode, std::string param, bool action)
 	if (!checkOperator(client.getNickname()) && !client.isOperator())
 	{
 		reply = ERR_CHANOPRIVSNEEDED(client.getNickname(), this->getName());
-		send(client.getSocket(), reply.c_str(), reply.size(), 0);
+		send(client.getSocket(), reply.c_str(), reply.size(), MSG_NOSIGNAL);
 		return ;
 	}
 	if (((this->modes[mode] == true && action == true)
@@ -74,6 +74,6 @@ void Channel::setMode(Client& client, char mode, std::string param, bool action)
 	else
 	{
 		reply = ERR_UNKNOWNMODE(client.getNickname(), mode);
-		send(client.getSocket(), reply.c_str(), reply.size(), 0);
+		send(client.getSocket(), reply.c_str(), reply.size(), MSG_NOSIGNAL);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/09 03:15:58 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/11 08:23:07 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,18 @@ static void sendMessageToUser(Server& server, Client& client, const std::string&
 	if (!server.userInServer(user))
 	{
 		reply = ERR_NOSUCHNICK(client.getNickname(), user);
-		send(client.getSocket(), reply.c_str(), reply.size(), 0);
+		send(client.getSocket(), reply.c_str(), reply.size(), MSG_NOSIGNAL);
 		return ;
 	}
 	std::string rawNickname = server.getRawNickname(user);
 	reply = RPL_PRIVMSG(client.getNickname(), client.getUsername(), rawNickname, messageToSend);
 	int recipientSocket = server.getSocketByNickname(rawNickname);
-	send(recipientSocket, reply.c_str(), reply.size(), 0);
+	send(recipientSocket, reply.c_str(), reply.size(), MSG_NOSIGNAL);
 	Client awayClient = server.getClientByNickname(user);
 	if (awayClient.isAway)
 	{
 		reply = RPL_AWAY(client.getNickname(), awayClient.getNickname(), awayClient.awayMessage);
-		send(client.getSocket(), reply.c_str(), reply.size(), 0);
+		send(client.getSocket(), reply.c_str(), reply.size(), MSG_NOSIGNAL);
 	}
 }
 
@@ -71,7 +71,7 @@ static void sendMessageToChannel(Server& server, Client& client, std::string& ch
 			else
 			{
 				reply = ERR_CANNOTSENDTOCHAN(client.getNickname(), (*it).getName());
-				send(client.getSocket(), reply.c_str(), reply.size(), 0);
+				send(client.getSocket(), reply.c_str(), reply.size(), MSG_NOSIGNAL);
 			}
 			return ;
 		}
@@ -81,7 +81,7 @@ static void sendMessageToChannel(Server& server, Client& client, std::string& ch
 		reply = ERR_NOSUCHCHANNEL(client.getNickname(), channel);
 	else
 		reply = ERR_NOTONCHANNEL(client.getNickname(), channel);
-	send(client.getSocket(), reply.c_str(), reply.size(), 0);
+	send(client.getSocket(), reply.c_str(), reply.size(), MSG_NOSIGNAL);
 }
 
 static void sendMessageToReceivers(Server& server, Client& client, std::vector<std::string>& receivers, std::string& messageToSend)

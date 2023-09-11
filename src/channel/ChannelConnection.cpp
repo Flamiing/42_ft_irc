@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ChannelConnection.cpp                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:18:42 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/07 18:59:03 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/11 08:21:59 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void Channel::_replyToNewUser(Client& client)
 	reply += RPL_NAMREPLY(client.getNickname(), "=", this->getName(), this->getOnlineUsersList());
 	reply += RPL_ENDOFNAMES(client.getNickname(), this->getName());
 	
-	send(client.getSocket(), reply.c_str(), reply.size(), 0);
+	send(client.getSocket(), reply.c_str(), reply.size(), MSG_NOSIGNAL);
 }
 
 void Channel::_informOnlineUsers(const std::string& reply)
@@ -27,7 +27,7 @@ void Channel::_informOnlineUsers(const std::string& reply)
 	
 	while (it != this->_onlineUsers.end())
 	{
-		send(it->getSocket(), reply.c_str(), reply.size(), 0);
+		send(it->getSocket(), reply.c_str(), reply.size(), MSG_NOSIGNAL);
 		it++;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   listCommand.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 21:53:27 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/09 18:35:48 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/11 08:22:33 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,19 @@ void listAllChannels(std::vector<Channel>& channels, Client& client)
 	std::string reply;
 	
 	reply = RPL_LISTSTART(client.getNickname());
-	send(client.getSocket(), reply.c_str(), reply.size(), 0);
+	send(client.getSocket(), reply.c_str(), reply.size(), MSG_NOSIGNAL);
 	while (channel != channels.end())
 	{
 		if ((*channel).modes['p'] != true && (*channel).modes['s'] != true)
 		{
 			reply = RPL_LIST(client.getNickname(), channel->getName(),
 				numberToString(channel->getUserCount()), channel->getTopic());
-			send(client.getSocket(), reply.c_str(), reply.size(), 0);
+			send(client.getSocket(), reply.c_str(), reply.size(), MSG_NOSIGNAL);
 		}
 		channel++;
 	}
 	reply = RPL_LISTEND(client.getNickname());
-	send(client.getSocket(), reply.c_str(), reply.size(), 0);
+	send(client.getSocket(), reply.c_str(), reply.size(), MSG_NOSIGNAL);
 }
 
 void listSpecifiedChannels(std::vector<Channel>& channels, std::vector<std::string>& channelsToFind, Client& client)
@@ -40,7 +40,7 @@ void listSpecifiedChannels(std::vector<Channel>& channels, std::vector<std::stri
 	std::string reply;
 	
 	reply = RPL_LISTSTART(client.getNickname());
-	send(client.getSocket(), reply.c_str(), reply.size(), 0);
+	send(client.getSocket(), reply.c_str(), reply.size(), MSG_NOSIGNAL);
 	while (toFind != channelsToFind.end())
 	{
 		channel = channels.begin();
@@ -51,14 +51,14 @@ void listSpecifiedChannels(std::vector<Channel>& channels, std::vector<std::stri
 			{
 				reply = RPL_LIST(client.getNickname(), channel->getName(),
 					numberToString(channel->getUserCount()), channel->getTopic());
-				send(client.getSocket(), reply.c_str(), reply.size(), 0);
+				send(client.getSocket(), reply.c_str(), reply.size(), MSG_NOSIGNAL);
 			}
 			channel++;
 		}
 		toFind++;
 	}
 	reply = RPL_LISTEND(client.getNickname());
-	send(client.getSocket(), reply.c_str(), reply.size(), 0);
+	send(client.getSocket(), reply.c_str(), reply.size(), MSG_NOSIGNAL);
 }
 
 void listCommand(Command& command)

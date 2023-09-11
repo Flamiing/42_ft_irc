@@ -39,7 +39,7 @@ static void printNames(Client& client, Channel& channel)
 {
 	std::string reply = RPL_NAMREPLY(client.getNickname(), "=", channel.getName(), channel.getOnlineUsersList());
 	reply += RPL_ENDOFNAMES(client.getNickname(), channel.getName());
-	send(client.getSocket(), reply.c_str(), reply.size(), 0);
+	send(client.getSocket(), reply.c_str(), reply.size(), MSG_NOSIGNAL);
 }
 
 static void sendName(Command& command, std::string& channelName)

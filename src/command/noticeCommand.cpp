@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 17:18:58 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/04 14:34:24 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/11 08:22:47 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,5 @@ void noticeCommand(Command& command)
 	std::string rawNickname = server.getRawNickname(command.message[1]);
 	std::string reply = RPL_NOTICE(client.getNickname(), client.getUsername(), rawNickname, messageToSend);
 	int recipientSocket = server.getSocketByNickname(rawNickname);
-	send(recipientSocket, reply.c_str(), reply.size(), 0);
+	send(recipientSocket, reply.c_str(), reply.size(), MSG_NOSIGNAL);
 }

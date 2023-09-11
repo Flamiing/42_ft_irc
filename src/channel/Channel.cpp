@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Channel.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:32 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/09 18:43:32 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/11 08:21:43 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ void Channel::messageOnlineUsers(const std::string sender, const std::string& re
 	while (it != this->_onlineUsers.end())
 	{
 		if (toUpperCase(it->getNickname()) != toUpperCase(sender))
-			send(it->getSocket(), reply.c_str(), reply.size(), 0);
+			send(it->getSocket(), reply.c_str(), reply.size(), MSG_NOSIGNAL);
 		it++;
 	}
 }
