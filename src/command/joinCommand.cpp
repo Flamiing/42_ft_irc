@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/11 15:52:56 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/11 16:56:19 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,6 @@ static std::string processRaw(std::string raw)
 	raw.erase(0, raw.find(JOIN) + 4);	
 	size_t	pos = raw.find_first_not_of(" ");
 	raw.erase(0, pos);
-	if (raw[0] != '#')
-		raw = "#" + raw;
 	for (size_t i = count; i < raw.size(); i++)
 	{
 		if (raw[i] == ',')
@@ -132,8 +130,17 @@ void joinCommand(Command& command)
 	if (parserJoin(command))
 		return ;
 	lexerJoin(channelNames, keyNames, command.raw);
+
 	for (size_t i = 0; i != channelNames.size(); i++)
 	{
+		if (i == 0 && !channelNames[0].empty())
+		{
+			if (channelNames[0][0] != '#')
+			{
+				buffer = ERR_NOSUCHCHANNEL(command.client->getNickname(), channelNames[0]);
+				return ;
+			}
+		}
 		if (command.server->isBanned(*command.client, channelNames[i]))
 			buffer = ERR_BANNEDFROMCHAN(command.client->getNickname(), channelNames[i]);
 		else
