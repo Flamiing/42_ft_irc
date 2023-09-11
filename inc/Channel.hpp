@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/11 16:04:55 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/11 18:33:01 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define MODE_CHANNEL_KEY 'k'
 # define MODE_CHANNEL_ADD true
 # define MODE_CHANNEL_REMOVE false
+# define MAX_CHANNELS_PER_CLIENT 3
 
 class Channel;
 
@@ -105,6 +106,7 @@ class Channel
 		std::string						_key;
 		std::string						_topic;
 		size_t							_limit;
+		static int						_nbChannels;
 
 		std::vector<std::string>		_operators;
 		std::vector<std::string>		_canTalk;

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/11 16:56:19 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/11 18:34:08 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,6 @@ void joinCommand(Command& command)
 	if (parserJoin(command))
 		return ;
 	lexerJoin(channelNames, keyNames, command.raw);
-
 	for (size_t i = 0; i != channelNames.size(); i++)
 	{
 		if (i == 0 && !channelNames[0].empty())
@@ -147,9 +146,3 @@ void joinCommand(Command& command)
 			joinChannel(command, channelNames[i], keyNames[i], buffer);
 	}
 }
-
-
-/* _GUILLE
-NOSUCHCHANNEL canal sin hastagb soo en netcat
-TOOMANYCHANNELS 
-*/

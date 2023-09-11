@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   Channel.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:32 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/11 10:58:26 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/11 18:18:35 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../inc/Channel.hpp"
 
-Channel::Channel(void) {}
+Channel::Channel(void) { return ; }
 
 Channel::Channel(std::string& name, std::string& key)
 	: _name(name), _userCount(0), _key(key), _topic("")
@@ -22,7 +22,10 @@ Channel::Channel(std::string& name, std::string& key)
 	_initModeFunctions();
 }
 
-Channel::Channel(const Channel& other) { *this = other; }
+Channel::Channel(const Channel& other)
+{
+	*this = other;
+}
 
 Channel::~Channel(void) {}
 
