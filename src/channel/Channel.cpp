@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:32 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/11 10:48:20 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/11 10:55:52 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ Channel::Channel(std::string& name, std::string& key)
 	: _name(name), _userCount(0), _key(key), _topic("")
 {
 	this->creationTime = getCurrentTime();
-	
 	_initChannelModes();
 	_initModeFunctions();
 }
