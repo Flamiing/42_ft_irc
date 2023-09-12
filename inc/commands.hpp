@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:48:53 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/11 18:19:10 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/12 08:07:44 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ class Command;
 # define SYMBOL_NONE ' '
 # define SYMBOL_PLUS '+'
 # define SYMBOL_MINUS '-'
+
+# define NOPARAMETER ""
 
 # define RPL_HELP(client) (":localhost 000 " + client + " :Use the following commands to traverse the chat: \r\n")
 # define RPL_WELCOME(client) (":localhost 001 " + client + " :Welcome to LOS OSADOS IRC Server, " + client + "!\r\n")

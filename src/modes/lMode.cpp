@@ -6,17 +6,35 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 12:37:42 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/08 13:04:11 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/12 08:47:21 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Server.hpp"
 
+static bool invalidParam(Client& client, bool action, std::string& param)
+{
+	std::string command;
+	if (param.empty())
+	{
+		if (action == MODE_CHANNEL_ADD)
+			command = "MODE +l";
+		else
+			command = "MODE -l";
+		std::string reply = ERR_NEEDMOREPARAMS(client.getNickname(), command);
+		send(client.getSocket(), reply.c_str(), reply.size(), MSG_NOSIGNAL);
+		return true;
+	}
+	else if (!allDigits(param) && action == MODE_CHANNEL_ADD)
+		return true;
+	return false;
+}
+
 void Channel::setL(Client& client, std::string param, bool action)
 {
 	std::string reply;
 	
-	if (!allDigits(param) && action == MODE_CHANNEL_ADD)
+	if (invalidParam(client, action, param))
 		return ;
 	if (action == MODE_CHANNEL_ADD)
 	{

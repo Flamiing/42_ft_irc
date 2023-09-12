@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 12:27:39 by guilmira          #+#    #+#             */
-/*   Updated: 2023/09/11 08:22:38 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/12 09:23:22 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,12 @@ static void replyChannelModes(Channel& channel, Client& client)
 	send(client.getSocket(), reply.c_str(), reply.size(), MSG_NOSIGNAL);
 }
 
-// Si hay p no puede haber s
-
 static size_t handleModesWithParams(Channel& channel, Client& client, std::string& modes, std::vector<std::string>& message, size_t currentMsg)
 {
 	size_t pos = 0;
 	size_t argPos = 1;
 	bool action = MODE_CHANNEL_ADD;
-	std::string noParameter = "";
-
+	
 	while (pos < modes.size())
 	{
 		if (modes[pos] == SYMBOL_MINUS)
@@ -94,8 +91,8 @@ static size_t handleModesWithParams(Channel& channel, Client& client, std::strin
 			if ((currentMsg + argPos) < message.size())
 				channel.setMode(client, modes[pos], message[currentMsg + argPos], action);
 			else
-				channel.setMode(client, modes[pos], noParameter, action);
-			if (action != MODE_CHANNEL_REMOVE && modes[pos] != 'l')
+				channel.setMode(client, modes[pos], NOPARAMETER, action);
+			if (currentMsg != (message.size() - 1) && (currentMsg + argPos) < message.size())
 				argPos++;
 		}
 		pos++;
@@ -107,7 +104,6 @@ void handleNormalModes(Channel& channel, Client& client, std::string& modes)
 {
 	size_t pos = 0;
 	bool action = MODE_CHANNEL_ADD;
-	std::string noParameter = "";
 
 	while (pos < modes.size())
 	{
@@ -117,7 +113,7 @@ void handleNormalModes(Channel& channel, Client& client, std::string& modes)
 			action = MODE_CHANNEL_ADD;
 		if (modes[pos] != 'o' && modes[pos] != 'k' && modes[pos] != 'v'
 			&& modes[pos] != 'l' && modes[pos] != 'b')
-			channel.setMode(client, modes[pos], noParameter, action);
+			channel.setMode(client, modes[pos], NOPARAMETER, action);
 		pos++;
 	}
 }
