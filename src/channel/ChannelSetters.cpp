@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ChannelSetters.cpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 10:56:32 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/11 10:57:43 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/12 12:02:28 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,3 +17,12 @@ void		Channel::setTopic(std::string topic)
 	this->_topic = topic;
 }
 
+void		Channel::addOperator(std::string operatorName)
+{
+	this->_operators.push_back(operatorName);
+}
+
+void		Channel::addInvitedUser(std::string newInvitedUser)
+{
+	this->_invitedUsers.push_back(newInvitedUser);
+}
