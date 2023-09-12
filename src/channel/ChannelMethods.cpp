@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ChannelMethods.cpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 17:33:47 by guilmira          #+#    #+#             */
-/*   Updated: 2023/09/09 18:47:54 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/12 15:05:45 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,3 @@ bool Channel::isClientOperator(Client& client)
 		return true;
 	return false;
 }
-

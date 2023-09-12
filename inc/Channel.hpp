@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/12 10:09:14 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/12 15:05:12 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ class Channel
 		void	messageOnlineUsers(const std::string sender, const std::string& reply);
 		bool	checkOperator(std::string client);
 		bool	isClientOperator(Client& client);
-		bool	isUserInChannel();
+		bool	isUserInChannel(void);
 
 		void	addOperator(std::string operatorName)
 		{
