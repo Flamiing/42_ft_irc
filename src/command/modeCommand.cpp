@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 12:27:39 by guilmira          #+#    #+#             */
-/*   Updated: 2023/09/12 09:23:22 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/12 09:50:05 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ static size_t handleModesWithParams(Channel& channel, Client& client, std::strin
 				channel.setMode(client, modes[pos], NOPARAMETER, action);
 			if (currentMsg != (message.size() - 1) && (currentMsg + argPos) < message.size())
 				argPos++;
+			if (action == MODE_CHANNEL_REMOVE && modes[pos] == 'l')
+				argPos--;
 		}
 		pos++;
 	}
