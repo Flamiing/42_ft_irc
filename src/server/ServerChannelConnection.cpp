@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 17:49:11 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/11 18:55:23 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/13 09:34:11 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void Server::connectToChannel(std::string& channel, Client& client, std::string&
 	{
 		if (isEqualStr(it->getName(), channel))
 		{
+
 			if (clientAlreadyConnected(channel, client))
 				return ;
 			if (client.getJoinedChannels().size() > MAX_CHANNELS_PER_CLIENT - 1)

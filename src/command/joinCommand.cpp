@@ -6,25 +6,34 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/11 18:34:08 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/13 12:24:54 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Server.hpp"
 
-static bool isInvitieOnly(Server& server, std::string& channelName)
+static bool checkInvitation(Server& server, std::string& channelName, std::string userName)
 {
 	std::vector<Channel>&	channels = server.channels;
-	std::vector<Channel>::iterator it = channels.begin();
+	std::vector<std::string> invitedUsers;
 
-	while (it != channels.end())
+	for (size_t i = 0; i < channels.size(); i++)
 	{
-		if (toUpperCase(it->getName()) == toUpperCase(channelName))
-			if (it->modes[MODE_CHANNEL_INVITE_ONLY] == true)
-			  	return (true);
-		it++;
+		if (isEqualStr(channels[i].getName(), channelName))
+		{
+			invitedUsers = channels[i].getInvitedUsers();
+			if (channels[i].modes[MODE_CHANNEL_INVITE_ONLY] == true)
+			{
+				for (std::vector<std::string>::iterator it = invitedUsers.begin(); it != invitedUsers.end(); it++)
+					if (isEqualStr(userName, *it))
+						return true;
+				return false;
+			}
+			else
+				return true;
+		}
 	}
-	return false;
+	return true;
 }
 
 static void joinChannel(Command& command, std::string& channelName, std::string& keyName, std::string& buffer)
@@ -35,14 +44,11 @@ static void joinChannel(Command& command, std::string& channelName, std::string&
 
 	if (channels.size() == 0 || channelNotFound(channels, channelName))
 		server.addChannel(channelName, keyName, client.getNickname());
-	if (isInvitieOnly(server, channelName)) /* _GUILLE MODE SOLO BOOLEANO */
+	if (!checkInvitation(server, channelName, client.getNickname()))
 	{
-		if (1) /* _GUILLE invitaciones, string de usuarios invitados en el canal? o esta ya gestionado */
-		{
-			buffer = ERR_INVITEONLYCHAN(client.getNickname(), channelName);
-			return ;
-		} 
-	}
+		buffer = ERR_INVITEONLYCHAN(client.getNickname(), channelName);
+		return ;
+	} 
 	server.connectToChannel(channelName, client, keyName, buffer);
 }
 

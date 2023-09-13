@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:48:53 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/12 08:07:44 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/13 12:49:10 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ class Command;
 # define KICK "KICK"
 # define JOIN "JOIN"
 # define TOPIC "TOPIC"
+# define INVITE "INVITE"
 # define QUIT "QUIT"
 # define PONG "PONG"
 # define PART "PART"
@@ -101,6 +102,8 @@ class Command;
 # define ERR_BADCHANNELKEY(client, channel) (":localhost 475 " + client + " " + channel + " :Cannot join channel (+k)\r\n")
 # define ERR_CHANNELISFULL(client, channel) (":localhost 471 " + client + " " + channel + " :Cannot join channel (+l)\r\n")
 # define ERR_TOOMANYCHANNELS(client, channel) (":localhost 405 " + client + " " + channel + " :You have joined too many channels\r\n")
+# define ERR_USERONCHANNEL(client, nick, channel) (":localhost 443 " + client + " " + nick + " " + channel + " :is already on channel\r\n")
+# define RPL_INVITING(client, nick, channel) (":localhost 341 " + client + " " + nick + " " + channel + " channel\r\n")
 
 
 
@@ -124,11 +127,6 @@ void listCommand(Command &command);
 void awayCommand(Command& command);
 void modeCommand(Command& command);
 void namesCommand(Command& command);
-
-
-
-
-std::string displayMsg(std::string number, std::string str, std::string clientNick);
-bool isEqualStr(std::string str1, std::string str2);
+void inviteCommand(Command& command);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Channel.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/12 15:05:12 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/13 12:50:32 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ class Channel
 		size_t getLimit(void) const;
 		std::string getOnlineUsersList(void) ;
 		std::vector<Client> getBannedUsers(void) const;
+		std::vector<std::string> getInvitedUsers(void) const;
+
 		void	joinChannel(Client& client, std::string& key, std::string& buffer);
 		bool	userIsBanned(std::string& nickname);
 		bool	banUser(std::string& nickname);
@@ -85,10 +87,9 @@ class Channel
 		bool	isClientOperator(Client& client);
 		bool	isUserInChannel(void);
 
-		void	addOperator(std::string operatorName)
-		{
-			this->_operators.push_back(operatorName);
-		}
+
+		void	addOperator(std::string operatorName);
+		void	addInvitedUser(std::string newInvitedUser);
 
 		std::map<char, bool> modes;
 		std::string creationTime;
@@ -110,6 +111,7 @@ class Channel
 
 		std::vector<std::string>		_operators;
 		std::vector<std::string>		_canTalk;
+		std::vector<std::string> 		_invitedUsers;
 		std::vector<Client>				_onlineUsers;
 		std::vector<Client>				_bannedUsers;
 };

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ChannelGetters.cpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 10:56:59 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/12 15:05:40 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/13 12:49:56 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ size_t Channel::getUserCount() const { return this->_onlineUsers.size(); }
 std::string Channel::getTopic() const { return this->_topic; }
 std::string Channel::getKey() const { return this->_key; }
 size_t Channel::getLimit() const { return this->_limit; }
+std::vector<std::string> Channel::getInvitedUsers() const
+{
+	return (this->_invitedUsers);
+}
 
 std::string Channel::getOnlineUsersList()
 {
