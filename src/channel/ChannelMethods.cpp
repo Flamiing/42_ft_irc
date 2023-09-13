@@ -6,13 +6,12 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 17:33:47 by guilmira          #+#    #+#             */
-/*   Updated: 2023/09/09 18:47:54 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/13 09:39:56 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Channel.hpp"
 
-/* On channel side */
 bool Channel::isUserInChannel()
 {
 	for (std::vector<Client>::iterator it = this->_onlineUsers.begin(); it != _onlineUsers.end(); it++)

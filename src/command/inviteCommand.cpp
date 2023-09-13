@@ -19,7 +19,7 @@ static bool parserInvite(Command& command)
 	std::string&				buffer = *command.buffer;
 
 
-	if (static_cast<int>(command.message.size()) < 3) /* _GUILLE undernet revisar si deberia ser 3 */
+	if (static_cast<int>(command.message.size()) < 3)
 	{
 		buffer = ERR_NEEDMOREPARAMS(client.getNickname(), command.message[0]);
 		return true;
@@ -28,7 +28,8 @@ static bool parserInvite(Command& command)
 
 }
 
-
+/* GUILLE, cuando te unes a muchos canaales estando ya en el limite, te muestra solo ultimo mensjae. poenr limite alto y fuera */
+/* _GUILLE meter limechat en el repo */
 bool clientAlreadyConnected(std::string& channel, Client& client);
 
 static void inviteToChannel(Command& command, std::string& guestName, std::string& channelName, Client& clientGuest)
@@ -63,6 +64,7 @@ static void inviteToChannel(Command& command, std::string& guestName, std::strin
 					return ;
 				}
 				channel[i].addInvitedUser(guestName);
+				buffer = RPL_INVITING(client.getNickname(), guestName, channelName);
 				return ;
 			}
 		}
@@ -88,7 +90,6 @@ void inviteCommand(Command& command)
 	{
 		if (isEqualStr(it->second.getNickname(), command.message[1]))
 		{
-			;
 			if (command.message.size() > 2)
 				inviteToChannel(command, command.message[1], command.message[2], it->second);
 			return ;
