@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/13 09:50:35 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/13 12:24:54 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,11 @@
 static bool checkInvitation(Server& server, std::string& channelName, std::string userName)
 {
 	std::vector<Channel>&	channels = server.channels;
-	std::vector<Channel>::iterator it = channels.begin();
 	std::vector<std::string> invitedUsers;
 
 	for (size_t i = 0; i < channels.size(); i++)
 	{
-		if (toUpperCase(it->getName()) == toUpperCase(channelName))
+		if (isEqualStr(channels[i].getName(), channelName))
 		{
 			invitedUsers = channels[i].getInvitedUsers();
 			if (channels[i].modes[MODE_CHANNEL_INVITE_ONLY] == true)
@@ -28,12 +27,13 @@ static bool checkInvitation(Server& server, std::string& channelName, std::strin
 				for (std::vector<std::string>::iterator it = invitedUsers.begin(); it != invitedUsers.end(); it++)
 					if (isEqualStr(userName, *it))
 						return true;
+				return false;
 			}
 			else
 				return true;
 		}
 	}
-	return false;
+	return true;
 }
 
 static void joinChannel(Command& command, std::string& channelName, std::string& keyName, std::string& buffer)
@@ -44,7 +44,6 @@ static void joinChannel(Command& command, std::string& channelName, std::string&
 
 	if (channels.size() == 0 || channelNotFound(channels, channelName))
 		server.addChannel(channelName, keyName, client.getNickname());
-
 	if (!checkInvitation(server, channelName, client.getNickname()))
 	{
 		buffer = ERR_INVITEONLYCHAN(client.getNickname(), channelName);
