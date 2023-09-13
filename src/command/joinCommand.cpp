@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/13 12:24:54 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/13 15:57:55 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,18 @@ static void joinChannel(Command& command, std::string& channelName, std::string&
 	Client&						client = *command.client;
 	std::vector<Channel>&		channels = server.channels;
 
+	if (client.getJoinedChannels().size() > MAX_CHANNELS_PER_CLIENT - 1)
+	{
+		buffer = ERR_TOOMANYCHANNELS(client.getNickname(), channelName);
+		return ;
+	}
 	if (channels.size() == 0 || channelNotFound(channels, channelName))
 		server.addChannel(channelName, keyName, client.getNickname());
 	if (!checkInvitation(server, channelName, client.getNickname()))
 	{
 		buffer = ERR_INVITEONLYCHAN(client.getNickname(), channelName);
 		return ;
-	} 
+	}
 	server.connectToChannel(channelName, client, keyName, buffer);
 }
 
