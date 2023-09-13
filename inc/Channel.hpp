@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/12 12:05:53 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/13 12:26:14 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ class Channel
 		void	removeFromChannel(std::string client, const std::string& reply);
 		void	messageOnlineUsers(const std::string sender, const std::string& reply);
 		bool	checkOperator(std::string client);
-		bool	isClientOperator(Client& client);
 		bool	isUserInChannel();
 
 

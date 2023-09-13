@@ -29,7 +29,6 @@ static bool parserInvite(Command& command)
 }
 
 /* GUILLE, cuando te unes a muchos canaales estando ya en el limite, te muestra solo ultimo mensjae. poenr limite alto y fuera */
-/* _GUILLE meter limechat en el repo */
 bool clientAlreadyConnected(std::string& channel, Client& client);
 
 static void inviteToChannel(Command& command, std::string& guestName, std::string& channelName, Client& clientGuest)

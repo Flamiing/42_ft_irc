@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 17:33:47 by guilmira          #+#    #+#             */
-/*   Updated: 2023/09/13 09:39:56 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/13 12:26:02 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,4 @@ bool Channel::isUserInChannel()
 	return false;
 }
 
-bool Channel::isClientOperator(Client& client)
-{
-	return true;
-	if (" " == client.getNickname()) /* _GUILLE check if its operator */
-		return true;
-	return false;
-}
 

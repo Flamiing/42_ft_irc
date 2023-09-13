@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:48:53 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/12 13:13:32 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/13 12:27:34 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,12 +126,5 @@ void awayCommand(Command& command);
 void modeCommand(Command& command);
 void namesCommand(Command& command);
 void inviteCommand(Command& command);
-
-
-
-
-
-std::string displayMsg(std::string number, std::string str, std::string clientNick);
-bool isEqualStr(std::string str1, std::string str2);
 
 #endif
