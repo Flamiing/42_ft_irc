@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:35:00 by guilmira          #+#    #+#             */
-/*   Updated: 2023/09/13 12:27:10 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/14 10:23:10 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static bool parserTopic(Command& command)
 	return false;
 }
 
-/* _GUILLE cerciorarse de que no hay channels con el mismo nombre */
 void topicCommand(Command& command)
 {
 	Server&						server = *command.server;
