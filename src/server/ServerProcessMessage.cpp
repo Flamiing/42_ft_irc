@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ServerProcessMessage.cpp                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:09:58 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/11 15:59:51 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/14 15:44:33 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ bool Server::_processMessage(const int& client, std::string message)
 {
 	std::string buffer;
 	int keyToFind = client;
-	if (message[message.size() - 1] == '\n')
+	if (!message.empty() && message[message.size() - 1] == '\n')
 		message.erase(message.size() - 1);
-	if (message[message.size() - 1] == '\r')
+	if (!message.empty() && message[message.size() - 1] == '\r')
 		message.erase(message.size() - 1);
 	Command		command(this, &this->_clients[client], &buffer, message);
 	if (this->_clients[client].getPassAuth() == false && command.cmd != PASS)
