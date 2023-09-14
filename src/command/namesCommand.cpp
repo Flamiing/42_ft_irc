@@ -24,6 +24,7 @@ static std::string processRaw(std::string raw)
 		if (raw[i] == ',')
 		{
 			if (i + 1 == raw.size())
+			
 				return raw.substr(0, i);
 			if (std::isspace(raw[i + 1]))
 				return raw.substr(0, i);
