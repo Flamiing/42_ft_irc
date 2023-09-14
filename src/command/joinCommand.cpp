@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/14 09:23:43 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/14 15:07:26 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ void	getVectors(std::vector<std::string>& channelNames, std::vector<std::string>
 		keys = "";
 }
 
+/* _GUILLE limite de una tacada */
 static void	lexerJoin(std::vector<std::string>& channelNames, std::vector<std::string>& keyNames, std::string raw)
 {
 	std::string processed;
