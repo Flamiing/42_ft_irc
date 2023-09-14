@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/14 15:07:26 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/14 16:10:36 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ void joinCommand(Command& command)
 	{
 		if (i == 0 && !channelNames[0].empty())
 		{
-			if (channelNames[0][0] != '#')
+			if (channelNames[0][0] != '#' && channelNames[0][0] != '&')
 			{
 				buffer = ERR_NOSUCHCHANNEL(command.client->getNickname(), channelNames[0]);
 				return ;
