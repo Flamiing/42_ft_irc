@@ -59,12 +59,6 @@ void namesCommand(Command& command)
 
 	processed = processRaw(command.raw);
 	channelNames = splitString(processed, ',');
-	/* std::vector<std::string>::iterator it = channelNames.begin();
-	while (it != channelNames.end())
-	{
-		std::cout << "namee: " << *it << std::endl;
-		it++;	
-	} */
 	for (size_t i = 0; i != channelNames.size(); i++)
 		sendName(command, channelNames[i]);
 	return ;
