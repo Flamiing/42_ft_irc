@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:41:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/15 12:58:26 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/15 14:16:58 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,33 +61,19 @@ void Channel::removeFromChannel(std::string client, const std::string& reply)
 			this->removeTalkingPermissions(it->getNickname());
 			_removeOperator(it->getNickname());
 			this->_onlineUsers.erase(it);
-			for (std::vector<std::string>::iterator it3 = this->_invitedUsers.begin(); it3 != this->_invitedUsers.end(); it3++)
-			{
-				std::cout << *it3 << std::endl;
-			}
-			
-
-			//it1 = std::find(this->_invitedUsers.begin(), this->_invitedUsers.end(), client);
 			upper = toUpperCase(client);
 			it1 = std::remove(this->_invitedUsers.begin(), this->_invitedUsers.end(), upper);
 			std::cout << client << std::endl;
 			if (it1 != this->_invitedUsers.end())
 			{
 				this->_invitedUsers.erase(it1);
-				std::cout << "⭕⭕" << std::endl;
 				break ;
 			}
-
 			lower = toLowerCase(client);
 			it1 = std::remove(this->_invitedUsers.begin(), this->_invitedUsers.end(), lower);
 			std::cout << client << std::endl;
 			if (it1 != this->_invitedUsers.end())
-			{
 				this->_invitedUsers.erase(it1);
-				std::cout << "⭕" << std::endl;
-				break ;
-			}
-
 			break ;
 		}
 		it++;

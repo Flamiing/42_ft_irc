@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/14 16:11:20 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/15 15:01:31 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ static void joinChannel(Command& command, std::string& channelName, std::string&
 	server.connectToChannel(channelName, client, keyName, buffer);
 }
 
-/* _GUILLE cuando creas canal no eres channel op en el lime */
 static bool parserJoin(Command& command)
 {
 	Client&						client = *command.client;
@@ -78,7 +77,6 @@ static bool parserJoin(Command& command)
 	Rule 3 - no channels without # or & */
 static std::string processRaw(std::string raw)
 {
-	bool flag = false;
 	size_t count = 0;
 
 	raw.erase(0, raw.find(JOIN) + 4);	
@@ -93,10 +91,6 @@ static std::string processRaw(std::string raw)
 			if (std::isspace(raw[i + 1]))
 				return raw.substr(0, i);
 		}
-			flag = true;
-		if (!flag && raw[i] == ',')
-				if (raw[i + 1] != '#' && raw[i + 1] != '&')
-					return raw.substr(0, i);
 	}
 	return raw;
 }
@@ -121,17 +115,35 @@ void	getVectors(std::vector<std::string>& channelNames, std::vector<std::string>
 		keys = "";
 }
 
+static void	purgeVectors(std::vector<std::string>& channelNames, std::vector<std::string>& RawChannelNames, std::vector<std::string>& keyNames, std::vector<std::string>& RawKeyNames)
+{
+	for (size_t i = 0; i < RawChannelNames.size(); i++)
+	{
+		if (!RawChannelNames[i].empty())
+		{
+			if (RawChannelNames[i][0] == '#' || RawChannelNames[i][0] == '&')
+			{
+				channelNames.push_back(RawChannelNames[i]);
+				keyNames.push_back(RawKeyNames[i]);
+			}
+		}
+	}
+}
+
 /* _GUILLE limite de una tacada */
 static void	lexerJoin(std::vector<std::string>& channelNames, std::vector<std::string>& keyNames, std::string raw)
 {
 	std::string processed;
+	std::vector<std::string>	RawChannelNames;
+	std::vector<std::string>	RawKeyNames;
 
 	processed = processRaw(raw);
-	getVectors(channelNames, keyNames, processed);
-	size_t size = channelNames.size();
-	size_t sizeKey = keyNames.size();
+	getVectors(RawChannelNames, RawKeyNames, processed);
+	size_t size = RawChannelNames.size();
+	size_t sizeKey = RawKeyNames.size();
 	for (size_t i = 0; i < size - sizeKey; i++)
-		keyNames.push_back("");
+		RawKeyNames.push_back("");
+	purgeVectors(channelNames, RawChannelNames, keyNames, RawKeyNames);
 }
 
 void joinCommand(Command& command)
