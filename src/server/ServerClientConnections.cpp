@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:10:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/16 15:22:07 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/16 15:47:21 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void Server::_processBuffer(size_t& client, std::string& buffer)
 	{
 		std::string reply = ERR_INPUTLINETOOLONG(this->_clients[this->_pollFds[client].fd].getNickname());
 		send(this->_pollFds[client].fd, reply.c_str(), reply.size(), MSG_NOSIGNAL);
+		buffer = "";
 		return ;
 	}
 	while (pos != std::string::npos)

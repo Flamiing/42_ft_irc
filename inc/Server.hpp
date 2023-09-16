@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/16 15:08:33 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/16 15:48:40 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 # define CLIENT_CONNECTION(socket) (" Client connected at socket #" + socket + "\n")
 # define CLIENT_DISCONNECTED(socket) (" Client at socket #" + socket + " disconnected\n")
 # define CHANNEL_DELETED(channel) (" " + channel + " has been deleted\r\n")
-# define CLIENT_MESSAGE_RECIVED(socket, message) (" Client at socket #" + socket + ": " + message + "\n")
+# define CLIENT_MESSAGE_RECIVED(socket, message) (" Client at socket #" + socket + ": " + message + "\r\n")
 
 class Server
 {

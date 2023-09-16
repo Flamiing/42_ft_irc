@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   nickCommand.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 01:45:31 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/01 15:59:14 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/16 16:05:35 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ static bool handleErrors(Server& server, Client& client, std::string& buffer, st
 		buffer = ERR_NONICKNAMEGIVEN(client.getNickname());
 		return true;
 	}
-	else if (nicknameInUse(server.getClients(), message[1]))
+	else if (nicknameInUse(server.getClients(), message[1])
+				&& toUpperCase(message[1]) != toUpperCase(client.getNickname()))
 	{
 		buffer = ERR_NICKNAMEINUSE(client.getNickname(), message[1]);
 		return true;
@@ -71,7 +72,8 @@ void nickCommand(Command& command)
 	Client&						client = *command.client;
 	std::string&				buffer = *command.buffer;
 	
-	if (handleErrors(server, client, buffer, command.message))
+	if (handleErrors(server, client, buffer, command.message)
+		|| toUpperCase(command.message[1]) == toUpperCase(client.getNickname()))
 		return ;
 	if (client.getNickAuth() == true)
 		buffer = RPL_NICKNAMECHANGED(client.getNickname(), client.getUsername(), command.message[1]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ChannelDisconnection.cpp                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:41:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/15 14:16:58 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/16 16:36:23 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void Channel::removeFromChannel(std::string client, const std::string& reply)
 			this->_onlineUsers.erase(it);
 			upper = toUpperCase(client);
 			it1 = std::remove(this->_invitedUsers.begin(), this->_invitedUsers.end(), upper);
-			std::cout << client << std::endl;
 			if (it1 != this->_invitedUsers.end())
 			{
 				this->_invitedUsers.erase(it1);
@@ -71,7 +70,6 @@ void Channel::removeFromChannel(std::string client, const std::string& reply)
 			}
 			lower = toLowerCase(client);
 			it1 = std::remove(this->_invitedUsers.begin(), this->_invitedUsers.end(), lower);
-			std::cout << client << std::endl;
 			if (it1 != this->_invitedUsers.end())
 				this->_invitedUsers.erase(it1);
 			break ;

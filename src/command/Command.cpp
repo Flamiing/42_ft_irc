@@ -28,8 +28,9 @@ Command::Command(Server *server, Client *client, std::string *buffer, std::strin
 	if (!message.empty())
 	{
 		this->message = splitString(message, ' ');
-		this->cmd = this->message[0];
+		this->cmd = toUpperCase(this->message[0]);
 		this->raw = trimSpaces(message);
+		toUpperCaseCmd(this->raw);
 	}
 	else
 		message = "EMPTY COMMAND";
