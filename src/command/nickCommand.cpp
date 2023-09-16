@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 01:45:31 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/16 21:08:18 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/16 21:14:10 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static std::string getNewNickname(std::string nickname)
 	size_t pos = 0;
 	
 	while (pos < nickname.size() && (isalnum(nickname[pos]) || nickname[pos] == '_' || nickname[pos] == '['
-				|| nickname[pos] == ']' || nickname[pos] == '{' || nickname[pos] == '}'))
+				|| nickname[pos] == ']' || nickname[pos] == '{' || nickname[pos] == '}' || nickname[pos] == '-'))
 		pos++;
 	return newNickname = nickname.substr(0, pos);
 }

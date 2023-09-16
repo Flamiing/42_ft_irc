@@ -30,6 +30,7 @@ class Command
 		std::string	*buffer;
 
 		std::string raw;
+		std::string rawCmd;
 		std::string cmd;
 		std::vector<std::string> message;
 
