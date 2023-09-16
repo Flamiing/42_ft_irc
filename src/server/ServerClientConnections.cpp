@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:10:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/16 14:58:09 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/16 15:22:07 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ void Server::_processBuffer(size_t& client, std::string& buffer)
 	std::string bufferToProcess;
 	std::string::size_type pos = buffer.find("\n");
 	
+	if (buffer.size() > BUFFER_LIMIT)
+	{
+		std::string reply = ERR_INPUTLINETOOLONG(this->_clients[this->_pollFds[client].fd].getNickname());
+		send(this->_pollFds[client].fd, reply.c_str(), reply.size(), MSG_NOSIGNAL);
+		return ;
+	}
 	while (pos != std::string::npos)
 	{
 		if (buffer[0] == 0)
@@ -47,7 +53,7 @@ void Server::_processBuffer(size_t& client, std::string& buffer)
 
 void Server::_handleClientRequest(size_t& client)
 {
-	char buffer[512] = {0};
+	char buffer[BUFFER_LIMIT] = {0};
 	std::string& stash = this->_clients[_pollFds[client].fd].buffer;
 	ssize_t bytesRead = recv(this->_pollFds[client].fd, buffer, sizeof(buffer), 0);
 	if (bytesRead <= 0)
