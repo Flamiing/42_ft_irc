@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:10:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/05 04:05:35 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/16 14:58:09 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void Server::_handleClientRequest(size_t& client)
 	}
 	else
 	{
-		std::string checkEOF(buffer);
+		std::string checkEOF(buffer, bytesRead);
 		stash += checkEOF;
 		if (checkEOF[checkEOF.size() - 1] != '\n')
 			return ;
