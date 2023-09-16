@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 01:45:31 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/16 21:14:10 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/16 21:28:43 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 static bool invalidNickname(std::string& nickname)
 {
-	size_t pos = 0;
+	//size_t pos = 0;
 	
 	if (!nickname.empty() && !isalpha(nickname[0]) && nickname[0] != '_' && nickname[0] != '['
 		&& nickname[0] != ']' && nickname[0] != '{' && nickname[0] != '}')
 		return true;
-	while (pos < nickname.size() && pos < 12)
+	/* while (pos < nickname.size() && pos < 12)
 	{
 		if (!isalnum(nickname[pos]) && nickname[pos] != '-' && nickname[pos] != '_' && !isspace(nickname[pos])
 			&& nickname[pos] != '[' && nickname[pos] != ']' && nickname[pos] != '{'
 			&& nickname[pos] != '}' && nickname[pos] != '@' && nickname[pos] != '+')
 			return true;
 		pos++;
-	}
+	} */
 	return false;
 }
 
