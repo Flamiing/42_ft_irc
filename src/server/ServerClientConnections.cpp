@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:10:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/16 15:47:21 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/16 19:53:19 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void Server::_processBuffer(size_t& client, std::string& buffer)
 		if (buffer[0] == '\n')
 			buffer.erase(0, 1);
 		bufferToProcess = buffer.substr(0, pos);
-		std::cout << SERVER << BOLD_CYAN << CLIENT_MESSAGE_RECIVED(numberToString(this->_pollFds[client].fd), bufferToProcess) << RESET;
 		if (!_processMessage(this->_pollFds[client].fd, bufferToProcess))
 			return ;
 		buffer.erase(0, pos + 1);

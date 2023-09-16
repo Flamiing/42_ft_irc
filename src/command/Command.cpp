@@ -24,7 +24,7 @@ Command::Command()
 split into the first token. then split string does a split on the message */
 Command::Command(Server *server, Client *client, std::string *buffer, std::string& message)
 	: server(server), client(client), buffer(buffer)
-{	
+{
 	if (!message.empty())
 	{
 		this->message = splitString(message, ' ');
