@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/11 08:23:07 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/17 18:06:29 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,16 @@ static void sendMessageToUser(Server& server, Client& client, const std::string&
 		send(client.getSocket(), reply.c_str(), reply.size(), MSG_NOSIGNAL);
 		return ;
 	}
-	std::string rawNickname = server.getRawNickname(user);
-	reply = RPL_PRIVMSG(client.getNickname(), client.getUsername(), rawNickname, messageToSend);
-	int recipientSocket = server.getSocketByNickname(rawNickname);
-	send(recipientSocket, reply.c_str(), reply.size(), MSG_NOSIGNAL);
 	Client awayClient = server.getClientByNickname(user);
 	if (awayClient.isAway)
 	{
 		reply = RPL_AWAY(client.getNickname(), awayClient.getNickname(), awayClient.awayMessage);
 		send(client.getSocket(), reply.c_str(), reply.size(), MSG_NOSIGNAL);
 	}
+	std::string rawNickname = server.getRawNickname(user);
+	reply = RPL_PRIVMSG(client.getNickname(), client.getUsername(), rawNickname, messageToSend);
+	int recipientSocket = server.getSocketByNickname(rawNickname);
+	send(recipientSocket, reply.c_str(), reply.size(), MSG_NOSIGNAL);
 }
 
 static void sendMessageToChannel(Server& server, Client& client, std::string& channel, const std::string& messageToSend)

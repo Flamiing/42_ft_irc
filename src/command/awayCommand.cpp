@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 02:52:41 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/05 03:39:43 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/17 17:59:31 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ void awayCommand(Command& command)
 	}
 	else
 	{
-		if (!client.isAway)
-		{
+		if (command.message[1][0] != ':')
+			client.awayMessage = command.message[1];
+		else
 			client.awayMessage = getMessageToSend(command, 1);
-			client.isAway = true;
-		}
+		client.isAway = true;
 		buffer = RPL_NOWAWAY(client.getNickname());
 	}
 }
