@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 03:14:59 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/01 03:33:23 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/17 03:45:25 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ void dieCommand(Command& command)
 		return ;
 	}
 	server.closeAllSockets();
+	std::cout << SERVER << BOLD_YELLOW << SERVER_SHUT_DOWN;
 	exit(0);
 }
