@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/18 13:56:37 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/18 14:10:37 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,6 @@ static void joinChannel(Command& command, std::string& channelName, std::string&
 	Client&						client = *command.client;
 	std::vector<Channel>&		channels = server.channels;
 
-	if (client.getJoinedChannels().size() > MAX_CHANNELS_PER_CLIENT - 1)
-	{
-		buffer = ERR_TOOMANYCHANNELS(client.getNickname(), channelName);
-		return ;
-	}
 	if (channels.size() == 0 || channelNotFound(channels, channelName))
 		server.addChannel(channelName, keyName, client.getNickname());
 	if (!checkInvitation(server, channelName, client.getNickname()))
@@ -126,7 +121,6 @@ static void	purgeVectors(std::vector<std::string>& channelNames, std::vector<boo
 	}
 }
 
-/* _GUILLE limite de una tacada */
 static void	lexerJoin(std::vector<std::string>& channelNames, std::vector<std::string>& keyNames, std::string raw, std::vector<bool>& channelState)
 {
 	std::string					processed;
@@ -150,6 +144,11 @@ void joinCommand(Command& command)
 	if (parserJoin(command))
 		return ;
 	lexerJoin(channelNames, keyNames, command.raw, channelState);
+	if (channelNames.size() >= MAX_CHANNELS_PER_COMMAND)
+	{
+		buffer = ERR_TOOMANYCHANNELS(command.client->getNickname(), channelNames[0]);
+		return ;
+	}
 	for (size_t i = 0; i != channelNames.size(); i++)
 	{
 		if (channelState[i] == false)

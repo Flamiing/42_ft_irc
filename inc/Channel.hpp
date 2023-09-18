@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/13 12:50:32 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/18 14:10:43 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define MODE_CHANNEL_KEY 'k'
 # define MODE_CHANNEL_ADD true
 # define MODE_CHANNEL_REMOVE false
-# define MAX_CHANNELS_PER_CLIENT 3
+# define MAX_CHANNELS_PER_COMMAND 4
 
 class Channel;
 
