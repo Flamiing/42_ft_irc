@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:28:56 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/08/22 17:52:16 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/16 20:18:36 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 # define W_ERRNO 1
 
 /* ERROR MESSAGES */
-# define BAD_PORT "Error: invalid port."
+# define BAD_PORT "Error: invalid port"
+# define PASS_TOO_LONG "Error: password too long"
 # define ERROR_SOCKET "Error: socket(): "
 # define ERROR_BIND "Error: bind(): "
 # define ERROR_LISTEN "Error: listen(): "

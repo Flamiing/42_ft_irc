@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:57:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/11 16:04:59 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/17 03:45:54 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@
 #  define MSG_NOSIGNAL 0
 # endif
 
-# define LOCALHOST "127.0.0.1"
 # define MAX_CLIENTS 10
+# define BUFFER_LIMIT 512
 # define OPERATOR_NAME "operator"
 # define OPERATOR_PASS "password"
 
@@ -45,7 +45,8 @@
 # define CLIENT_CONNECTION(socket) (" Client connected at socket #" + socket + "\n")
 # define CLIENT_DISCONNECTED(socket) (" Client at socket #" + socket + " disconnected\n")
 # define CHANNEL_DELETED(channel) (" " + channel + " has been deleted\r\n")
-# define CLIENT_MESSAGE_RECIVED(socket, message) (" Client at socket #" + socket + ": " + message + "\n")
+# define CLIENT_MESSAGE_RECIVED(socket, message) (" Client at socket #" + socket + ": " + message + "\r\n")
+# define SERVER_SHUT_DOWN " SERVER SHUT DOWN!\033[0m\n";
 
 class Server
 {

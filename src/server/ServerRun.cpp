@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ServerRun.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 14:03:54 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/12 11:05:59 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/17 03:43:38 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void Server::closeAllSockets(void)
 	while (pos < this->_pollFds.size())
 	{
 		fdToClose = this->_pollFds[pos].fd;
+		std::cout << SERVER << BOLD_YELLOW << CLIENT_DISCONNECTED(numberToString(this->_pollFds[pos].fd)) << RESET;
 		this->_pollFds[pos].fd = -1;
 		close(this->_clients[fdToClose].getSocket());
 		pos++;

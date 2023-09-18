@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:04:22 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/05 00:46:59 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/17 03:47:47 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int main(int argc, char **argv)
 		std::string portStr(argv[1]);
 		if (!parsePort(portStr, port))
 			return printError(BAD_PORT, NORMAL);
+		if (password.size() > 30)
+			return printError(PASS_TOO_LONG, NORMAL);
 		Server server(port, password);
 		server.runServer();
 	}

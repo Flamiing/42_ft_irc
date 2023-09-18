@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   generalUtils.hpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 22:37:45 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/13 12:27:55 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/16 16:26:55 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ std::vector<std::string> getChannelNames(std::string& raw, std::string commandNa
 std::string getCurrentTime(void);
 bool allDigits(const std::string& str);
 bool isEqualStr(std::string str1, std::string str2);
+void toUpperCaseCmd(std::string& str);
 
 
 #endif

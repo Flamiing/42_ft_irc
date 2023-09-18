@@ -6,7 +6,7 @@
 /*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 02:35:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/01 03:09:33 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/17 03:24:33 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void operCommand(Command& command)
 	Client&						client = *command.client;
 	std::string&				buffer = *command.buffer;
 
-	if (handleErrors(client, buffer, command.message))
+	if (client.isOperator() || handleErrors(client, buffer, command.message))
 		return ;
 	client.setAsOperator();
 	buffer = RPL_YOUREOPER(client.getNickname());

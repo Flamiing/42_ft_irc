@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processCommand.cpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 20:10:01 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/05 14:30:36 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/16 21:10:56 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void processGeneralCommands(Command& command, std::map<std::string, custo
 		if (it != mapCommand.end())
 			mapCommand[command.cmd](command);
 		else
-			*command.buffer = ERR_UNKNOWNCOMMAND(command.client->getNickname(), command.cmd);
+			*command.buffer = ERR_UNKNOWNCOMMAND(command.client->getNickname(), command.rawCmd);
 	}
 	else
 	{

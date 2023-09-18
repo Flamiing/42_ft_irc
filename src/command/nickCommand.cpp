@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   nickCommand.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 01:45:31 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/01 15:59:14 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/17 00:41:53 by alaaouam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,9 @@
 
 static bool invalidNickname(std::string& nickname)
 {
-	size_t pos = 0;
-	
-	if (!nickname.empty() && !isalpha(nickname[0])
-		&& nickname[0] != '_')
+	if (!nickname.empty() && !isalpha(nickname[0]) && nickname[0] != '_' && nickname[0] != '['
+		&& nickname[0] != ']' && nickname[0] != '{' && nickname[0] != '}')
 		return true;
-	while (pos < nickname.size())
-	{
-		if (!isalnum(nickname[pos]) && nickname[pos] != '-'
-			&& nickname[pos] != '_')
-			return true;
-		pos++;
-	}
 	return false;
 }
 
@@ -49,7 +40,8 @@ static bool handleErrors(Server& server, Client& client, std::string& buffer, st
 		buffer = ERR_NONICKNAMEGIVEN(client.getNickname());
 		return true;
 	}
-	else if (nicknameInUse(server.getClients(), message[1]))
+	else if (nicknameInUse(server.getClients(), message[1])
+				&& toUpperCase(message[1]) != toUpperCase(client.getNickname()))
 	{
 		buffer = ERR_NICKNAMEINUSE(client.getNickname(), message[1]);
 		return true;
@@ -64,20 +56,35 @@ static bool handleErrors(Server& server, Client& client, std::string& buffer, st
 	return false;
 }
 
+static std::string getNewNickname(std::string nickname)
+{
+	std::string newNickname;
+	size_t pos = 0;
+	
+	while (pos < nickname.size() && (isalnum(nickname[pos]) || nickname[pos] == '_' || nickname[pos] == '['
+				|| nickname[pos] == ']' || nickname[pos] == '{' || nickname[pos] == '}' || nickname[pos] == '-'))
+		pos++;
+	return newNickname = nickname.substr(0, pos);
+}
+
 void nickCommand(Command& command)
 {
 	bool firstConnection = false;
 	Server&						server = *command.server;
 	Client&						client = *command.client;
 	std::string&				buffer = *command.buffer;
+	std::string newNickname;
 	
 	if (handleErrors(server, client, buffer, command.message))
 		return ;
+	newNickname = getNewNickname(command.message[1].substr(0, 12));
+	if (toUpperCase(newNickname) == toUpperCase(client.getNickname()))
+		return ;
 	if (client.getNickAuth() == true)
-		buffer = RPL_NICKNAMECHANGED(client.getNickname(), client.getUsername(), command.message[1]);
+		buffer = RPL_NICKNAMECHANGED(client.getNickname(), client.getUsername(), newNickname);
 	else
 		firstConnection = true;
-	client.setNickname(command.message[1]);
+	client.setNickname(newNickname);
 	client.setNickAuth(true);
 	if (firstConnection && client.getAuth() == true)
 		buffer = RPL_WELCOME(client.getNickname());
