@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:41:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/15 14:16:58 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/18 14:32:51 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ std::string toLowerCase(const std::string& str)
 }
 
 /* _GUILLE REVISAR LO DE LOS UPPER CASE Y NOMBRES CON MEDIO UPPER Y MEDO LOWER PORQUE TE LA PUEDEN LIAR */
-/* _GUILLE DE UNA TACADA CUANTOS PUEDO METERLE AL CANAL */
+
 /* _GUILLE NO TE CHEKEE PRIMERO SI ESTAS INVITED, SI NO SI YA ESTAS EN EL CHANEL */
 void Channel::removeFromChannel(std::string client, const std::string& reply)
 {

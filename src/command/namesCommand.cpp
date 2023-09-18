@@ -16,7 +16,6 @@ static std::string processRaw(std::string raw)
 {
 	size_t count = 0;
 	raw.erase(0, raw.find(NAMES) + 5);
-	std::cout << raw << std::endl;
 	size_t	pos = raw.find_first_not_of(" ");
 	raw.erase(0, pos);
 	for (size_t i = count; i < raw.size(); i++)
