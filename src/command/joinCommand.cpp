@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/15 15:01:31 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/18 13:56:37 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,35 +115,29 @@ void	getVectors(std::vector<std::string>& channelNames, std::vector<std::string>
 		keys = "";
 }
 
-static void	purgeVectors(std::vector<std::string>& channelNames, std::vector<std::string>& RawChannelNames, std::vector<std::string>& keyNames, std::vector<std::string>& RawKeyNames)
+static void	purgeVectors(std::vector<std::string>& channelNames, std::vector<bool>& channelState)
 {
-	for (size_t i = 0; i < RawChannelNames.size(); i++)
+	for (size_t i = 0; i < channelNames.size(); i++)
 	{
-		if (!RawChannelNames[i].empty())
-		{
-			if (RawChannelNames[i][0] == '#' || RawChannelNames[i][0] == '&')
-			{
-				channelNames.push_back(RawChannelNames[i]);
-				keyNames.push_back(RawKeyNames[i]);
-			}
-		}
+		channelState.push_back(false);
+		if (!channelNames[i].empty())
+			if (channelNames[i][0] == '#' || channelNames[i][0] == '&')
+				channelState[i] = true;
 	}
 }
 
 /* _GUILLE limite de una tacada */
-static void	lexerJoin(std::vector<std::string>& channelNames, std::vector<std::string>& keyNames, std::string raw)
+static void	lexerJoin(std::vector<std::string>& channelNames, std::vector<std::string>& keyNames, std::string raw, std::vector<bool>& channelState)
 {
-	std::string processed;
-	std::vector<std::string>	RawChannelNames;
-	std::vector<std::string>	RawKeyNames;
+	std::string					processed;
 
 	processed = processRaw(raw);
-	getVectors(RawChannelNames, RawKeyNames, processed);
-	size_t size = RawChannelNames.size();
-	size_t sizeKey = RawKeyNames.size();
+	getVectors(channelNames, keyNames, processed);
+	size_t size = channelNames.size();
+	size_t sizeKey = keyNames.size();
 	for (size_t i = 0; i < size - sizeKey; i++)
-		RawKeyNames.push_back("");
-	purgeVectors(channelNames, RawChannelNames, keyNames, RawKeyNames);
+		keyNames.push_back("");
+	purgeVectors(channelNames, channelState);
 }
 
 void joinCommand(Command& command)
@@ -151,21 +145,16 @@ void joinCommand(Command& command)
 	std::string&				buffer = *command.buffer;	
 	std::vector<std::string>	channelNames;
 	std::vector<std::string>	keyNames;
+	std::vector<bool>	channelState;
 
 	if (parserJoin(command))
 		return ;
-	lexerJoin(channelNames, keyNames, command.raw);
+	lexerJoin(channelNames, keyNames, command.raw, channelState);
 	for (size_t i = 0; i != channelNames.size(); i++)
 	{
-		if (i == 0 && !channelNames[0].empty())
-		{
-			if (channelNames[0][0] != '#' && channelNames[0][0] != '&')
-			{
-				buffer = ERR_NOSUCHCHANNEL(command.client->getNickname(), channelNames[0]);
-				return ;
-			}
-		}
-		if (command.server->isBanned(*command.client, channelNames[i]))
+		if (channelState[i] == false)
+				buffer += ERR_NOSUCHCHANNEL(command.client->getNickname(), channelNames[i]);
+		else if (command.server->isBanned(*command.client, channelNames[i]))
 			buffer = ERR_BANNEDFROMCHAN(command.client->getNickname(), channelNames[i]);
 		else
 			joinChannel(command, channelNames[i], keyNames[i], buffer);
