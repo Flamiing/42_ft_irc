@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:41:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/18 18:21:30 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/19 13:46:29 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,12 @@ std::string toLowerCase(const std::string& str)
 
 /* _GUILLE REVISAR LO DE LOS UPPER CASE Y NOMBRES CON MEDIO UPPER Y MEDO LOWER PORQUE TE LA PUEDEN LIAR */
 
-/* _GUILLE NO TE CHEKEE PRIMERO SI ESTAS INVITED, SI NO SI YA ESTAS EN EL CHANEL */
 void Channel::removeFromChannel(std::string client, const std::string& reply)
 {
 	std::vector<Client>::iterator it = this->_onlineUsers.begin();
 	std::vector<std::string>::iterator it1 = this->_invitedUsers.begin();
 	std::string lower;
 	std::string upper;
-
-
 
 	_informOnlineUsers(reply);
 	while (it != this->_onlineUsers.end())
