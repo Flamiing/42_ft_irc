@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 17:49:30 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/19 13:00:19 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/19 13:05:50 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,38 +48,15 @@ void Server::partFromChannel(Client& client, std::string& channelName)
 			
 			if (it->getUserCount() == 0)
 			{
-			/* 	it3 = this->channels.begin();
-			while (it3 != this->channels.end())
-			{
-				std::cout << it3->getName() << std::endl;
-				std::cout << it3->getOnlineUsersList() << std::endl;
-				it3++;
-			} */
-
-				/* if (it != channels.end())
-				{
-    				std::rotate(it, it + 1, channels.end());
-    				channels.pop_back();
-				std::cout << SERVER << BOLD_YELLOW << CHANNEL_DELETED(channelName) << RESET;
-				} */
 				channels.erase(it);
+				std::cout << SERVER << BOLD_YELLOW << CHANNEL_DELETED(channelName) << RESET;
 			}
 			break ;
 		}
 		it++;
 	}
-
 	_removeChannelFromClient(client.getNickname(), channelName);
 }
-
-
-		/* 	it3 = this->channels.begin();
-			while (it3 != this->channels.end())
-			{
-				std::cout << it3->getName() << std::endl;
-				std::cout << it3->getOnlineUsersList() << std::endl;
-				it3++;
-			} */
 
 void Server::kickFromChannel(std::string& clientName, std::string& channelName, std::string& reply)
 {
