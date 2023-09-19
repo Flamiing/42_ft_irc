@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 10:02:45 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/19 12:58:02 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/19 14:32:19 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void copyVector(std::vector<T>& dest, const std::vector<T>& src)
 template<typename KeyType, typename ValueType>
 void copyMap(std::map<KeyType, ValueType>& dest, const std::map<KeyType, ValueType>& src)
 {
+	dest.clear();
 	typename std::map<KeyType, ValueType>::const_iterator it = src.begin();
 	while (it != src.end())
 	{
