@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 17:49:30 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/19 13:05:50 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/19 13:42:09 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,15 @@ void Server::disconnectClientFromChannels(std::string client, std::string& reply
 	}
 }
 
-/* _GUILLE poner to upper en el if () */
 void Server::partFromChannel(Client& client, std::string& channelName)
 {
 	std::vector<Channel>::iterator it = this->channels.begin();
 	std::string reply = RPL_PART(client.getNickname(), client.getUsername(), channelName);
 
-
 	while (it != this->channels.end())
 	{
 		
-		if (it->getName() == channelName && it->clientInChannel(client.getNickname()))
+		if (isEqualStr(it->getName(), channelName) && it->clientInChannel(client.getNickname()))
 		{
 			it->removeFromChannel(client.getNickname(), reply);
 			
