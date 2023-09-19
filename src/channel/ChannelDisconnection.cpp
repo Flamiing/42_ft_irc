@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:41:40 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/18 17:08:23 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/18 18:21:30 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void Channel::removeFromChannel(std::string client, const std::string& reply)
 	std::vector<std::string>::iterator it1 = this->_invitedUsers.begin();
 	std::string lower;
 	std::string upper;
+
+
 
 	_informOnlineUsers(reply);
 	while (it != this->_onlineUsers.end())

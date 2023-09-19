@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   copyTemplates.tpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 10:02:45 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/12 10:16:10 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/19 12:58:02 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 
 template<typename T>
 void copyVector(std::vector<T>& dest, const std::vector<T>& src)
-{
+{	
+	dest.clear();
 	size_t pos = 0;
 	while (pos < src.size())
 	{

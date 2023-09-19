@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 22:55:48 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/14 16:27:27 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/18 18:11:58 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,5 @@ void partCommand(Command& command)
 	else if (!findChannels(client, server.channels, channels))
 		return ;
 	partFromChannels(server, client, channels);
+
 }

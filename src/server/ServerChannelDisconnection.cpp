@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ServerChannelDisconnection.cpp                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 17:49:30 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/05 00:54:14 by alaaouam         ###   ########.fr       */
+/*   Updated: 2023/09/19 13:00:19 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,27 +32,54 @@ void Server::disconnectClientFromChannels(std::string client, std::string& reply
 	}
 }
 
+/* _GUILLE poner to upper en el if () */
 void Server::partFromChannel(Client& client, std::string& channelName)
 {
 	std::vector<Channel>::iterator it = this->channels.begin();
 	std::string reply = RPL_PART(client.getNickname(), client.getUsername(), channelName);
 
+
 	while (it != this->channels.end())
 	{
+		
 		if (it->getName() == channelName && it->clientInChannel(client.getNickname()))
 		{
 			it->removeFromChannel(client.getNickname(), reply);
+			
 			if (it->getUserCount() == 0)
 			{
-				this->channels.erase(it);
+			/* 	it3 = this->channels.begin();
+			while (it3 != this->channels.end())
+			{
+				std::cout << it3->getName() << std::endl;
+				std::cout << it3->getOnlineUsersList() << std::endl;
+				it3++;
+			} */
+
+				/* if (it != channels.end())
+				{
+    				std::rotate(it, it + 1, channels.end());
+    				channels.pop_back();
 				std::cout << SERVER << BOLD_YELLOW << CHANNEL_DELETED(channelName) << RESET;
+				} */
+				channels.erase(it);
 			}
 			break ;
 		}
 		it++;
 	}
+
 	_removeChannelFromClient(client.getNickname(), channelName);
 }
+
+
+		/* 	it3 = this->channels.begin();
+			while (it3 != this->channels.end())
+			{
+				std::cout << it3->getName() << std::endl;
+				std::cout << it3->getOnlineUsersList() << std::endl;
+				it3++;
+			} */
 
 void Server::kickFromChannel(std::string& clientName, std::string& channelName, std::string& reply)
 {
