@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alaaouam <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/27 19:25:47 by alaaouam          #+#    #+#              #
-#    Updated: 2023/09/14 15:44:54 by alaaouam         ###   ########.fr        #
+#    Updated: 2023/09/21 11:42:04 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@
 
 GREEN = \033[0:32m
 COLOR_OFF = \033[0m
+
 
 #	VARIABLES	#
 
@@ -79,7 +80,6 @@ san: $(OBJS)
 
 net:
 	nc -c localhost $(ARG1)
-#echo "PASS pass"
 
 net1:
 	bash user.sh

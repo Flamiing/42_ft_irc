@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:18:42 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/11 16:00:04 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/21 12:55:19 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void Channel::joinChannel(Client& client, std::string& keyName, std::string& buf
 	{
 		if (this->getUserCount() >= this->getLimit())
 		{
-			buffer = ERR_CHANNELISFULL(client.getNickname(), this->getName());
+			buffer += ERR_CHANNELISFULL(client.getNickname(), this->getName());
 			return ;
 		}
 	}
@@ -53,6 +53,6 @@ void Channel::joinChannel(Client& client, std::string& keyName, std::string& buf
 		client.addToJoinedChannels(*this);
 	}
 	else
-		buffer = ERR_BADCHANNELKEY(client.getNickname(), this->getName());
+		buffer += ERR_BADCHANNELKEY(client.getNickname(), this->getName());
 	this->_userCount++;
 }

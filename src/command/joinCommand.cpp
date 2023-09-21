@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:52:07 by alaaouam          #+#    #+#             */
-/*   Updated: 2023/09/18 14:10:37 by guilmira         ###   ########.fr       */
+/*   Updated: 2023/09/21 12:56:34 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void joinChannel(Command& command, std::string& channelName, std::string&
 		server.addChannel(channelName, keyName, client.getNickname());
 	if (!checkInvitation(server, channelName, client.getNickname()))
 	{
-		buffer = ERR_INVITEONLYCHAN(client.getNickname(), channelName);
+		buffer += ERR_INVITEONLYCHAN(client.getNickname(), channelName);
 		return ;
 	}
 	server.connectToChannel(channelName, client, keyName, buffer);
@@ -154,7 +154,7 @@ void joinCommand(Command& command)
 		if (channelState[i] == false)
 				buffer += ERR_NOSUCHCHANNEL(command.client->getNickname(), channelNames[i]);
 		else if (command.server->isBanned(*command.client, channelNames[i]))
-			buffer = ERR_BANNEDFROMCHAN(command.client->getNickname(), channelNames[i]);
+			buffer += ERR_BANNEDFROMCHAN(command.client->getNickname(), channelNames[i]);
 		else
 			joinChannel(command, channelNames[i], keyNames[i], buffer);
 	}
