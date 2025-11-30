@@ -9,13 +9,13 @@ It handles multiple clients using `poll(2)`, parses IRC-style commands, manages 
 
 1. [Introduction](#-introduction)
 2. [Project Overview](#-project-overview)
-3. [How It Works](#-how-it-works)
+3. [How It Works](#%EF%B8%8F-how-it-works)
 4. [Architecture & Responsibilities](#-architecture--responsibilities)
 5. [Command Handling](#-command-handling)
 6. [Program Flow](#-program-flow)
 7. [Error Handling & Limits](#-error-handling--limits)
-8. [Compilation](#-compilation)
-9. [Usage](#-usage)
+8. [Compilation](#%EF%B8%8F-compilation)
+9. [Usage](#%EF%B8%8F-usage)
 10. [Project Structure](#-project-structure)
 11. [Credits](#-credits)
 
